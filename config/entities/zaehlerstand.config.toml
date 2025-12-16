@@ -16,6 +16,7 @@ type = "uuid"
 required = true
 reference = "zaehler"
 label = "labels.zaehlerstand.zaehler"
+visible_in_form = false
 
 [entity.fields.datum]
 type = "date"

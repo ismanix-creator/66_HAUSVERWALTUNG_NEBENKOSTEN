@@ -1,0 +1,57 @@
+[form]
+entity = "rechnung"
+title_create = "labels.form.rechnung_erfassen"
+title_edit = "labels.form.rechnung_bearbeiten"
+
+[[form.sections]]
+id = "metadata"
+label = "labels.form.section.rechnung"
+
+  [[form.sections.fields]]
+  field = "objekt_id"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "kostenart_id"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "einheit_id"
+  width = "full"
+
+[[form.sections]]
+id = "zeiträume"
+label = "labels.form.section.zeitraum"
+
+  [[form.sections.fields]]
+  field = "rechnungsnummer"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "rechnungsdatum"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "faelligkeitsdatum"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "zeitraum_von"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "zeitraum_bis"
+  width = "half"
+
+[[form.sections]]
+id = "betrag"
+label = "labels.form.section.betrag"
+
+  [[form.sections.fields]]
+  field = "betrag"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "notiz"
+  width = "full"
+  rows = 3

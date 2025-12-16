@@ -65,3 +65,12 @@ export function useFormConfig<T = unknown>(formName: string) {
     enabled: !!formName,
   })
 }
+
+export function useCatalog<T = unknown>(catalogName: string) {
+  return useQuery({
+    queryKey: ['catalog', catalogName],
+    queryFn: () => apiService.getCatalog<T>(catalogName),
+    staleTime: Infinity,
+    enabled: !!catalogName,
+  })
+}

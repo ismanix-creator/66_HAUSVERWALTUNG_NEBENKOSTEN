@@ -1,0 +1,34 @@
+[form]
+entity = "zaehlerstand"
+title_create = "labels.form.zaehlerstand_erfassen"
+title_edit = "labels.form.zaehlerstand_bearbeiten"
+
+[[form.sections]]
+id = "basis"
+label = "labels.form.section.zaehlerstand"
+
+  [[form.sections.fields]]
+  field = "zaehler_id"
+  width = "full"
+  hidden = true
+
+  [[form.sections.fields]]
+  field = "datum"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "stand"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "ableseart"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "foto"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "notiz"
+  width = "full"
+  rows = 3

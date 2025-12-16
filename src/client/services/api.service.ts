@@ -76,6 +76,10 @@ class ApiService {
     return this.fetch<T>('/config/navigation')
   }
 
+  async getCatalog<T>(catalogName: string): Promise<T> {
+    return this.fetch<T>(`/catalog/${catalogName}`)
+  }
+
   /**
    * Lädt Entity-Konfiguration
    */

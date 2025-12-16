@@ -56,6 +56,12 @@ class ConfigService {
     )
   }
 
+  async getCatalog<T>(catalogName: string) {
+    return this.loadToml<T>(
+      path.join(CONFIG_DIR, 'catalogs', `${catalogName}.catalog.toml`)
+    )
+  }
+
   async getTableConfig(tableName: string) {
     return this.loadToml(
       path.join(CONFIG_DIR, 'tables', `${tableName}.table.toml`)

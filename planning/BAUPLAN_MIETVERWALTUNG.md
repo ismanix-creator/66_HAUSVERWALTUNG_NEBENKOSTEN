@@ -1563,6 +1563,8 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 - Rechnungen erfassbar
 - NK-Abrechnung kann erstellt werden
 
+**Status:** Alle Phasen-4-Kriterien (Zähler, Ablesung, Verbrauch, Rechnungen, Abrechnung, Verteilung, Umlageschlüssel) sind mit den neuen Seiten und Config-Formularen erfüllt.
+
 ---
 
 ### Phase 5: Dashboard + Dokumente + PDF
@@ -1834,7 +1836,6 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 - **Backend:** Node.js + Express + TypeScript
 - **Datenbank:** SQLite (lokal)
 - **Config:** TOML-Dateien
-- **Config:** TOML-Dateien
 
 ---
 
@@ -1844,7 +1845,7 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 - [x] Phase 1 – Entity-System & CRUD (Schema-Generator, Entity-Service, API)
 - [x] Phase 2 – Frontend-Grundgerüst & generische Komponenten (Navigation, DataTable, DynamicForm, ObjektePage)
 - [x] Phase 3 – Verträge & Finanzen (Routes `/vertraege`, `/finanzen`, Forms/Tables für Kaution/Zahlung/Sollstellung, Shared Logger, Tests)
-- [ ] Phase 4 – Nebenkosten & Zähler
+- [x] Phase 4 – Nebenkosten & Zähler
 - [ ] Phase 5 – Dashboard, Dokumente & PDF
 - [ ] Phase 6 – Mobile-Ansicht & Polish
 

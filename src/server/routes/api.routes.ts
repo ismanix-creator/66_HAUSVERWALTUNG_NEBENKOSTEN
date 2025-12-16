@@ -42,6 +42,15 @@ apiRoutes.get('/config/entity/:name', async (req, res, next) => {
   }
 })
 
+apiRoutes.get('/catalog/:name', async (req, res, next) => {
+  try {
+    const catalog = await configService.getCatalog(req.params.name)
+    res.json(catalog)
+  } catch (error) {
+    next(error)
+  }
+})
+
 apiRoutes.get('/config/table/:name', async (req, res, next) => {
   try {
     const config = await configService.getTableConfig(req.params.name)
