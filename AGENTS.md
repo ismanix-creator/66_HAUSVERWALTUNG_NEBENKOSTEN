@@ -1,8 +1,9 @@
 # Repository Guidelines
 
 ## Wichtige Referenzen
-- Lies `CODEX.md` und `.codex/CODEX.md` für projektweite Erwartungen, Ports und das Config-first-Paradigma.
-- Nutze `.codex/workflows/implement.md` bzw. `/refactor.md`, ergänze Änderungen in `.ai/*.md` oder `planning/BAUPLAN_MIETVERWALTUNG.md`.
+- Lies `CODEX.md`, `.codex/CODEX.md` und `.codex/system.md` für projektweite Erwartungen, Ports und das Config-first-Paradigma.
+- `.ai/*.md` liefern die Shared Rules, `.claude/*` den Review/Plan-Bias – ziehe sie vor jeder Änderung heran.
+- Konsultiere `planning/BAUPLAN_MIETVERWALTUNG.md` für Phase/Deliverables/Status, damit jede Änderung im Einklang mit dem Bauplan steht; dokumentiere neue Features dort.
 
 ## Projektstruktur & Modulorganisation
 - `src/client`, `src/server` und `src/shared` trennen UI, API und gemeinsame Typen/Utilities.
