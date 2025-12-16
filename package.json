@@ -4,8 +4,8 @@
   "description": "Private Mietobjekt-Verwaltung - 100% Config-Driven",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"TSX_LOADER=./loaders/resolve-js-extension.mjs npm run dev:server\" \"npm run dev:client\"",
-    "dev:server": "tsx watch src/server/index.ts",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "NODE_OPTIONS=--experimental-loader=./loaders/resolve-js-extension.mjs node scripts/watch-server.js",
     "dev:client": "vite",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
@@ -20,7 +20,8 @@
     "db:migrate": "tsx scripts/migrate.ts",
     "db:backup": "tsx scripts/backup.ts",
     "db:seed": "tsx scripts/seed-demo.ts",
-    "start:server": "PORT=3001 NODE_OPTIONS=--experimental-loader=./loaders/resolve-js-extension.mjs node dist/server/server/index.js"
+    "start:server": "npm run copy:config && PORT=3001 NODE_OPTIONS=--experimental-loader=./loaders/resolve-js-extension.mjs node dist/server/server/index.js",
+    "copy:config": "node scripts/copy-config.js"
   },
   "dependencies": {
     "@iarna/toml": "^2.2.5",
