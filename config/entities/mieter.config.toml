@@ -1,5 +1,6 @@
 [entity]
 name = "mieter"
+table_name = "mieter"
 label = "labels.entity.mieter"
 label_plural = "labels.entity.mieter_plural"
 icon = "User"

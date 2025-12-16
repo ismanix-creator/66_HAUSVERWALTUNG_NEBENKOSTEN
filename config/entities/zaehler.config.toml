@@ -1,5 +1,6 @@
 [entity]
 name = "zaehler"
+table_name = "zaehler"
 label = "labels.entity.zaehler"
 label_plural = "labels.entity.zaehler_plural"
 icon = "Gauge"

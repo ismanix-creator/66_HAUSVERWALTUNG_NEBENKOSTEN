@@ -1,5 +1,6 @@
 [entity]
 name = "vertrag"
+table_name = "vertraege"
 label = "labels.entity.vertrag"
 label_plural = "labels.entity.vertraege"
 icon = "FileSignature"

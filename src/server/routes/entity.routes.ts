@@ -7,33 +7,33 @@
 
 import { Router, Request, Response, NextFunction } from 'express'
 import { entityService, EntityNotFoundError, ValidationError } from '../services/entity.service'
+import { schemaService } from '../services/schema.service'
 
 export const entityRoutes = Router()
 
-// Liste aller unterstützten Entities
-const SUPPORTED_ENTITIES = [
-  'objekt',
-  'einheit',
-  'mieter',
-  'vertrag',
-  'kaution',
-  'zahlung',
-  'sollstellung',
-  'nebenkostenabrechnung',
-  'zaehler',
-  'zaehlerstand',
-  'dokument',
-  'kostenart',
-  'rechnung',
-  'erinnerung',
-]
+// Cache für unterstützte Entities (wird beim ersten Request geladen)
+let supportedEntitiesCache: string[] | null = null
+
+/**
+ * Lädt unterstützte Entities dynamisch aus Config-Verzeichnis
+ */
+async function getSupportedEntities(): Promise<string[]> {
+  if (supportedEntitiesCache) {
+    return supportedEntitiesCache
+  }
+  supportedEntitiesCache = await schemaService.getEntityNames()
+  return supportedEntitiesCache
+}
 
 /**
  * Middleware: Prüft ob Entity unterstützt wird
+ * Dynamisch aus config/entities/ Verzeichnis
  */
-function validateEntity(req: Request, res: Response, next: NextFunction) {
+async function validateEntity(req: Request, res: Response, next: NextFunction) {
   const { entity } = req.params
-  if (!SUPPORTED_ENTITIES.includes(entity)) {
+  const supportedEntities = await getSupportedEntities()
+
+  if (!supportedEntities.includes(entity)) {
     res.status(404).json({
       error: {
         message: `Entity '${entity}' nicht gefunden`,

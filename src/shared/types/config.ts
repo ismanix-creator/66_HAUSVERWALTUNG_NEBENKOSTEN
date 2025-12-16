@@ -55,6 +55,7 @@ export interface NavigationItem {
 export interface EntityConfig {
   entity: {
     name: string
+    table_name: string
     label: string
     label_plural: string
     icon: string

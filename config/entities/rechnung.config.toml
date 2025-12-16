@@ -1,5 +1,6 @@
 [entity]
 name = "rechnung"
+table_name = "rechnungen"
 label = "labels.entity.rechnung"
 label_plural = "labels.entity.rechnungen"
 icon = "Receipt"

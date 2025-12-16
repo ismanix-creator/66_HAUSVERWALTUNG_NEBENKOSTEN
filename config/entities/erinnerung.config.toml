@@ -1,5 +1,6 @@
 [entity]
 name = "erinnerung"
+table_name = "erinnerungen"
 label = "labels.entity.erinnerung"
 label_plural = "labels.entity.erinnerungen"
 icon = "Bell"

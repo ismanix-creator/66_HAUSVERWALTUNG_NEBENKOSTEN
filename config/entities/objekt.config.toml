@@ -1,5 +1,6 @@
 [entity]
 name = "objekt"
+table_name = "objekte"
 label = "labels.entity.objekt"
 label_plural = "labels.entity.objekte"
 icon = "Building2"

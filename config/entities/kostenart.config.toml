@@ -1,5 +1,6 @@
 [entity]
 name = "kostenart"
+table_name = "kostenarten"
 label = "labels.entity.kostenart"
 label_plural = "labels.entity.kostenarten"
 icon = "Tag"

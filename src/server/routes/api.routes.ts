@@ -6,6 +6,7 @@
 
 import { Router } from 'express'
 import { configService } from '../services/config.service'
+import { schemaService } from '../services/schema.service'
 import { entityRoutes } from './entity.routes'
 
 export const apiRoutes = Router()
@@ -59,24 +60,12 @@ apiRoutes.get('/config/form/:name', async (req, res, next) => {
   }
 })
 
-// Liste unterstützter Entities
-apiRoutes.get('/entities', (_req, res) => {
-  res.json({
-    entities: [
-      'objekt',
-      'einheit',
-      'mieter',
-      'vertrag',
-      'kaution',
-      'zahlung',
-      'sollstellung',
-      'nebenkostenabrechnung',
-      'zaehler',
-      'zaehlerstand',
-      'dokument',
-      'kostenart',
-      'rechnung',
-      'erinnerung',
-    ],
-  })
+// Liste unterstützter Entities - dynamisch aus Config-Verzeichnis
+apiRoutes.get('/entities', async (_req, res, next) => {
+  try {
+    const entities = await schemaService.getEntityNames()
+    res.json({ entities })
+  } catch (error) {
+    next(error)
+  }
 })

@@ -1,5 +1,6 @@
 [entity]
 name = "zahlung"
+table_name = "zahlungen"
 label = "labels.entity.zahlung"
 label_plural = "labels.entity.zahlungen"
 icon = "ArrowDownCircle"

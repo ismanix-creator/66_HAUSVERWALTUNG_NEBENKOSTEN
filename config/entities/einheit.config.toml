@@ -1,5 +1,6 @@
 [entity]
 name = "einheit"
+table_name = "einheiten"
 label = "labels.entity.einheit"
 label_plural = "labels.entity.einheiten"
 icon = "DoorOpen"

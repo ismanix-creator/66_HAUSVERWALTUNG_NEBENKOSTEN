@@ -1,5 +1,6 @@
 [entity]
 name = "sollstellung"
+table_name = "sollstellungen"
 label = "labels.entity.sollstellung"
 label_plural = "labels.entity.sollstellungen"
 icon = "ListChecks"

@@ -1,5 +1,6 @@
 [entity]
 name = "dokument"
+table_name = "dokumente"
 label = "labels.entity.dokument"
 label_plural = "labels.entity.dokumente"
 icon = "File"
