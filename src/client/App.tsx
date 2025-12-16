@@ -4,6 +4,7 @@ import { DashboardPage } from './pages/DashboardPage'
 import { ObjektePage } from './pages/ObjektePage'
 import { VertraegePage } from './pages/VertraegePage'
 import { FinanzenPage } from './pages/FinanzenPage'
+import { ZaehlerPage } from './pages/ZaehlerPage'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/vertraege/:id" element={<VertraegePage />} />
         <Route path="/finanzen" element={<FinanzenPage />} />
         <Route path="/finanzen/:tab" element={<FinanzenPage />} />
+        <Route path="/nebenkosten/zaehler" element={<ZaehlerPage />} />
         {/* Weitere Routes werden config-gesteuert hinzugefügt */}
       </Routes>
     </AppShell>

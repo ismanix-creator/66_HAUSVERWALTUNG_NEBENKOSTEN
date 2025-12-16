@@ -8,6 +8,10 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-16
 
+### [03:29] - Feature - Phase 4: Nebenkosten (Zähler)
+- `ZaehlerPage` (Route `/nebenkosten/zaehler`) zeigt config-gesteuerte Tabelle mit Action-Buttons.
+- Zähler-Formular (`config/forms/zaehler.form.toml`) ermöglicht Zuordnung, Typ, Messeinheit + Notizen.
+
 ### [03:17] - Feature - Phase 3: Verträge + Finanzen
 - Verträge- und Finanzen-Bereiche mit config-gesteuerter Liste/Form (Routes `/vertraege`, `/finanzen`) ergänzt.
 - Neue Form-Configs (`kaution.form`, `zahlung.form`, `sollstellung.form`) sowie Tabellen-Configs für Kautionen erlauben standardisierte Dialoge und Übersichten.

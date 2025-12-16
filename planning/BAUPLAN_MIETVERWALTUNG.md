@@ -1712,6 +1712,9 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 | 4.6 | Anteil pro Mieter wird berechnet | Ergebnis prüfen |
 | 4.7 | Umlageschlüssel werden angewendet | Rechnung prüfen |
 
+**Aktueller Fokus**
+- [x] 4.1 Zähler kann angelegt werden (Konfiguration + `ZaehlerPage` mit DynamicForm)
+
 ### Phase 5: Dashboard + Dokumente
 
 | # | Kriterium | Prüfmethode |
@@ -1831,6 +1834,19 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 - **Backend:** Node.js + Express + TypeScript
 - **Datenbank:** SQLite (lokal)
 - **Config:** TOML-Dateien
+- **Config:** TOML-Dateien
+
+---
+
+### Fortschritt
+
+- [x] Phase 0 – Projekt-Setup & Grundstruktur (Node, Vite, Express, Config-Loader, AI-Dokumente)
+- [x] Phase 1 – Entity-System & CRUD (Schema-Generator, Entity-Service, API)
+- [x] Phase 2 – Frontend-Grundgerüst & generische Komponenten (Navigation, DataTable, DynamicForm, ObjektePage)
+- [x] Phase 3 – Verträge & Finanzen (Routes `/vertraege`, `/finanzen`, Forms/Tables für Kaution/Zahlung/Sollstellung, Shared Logger, Tests)
+- [ ] Phase 4 – Nebenkosten & Zähler
+- [ ] Phase 5 – Dashboard, Dokumente & PDF
+- [ ] Phase 6 – Mobile-Ansicht & Polish
 
 ---
 
