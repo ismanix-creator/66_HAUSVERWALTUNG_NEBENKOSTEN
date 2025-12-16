@@ -1,3 +1,10 @@
+/**
+ * Sidebar: Config-Driven Navigation
+ * Lädt Navigation aus TOML-Config
+ *
+ * @lastModified 2025-12-16
+ */
+
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard,
@@ -8,70 +15,145 @@ import {
   Calculator,
   FolderOpen,
   Settings,
+  ChevronDown,
+  type LucideIcon,
 } from 'lucide-react'
 import { clsx } from 'clsx'
+import { useState } from 'react'
+import { useNavigationConfig } from '../../hooks/useConfig'
+import type { NavigationItem } from '@shared/types/config'
 
-const navItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, route: '/dashboard' },
-  { id: 'objekte', label: 'Objekte', icon: Building2, route: '/objekte' },
-  { id: 'mieter', label: 'Mieter', icon: Users, route: '/mieter' },
-  { id: 'vertraege', label: 'Verträge', icon: FileText, route: '/vertraege' },
-  { id: 'finanzen', label: 'Finanzen', icon: Wallet, route: '/finanzen' },
-  { id: 'nebenkosten', label: 'Nebenkosten', icon: Calculator, route: '/nebenkosten' },
-  { id: 'dokumente', label: 'Dokumente', icon: FolderOpen, route: '/dokumente' },
-]
+// Icon-Mapping: String aus Config → Lucide Icon
+const iconMap: Record<string, LucideIcon> = {
+  LayoutDashboard,
+  Building2,
+  Users,
+  FileText,
+  Wallet,
+  Calculator,
+  FolderOpen,
+  Settings,
+}
 
-const bottomItems = [
-  { id: 'einstellungen', label: 'Einstellungen', icon: Settings, route: '/einstellungen' },
+// Fallback-Navigation falls Config nicht geladen
+const fallbackNav: NavigationItem[] = [
+  { id: 'dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/dashboard', order: 1 },
+  { id: 'objekte', label: 'Objekte', icon: 'Building2', route: '/objekte', order: 2 },
 ]
 
 export function Sidebar() {
+  const { data: navConfig, isLoading } = useNavigationConfig()
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set())
+
+  // Navigation Items sortieren und gruppieren
+  const items = navConfig?.navigation?.items || fallbackNav
+  const topItems = items
+    .filter((item) => item.position !== 'bottom')
+    .sort((a, b) => a.order - b.order)
+  const bottomItems = items
+    .filter((item) => item.position === 'bottom')
+    .sort((a, b) => a.order - b.order)
+
+  // Toggle für Items mit Kindern
+  const toggleExpand = (id: string) => {
+    setExpandedItems((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+      }
+      return next
+    })
+  }
+
+  // Label aus i18n-Key extrahieren (vereinfacht)
+  const getLabel = (label: string): string => {
+    // Format: "labels.nav.dashboard" → "Dashboard"
+    if (label.startsWith('labels.')) {
+      const parts = label.split('.')
+      const key = parts[parts.length - 1]
+      // Erste Buchstabe groß
+      return key.charAt(0).toUpperCase() + key.slice(1)
+    }
+    return label
+  }
+
+  // Render einzelnes Nav-Item
+  const renderNavItem = (item: NavigationItem, isNested = false) => {
+    const Icon = iconMap[item.icon] || Building2
+    const hasChildren = item.children && item.children.length > 0
+    const isExpanded = expandedItems.has(item.id)
+    const label = getLabel(item.label)
+
+    if (hasChildren) {
+      return (
+        <div key={item.id}>
+          <button
+            onClick={() => toggleExpand(item.id)}
+            className={clsx(
+              'flex items-center w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+              'text-gray-700 hover:bg-gray-100',
+              isNested && 'pl-8'
+            )}
+          >
+            <Icon className="h-5 w-5 mr-3" />
+            <span className="flex-1 text-left">{label}</span>
+            <ChevronDown
+              className={clsx('h-4 w-4 transition-transform', isExpanded && 'rotate-180')}
+            />
+          </button>
+          {isExpanded && (
+            <div className="mt-1 space-y-1">
+              {item.children!.map((child) => renderNavItem(child, true))}
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    return (
+      <NavLink
+        key={item.id}
+        to={item.route}
+        className={({ isActive }) =>
+          clsx(
+            'flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+            isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:bg-gray-100',
+            isNested && 'pl-8'
+          )
+        }
+      >
+        {!isNested && <Icon className="h-5 w-5 mr-3" />}
+        {isNested && <span className="w-5 mr-3" />}
+        {label}
+      </NavLink>
+    )
+  }
+
   return (
     <aside className="flex w-64 flex-col bg-white border-r border-gray-200">
+      {/* Header */}
       <div className="flex h-16 items-center px-6 border-b border-gray-200">
         <Building2 className="h-8 w-8 text-primary-600" />
         <span className="ml-3 text-xl font-semibold text-gray-900">Mietverwaltung</span>
       </div>
 
-      <nav className="flex-1 px-3 py-4 space-y-1">
-        {navItems.map(item => (
-          <NavLink
-            key={item.id}
-            to={item.route}
-            className={({ isActive }) =>
-              clsx(
-                'flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-                isActive
-                  ? 'bg-primary-50 text-primary-700'
-                  : 'text-gray-700 hover:bg-gray-100'
-              )
-            }
-          >
-            <item.icon className="h-5 w-5 mr-3" />
-            {item.label}
-          </NavLink>
-        ))}
+      {/* Navigation */}
+      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        {isLoading ? (
+          <div className="px-3 py-2 text-sm text-gray-500">Laden...</div>
+        ) : (
+          topItems.map((item) => renderNavItem(item))
+        )}
       </nav>
 
-      <div className="px-3 py-4 border-t border-gray-200">
-        {bottomItems.map(item => (
-          <NavLink
-            key={item.id}
-            to={item.route}
-            className={({ isActive }) =>
-              clsx(
-                'flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-                isActive
-                  ? 'bg-primary-50 text-primary-700'
-                  : 'text-gray-700 hover:bg-gray-100'
-              )
-            }
-          >
-            <item.icon className="h-5 w-5 mr-3" />
-            {item.label}
-          </NavLink>
-        ))}
-      </div>
+      {/* Bottom Items */}
+      {bottomItems.length > 0 && (
+        <div className="px-3 py-4 border-t border-gray-200">
+          {bottomItems.map((item) => renderNavItem(item))}
+        </div>
+      )}
     </aside>
   )
 }

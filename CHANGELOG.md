@@ -8,6 +8,16 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-16
 
+### [02:16] - Feature - Phase 2: Frontend-Grundgerüst + generische Komponenten
+- API-Service: Fetch-Wrapper für Backend-Kommunikation
+- TanStack Query Hooks: useConfig, useEntity, useTableConfig, useFormConfig
+- DataTable: Generische Tabelle mit Sortierung, Pagination, Row-Actions
+- DynamicForm: Config-gesteuertes Formular mit Validierung
+- ObjektePage: 100% Config-Driven (lädt Table/Form/Entity-Config aus API)
+- Sidebar: Navigation dynamisch aus TOML-Config geladen
+- Expandierbare Sub-Navigation für Finanzen/Nebenkosten
+- API-Endpunkte: /api/config/table/:name, /api/config/form/:name
+
 ### [02:00] - Feature - Phase 1: Entity-System + CRUD
 - Schema-Generator: TOML → SQL CREATE TABLE (14 Tabellen)
 - Generischer Entity-Service mit CRUD-Operationen
@@ -38,4 +48,7 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 ## Nächste Schritte
 
 - [x] Phase 1: Entity-System + CRUD
-- [ ] Phase 2: Frontend-Grundgerüst + generische Komponenten
+- [x] Phase 2: Frontend-Grundgerüst + generische Komponenten
+- [ ] Phase 3: Erweiterte Views (Mieter, Verträge, Finanzen)
+- [ ] Phase 4: Nebenkosten-Abrechnung
+- [ ] Phase 5: Dokumente + PDF-Generation

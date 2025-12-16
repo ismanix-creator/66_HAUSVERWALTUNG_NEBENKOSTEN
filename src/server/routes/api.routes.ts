@@ -41,6 +41,24 @@ apiRoutes.get('/config/entity/:name', async (req, res, next) => {
   }
 })
 
+apiRoutes.get('/config/table/:name', async (req, res, next) => {
+  try {
+    const config = await configService.getTableConfig(req.params.name)
+    res.json(config)
+  } catch (error) {
+    next(error)
+  }
+})
+
+apiRoutes.get('/config/form/:name', async (req, res, next) => {
+  try {
+    const config = await configService.getFormConfig(req.params.name)
+    res.json(config)
+  } catch (error) {
+    next(error)
+  }
+})
+
 // Liste unterstützter Entities
 apiRoutes.get('/entities', (_req, res) => {
   res.json({

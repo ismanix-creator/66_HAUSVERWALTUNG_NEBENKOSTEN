@@ -4,8 +4,8 @@ node_modules/
 # Build outputs
 dist/
 
-# Data (local database, backups, uploads)
-data/
+# Data (local database, backups, uploads) - nur Root-Level
+/data/
 *.sqlite
 *.sqlite-journal
 
