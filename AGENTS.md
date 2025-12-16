@@ -39,3 +39,17 @@
 - Jede Änderung erhält Einträge in AGENTS, CHANGELOG und BAUPLAN, damit die Wissensbasis konsistent bleibt.
 - Verweise innerhalb AGENTS auf die anderen Dokumente, damit kommende Agenten schnell Orientierung finden.
 - Bei neuen Prozessschritten oder Tools beschreibe kurz, wo die Recourcen liegen (z. B. `config/*.toml`, `.codex/`).
+
+## Laufende Änderungen
+- [2025-12-16 05:48] Bugfix – API-Routing
+  - Konfigurations-, Dashboard-, Export- und `/entities`-Endpoints regeln sich nun vor den generischen `entityRoutes`, sodass `/api/config/navigation` und `/api/dashboard/summary` wieder erreichbar sind (`src/server/routes/api.routes.ts:16-104`).
+  - Dokumentiert in `CHANGELOG.md` und `planning/BAUPLAN_MIETVERWALTUNG.md` (Abschnitt 12 "Laufende Fixes").
+- [2025-12-16 05:51] UI – Statusbar
+  - Die Statusleiste bezieht Branding und Versionsnummer aus `config/app.config.toml` (`app.owner.name`, `app.version`) und rendert das Ergebnis zentral zwischen den SQLite-/Server-Indikatoren (`src/client/components/layout/StatusBar.tsx:1-21`).
+  - Dokumentiert in `CHANGELOG.md` und `planning/BAUPLAN_MIETVERWALTUNG.md` (Abschnitt 12 "Laufende Fixes").
+- [2025-12-16 06:03] Typisierung – Query & Entity-Types
+  - `BaseEntity` erweitert jetzt `Record<string, unknown>`, `Dokument` enthält Metadaten wie `hochgeladen_am`, `Nebenkostenabrechnung` wurde ergänzt, und `useEntityList`-Resultate liefern weiterhin `ApiResponse`-Payloads, die in `FinanzenPage`, `NebenkostenPage` und `ZaehlerPage` korrekt ausgepackt werden (`src/shared/types/entities.ts`, `src/client/pages/{Finanzen,Nebenkosten,Zaehler}.tsx`, `src/client/pages/DashboardPage.tsx`).
+  - Dokumentiert in `CHANGELOG.md` und `planning/BAUPLAN_MIETVERWALTUNG.md` (Abschnitt 12 "Laufende Fixes").
+- [2025-12-16 06:15] Config – Dokumenten-Formular
+  - Neu: `forms/dokument.form.toml` beschreibt Upload/Edit-Dialog für `dokument` inkl. Zuordnung, Dateimetadaten und readonly-Felder, damit `/api/config/form/dokument` wieder existiert und die Tabellen-/View-Aktionen nicht mit 500 antworten (`config/forms/dokument.form.toml`).
+  - Dokumentiert in `CHANGELOG.md` und `planning/BAUPLAN_MIETVERWALTUNG.md` (Abschnitt 12 "Laufende Fixes").

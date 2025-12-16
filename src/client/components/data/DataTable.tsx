@@ -181,7 +181,7 @@ export function DataTable<T extends Record<string, unknown>>({
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              {columns.map((column) => (
+              {columns.map(column => (
                 <th
                   key={column.field}
                   style={{ width: column.width }}
@@ -192,9 +192,13 @@ export function DataTable<T extends Record<string, unknown>>({
                 >
                   <div className="flex items-center gap-1">
                     <span>{column.label.replace('labels.', '')}</span>
-                    {column.sortable && sortField === column.field && (
-                      sortDir === 'ASC' ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />
-                    )}
+                    {column.sortable &&
+                      sortField === column.field &&
+                      (sortDir === 'ASC' ? (
+                        <ChevronUp className="h-4 w-4" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4" />
+                      ))}
                   </div>
                 </th>
               ))}
@@ -204,18 +208,24 @@ export function DataTable<T extends Record<string, unknown>>({
           <tbody className="divide-y divide-gray-200 bg-white">
             {isLoading ? (
               <tr>
-                <td colSpan={columns.length + (row_actions ? 1 : 0)} className="px-4 py-8 text-center text-gray-500">
+                <td
+                  colSpan={columns.length + (row_actions ? 1 : 0)}
+                  className="px-4 py-8 text-center text-gray-500"
+                >
                   Laden...
                 </td>
               </tr>
             ) : data.length === 0 ? (
               <tr>
-                <td colSpan={columns.length + (row_actions ? 1 : 0)} className="px-4 py-8 text-center text-gray-500">
+                <td
+                  colSpan={columns.length + (row_actions ? 1 : 0)}
+                  className="px-4 py-8 text-center text-gray-500"
+                >
                   Keine Einträge vorhanden
                 </td>
               </tr>
             ) : (
-              data.map((item) => (
+              data.map(item => (
                 <tr
                   key={item.id as string}
                   className={`${row_click ? 'cursor-pointer hover:bg-gray-50' : ''} ${
@@ -223,7 +233,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   }`}
                   onClick={() => handleRowClick(item)}
                 >
-                  {columns.map((column) => (
+                  {columns.map(column => (
                     <td
                       key={column.field}
                       className={`px-4 py-3 text-sm text-gray-900 text-${column.align || 'left'}`}
@@ -236,7 +246,7 @@ export function DataTable<T extends Record<string, unknown>>({
                       {deleteConfirm === item.id ? (
                         <div className="flex items-center justify-end gap-2">
                           <button
-                            onClick={(e) => {
+                            onClick={e => {
                               e.stopPropagation()
                               confirmDelete(item)
                             }}
@@ -245,7 +255,7 @@ export function DataTable<T extends Record<string, unknown>>({
                             Löschen
                           </button>
                           <button
-                            onClick={(e) => {
+                            onClick={e => {
                               e.stopPropagation()
                               setDeleteConfirm(null)
                             }}
@@ -258,7 +268,7 @@ export function DataTable<T extends Record<string, unknown>>({
                         <div className="flex items-center justify-end gap-2">
                           {row_actions.edit && (
                             <button
-                              onClick={(e) => {
+                              onClick={e => {
                                 e.stopPropagation()
                                 onEdit?.(item)
                               }}
@@ -269,7 +279,7 @@ export function DataTable<T extends Record<string, unknown>>({
                           )}
                           {row_actions.delete && (
                             <button
-                              onClick={(e) => handleDeleteClick(item, e)}
+                              onClick={e => handleDeleteClick(item, e)}
                               className="p-1 text-gray-400 hover:text-red-600"
                             >
                               <Trash2 className="h-4 w-4" />
@@ -290,7 +300,7 @@ export function DataTable<T extends Record<string, unknown>>({
       {totalPages > 1 && (
         <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
           <div className="text-sm text-gray-500">
-            {((page - 1) * pageSize) + 1} - {Math.min(page * pageSize, total)} von {total}
+            {(page - 1) * pageSize + 1} - {Math.min(page * pageSize, total)} von {total}
           </div>
           <div className="flex items-center gap-2">
             <button

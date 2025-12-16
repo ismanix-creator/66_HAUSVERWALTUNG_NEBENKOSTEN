@@ -94,7 +94,7 @@ class EntityService {
     // SQL generieren
     const fields = Object.keys(processedData)
     const placeholders = fields.map(() => '?').join(', ')
-    const values = fields.map((f) => processedData[f])
+    const values = fields.map(f => this.convertValueForSqlite(processedData[f]))
 
     const sql = `INSERT INTO ${tableName} (${fields.join(', ')}) VALUES (${placeholders})`
     databaseService.run(sql, values)
@@ -132,8 +132,8 @@ class EntityService {
 
     // SQL generieren
     const fields = Object.keys(processedData)
-    const setClauses = fields.map((f) => `${f} = ?`).join(', ')
-    const values = [...fields.map((f) => processedData[f]), id]
+    const setClauses = fields.map(f => `${f} = ?`).join(', ')
+    const values = [...fields.map(f => this.convertValueForSqlite(processedData[f])), id]
 
     const sql = `UPDATE ${tableName} SET ${setClauses} WHERE id = ?`
     databaseService.run(sql, values)
@@ -251,11 +251,7 @@ class EntityService {
   /**
    * Validiert Feldtyp
    */
-  private validateFieldType(
-    fieldName: string,
-    value: unknown,
-    config: FieldConfig
-  ): string | null {
+  private validateFieldType(fieldName: string, value: unknown, config: FieldConfig): string | null {
     switch (config.type) {
       case 'string':
       case 'text':
@@ -332,6 +328,30 @@ class EntityService {
     processed.aktualisiert_am = now
 
     return processed
+  }
+
+  /**
+   * Konvertiert Werte für SQLite-Kompatibilität
+   * SQLite unterstützt nur: number, string, bigint, Buffer, null
+   */
+  private convertValueForSqlite(value: unknown): string | number | bigint | Buffer | null {
+    // null/undefined → null
+    if (value === null || value === undefined) {
+      return null
+    }
+
+    // Boolean → 0 oder 1
+    if (typeof value === 'boolean') {
+      return value ? 1 : 0
+    }
+
+    // Arrays/Objects → JSON string
+    if (typeof value === 'object' && !(value instanceof Buffer)) {
+      return JSON.stringify(value)
+    }
+
+    // Alles andere durchreichen (string, number, bigint, Buffer)
+    return value as string | number | bigint | Buffer
   }
 }
 

@@ -51,17 +51,23 @@ class DatabaseService {
 
   // Run a single statement
   run(sql: string, params: unknown[] = []) {
-    return this.getDb().prepare(sql).run(...params)
+    return this.getDb()
+      .prepare(sql)
+      .run(...params)
   }
 
   // Get single row
   get<T>(sql: string, params: unknown[] = []): T | undefined {
-    return this.getDb().prepare(sql).get(...params) as T | undefined
+    return this.getDb()
+      .prepare(sql)
+      .get(...params) as T | undefined
   }
 
   // Get all rows
   all<T>(sql: string, params: unknown[] = []): T[] {
-    return this.getDb().prepare(sql).all(...params) as T[]
+    return this.getDb()
+      .prepare(sql)
+      .all(...params) as T[]
   }
 
   // Execute multiple statements in a transaction

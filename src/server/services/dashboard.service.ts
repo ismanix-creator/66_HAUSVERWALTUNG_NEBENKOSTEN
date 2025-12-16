@@ -3,7 +3,11 @@ import { schemaService } from './schema.service'
 import type { DashboardSummary } from '@shared/types/dashboard'
 
 class DashboardService {
-  private async countTable(entityName: string, whereClause?: string, params: unknown[] = []): Promise<number> {
+  private async countTable(
+    entityName: string,
+    whereClause?: string,
+    params: unknown[] = []
+  ): Promise<number> {
     const tableName = schemaService.getTableName(entityName)
     const where = whereClause ? ` WHERE ${whereClause}` : ''
     const result = await databaseService.get<{ count: number }>(

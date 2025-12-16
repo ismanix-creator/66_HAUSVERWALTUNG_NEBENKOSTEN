@@ -9,7 +9,12 @@ import { Plus, Download, FileText } from 'lucide-react'
 import { DataTable, TableConfig } from '../components/data/DataTable'
 import { DynamicForm, FormConfig } from '../components/data/DynamicForm'
 import { useEntityConfig, useFormConfig, useTableConfig } from '../hooks/useConfig'
-import { useCreateEntity, useDeleteEntity, useEntityList, useUpdateEntity } from '../hooks/useEntity'
+import {
+  useCreateEntity,
+  useDeleteEntity,
+  useEntityList,
+  useUpdateEntity,
+} from '../hooks/useEntity'
 import type { Dokument } from '@shared/types/entities'
 
 const ENTITY_NAME = 'dokument'

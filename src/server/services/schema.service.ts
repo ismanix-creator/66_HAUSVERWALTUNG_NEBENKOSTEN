@@ -61,9 +61,7 @@ export class SchemaService {
       // Foreign Key für reference-Felder
       if (field.type === 'reference' && field.reference) {
         const refTable = this.getTableName(field.reference)
-        foreignKeys.push(
-          `FOREIGN KEY (${fieldName}) REFERENCES ${refTable}(id) ON DELETE SET NULL`
-        )
+        foreignKeys.push(`FOREIGN KEY (${fieldName}) REFERENCES ${refTable}(id) ON DELETE SET NULL`)
       }
     }
 
@@ -83,11 +81,7 @@ export class SchemaService {
   /**
    * Generiert Spalten-Definition für ein Feld
    */
-  private generateColumnDef(
-    fieldName: string,
-    field: FieldConfig,
-    primaryKey: string
-  ): string {
+  private generateColumnDef(fieldName: string, field: FieldConfig, primaryKey: string): string {
     const sqlType = this.fieldTypeToSql(field.type)
     const parts: string[] = [fieldName, sqlType]
 
@@ -155,7 +149,7 @@ export class SchemaService {
     if (this.tableNameCache.has(entityName)) {
       return this.tableNameCache.get(entityName)!
     }
-    const config = await configService.getEntityConfig(entityName) as EntityConfig | null
+    const config = (await configService.getEntityConfig(entityName)) as EntityConfig | null
     if (config?.entity?.table_name) {
       this.tableNameCache.set(entityName, config.entity.table_name)
       return config.entity.table_name
@@ -197,9 +191,7 @@ export class SchemaService {
   async getEntityNames(): Promise<string[]> {
     const entitiesDir = path.join(CONFIG_DIR, 'entities')
     const files = await fs.readdir(entitiesDir)
-    return files
-      .filter((f) => f.endsWith('.config.toml'))
-      .map((f) => f.replace('.config.toml', ''))
+    return files.filter(f => f.endsWith('.config.toml')).map(f => f.replace('.config.toml', ''))
   }
 
   /**
@@ -214,7 +206,7 @@ export class SchemaService {
 
     for (const entityName of entityNames) {
       try {
-        const config = await configService.getEntityConfig(entityName) as EntityConfig | null
+        const config = (await configService.getEntityConfig(entityName)) as EntityConfig | null
         if (!config) {
           logger.warn(`  ⚠ Entity-Config nicht gefunden: ${entityName}`)
           continue

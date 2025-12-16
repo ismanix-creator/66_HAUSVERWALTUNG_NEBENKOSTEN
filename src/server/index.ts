@@ -14,7 +14,8 @@ import { schemaService } from './services/schema.service'
 import { logger } from './utils/logger'
 
 const app = express()
-const PORT = process.env.PORT || 3001
+const PORT = Number(process.env.PORT) || 3001
+const HOST = process.env.HOST || '0.0.0.0'
 
 // Middleware
 app.use(express.json())
@@ -43,7 +44,7 @@ async function startServer() {
     await schemaService.initializeAllTables()
 
     // Server starten
-    app.listen(PORT, () => {
+    app.listen(PORT, HOST, () => {
       logger.info(`Server läuft auf http://localhost:${PORT}`)
       logger.info(`API verfügbar unter http://localhost:${PORT}/api`)
     })

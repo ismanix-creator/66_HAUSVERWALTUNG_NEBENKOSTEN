@@ -13,9 +13,6 @@ import { entityRoutes } from './entity.routes'
 
 export const apiRoutes = Router()
 
-// Entity CRUD Routes (generisch für alle Entities)
-apiRoutes.use(entityRoutes)
-
 // Config Endpoints
 apiRoutes.get('/config/app', async (_req, res, next) => {
   try {
@@ -102,3 +99,6 @@ apiRoutes.get('/entities', async (_req, res, next) => {
     next(error)
   }
 })
+
+// Entity CRUD Routes (generisch für alle Entities)
+apiRoutes.use(entityRoutes)

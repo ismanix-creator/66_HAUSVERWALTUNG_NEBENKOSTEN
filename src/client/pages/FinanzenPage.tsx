@@ -11,11 +11,7 @@ import { DataTable } from '../components/data/DataTable'
 import { DynamicForm } from '../components/data/DynamicForm'
 import type { TableConfig } from '../components/data/DataTable'
 import type { FormConfig } from '../components/data/DynamicForm'
-import {
-  useEntityList,
-  useCreateEntity,
-  useUpdateEntity,
-} from '../hooks/useEntity'
+import { useEntityList, useCreateEntity, useUpdateEntity } from '../hooks/useEntity'
 import { useEntityConfig, useFormConfig, useTableConfig } from '../hooks/useConfig'
 import type { Zahlung, Sollstellung, Kaution } from '@shared/types/entities'
 
@@ -27,7 +23,9 @@ export function FinanzenPage() {
   const navigate = useNavigate()
   const { tab } = useParams<{ tab?: FinanceTab }>()
 
-  const [activeTab, setActiveTab] = useState<FinanceTab>(TABS.includes(tab as FinanceTab) ? (tab as FinanceTab) : 'zahlungen')
+  const [activeTab, setActiveTab] = useState<FinanceTab>(
+    TABS.includes(tab as FinanceTab) ? (tab as FinanceTab) : 'zahlungen'
+  )
   const [pagination, setPagination] = useState<Record<FinanceTab, number>>({
     zahlungen: 1,
     sollstellung: 1,
@@ -52,11 +50,12 @@ export function FinanzenPage() {
     navigate(`/finanzen/${nextTab}`, { replace: true })
   }
 
-  const { data: zahlungTable, isLoading: zahlungTableLoading } = useTableConfig<TableConfig>('zahlungen')
-  const { data: sollstellungTable, isLoading: sollstellungTableLoading } = useTableConfig<TableConfig>(
-    'sollstellungen'
-  )
-  const { data: kautionenTable, isLoading: kautionenTableLoading } = useTableConfig<TableConfig>('kautionen')
+  const { data: zahlungTable, isLoading: zahlungTableLoading } =
+    useTableConfig<TableConfig>('zahlungen')
+  const { data: sollstellungTable, isLoading: sollstellungTableLoading } =
+    useTableConfig<TableConfig>('sollstellungen')
+  const { data: kautionenTable, isLoading: kautionenTableLoading } =
+    useTableConfig<TableConfig>('kautionen')
 
   const { data: zahlungForm } = useFormConfig<FormConfig>('zahlung')
   const { data: sollstellungForm } = useFormConfig<FormConfig>('sollstellung')
@@ -93,7 +92,7 @@ export function FinanzenPage() {
   const updateKaution = useUpdateEntity<Kaution>('kaution')
 
   const handlePageChange = (target: FinanceTab, nextPage: number) => {
-    setPagination((prev) => ({ ...prev, [target]: nextPage }))
+    setPagination(prev => ({ ...prev, [target]: nextPage }))
   }
 
   const handleZahlungSubmit = async (data: Record<string, unknown>) => {
@@ -192,16 +191,19 @@ export function FinanzenPage() {
     activeTab === 'zahlungen'
       ? zahlungTable
       : activeTab === 'sollstellung'
-      ? sollstellungTable
-      : kautionenTable
+        ? sollstellungTable
+        : kautionenTable
 
   const currentListData =
     activeTab === 'zahlungen'
       ? zahlungList
       : activeTab === 'sollstellung'
-      ? sollstellungList
-      : kautionList
+        ? sollstellungList
+        : kautionList
 
+  type FinanceRow = Zahlung | Sollstellung | Kaution
+  const currentData = (currentListData.data?.data || []) as FinanceRow[]
+  const currentMeta = currentListData.data?.meta
   const isConfigLoading =
     zahlungTableLoading || sollstellungTableLoading || kautionenTableLoading || !currentTableConfig
 
@@ -213,7 +215,7 @@ export function FinanzenPage() {
       </div>
 
       <div className="flex space-x-2">
-        {TABS.map((tabName) => (
+        {TABS.map(tabName => (
           <button
             key={tabName}
             onClick={() => handleTabChange(tabName)}
@@ -226,8 +228,8 @@ export function FinanzenPage() {
             {tabName === 'zahlungen'
               ? 'Zahlungen'
               : tabName === 'sollstellung'
-              ? 'Sollstellungen'
-              : 'Kautionen'}
+                ? 'Sollstellungen'
+                : 'Kautionen'}
           </button>
         ))}
       </div>
@@ -252,14 +254,14 @@ export function FinanzenPage() {
             </button>
           </div>
 
-          <DataTable
+          <DataTable<FinanceRow>
             config={currentTableConfig}
-            data={currentListData.data || []}
-            total={currentListData.meta?.total || 0}
+            data={currentData}
+            total={currentMeta?.total || 0}
             page={pagination[activeTab]}
             pageSize={PAGE_SIZE}
-            onPageChange={(next) => handlePageChange(activeTab, next)}
-            onEdit={(item) => {
+            onPageChange={next => handlePageChange(activeTab, next)}
+            onEdit={item => {
               resetForms()
               if (activeTab === 'zahlungen') {
                 setEditingZahlung(item as Zahlung)

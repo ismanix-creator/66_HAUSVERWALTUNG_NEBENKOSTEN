@@ -1,5 +1,5 @@
 // Base Entity Interface
-export interface BaseEntity {
+export interface BaseEntity extends Record<string, unknown> {
   id: string
   erstellt_am: string
   aktualisiert_am?: string
@@ -153,6 +153,11 @@ export interface Dokument extends BaseEntity {
   dateipfad: string
   datum?: string
   notiz?: string
+  dateiname?: string
+  dateigroesse?: number
+  mime_type?: string
+  jahr?: number
+  hochgeladen_am?: string
 }
 
 // Erinnerung
@@ -164,4 +169,14 @@ export interface Erinnerung extends BaseEntity {
   entity_typ?: string
   entity_id?: string
   status: 'offen' | 'erledigt' | 'verschoben'
+}
+
+export interface Nebenkostenabrechnung extends BaseEntity {
+  objekt_id: string
+  jahr: number
+  zeitraum_von: string
+  zeitraum_bis: string
+  status: 'entwurf' | 'erstellt' | 'versendet'
+  notiz?: string
+  gesamtkosten?: number
 }

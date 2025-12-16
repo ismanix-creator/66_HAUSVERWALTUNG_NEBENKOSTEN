@@ -55,146 +55,166 @@ async function validateEntity(req: Request, res: Response, next: NextFunction) {
  * - orderDir: ASC oder DESC
  * - filter[feldname]: Filter nach Feldwert
  */
-entityRoutes.get('/:entity', validateEntity, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { entity } = req.params
-    const { limit, offset, orderBy, orderDir, ...rest } = req.query
+entityRoutes.get(
+  '/:entity',
+  validateEntity,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { entity } = req.params
+      const { limit, offset, orderBy, orderDir, ...rest } = req.query
 
-    // Filter aus Query-Parametern extrahieren
-    const filters: Record<string, unknown> = {}
-    for (const [key, value] of Object.entries(rest)) {
-      if (key.startsWith('filter[') && key.endsWith(']')) {
-        const fieldName = key.slice(7, -1)
-        filters[fieldName] = value
+      // Filter aus Query-Parametern extrahieren
+      const filters: Record<string, unknown> = {}
+      for (const [key, value] of Object.entries(rest)) {
+        if (key.startsWith('filter[') && key.endsWith(']')) {
+          const fieldName = key.slice(7, -1)
+          filters[fieldName] = value
+        }
       }
+
+      const options = {
+        limit: limit ? parseInt(limit as string, 10) : 100,
+        offset: offset ? parseInt(offset as string, 10) : 0,
+        orderBy: orderBy as string | undefined,
+        orderDir: (orderDir as 'ASC' | 'DESC') || 'DESC',
+        filters: Object.keys(filters).length > 0 ? filters : undefined,
+      }
+
+      const [data, total] = await Promise.all([
+        entityService.getAll(entity, options),
+        entityService.count(entity, filters),
+      ])
+
+      res.json({
+        data,
+        meta: {
+          total,
+          limit: options.limit,
+          offset: options.offset,
+        },
+      })
+    } catch (error) {
+      next(error)
     }
-
-    const options = {
-      limit: limit ? parseInt(limit as string, 10) : 100,
-      offset: offset ? parseInt(offset as string, 10) : 0,
-      orderBy: orderBy as string | undefined,
-      orderDir: (orderDir as 'ASC' | 'DESC') || 'DESC',
-      filters: Object.keys(filters).length > 0 ? filters : undefined,
-    }
-
-    const [data, total] = await Promise.all([
-      entityService.getAll(entity, options),
-      entityService.count(entity, filters),
-    ])
-
-    res.json({
-      data,
-      meta: {
-        total,
-        limit: options.limit,
-        offset: options.offset,
-      },
-    })
-  } catch (error) {
-    next(error)
   }
-})
+)
 
 /**
  * GET /api/:entity/:id - Einzelner Eintrag
  */
-entityRoutes.get('/:entity/:id', validateEntity, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { entity, id } = req.params
-    const data = await entityService.getById(entity, id)
+entityRoutes.get(
+  '/:entity/:id',
+  validateEntity,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { entity, id } = req.params
+      const data = await entityService.getById(entity, id)
 
-    if (!data) {
-      res.status(404).json({
-        error: {
-          message: `${entity} mit ID '${id}' nicht gefunden`,
-          code: 'ENTITY_NOT_FOUND',
-        },
-      })
-      return
+      if (!data) {
+        res.status(404).json({
+          error: {
+            message: `${entity} mit ID '${id}' nicht gefunden`,
+            code: 'ENTITY_NOT_FOUND',
+          },
+        })
+        return
+      }
+
+      res.json({ data })
+    } catch (error) {
+      next(error)
     }
-
-    res.json({ data })
-  } catch (error) {
-    next(error)
   }
-})
+)
 
 /**
  * POST /api/:entity - Neuen Eintrag erstellen
  */
-entityRoutes.post('/:entity', validateEntity, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { entity } = req.params
-    const data = await entityService.create(entity, req.body)
+entityRoutes.post(
+  '/:entity',
+  validateEntity,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { entity } = req.params
+      const data = await entityService.create(entity, req.body)
 
-    res.status(201).json({ data })
-  } catch (error) {
-    if (error instanceof ValidationError) {
-      res.status(400).json({
-        error: {
-          message: error.message,
-          code: error.code,
-          details: error.details,
-        },
-      })
-      return
+      res.status(201).json({ data })
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        res.status(400).json({
+          error: {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+          },
+        })
+        return
+      }
+      next(error)
     }
-    next(error)
   }
-})
+)
 
 /**
  * PUT /api/:entity/:id - Eintrag aktualisieren
  */
-entityRoutes.put('/:entity/:id', validateEntity, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { entity, id } = req.params
-    const data = await entityService.update(entity, id, req.body)
+entityRoutes.put(
+  '/:entity/:id',
+  validateEntity,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { entity, id } = req.params
+      const data = await entityService.update(entity, id, req.body)
 
-    res.json({ data })
-  } catch (error) {
-    if (error instanceof EntityNotFoundError) {
-      res.status(404).json({
-        error: {
-          message: error.message,
-          code: error.code,
-        },
-      })
-      return
+      res.json({ data })
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        res.status(404).json({
+          error: {
+            message: error.message,
+            code: error.code,
+          },
+        })
+        return
+      }
+      if (error instanceof ValidationError) {
+        res.status(400).json({
+          error: {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+          },
+        })
+        return
+      }
+      next(error)
     }
-    if (error instanceof ValidationError) {
-      res.status(400).json({
-        error: {
-          message: error.message,
-          code: error.code,
-          details: error.details,
-        },
-      })
-      return
-    }
-    next(error)
   }
-})
+)
 
 /**
  * DELETE /api/:entity/:id - Eintrag löschen
  */
-entityRoutes.delete('/:entity/:id', validateEntity, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { entity, id } = req.params
-    await entityService.delete(entity, id)
+entityRoutes.delete(
+  '/:entity/:id',
+  validateEntity,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { entity, id } = req.params
+      await entityService.delete(entity, id)
 
-    res.status(204).send()
-  } catch (error) {
-    if (error instanceof EntityNotFoundError) {
-      res.status(404).json({
-        error: {
-          message: error.message,
-          code: error.code,
-        },
-      })
-      return
+      res.status(204).send()
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        res.status(404).json({
+          error: {
+            message: error.message,
+            code: error.code,
+          },
+        })
+        return
+      }
+      next(error)
     }
-    next(error)
   }
-})
+)

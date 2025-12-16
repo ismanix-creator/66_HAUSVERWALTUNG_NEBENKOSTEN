@@ -1853,6 +1853,13 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 
 ---
 
+### Laufende Fixes
+
+- [2025-12-16 05:48] Bugfix – API-Routing: Konfigurations-, Dashboard-, Export- und `/entities`-Endpoints werden nun vor den generischen `/api/:entity`-Routes registriert, damit `/api/config/navigation` und `/api/dashboard/summary` wieder erreichbar sind (`src/server/routes/api.routes.ts:16-104`). Dokumentiert in AGENTS.md + CHANGELOG.md.
+- [2025-12-16 05:51] UI – Statusleiste: Branding (Owner & Version) stammt jetzt aus `config/app.config.toml` (`app.owner.name`, `app.version`), was den Text/Rechtsmeldungen zwischen den SQLite- und Server-Indikatoren zentriert und config-driven macht (`src/client/components/layout/StatusBar.tsx`). Dokumentiert in AGENTS.md + CHANGELOG.md.
+- [2025-12-16 06:03] Typisierung – Query & Entity-Types: `BaseEntity` erweitert nun `Record<string, unknown>`, `Nebenkostenabrechnung` wurde ergänzt und `useEntityList`-Payloads werden konsequent mit `*.data` verwendet, sodass `DataTable`/`DynamicForm` Zugriff auf `Record<string, unknown>`-kompatible Daten in `FinanzenPage`, `NebenkostenPage`, `ZaehlerPage` und `DashboardPage` haben (`src/shared/types/entities.ts`, `src/client/pages/{Finanzen,Nebenkosten,Zaehler,Dashboard}.tsx`). Dokumentiert in AGENTS.md + CHANGELOG.md.
+- [2025-12-16 06:15] Config – Dokumenten-Formular: `forms/dokument.form.toml` liefert Upload-/Edit-Felder samt Zuordnung, Dateimetadaten und readonly-Feldern, wodurch `/api/config/form/dokument` wieder funktioniert und die Dokumente-Tables/Wizards keine 500er mehr werfen (`config/forms/dokument.form.toml`). Dokumentiert in AGENTS.md + CHANGELOG.md.
+
 ### Fortschritt
 
 - [x] Phase 0 – Projekt-Setup & Grundstruktur (Node, Vite, Express, Config-Loader, AI-Dokumente)

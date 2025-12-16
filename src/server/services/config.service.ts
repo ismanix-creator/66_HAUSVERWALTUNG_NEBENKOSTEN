@@ -39,33 +39,23 @@ class ConfigService {
   }
 
   async getEntityConfig(entityName: string) {
-    return this.loadToml(
-      path.join(CONFIG_DIR, 'entities', `${entityName}.config.toml`)
-    )
+    return this.loadToml(path.join(CONFIG_DIR, 'entities', `${entityName}.config.toml`))
   }
 
   async getViewConfig(viewName: string) {
-    return this.loadToml(
-      path.join(CONFIG_DIR, 'views', `${viewName}.config.toml`)
-    )
+    return this.loadToml(path.join(CONFIG_DIR, 'views', `${viewName}.config.toml`))
   }
 
   async getFormConfig(formName: string) {
-    return this.loadToml(
-      path.join(CONFIG_DIR, 'forms', `${formName}.form.toml`)
-    )
+    return this.loadToml(path.join(CONFIG_DIR, 'forms', `${formName}.form.toml`))
   }
 
   async getCatalog<T>(catalogName: string) {
-    return this.loadToml<T>(
-      path.join(CONFIG_DIR, 'catalogs', `${catalogName}.catalog.toml`)
-    )
+    return this.loadToml<T>(path.join(CONFIG_DIR, 'catalogs', `${catalogName}.catalog.toml`))
   }
 
   async getTableConfig(tableName: string) {
-    return this.loadToml(
-      path.join(CONFIG_DIR, 'tables', `${tableName}.table.toml`)
-    )
+    return this.loadToml(path.join(CONFIG_DIR, 'tables', `${tableName}.table.toml`))
   }
 
   clearCache() {

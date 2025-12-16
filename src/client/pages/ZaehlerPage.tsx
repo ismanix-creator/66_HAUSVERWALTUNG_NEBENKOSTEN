@@ -10,7 +10,12 @@ import { Plus } from 'lucide-react'
 import { DataTable, TableConfig } from '../components/data/DataTable'
 import { DynamicForm, FormConfig } from '../components/data/DynamicForm'
 import { useEntityConfig, useTableConfig, useFormConfig } from '../hooks/useConfig'
-import { useEntityList, useCreateEntity, useUpdateEntity, useDeleteEntity } from '../hooks/useEntity'
+import {
+  useEntityList,
+  useCreateEntity,
+  useUpdateEntity,
+  useDeleteEntity,
+} from '../hooks/useEntity'
 import type { Zaehler, Zaehlerstand } from '@shared/types/entities'
 
 const ENTITY_NAME = 'zaehler'
@@ -55,13 +60,14 @@ export function ZaehlerPage() {
     }
   }, [rows, selectedReadingZaehlerId])
 
-  const readingOptions = rows.map((row) => ({ id: row.id, label: row.zaehlernummer || row.id }))
+  const readingOptions = rows.map(row => ({ id: row.id, label: row.zaehlernummer || row.id }))
   const readings = useEntityList<Zaehlerstand>('zaehlerstand', {
     limit: 5,
     orderBy: 'datum',
     orderDir: 'DESC',
     filters: selectedReadingZaehlerId ? { zaehler_id: selectedReadingZaehlerId } : undefined,
   })
+  const readingRows = readings.data?.data || []
 
   const handleSort = (field: string, dir: 'ASC' | 'DESC') => {
     setSortField(field)
@@ -172,10 +178,10 @@ export function ZaehlerPage() {
             <select
               disabled={readingOptions.length === 0}
               value={selectedReadingZaehlerId}
-              onChange={(event) => setSelectedReadingZaehlerId(event.target.value)}
+              onChange={event => setSelectedReadingZaehlerId(event.target.value)}
               className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
             >
-              {readingOptions.map((option) => (
+              {readingOptions.map(option => (
                 <option key={option.id} value={option.id}>
                   {option.label}
                 </option>
@@ -196,14 +202,14 @@ export function ZaehlerPage() {
         </div>
 
         <div className="space-y-2">
-          {readings.isLoading ? (
-            <p className="text-sm text-gray-500">Lade letzte Ablesungen...</p>
-          ) : readings.data?.length ? (
-            readings.data.map((reading, index) => (
-              <div
-                key={reading.id}
-                className="rounded-lg border border-gray-100 bg-gray-50 p-4 text-sm text-gray-600"
-              >
+        {readings.isLoading ? (
+          <p className="text-sm text-gray-500">Lade letzte Ablesungen...</p>
+        ) : readingRows.length ? (
+          readingRows.map((reading, index) => (
+            <div
+              key={reading.id}
+              className="rounded-lg border border-gray-100 bg-gray-50 p-4 text-sm text-gray-600"
+            >
                 <p>
                   <span className="font-semibold text-gray-900">
                     {reading.datum
@@ -212,16 +218,16 @@ export function ZaehlerPage() {
                   </span>{' '}
                   — {reading.stand ?? '—'} {reading.ableseart}
                 </p>
-                {index < (readings.data.length - 1) && (
+                {index < readingRows.length - 1 && (
                   <p className="text-xs text-gray-500">
                     Verbrauch seit letzter Ablesung:{' '}
-                    {formatConsumption(reading.stand, readings.data[index + 1]?.stand)} kWh
+                    {formatConsumption(reading.stand, readingRows[index + 1]?.stand)} kWh
                   </p>
                 )}
-              </div>
-            ))
-          ) : (
-            <p className="text-sm text-gray-500">Noch keine Ablesungen vorhanden.</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-sm text-gray-500">Noch keine Ablesungen vorhanden.</p>
           )}
         </div>
       </section>

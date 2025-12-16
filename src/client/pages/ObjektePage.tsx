@@ -7,7 +7,12 @@
 
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
-import { useEntityList, useCreateEntity, useUpdateEntity, useDeleteEntity } from '../hooks/useEntity'
+import {
+  useEntityList,
+  useCreateEntity,
+  useUpdateEntity,
+  useDeleteEntity,
+} from '../hooks/useEntity'
 import { useEntityConfig, useTableConfig, useFormConfig } from '../hooks/useConfig'
 import { DataTable, TableConfig } from '../components/data/DataTable'
 import { DynamicForm, FormConfig } from '../components/data/DynamicForm'

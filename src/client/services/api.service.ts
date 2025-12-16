@@ -36,11 +36,7 @@ class ApiService {
   /**
    * Generische Fetch-Methode mit Error-Handling
    */
-  private async fetch<T>(
-    endpoint: string,
-    options?: RequestInit,
-    base = API_BASE
-  ): Promise<T> {
+  private async fetch<T>(endpoint: string, options?: RequestInit, base = API_BASE): Promise<T> {
     const response = await fetch(`${base}${endpoint}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -115,10 +111,7 @@ class ApiService {
   /**
    * Holt alle Einträge einer Entity
    */
-  async getAll<T>(
-    entityName: string,
-    options?: QueryOptions
-  ): Promise<ApiResponse<T[]>> {
+  async getAll<T>(entityName: string, options?: QueryOptions): Promise<ApiResponse<T[]>> {
     const params = new URLSearchParams()
 
     if (options?.limit) params.set('limit', String(options.limit))
@@ -148,10 +141,7 @@ class ApiService {
   /**
    * Erstellt einen neuen Eintrag
    */
-  async create<T>(
-    entityName: string,
-    data: Partial<T>
-  ): Promise<ApiResponse<T>> {
+  async create<T>(entityName: string, data: Partial<T>): Promise<ApiResponse<T>> {
     return this.fetch<ApiResponse<T>>(`/${entityName}`, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -161,11 +151,7 @@ class ApiService {
   /**
    * Aktualisiert einen Eintrag
    */
-  async update<T>(
-    entityName: string,
-    id: string,
-    data: Partial<T>
-  ): Promise<ApiResponse<T>> {
+  async update<T>(entityName: string, id: string, data: Partial<T>): Promise<ApiResponse<T>> {
     return this.fetch<ApiResponse<T>>(`/${entityName}/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),

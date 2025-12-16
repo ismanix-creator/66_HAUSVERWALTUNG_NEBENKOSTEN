@@ -1,11 +1,4 @@
-import {
-  Building2,
-  Users,
-  FileText,
-  Wallet,
-  FileArchive,
-  FileCheck,
-} from 'lucide-react'
+import { Building2, Users, FileText, Wallet, FileArchive, FileCheck } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useDashboardSummary } from '../hooks/useConfig'
 
@@ -29,7 +22,7 @@ export function DashboardPage() {
     )
   }
 
-  const stats = [
+  const stats: StatsCardItem[] = [
     { title: 'Objekte', value: summary.objekte, icon: Building2, color: 'blue' },
     { title: 'Mieter', value: summary.mieter, icon: Users, color: 'green' },
     { title: 'Verträge', value: summary.vertraege, icon: FileText, color: 'purple' },
@@ -50,7 +43,7 @@ export function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {stats.map((stat) => (
+        {stats.map(stat => (
           <StatsCard
             key={stat.title}
             title={stat.title}
@@ -98,14 +91,17 @@ export function DashboardPage() {
         <div className="rounded-lg border border-gray-200 bg-white p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-2">Status</h2>
           <p className="text-sm text-gray-500">
-            {summary.offeneErinnerungen} Erinnerung(en) offen, {summary.offeneRechnungen} offene Rechnung(en).
+            {summary.offeneErinnerungen} Erinnerung(en) offen, {summary.offeneRechnungen} offene
+            Rechnung(en).
           </p>
           <div className="mt-4 space-y-2">
             <p className="text-sm text-gray-500">
               {summary.objekte} Objekte &middot; {summary.einheiten} Einheiten verwaltet.
             </p>
             <p className="text-sm text-gray-500">Letzte Dokumente: {summary.dokumente}</p>
-            <p className="text-sm text-gray-500">Alle Zahlen basieren auf der aktuellen Datenbank.</p>
+            <p className="text-sm text-gray-500">
+              Alle Zahlen basieren auf der aktuellen Datenbank.
+            </p>
           </div>
         </div>
       </section>
@@ -113,11 +109,20 @@ export function DashboardPage() {
   )
 }
 
+type StatsCardColor = 'blue' | 'green' | 'purple' | 'orange'
+
+interface StatsCardItem {
+  title: string
+  value: number
+  icon: React.ComponentType<{ className?: string }>
+  color: StatsCardColor
+}
+
 interface StatsCardProps {
   title: string
   value: string
   icon: React.ComponentType<{ className?: string }>
-  color: 'blue' | 'green' | 'purple' | 'orange'
+  color: StatsCardColor
 }
 
 function StatsCard({ title, value, icon: Icon, color }: StatsCardProps) {

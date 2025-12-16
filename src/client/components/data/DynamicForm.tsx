@@ -76,10 +76,10 @@ export function DynamicForm({
 
   // Handle field change
   const handleChange = (fieldName: string, value: unknown) => {
-    setFormData((prev) => ({ ...prev, [fieldName]: value }))
+    setFormData(prev => ({ ...prev, [fieldName]: value }))
     // Clear error when field changes
     if (errors[fieldName]) {
-      setErrors((prev) => {
+      setErrors(prev => {
         const newErrors = { ...prev }
         delete newErrors[fieldName]
         return newErrors
@@ -125,7 +125,11 @@ export function DynamicForm({
       }
 
       // Max length for strings
-      if (fieldConfig.max_length && typeof value === 'string' && value.length > fieldConfig.max_length) {
+      if (
+        fieldConfig.max_length &&
+        typeof value === 'string' &&
+        value.length > fieldConfig.max_length
+      ) {
         newErrors[fieldName] = `Maximal ${fieldConfig.max_length} Zeichen`
       }
     }
@@ -178,7 +182,7 @@ export function DynamicForm({
           <input
             type="text"
             value={(value as string) || ''}
-            onChange={(e) => handleChange(formField.field, e.target.value)}
+            onChange={e => handleChange(formField.field, e.target.value)}
             placeholder={fieldConfig.placeholder}
             className={baseClasses}
             disabled={fieldConfig.readonly}
@@ -190,7 +194,7 @@ export function DynamicForm({
           <input
             type="text"
             value={(value as string) || ''}
-            onChange={(e) => handleChange(formField.field, e.target.value)}
+            onChange={e => handleChange(formField.field, e.target.value)}
             placeholder={fieldConfig.placeholder || 'Pfad oder URL'}
             className={baseClasses}
             disabled={fieldConfig.readonly}
@@ -201,7 +205,7 @@ export function DynamicForm({
         {fieldConfig.type === 'text' && (
           <textarea
             value={(value as string) || ''}
-            onChange={(e) => handleChange(formField.field, e.target.value)}
+            onChange={e => handleChange(formField.field, e.target.value)}
             rows={formField.rows || 3}
             className={baseClasses}
             disabled={fieldConfig.readonly}
@@ -209,11 +213,15 @@ export function DynamicForm({
         )}
 
         {/* Number input */}
-        {(fieldConfig.type === 'integer' || fieldConfig.type === 'decimal' || fieldConfig.type === 'currency') && (
+        {(fieldConfig.type === 'integer' ||
+          fieldConfig.type === 'decimal' ||
+          fieldConfig.type === 'currency') && (
           <input
             type="number"
             value={value !== undefined && value !== null ? String(value) : ''}
-            onChange={(e) => handleChange(formField.field, e.target.value === '' ? null : Number(e.target.value))}
+            onChange={e =>
+              handleChange(formField.field, e.target.value === '' ? null : Number(e.target.value))
+            }
             min={fieldConfig.min}
             max={fieldConfig.max}
             step={fieldConfig.type === 'integer' ? 1 : 0.01}
@@ -228,7 +236,7 @@ export function DynamicForm({
             <input
               type="checkbox"
               checked={Boolean(value)}
-              onChange={(e) => handleChange(formField.field, e.target.checked)}
+              onChange={e => handleChange(formField.field, e.target.checked)}
               className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
               disabled={fieldConfig.readonly}
             />
@@ -242,12 +250,12 @@ export function DynamicForm({
         {fieldConfig.type === 'enum' && fieldConfig.options && (
           <select
             value={(value as string) || ''}
-            onChange={(e) => handleChange(formField.field, e.target.value)}
+            onChange={e => handleChange(formField.field, e.target.value)}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           >
             <option value="">Bitte wählen...</option>
-            {fieldConfig.options.map((opt) => (
+            {fieldConfig.options.map(opt => (
               <option key={opt} value={opt}>
                 {opt}
               </option>
@@ -260,7 +268,7 @@ export function DynamicForm({
           <input
             type="date"
             value={(value as string) || ''}
-            onChange={(e) => handleChange(formField.field, e.target.value)}
+            onChange={e => handleChange(formField.field, e.target.value)}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           />
@@ -271,7 +279,7 @@ export function DynamicForm({
           <input
             type="datetime-local"
             value={(value as string)?.slice(0, 16) || ''}
-            onChange={(e) => handleChange(formField.field, e.target.value)}
+            onChange={e => handleChange(formField.field, e.target.value)}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           />
@@ -301,17 +309,15 @@ export function DynamicForm({
         {/* Form */}
         <form onSubmit={handleSubmit} className="overflow-y-auto max-h-[calc(90vh-140px)]">
           <div className="p-6 space-y-6">
-            {error && (
-              <div className="p-4 text-sm text-red-600 bg-red-50 rounded-lg">{error}</div>
-            )}
+            {error && <div className="p-4 text-sm text-red-600 bg-red-50 rounded-lg">{error}</div>}
 
-            {formConfig.form.sections.map((section) => (
+            {formConfig.form.sections.map(section => (
               <div key={section.id}>
                 <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
                   {section.label.replace('labels.', '')}
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {section.fields.map((field) => renderField(field))}
+                  {section.fields.map(field => renderField(field))}
                 </div>
               </div>
             ))}

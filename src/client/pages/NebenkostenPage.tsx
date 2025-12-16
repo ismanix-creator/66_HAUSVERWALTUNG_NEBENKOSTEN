@@ -61,9 +61,10 @@ export function NebenkostenPage() {
     orderBy: 'bezeichnung',
     orderDir: 'ASC',
   })
-  const shareCatalogQuery = useCatalog<{ catalog: { items: { id: string; bezeichnung: string; beschreibung?: string }[] } }>(
-    'umlageschluessel'
-  )
+  const objectRows = objectList.data?.data || []
+  const shareCatalogQuery = useCatalog<{
+    catalog: { items: { id: string; bezeichnung: string; beschreibung?: string }[] }
+  }>('umlageschluessel')
   const catalogItems = useMemo(
     () => shareCatalogQuery.data?.catalog?.items || [],
     [shareCatalogQuery.data]
@@ -76,10 +77,10 @@ export function NebenkostenPage() {
   }, [catalogItems, shareKey])
 
   useEffect(() => {
-    if (!shareObjectId && objectList.data && objectList.data.length > 0) {
-      setShareObjectId(objectList.data[0].id)
+    if (!shareObjectId && objectRows.length > 0) {
+      setShareObjectId(objectRows[0].id)
     }
-  }, [objectList.data, shareObjectId])
+  }, [objectRows, shareObjectId])
 
   const unitList = useEntityList<Einheit>('einheit', {
     limit: 200,
@@ -95,25 +96,31 @@ export function NebenkostenPage() {
     filters: shareObjectId ? { objekt_id: shareObjectId } : undefined,
   })
 
+  const unitRows = unitList.data?.data || []
+  const invoiceRows = invoicesForShare.data?.data || []
+  const rechnungRows = rechnungList.data?.data || []
+  const abrechnungRows = abrechnungList.data?.data || []
+
   const filteredInvoices = useMemo(
     () =>
-      invoicesForShare.data?.filter((invoice) => {
+      invoiceRows.filter(invoice => {
         if (!invoice.rechnungsdatum) return false
         return new Date(String(invoice.rechnungsdatum)).getFullYear() === shareYear
       }) ?? [],
-    [invoicesForShare.data, shareYear]
+    [invoiceRows, shareYear]
   )
 
   const shareTotal = filteredInvoices.reduce(
-    (sum, invoice) => sum + (typeof invoice.betrag === 'number' ? invoice.betrag : Number(invoice.betrag ?? 0)),
+    (sum, invoice) =>
+      sum + (typeof invoice.betrag === 'number' ? invoice.betrag : Number(invoice.betrag ?? 0)),
     0
   )
 
   const shareRows = useMemo(() => {
-    const units = unitList.data || []
+    const units = unitRows
     const totalArea = units.reduce((sum, unit) => sum + Number(unit.flaeche ?? 0), 0)
 
-    return units.map((unit) => {
+    return units.map(unit => {
       const percent = calculateSharePercent(unit, units.length, totalArea, shareKey)
       const amount = percent * shareTotal
       return {
@@ -123,10 +130,10 @@ export function NebenkostenPage() {
         amount,
       }
     })
-  }, [unitList.data, shareKey, shareTotal])
+  }, [unitRows, shareKey, shareTotal])
 
-  const rechnungPage = Math.floor((rechnungList.meta?.offset ?? 0) / PAGE_SIZE) + 1
-  const abrechnungPage = Math.floor((abrechnungList.meta?.offset ?? 0) / PAGE_SIZE) + 1
+  const rechnungPage = Math.floor((rechnungList.data?.meta?.offset ?? 0) / PAGE_SIZE) + 1
+  const abrechnungPage = Math.floor((abrechnungList.data?.meta?.offset ?? 0) / PAGE_SIZE) + 1
 
   const handleTabChange = (nextTab: NebenkostenTab) => {
     setActiveTab(nextTab)
@@ -161,7 +168,7 @@ export function NebenkostenPage() {
           <p className="text-gray-500">Rechnungen erfassen und Abrechnungen vorbereiten</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {TABS.map((tab) => (
+          {TABS.map(tab => (
             <button
               key={tab}
               onClick={() => handleTabChange(tab)}
@@ -195,8 +202,8 @@ export function NebenkostenPage() {
           {rechnungTable && (
             <DataTable<Rechnung>
               config={rechnungTable}
-              data={rechnungList.data || []}
-              total={rechnungList.meta?.total || 0}
+              data={rechnungRows}
+              total={rechnungList.data?.meta?.total || 0}
               page={rechnungPage}
               pageSize={PAGE_SIZE}
               onPageChange={() => undefined}
@@ -211,7 +218,9 @@ export function NebenkostenPage() {
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h2 className="text-xl font-semibold text-gray-900">Abrechnungen</h2>
-              <p className="text-sm text-gray-500">Umlageschlüssel anwenden und Verteilungen prüfen</p>
+              <p className="text-sm text-gray-500">
+                Umlageschlüssel anwenden und Verteilungen prüfen
+              </p>
             </div>
             <div className="flex flex-wrap gap-2">
               <button
@@ -229,10 +238,10 @@ export function NebenkostenPage() {
               <label className="text-sm font-medium text-gray-500">Objekt</label>
               <select
                 value={shareObjectId}
-                onChange={(event) => setShareObjectId(event.target.value)}
+                onChange={event => setShareObjectId(event.target.value)}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
               >
-                {objectList.data?.map((objekt) => (
+                {objectRows.map(objekt => (
                   <option key={objekt.id} value={objekt.id}>
                     {objekt.bezeichnung}
                   </option>
@@ -245,7 +254,7 @@ export function NebenkostenPage() {
                   <input
                     type="number"
                     value={shareYear}
-                    onChange={(event) => setShareYear(Number(event.target.value))}
+                    onChange={event => setShareYear(Number(event.target.value))}
                     className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                   />
                 </div>
@@ -253,10 +262,10 @@ export function NebenkostenPage() {
                   <label className="text-sm font-medium text-gray-500">Umlageschlüssel</label>
                   <select
                     value={shareKey}
-                    onChange={(event) => setShareKey(event.target.value)}
+                    onChange={event => setShareKey(event.target.value)}
                     className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                   >
-                    {catalogItems.map((item) => (
+                    {catalogItems.map(item => (
                       <option key={item.id} value={item.id}>
                         {item.bezeichnung}
                       </option>
@@ -266,7 +275,7 @@ export function NebenkostenPage() {
               </div>
 
               <p className="text-xs text-gray-500">
-                {catalogItems.find((item) => item.id === shareKey)?.beschreibung ||
+                {catalogItems.find(item => item.id === shareKey)?.beschreibung ||
                   'Wählt den gewünschten Verteilungsschlüssel aus.'}
               </p>
             </div>
@@ -287,12 +296,15 @@ export function NebenkostenPage() {
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-500">Verteilungen</p>
               <p className="text-sm text-gray-500">
-                {catalogItems.find((item) => item.id === shareKey)?.bezeichnung}
+                {catalogItems.find(item => item.id === shareKey)?.bezeichnung}
               </p>
             </div>
             <div className="mt-3 grid gap-3">
-              {shareRows.map((row) => (
-                <div key={row.id} className="flex items-center justify-between rounded-lg border border-gray-100 px-4 py-3">
+              {shareRows.map(row => (
+                <div
+                  key={row.id}
+                  className="flex items-center justify-between rounded-lg border border-gray-100 px-4 py-3"
+                >
                   <div>
                     <p className="text-sm font-medium text-gray-900">{row.label}</p>
                     <p className="text-xs text-gray-500">
@@ -310,15 +322,15 @@ export function NebenkostenPage() {
           </div>
 
           {abrechnungTable && (
-            <DataTable<Nebenkostenabrechnung>
-              config={abrechnungTable}
-              data={abrechnungList.data || []}
-              total={abrechnungList.meta?.total || 0}
-              page={abrechnungPage}
-              pageSize={PAGE_SIZE}
-              onPageChange={() => undefined}
-              isLoading={abrechnungList.isLoading}
-            />
+              <DataTable<Nebenkostenabrechnung>
+                config={abrechnungTable}
+                data={abrechnungRows}
+                total={abrechnungList.data?.meta?.total || 0}
+                page={abrechnungPage}
+                pageSize={PAGE_SIZE}
+                onPageChange={() => undefined}
+                isLoading={abrechnungList.isLoading}
+              />
           )}
         </section>
       )}

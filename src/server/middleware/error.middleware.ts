@@ -5,12 +5,7 @@ export interface AppError extends Error {
   code?: string
 }
 
-export function errorMiddleware(
-  err: AppError,
-  _req: Request,
-  res: Response,
-  _next: NextFunction
-) {
+export function errorMiddleware(err: AppError, _req: Request, res: Response, _next: NextFunction) {
   const statusCode = err.statusCode || 500
   const message = err.message || 'Interner Serverfehler'
 

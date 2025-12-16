@@ -20,7 +20,7 @@
     "db:migrate": "tsx scripts/migrate.ts",
     "db:backup": "tsx scripts/backup.ts",
     "db:seed": "tsx scripts/seed-demo.ts",
-    "start:server": "npm run copy:config && PORT=3001 NODE_OPTIONS=--experimental-loader=./loaders/resolve-js-extension.mjs node dist/server/server/index.js",
+    "start:server": "npm run copy:config && HOST=127.0.0.1 PORT=3001 NODE_OPTIONS=--experimental-loader=./loaders/resolve-js-extension.mjs node dist/server/server/index.js",
     "copy:config": "node scripts/copy-config.js"
   },
   "dependencies": {

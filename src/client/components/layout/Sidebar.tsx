@@ -48,15 +48,15 @@ export function Sidebar() {
   // Navigation Items sortieren und gruppieren
   const items = navConfig?.navigation?.items || fallbackNav
   const topItems = items
-    .filter((item) => item.position !== 'bottom')
+    .filter(item => item.position !== 'bottom')
     .sort((a, b) => a.order - b.order)
   const bottomItems = items
-    .filter((item) => item.position === 'bottom')
+    .filter(item => item.position === 'bottom')
     .sort((a, b) => a.order - b.order)
 
   // Toggle für Items mit Kindern
   const toggleExpand = (id: string) => {
-    setExpandedItems((prev) => {
+    setExpandedItems(prev => {
       const next = new Set(prev)
       if (next.has(id)) {
         next.delete(id)
@@ -105,7 +105,7 @@ export function Sidebar() {
           </button>
           {isExpanded && (
             <div className="mt-1 space-y-1">
-              {item.children!.map((child) => renderNavItem(child, true))}
+              {item.children!.map(child => renderNavItem(child, true))}
             </div>
           )}
         </div>
@@ -144,14 +144,14 @@ export function Sidebar() {
         {isLoading ? (
           <div className="px-3 py-2 text-sm text-gray-500">Laden...</div>
         ) : (
-          topItems.map((item) => renderNavItem(item))
+          topItems.map(item => renderNavItem(item))
         )}
       </nav>
 
       {/* Bottom Items */}
       {bottomItems.length > 0 && (
         <div className="px-3 py-4 border-t border-gray-200">
-          {bottomItems.map((item) => renderNavItem(item))}
+          {bottomItems.map(item => renderNavItem(item))}
         </div>
       )}
     </aside>

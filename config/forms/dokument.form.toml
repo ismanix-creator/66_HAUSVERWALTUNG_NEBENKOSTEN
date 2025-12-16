@@ -1,0 +1,88 @@
+[form]
+entity = "dokument"
+title_create = "labels.form.dokument_hochladen"
+title_edit = "labels.form.dokument_bearbeiten"
+
+[[form.sections]]
+id = "zuordnung"
+label = "labels.form.section.zuordnung"
+
+  [[form.sections.fields]]
+  field = "objekt_id"
+  width = "half"
+  allow_clear = true
+
+  [[form.sections.fields]]
+  field = "einheit_id"
+  width = "half"
+  allow_clear = true
+
+  [[form.sections.fields]]
+  field = "mieter_id"
+  width = "half"
+  allow_clear = true
+
+  [[form.sections.fields]]
+  field = "vertrag_id"
+  width = "half"
+  allow_clear = true
+
+[[form.sections]]
+id = "detail"
+label = "labels.form.section.details"
+
+  [[form.sections.fields]]
+  field = "typ"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "bezeichnung"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "datum"
+  width = "third"
+
+  [[form.sections.fields]]
+  field = "jahr"
+  width = "third"
+
+  [[form.sections.fields]]
+  field = "hochgeladen_am"
+  width = "third"
+  readonly = true
+
+[[form.sections]]
+id = "datei"
+label = "labels.form.section.datei"
+
+  [[form.sections.fields]]
+  field = "dateiname"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "dateipfad"
+  width = "half"
+  readonly = true
+
+  [[form.sections.fields]]
+  field = "dateigroesse"
+  width = "half"
+  readonly = true
+
+  [[form.sections.fields]]
+  field = "mime_type"
+  width = "half"
+  readonly = true
+
+[[form.sections]]
+id = "notiz"
+
+  [[form.sections.fields]]
+  field = "notiz"
+  width = "full"
+  rows = 3
+
+[form.actions]
+save_label = "labels.actions.speichern"
+cancel_label = "labels.actions.abbrechen"

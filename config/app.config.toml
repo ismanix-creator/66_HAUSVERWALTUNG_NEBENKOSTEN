@@ -8,7 +8,7 @@ timezone = "Europe/Berlin"
 
 [app.owner]
 # Wird in Einstellungen gepflegt, hier Defaults
-name = ""
+name = "Akki Scholze"
 address = ""
 tax_number = ""
 

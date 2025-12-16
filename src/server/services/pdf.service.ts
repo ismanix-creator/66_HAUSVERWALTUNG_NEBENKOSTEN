@@ -23,14 +23,16 @@ class PdfService {
       { label: 'Offene Erinnerungen', value: summary.offeneErinnerungen },
     ]
 
-    stats.forEach((stat) => {
+    stats.forEach(stat => {
       doc.fontSize(12).text(`${stat.label}: ${stat.value}`)
     })
 
     doc.moveDown(1.5)
-    doc.fontSize(12).text(
-      'Diese Datei enthält eine kompakte Übersicht über den aktuellen Betriebszustand. Lass dir den Export von deinem Steuerberater bestätigen.'
-    )
+    doc
+      .fontSize(12)
+      .text(
+        'Diese Datei enthält eine kompakte Übersicht über den aktuellen Betriebszustand. Lass dir den Export von deinem Steuerberater bestätigen.'
+      )
 
     return doc
   }

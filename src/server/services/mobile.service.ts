@@ -31,7 +31,7 @@ class MobileService {
       [this.reminderLimit]
     )
 
-    return rows.map((row) => ({
+    return rows.map(row => ({
       ...row,
       faellig_am: row.faellig_am ?? null,
       bezug_typ: row.bezug_typ ?? null,
@@ -48,7 +48,7 @@ class MobileService {
       [this.invoiceLimit]
     )
 
-    return rows.map((row) => ({
+    return rows.map(row => ({
       ...row,
       rechnungsnummer: row.rechnungsnummer ?? null,
       rechnungsdatum: row.rechnungsdatum ?? null,

@@ -8,6 +8,19 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-16
 
+### [06:03] - Bugfix - Typisierung & Query Handling
+- `BaseEntity` erbt nun von `Record<string, unknown>`, Nebenkostenabrechnungen wurden typisiert, `Dokument` kennt `hochgeladen_am`/`dateiname`, und die `useEntityList`-Resultate in `FinanzenPage`, `NebenkostenPage`, `ZaehlerPage` und `DashboardPage` nutzen die tatsächliche `ApiResponse`-Payload (`src/shared/types/entities.ts`, `src/client/pages/{Finanzen,Nebenkosten,Zaehler,Dashboard}.tsx`).
+- Holen von Table-/Form-Configs und Tabelleninhalte rechnet jetzt sauber mit `.data`, sodass `DataTable`/`DynamicForm` stets `Record<string, unknown>`-kompatible Daten sehen.
+
+### [06:15] - Config - Dokumenten-Formular
+- `forms/dokument.form.toml` liefert einen Upload/Edit-Dialog für `dokument` inklusive Zuordnungen, Dateinamen, Format, Größe und readonly-Metadaten, so dass `/api/config/form/dokument` wieder vorhanden ist und die Tabellen/Views keine 500er mehr erzeugen (`config/forms/dokument.form.toml`).
+
+### [05:51] - UI - Statusbar
+- Branding und Versionsnummer der Statusleiste stammen nun aus `config/app.config.toml` (`app.owner.name`, `app.version`), damit der mittige Hinweis komplett config-driven bleibt (`src/client/components/layout/StatusBar.tsx`).
+
+### [05:48] - Bugfix - API-Routing
+- Konfigurations-, Dashboard- und Export-Endpunkte (`/api/config/*`, `/api/dashboard/summary`, `/api/export/steuerberater`) sowie die `/api/entities`-Liste werden jetzt vor den generischen Entity-Routen registriert, damit sie nicht mehr von `entityRoutes` mit `/:entity/:id` abgefangen werden.
+
 ### [04:45] - Feature - Phase 6: Mobile & Polish
 - `/mobile/dashboard` liefert eine Read-Only-Übersicht (Summary, Erinnerungen, offene Rechnungen) über `mobileRoutes`, den neuen `mobile.service` und das `MobileSnapshot`-Payload.
 - `mobileReadOnlyMiddleware` blockiert alle Schreibzugriffe auf `/mobile`, während `MobileDashboardPage` mit `useMobileSnapshot` eine Touch-optimierte Seite liefert.
