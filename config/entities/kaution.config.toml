@@ -1,0 +1,79 @@
+[entity]
+name = "kaution"
+label = "labels.entity.kaution"
+label_plural = "labels.entity.kautionen"
+icon = "Shield"
+primary_key = "id"
+
+[entity.fields.id]
+type = "uuid"
+auto_generate = true
+visible = false
+
+[entity.fields.vertrag_id]
+type = "uuid"
+required = true
+unique = true
+reference = "vertrag"
+label = "labels.kaution.vertrag"
+
+[entity.fields.betrag]
+type = "currency"
+required = true
+min = 0
+label = "labels.kaution.betrag"
+
+[entity.fields.eingangsdatum]
+type = "date"
+required = true
+label = "labels.kaution.eingangsdatum"
+
+[entity.fields.anlageform]
+type = "enum"
+required = true
+options = ["sparbuch", "konto", "buergschaft", "bar"]
+default = "konto"
+label = "labels.kaution.anlageform"
+
+[entity.fields.anlage_details]
+type = "text"
+label = "labels.kaution.anlage_details"
+placeholder = "Bank, Kontonummer, etc."
+
+[entity.fields.zinssatz]
+type = "decimal"
+min = 0
+max = 10
+precision = 2
+suffix = "%"
+label = "labels.kaution.zinssatz"
+
+[entity.fields.status]
+type = "enum"
+required = true
+options = ["angelegt", "teilrueckzahlung", "zurueckgezahlt"]
+default = "angelegt"
+label = "labels.kaution.status"
+
+[entity.fields.rueckzahlungsdatum]
+type = "date"
+label = "labels.kaution.rueckzahlungsdatum"
+visible_if = { field = "status", in = ["teilrueckzahlung", "zurueckgezahlt"] }
+
+[entity.fields.rueckzahlungsbetrag]
+type = "currency"
+min = 0
+label = "labels.kaution.rueckzahlungsbetrag"
+visible_if = { field = "status", in = ["teilrueckzahlung", "zurueckgezahlt"] }
+
+[entity.fields.einbehalt_grund]
+type = "text"
+label = "labels.kaution.einbehalt_grund"
+visible_if = { field = "status", equals = "teilrueckzahlung" }
+
+[entity.fields.notiz]
+type = "text"
+label = "labels.common.notiz"
+
+[entity.relations]
+vertrag = { type = "one_to_one", target = "vertrag", foreign_key = "vertrag_id" }

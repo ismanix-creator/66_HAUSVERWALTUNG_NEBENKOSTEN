@@ -1,0 +1,61 @@
+[table]
+entity = "rechnung"
+
+[[table.columns]]
+field = "rechnungsdatum"
+label = "labels.rechnung.datum"
+sortable = true
+width = "10%"
+format = "date"
+
+[[table.columns]]
+field = "objekt.bezeichnung"
+label = "labels.rechnung.objekt"
+sortable = true
+width = "18%"
+
+[[table.columns]]
+field = "kostenart.bezeichnung"
+label = "labels.rechnung.kostenart"
+sortable = true
+width = "15%"
+
+[[table.columns]]
+field = "rechnungsnummer"
+label = "labels.rechnung.nummer"
+width = "12%"
+
+[[table.columns]]
+field = "betrag"
+label = "labels.rechnung.betrag"
+sortable = true
+width = "12%"
+format = "currency"
+
+[[table.columns]]
+field = "zeitraum_von"
+label = "labels.rechnung.zeitraum"
+width = "15%"
+template = "{zeitraum_von|date} - {zeitraum_bis|date}"
+
+[[table.columns]]
+field = "computed.ist_bezahlt"
+label = "labels.rechnung.bezahlt"
+sortable = true
+width = "8%"
+display = "boolean_icon"
+icons = { true = "Check", false = "X" }
+
+[[table.columns]]
+field = "dokument_id"
+label = ""
+width = "5%"
+display = "icon_link"
+icon = "FileText"
+visible_if = { field = "dokument_id", is_set = true }
+click = "preview_document"
+
+[table.row_actions]
+edit = { icon = "Pencil", dialog = "forms/rechnung.form" }
+bezahlen = { icon = "CheckCircle", handler = "rechnung.markAsPaid", visible_if = { field = "computed.ist_bezahlt", equals = false } }
+dokument = { icon = "Upload", dialog = "forms/dokument.form", defaults = { objekt_id = ":objekt_id" } }

@@ -1,0 +1,53 @@
+[form]
+entity = "objekt"
+title_create = "labels.form.objekt_anlegen"
+title_edit = "labels.form.objekt_bearbeiten"
+
+[[form.sections]]
+id = "basis"
+label = "labels.form.section.basis"
+
+  [[form.sections.fields]]
+  field = "bezeichnung"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "typ"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "ist_multi_einheit"
+  width = "half"
+
+[[form.sections]]
+id = "adresse"
+label = "labels.form.section.adresse"
+
+  [[form.sections.fields]]
+  field = "adresse"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "plz"
+  width = "third"
+
+  [[form.sections.fields]]
+  field = "ort"
+  width = "two_thirds"
+
+[[form.sections]]
+id = "details"
+label = "labels.form.section.details"
+
+  [[form.sections.fields]]
+  field = "baujahr"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "notiz"
+  width = "full"
+  rows = 3
+
+[form.actions]
+submit = { label = "labels.actions.speichern" }
+cancel = { label = "labels.actions.abbrechen" }

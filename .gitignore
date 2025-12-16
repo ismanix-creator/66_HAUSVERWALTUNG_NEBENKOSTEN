@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+
+# Data (local database, backups, uploads)
+data/
+*.sqlite
+*.sqlite-journal
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+
+# Temp
+tmp/
+temp/
+
+# User-specific AI configs (not shared)
+.claude/CLAUDE.md
+.codex/CODEX.md

@@ -1,0 +1,107 @@
+[form]
+entity = "vertrag"
+title_create = "labels.form.vertrag_anlegen"
+title_edit = "labels.form.vertrag_bearbeiten"
+
+[[form.sections]]
+id = "zuordnung"
+label = "labels.form.section.zuordnung"
+
+  [[form.sections.fields]]
+  field = "einheit_id"
+  width = "half"
+  filter = { status = "leer" }
+  include_current = true
+
+  [[form.sections.fields]]
+  field = "mieter_id"
+  width = "half"
+  allow_create = true
+
+  [[form.sections.fields]]
+  field = "vertragsnummer"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "typ"
+  width = "half"
+
+[[form.sections]]
+id = "laufzeit"
+label = "labels.form.section.laufzeit"
+
+  [[form.sections.fields]]
+  field = "beginn"
+  width = "third"
+
+  [[form.sections.fields]]
+  field = "ende"
+  width = "third"
+
+  [[form.sections.fields]]
+  field = "kuendigungsfrist"
+  width = "third"
+
+[[form.sections]]
+id = "miete"
+label = "labels.form.section.miete"
+
+  [[form.sections.fields]]
+  field = "kaltmiete"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "nebenkosten_vorauszahlung"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "heizkosten_vorauszahlung"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "sonstige_vorauszahlung"
+  width = "half"
+
+  [form.sections.computed_display]
+  field = "computed.gesamtmiete"
+  label = "labels.vertrag.gesamtmiete"
+  format = "currency"
+  highlight = true
+
+[[form.sections]]
+id = "anpassung"
+label = "labels.form.section.mietanpassung"
+collapsible = true
+
+  [[form.sections.fields]]
+  field = "mietanpassung_typ"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "letzte_mieterhoehung"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "staffelmiete"
+  width = "full"
+  component = "StaffelmieteEditor"
+
+  [[form.sections.fields]]
+  field = "indexmiete"
+  width = "full"
+  component = "IndexmieteEditor"
+
+[[form.sections]]
+id = "sonstiges"
+
+  [[form.sections.fields]]
+  field = "notiz"
+  width = "full"
+  rows = 3
+
+[form.on_save]
+actions = [
+  { action = "update_einheit_status", target = "einheit_id", set = { status = "vermietet" } },
+  { action = "update_mieter_status", target = "mieter_id", set = { status = "aktiv" } },
+  { action = "generate_sollstellungen", from = "beginn" }
+]

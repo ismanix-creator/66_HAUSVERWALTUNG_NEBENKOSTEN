@@ -1,0 +1,89 @@
+[navigation]
+default_route = "/dashboard"
+
+[[navigation.items]]
+id = "dashboard"
+label = "labels.nav.dashboard"
+icon = "LayoutDashboard"
+route = "/dashboard"
+order = 1
+
+[[navigation.items]]
+id = "objekte"
+label = "labels.nav.objekte"
+icon = "Building2"
+route = "/objekte"
+order = 2
+
+[[navigation.items]]
+id = "mieter"
+label = "labels.nav.mieter"
+icon = "Users"
+route = "/mieter"
+order = 3
+
+[[navigation.items]]
+id = "vertraege"
+label = "labels.nav.vertraege"
+icon = "FileText"
+route = "/vertraege"
+order = 4
+
+[[navigation.items]]
+id = "finanzen"
+label = "labels.nav.finanzen"
+icon = "Wallet"
+route = "/finanzen"
+order = 5
+
+  [[navigation.items.children]]
+  id = "zahlungen"
+  label = "labels.nav.zahlungen"
+  route = "/finanzen/zahlungen"
+
+  [[navigation.items.children]]
+  id = "kautionen"
+  label = "labels.nav.kautionen"
+  route = "/finanzen/kautionen"
+
+  [[navigation.items.children]]
+  id = "sollstellung"
+  label = "labels.nav.sollstellung"
+  route = "/finanzen/sollstellung"
+
+[[navigation.items]]
+id = "nebenkosten"
+label = "labels.nav.nebenkosten"
+icon = "Calculator"
+route = "/nebenkosten"
+order = 6
+
+  [[navigation.items.children]]
+  id = "rechnungen"
+  label = "labels.nav.rechnungen"
+  route = "/nebenkosten/rechnungen"
+
+  [[navigation.items.children]]
+  id = "abrechnungen"
+  label = "labels.nav.abrechnungen"
+  route = "/nebenkosten/abrechnungen"
+
+  [[navigation.items.children]]
+  id = "zaehler"
+  label = "labels.nav.zaehler"
+  route = "/nebenkosten/zaehler"
+
+[[navigation.items]]
+id = "dokumente"
+label = "labels.nav.dokumente"
+icon = "FolderOpen"
+route = "/dokumente"
+order = 7
+
+[[navigation.items]]
+id = "einstellungen"
+label = "labels.nav.einstellungen"
+icon = "Settings"
+route = "/einstellungen"
+order = 99
+position = "bottom"

@@ -1,0 +1,38 @@
+[table]
+entity = "mieter"
+row_click = "navigate"
+row_click_route = "/mieter/:id"
+
+[[table.columns]]
+field = "computed.display_name"
+label = "labels.mieter.name"
+sortable = true
+sort_field = "nachname"
+width = "25%"
+
+[[table.columns]]
+field = "telefon"
+label = "labels.mieter.telefon"
+width = "15%"
+
+[[table.columns]]
+field = "email"
+label = "labels.mieter.email"
+width = "20%"
+
+[[table.columns]]
+field = "computed.aktuelle_einheit.bezeichnung"
+label = "labels.mieter.einheit"
+width = "20%"
+empty_text = "—"
+
+[[table.columns]]
+field = "status"
+label = "labels.mieter.status"
+sortable = true
+width = "10%"
+display = "badge"
+badge_colors = { aktiv = "green", gekuendigt = "yellow", ehemalig = "gray" }
+
+[table.row_actions]
+edit = { icon = "Pencil", dialog = "forms/mieter.form" }
