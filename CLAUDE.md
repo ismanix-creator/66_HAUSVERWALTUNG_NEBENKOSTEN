@@ -187,7 +187,15 @@ npm run lint          # ESLint ausführen
 - React-Grundgerüst mit Layout-Komponenten
 - AI-Dokumentationsstruktur (.ai/, .codex/, .claude/)
 
-**Nächste Phase:** Phase 1 - Entity-System + CRUD
+**Phase 1 abgeschlossen:**
+- Schema-Generator: TOML → SQL CREATE TABLE (14 Tabellen)
+- Generischer Entity-Service mit CRUD-Operationen
+- REST API: /api/:entity Routen (GET, POST, PUT, DELETE)
+- Validierung gegen Entity-Config
+
+**Nächste Phase:** Phase 2 - Frontend-Grundgerüst + generische Komponenten
+
+**Zuletzt aktualisiert:** 2025-12-16 02:00 CET
 
 ---
 

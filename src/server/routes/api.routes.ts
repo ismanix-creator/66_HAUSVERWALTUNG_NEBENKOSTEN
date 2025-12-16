@@ -1,7 +1,17 @@
+/**
+ * API Routes: Haupt-Router für alle API-Endpunkte
+ *
+ * @lastModified 2025-12-16
+ */
+
 import { Router } from 'express'
 import { configService } from '../services/config.service'
+import { entityRoutes } from './entity.routes'
 
 export const apiRoutes = Router()
+
+// Entity CRUD Routes (generisch für alle Entities)
+apiRoutes.use(entityRoutes)
 
 // Config Endpoints
 apiRoutes.get('/config/app', async (_req, res, next) => {
@@ -31,7 +41,24 @@ apiRoutes.get('/config/entity/:name', async (req, res, next) => {
   }
 })
 
-// Placeholder for entity CRUD routes (will be added in Phase 1)
+// Liste unterstützter Entities
 apiRoutes.get('/entities', (_req, res) => {
-  res.json({ message: 'Entity routes will be implemented in Phase 1' })
+  res.json({
+    entities: [
+      'objekt',
+      'einheit',
+      'mieter',
+      'vertrag',
+      'kaution',
+      'zahlung',
+      'sollstellung',
+      'nebenkostenabrechnung',
+      'zaehler',
+      'zaehlerstand',
+      'dokument',
+      'kostenart',
+      'rechnung',
+      'erinnerung',
+    ],
+  })
 })

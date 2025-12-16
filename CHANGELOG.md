@@ -8,6 +8,13 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-16
 
+### [02:00] - Feature - Phase 1: Entity-System + CRUD
+- Schema-Generator: TOML → SQL CREATE TABLE (14 Tabellen)
+- Generischer Entity-Service mit CRUD-Operationen
+- REST API: /api/:entity Routen (GET, POST, PUT, DELETE)
+- Validierung gegen Entity-Config (required, type, min/max, enum)
+- DB-Schema automatische Initialisierung beim Server-Start
+
 ### [01:45] - Setup - AI-Dokumentationsstruktur finalisiert
 - CLAUDE.md (Root) + .claude/CLAUDE.md (User) erstellt
 - CODEX.md (Root) + .codex/CODEX.md (User) erstellt
@@ -30,4 +37,5 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## Nächste Schritte
 
-- [ ] Phase 1: Entity-System + CRUD
+- [x] Phase 1: Entity-System + CRUD
+- [ ] Phase 2: Frontend-Grundgerüst + generische Komponenten
