@@ -38,9 +38,10 @@ class ApiService {
    */
   private async fetch<T>(
     endpoint: string,
-    options?: RequestInit
+    options?: RequestInit,
+    base = API_BASE
   ): Promise<T> {
-    const response = await fetch(`${API_BASE}${endpoint}`, {
+    const response = await fetch(`${base}${endpoint}`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -82,6 +83,10 @@ class ApiService {
 
   async getDashboardSummary<T>(): Promise<T> {
     return this.fetch<T>('/dashboard/summary')
+  }
+
+  async getMobileSnapshot<T>(): Promise<T> {
+    return this.fetch<T>('/mobile/dashboard', undefined, '')
   }
 
   /**

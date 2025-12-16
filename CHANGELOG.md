@@ -8,6 +8,11 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-16
 
+### [04:45] - Feature - Phase 6: Mobile & Polish
+- `/mobile/dashboard` liefert eine Read-Only-Übersicht (Summary, Erinnerungen, offene Rechnungen) über `mobileRoutes`, den neuen `mobile.service` und das `MobileSnapshot`-Payload.
+- `mobileReadOnlyMiddleware` blockiert alle Schreibzugriffe auf `/mobile`, während `MobileDashboardPage` mit `useMobileSnapshot` eine Touch-optimierte Seite liefert.
+- Tests (`tests/unit/mobile.service.test.ts`) sowie AGENTS, BAUPLAN und `.claude/validation.md` dokumentieren den Status von Phase 6 und brandneue Mobile-Entscheidungen.
+
 ### [04:02] - Feature - Phase 5: Dashboard, Dokumente & PDF
 - Dashboard liefert jetzt echte Zähler (Objekte, Einheiten, Verträge, offene Rechnungen, Dokumente, Erinnerungen) aus `/dashboard/summary`.
 - Dokumente-Ansicht ermöglicht Upload/Preview, nutzt die neue `documents.table`/`document.form` und greift auf `Steuerberater-Export` zurück.

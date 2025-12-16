@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AppShell } from './components/layout/AppShell'
 import { DashboardPage } from './pages/DashboardPage'
 import { ObjektePage } from './pages/ObjektePage'
@@ -7,8 +7,22 @@ import { FinanzenPage } from './pages/FinanzenPage'
 import { ZaehlerPage } from './pages/ZaehlerPage'
 import { NebenkostenPage } from './pages/NebenkostenPage'
 import { DokumentePage } from './pages/DokumentePage'
+import { MobileDashboardPage } from './pages/mobile/MobileDashboardPage'
 
 export default function App() {
+  const location = useLocation()
+  const isMobileRoute = location.pathname.startsWith('/mobile')
+
+  if (isMobileRoute) {
+    return (
+      <Routes>
+        <Route path="/mobile" element={<Navigate to="/mobile/dashboard" replace />} />
+        <Route path="/mobile/dashboard" element={<MobileDashboardPage />} />
+        <Route path="/mobile/*" element={<Navigate to="/mobile/dashboard" replace />} />
+      </Routes>
+    )
+  }
+
   return (
     <AppShell>
       <Routes>

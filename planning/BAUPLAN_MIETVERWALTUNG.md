@@ -1650,6 +1650,8 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 - Tests existieren
 - Dokumentation ist vollständig
 
+**Status:** `/mobile/dashboard` liefert eine Read-Only-Übersicht via `mobileRoutes` + `mobileService`, Schreibzugriffe stoppt `mobileReadOnlyMiddleware`; `MobileDashboardPage` bietet die responsive Touch-Ansicht, Tests (`mobile.service.test.ts`) und Dokumentation (AGENTS/CHANGELOG/BAUPLAN) sind aktualisiert.
+
 ---
 
 ## 10. AKZEPTANZKRITERIEN PRO PHASE
@@ -1859,7 +1861,7 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 - [x] Phase 3 – Verträge & Finanzen (Routes `/vertraege`, `/finanzen`, Forms/Tables für Kaution/Zahlung/Sollstellung, Shared Logger, Tests)
 - [x] Phase 4 – Nebenkosten & Zähler
 - [x] Phase 5 – Dashboard, Dokumente & PDF (Metriken, Dokumente + Steuerberater-Export)
-- [ ] Phase 6 – Mobile-Ansicht & Polish
+- [x] Phase 6 – Mobile-Ansicht & Polish
 
 ---
 

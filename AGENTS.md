@@ -10,6 +10,7 @@
 - `config/forms`, `config/tables`, `config/entities/*.config.toml` definieren UI/DB-Verhalten; `schema.service.ts` liest sie bei Start.
 - `data/` enthält DB-Dateien und Backups, `public/` Assets, `dist/` Build-Output, `scripts/` bietet DB-Hilfen.
 - Neue Features landen in passenden Services/Routes/Hooks und greifen ausschließlich auf Konfigurationen zu.
+- `/mobile` ist read-only (`mobileRoutes`, `mobileReadOnlyMiddleware`) und liefert eine vereinfachte Übersicht (`MobileDashboardPage`); dokumentiere Mobile-Entscheidungen in AGENTS/BAUPLAN/CHANGELOG.
 
 ## Build-, Test- und Entwicklungsbefehle
 - `npm run dev` startet Client (Vite) plus Server (ts-node) für lokale Arbeit.

@@ -6,7 +6,9 @@
 
 import express from 'express'
 import { apiRoutes } from './routes/api.routes'
+import { mobileRoutes } from './routes/mobile.routes'
 import { errorMiddleware } from './middleware/error.middleware'
+import { mobileReadOnlyMiddleware } from './middleware/mobile.middleware'
 import { databaseService } from './services/database.service'
 import { schemaService } from './services/schema.service'
 import { logger } from './utils/logger'
@@ -19,6 +21,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // API Routes
+app.use('/mobile', mobileReadOnlyMiddleware)
+app.use('/mobile', mobileRoutes)
 app.use('/api', apiRoutes)
 
 // Health Check

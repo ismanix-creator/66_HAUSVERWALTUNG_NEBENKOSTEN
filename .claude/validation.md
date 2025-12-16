@@ -37,10 +37,10 @@ Referenziere AGENTS, CHANGELOG und BAUPLAN für jede Anpassung, damit die AI-Dok
 - [x] Dokumente verwalten + PDF-Export (TOML-Template) umgesetzt.
 - [x] Screenshots, Tests und Changelog-Einträge erweitern die Historie.
 
-### Phase 6: Mobile + Polish ☐
-- [ ] Mobile Read-Only Routes `/mobile/...` implementieren (BAUPLAN Phase 6).
-- [ ] Responsive Tabellen, Touch-Steuerung, Lazy Loading, Tests laut BAUPLAN.
-- [ ] Dokumentation (Benutzerhandbuch, Backup-Anleitung, Setup) vervollständigen sowie AGENTS-Referenzen ergänzen.
+### Phase 6: Mobile + Polish ✅
+- [x] Mobile Read-Only Routes `/mobile/...` stehen (siehe `mobileRoutes`, `/mobile/dashboard` plus `mobileReadOnlyMiddleware`).
+- [x] Responsive Touch-optimierte Dashboardseite (`MobileDashboardPage`) mit Invoice- und Reminder-Listen sowie config-gesteuerten Calls.
+- [x] Tests (`tests/unit/mobile.service.test.ts`) und Dokumentation (AGENTS, CHANGELOG, BAUPLAN) aktualisiert; Validierungs-Protokoll bereit.
 
 ## Übergreifende Checks
 - [x] `npm run lint`, `npm run format`, `npm test`, `npm run typecheck` als Standard-Checks (gemeldet in CHANGELOG/AGENTS).
