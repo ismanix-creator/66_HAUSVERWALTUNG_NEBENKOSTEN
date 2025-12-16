@@ -1,0 +1,38 @@
+[form]
+entity = "zahlung"
+title_create = "labels.form.zahlung_erfassen"
+title_edit = "labels.form.zahlung_bearbeiten"
+
+[[form.sections]]
+id = "basis"
+label = "labels.form.section.zahlung"
+
+  [[form.sections.fields]]
+  field = "vertrag_id"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "datum"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "betrag"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "typ"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "monat_fuer"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "verwendungszweck"
+  width = "full"
+  rows = 2
+
+  [[form.sections.fields]]
+  field = "notiz"
+  width = "full"
+  rows = 2

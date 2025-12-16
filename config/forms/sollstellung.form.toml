@@ -1,0 +1,28 @@
+[form]
+entity = "sollstellung"
+title_create = "labels.form.sollstellung_anlegen"
+title_edit = "labels.form.sollstellung_bearbeiten"
+
+[[form.sections]]
+id = "zeitraum"
+label = "labels.form.section.sollstellung"
+
+  [[form.sections.fields]]
+  field = "vertrag_id"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "monat"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "sollbetrag"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "istbetrag"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "status"
+  width = "half"

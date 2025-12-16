@@ -5,11 +5,19 @@
  * @lastModified 2025-12-16
  */
 
+import fs from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import { configService } from './config.service'
 import { databaseService } from './database.service'
+import { logger } from '../utils/logger'
 import type { EntityConfig, FieldConfig, FieldType } from '../../shared/types/config'
 
-class SchemaService {
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const CONFIG_DIR = path.resolve(__dirname, '../../../config')
+
+export class SchemaService {
   /**
    * Mappt FieldType zu SQLite-Datentyp
    */
@@ -38,7 +46,10 @@ class SchemaService {
    */
   generateCreateTableSql(config: EntityConfig): string {
     const entity = config.entity
-    const tableName = this.getTableName(entity.name)
+    // table_name direkt aus Config lesen
+    const tableName = entity.table_name || this.getTableName(entity.name)
+    // Cache setzen für spätere Verwendung
+    this.tableNameCache.set(entity.name, tableName)
     const columns: string[] = []
     const foreignKeys: string[] = []
 
@@ -116,27 +127,40 @@ class SchemaService {
   }
 
   /**
-   * Konvertiert Entity-Name zu Tabellen-Name (Plural)
+   * Holt Tabellen-Name aus EntityConfig
+   * Cached für Performance
    */
+  private tableNameCache: Map<string, string> = new Map()
+
   getTableName(entityName: string): string {
-    // Einfache Pluralisierung für deutsche Begriffe
-    const pluralMap: Record<string, string> = {
-      objekt: 'objekte',
-      einheit: 'einheiten',
-      mieter: 'mieter', // Singular = Plural
-      vertrag: 'vertraege',
-      kaution: 'kautionen',
-      zahlung: 'zahlungen',
-      sollstellung: 'sollstellungen',
-      nebenkostenabrechnung: 'nebenkostenabrechnungen',
-      zaehler: 'zaehler', // Singular = Plural
-      zaehlerstand: 'zaehlerstaende',
-      dokument: 'dokumente',
-      kostenart: 'kostenarten',
-      rechnung: 'rechnungen',
-      erinnerung: 'erinnerungen',
+    // Aus Cache wenn vorhanden
+    if (this.tableNameCache.has(entityName)) {
+      return this.tableNameCache.get(entityName)!
     }
-    return pluralMap[entityName] || `${entityName}s`
+    // Fallback: Pluralisierung (sollte nicht passieren wenn Config korrekt)
+    return `${entityName}s`
+  }
+
+  /**
+   * Setzt Tabellen-Name aus Config (beim Laden der Configs)
+   */
+  setTableName(entityName: string, tableName: string): void {
+    this.tableNameCache.set(entityName, tableName)
+  }
+
+  /**
+   * Holt Tabellen-Name aus Config (async Version für initiales Laden)
+   */
+  async getTableNameFromConfig(entityName: string): Promise<string> {
+    if (this.tableNameCache.has(entityName)) {
+      return this.tableNameCache.get(entityName)!
+    }
+    const config = await configService.getEntityConfig(entityName) as EntityConfig | null
+    if (config?.entity?.table_name) {
+      this.tableNameCache.set(entityName, config.entity.table_name)
+      return config.entity.table_name
+    }
+    return `${entityName}s`
   }
 
   /**
@@ -167,40 +191,40 @@ class SchemaService {
   }
 
   /**
+   * Lädt alle Entity-Namen aus dem Config-Verzeichnis
+   * 100% dynamisch - keine hardcodierten Entity-Listen
+   */
+  async getEntityNames(): Promise<string[]> {
+    const entitiesDir = path.join(CONFIG_DIR, 'entities')
+    const files = await fs.readdir(entitiesDir)
+    return files
+      .filter((f) => f.endsWith('.config.toml'))
+      .map((f) => f.replace('.config.toml', ''))
+  }
+
+  /**
    * Initialisiert alle Entity-Tabellen
+   * Dynamisch aus config/entities/ Verzeichnis
    */
   async initializeAllTables(): Promise<void> {
-    const entityNames = [
-      'objekt',
-      'einheit',
-      'mieter',
-      'vertrag',
-      'kaution',
-      'zahlung',
-      'sollstellung',
-      'nebenkostenabrechnung',
-      'zaehler',
-      'zaehlerstand',
-      'dokument',
-      'kostenart',
-      'rechnung',
-      'erinnerung',
-    ]
+    // Entity-Namen dynamisch aus Config-Verzeichnis laden
+    const entityNames = await this.getEntityNames()
 
-    console.log('Initialisiere Datenbank-Schema...')
+    logger.info(`Initialisiere Datenbank-Schema (${entityNames.length} Entities)...`)
 
     for (const entityName of entityNames) {
       try {
         const config = await configService.getEntityConfig(entityName) as EntityConfig | null
         if (!config) {
-          console.warn(`  ⚠ Entity-Config nicht gefunden: ${entityName}`)
+          logger.warn(`  ⚠ Entity-Config nicht gefunden: ${entityName}`)
           continue
         }
 
         // Tabelle erstellen
         const createSql = this.generateCreateTableSql(config)
         databaseService.run(createSql)
-        console.log(`  ✓ Tabelle erstellt: ${this.getTableName(entityName)}`)
+        const tableName = config.entity.table_name || this.getTableName(entityName)
+        logger.info(`  ✓ Tabelle erstellt: ${tableName}`)
 
         // Indizes erstellen
         const indexSqls = this.generateIndexSql(config)
@@ -208,11 +232,11 @@ class SchemaService {
           databaseService.run(indexSql)
         }
       } catch (error) {
-        console.error(`  ✗ Fehler bei Entity ${entityName}:`, error)
+        logger.error(`  ✗ Fehler bei Entity ${entityName}:`, error)
       }
     }
 
-    console.log('Datenbank-Schema initialisiert.')
+    logger.info('Datenbank-Schema initialisiert.')
   }
 }
 

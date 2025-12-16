@@ -8,6 +8,12 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-16
 
+### [03:17] - Feature - Phase 3: Verträge + Finanzen
+- Verträge- und Finanzen-Bereiche mit config-gesteuerter Liste/Form (Routes `/vertraege`, `/finanzen`) ergänzt.
+- Neue Form-Configs (`kaution.form`, `zahlung.form`, `sollstellung.form`) sowie Tabellen-Configs für Kautionen erlauben standardisierte Dialoge und Übersichten.
+- Dokumentation erweitert (`AGENTS.md`) und `vitest.config.ts` + Tests sichern die Config‑Ladepflicht.
+- Shared Logger (`src/server/utils/logger.ts`) verhindert `no-console`-Warnungen bei Start/Schema-Init.
+
 ### [02:16] - Feature - Phase 2: Frontend-Grundgerüst + generische Komponenten
 - API-Service: Fetch-Wrapper für Backend-Kommunikation
 - TanStack Query Hooks: useConfig, useEntity, useTableConfig, useFormConfig

@@ -9,6 +9,7 @@ import { apiRoutes } from './routes/api.routes'
 import { errorMiddleware } from './middleware/error.middleware'
 import { databaseService } from './services/database.service'
 import { schemaService } from './services/schema.service'
+import { logger } from './utils/logger'
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -39,8 +40,8 @@ async function startServer() {
 
     // Server starten
     app.listen(PORT, () => {
-      console.log(`Server läuft auf http://localhost:${PORT}`)
-      console.log(`API verfügbar unter http://localhost:${PORT}/api`)
+      logger.info(`Server läuft auf http://localhost:${PORT}`)
+      logger.info(`API verfügbar unter http://localhost:${PORT}/api`)
     })
   } catch (error) {
     console.error('Fehler beim Starten des Servers:', error)
