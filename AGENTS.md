@@ -1,41 +1,40 @@
 # Repository Guidelines
 
 ## Wichtige Referenzen
-- Lies `CODEX.md`, `.codex/CODEX.md` und `.codex/system.md` für projektweite Erwartungen, Ports und das Config-first-Paradigma.
-- `.ai/*.md` liefern die Shared Rules, `.claude/*` den Review/Plan-Bias – ziehe sie vor jeder Änderung heran.
-- Konsultiere `planning/BAUPLAN_MIETVERWALTUNG.md` für Phase/Deliverables/Status, damit jede Änderung im Einklang mit dem Bauplan steht; dokumentiere neue Features dort.
+- **CODEX.md / .codex/**: Projektprinzipien, Ports und Config-first-Richtlinien.
+- **planning/BAUPLAN_MIETVERWALTUNG.md**: Status, Phase und Aufgabenreihenfolge; aktualisiere ihn immer, wenn Features hinzukommen.
+- **CHANGELOG.md**: Neuen Code dort dokumentieren vor Commit; beziehe AGENTS und BAUPLAN auf jede Ergänzung.
 
 ## Projektstruktur & Modulorganisation
-- `src/client`, `src/server` und `src/shared` trennen UI, API und gemeinsame Typen/Utilities.
-- `config/entities/*.config.toml` definiert das Schema; `src/server/services/schema.service.ts` lädt diese beim Start. Änderungen verlangen einen Neustart.
-- `data` enthält `database.sqlite`, WAL/SHM sowie `backups`; Skripte (z. B. `scripts/init-db.ts`) manipulieren die Datei.
-- `public` liefert statische Assets, `dist` den Produktionsoutput, und `tests/unit` vs. `tests/integration` halten Testfälle getrennt.
+- `src/client`, `src/server`, `src/shared` trennen UI, API und gemeinsame Typen/Utilities.
+- `config/forms`, `config/tables`, `config/entities/*.config.toml` definieren UI/DB-Verhalten; `schema.service.ts` liest sie bei Start.
+- `data/` enthält DB-Dateien und Backups, `public/` Assets, `dist/` Build-Output, `scripts/` bietet DB-Hilfen.
+- Neue Features landen in passenden Services/Routes/Hooks und greifen ausschließlich auf Konfigurationen zu.
 
 ## Build-, Test- und Entwicklungsbefehle
-- `npm run dev` startet `npm run dev:server` + `npm run dev:client` für lokale Feature-Arbeit.
-- `npm run build` erstellt Client (`vite build`) und Server (`tsc -p tsconfig.server.json`).
-- `npm run preview` startet den gebauten Client lokal via Vite.
-- `npm run lint`, `npm run lint:fix`, `npm run format` und `npm run typecheck` sichern Style und Typen.
-- `npm test` (Vitest) führt alle Tests aus; `npm run test -- --watch` für schnelle Iterationen.
-- `npm run db:init | db:migrate | db:seed | db:backup` führen Datenbankskripte in `scripts/` aus.
+- `npm run dev` startet Client (Vite) plus Server (ts-node) für lokale Arbeit.
+- `npm run build` führt `vite build` und `tsc -p tsconfig.server.json` aus.
+- `npm run lint` (ESLint), `npm run lint:fix`, `npm run format`, `npm run typecheck` sichern Style/Typen.
+- `npm test` (Vitest) kontrolliert Logik; `npm run test -- --watch` für schnelle Iterationen.
+- Datenbankskripte nur über `npm run db:init`, `db:migrate`, `db:seed`, `db:backup`.
 
 ## Coding-Stil & Namenskonventionen
-- ESLint (inkl. `@typescript-eslint`, React-Plugins) plus Prettier (`.prettierrc`) gelten: 2 Spaces, keine Semikolons, Single Quotes, `arrowParens: "avoid"`.
-- Verwende sprechende Dateinamen wie `mieter.config.toml`, `api.routes.ts` oder `schema.service.ts`; TypeScript-Identifikatoren folgen CamelCase.
-- Komponenten/Services sollen einzelne Verantwortlichkeiten tragen; splitte aufgeblähte Dateien entlang von `services`, `routes` oder `hooks`.
-- Vermeide Hardcoding; nutze Konfiguration (`config/entities`, `config/forms`).
+- Zwei Leerzeichen, keine Semikolons, Single Quotes, `arrowParens: "avoid"` (siehe `.prettierrc`).
+- Komponenten/Services in PascalCase, Funktionen/Variablen in camelCase; Dateinamen beschreiben Inhalt (`nebebkosten.query.ts`).
+- Services folgen Single Responsibility; wiederkehrende Logik wandert in `src/shared`.
+- Werte aus TOML/ENV lesen, keine Hardcodings; neue Richtlinien dokumentierst du in AGENTS/BAUPLAN.
 
 ## Test-Richtlinien
-- Platziere Tests unter `tests/unit` bzw. `tests/integration` mit beschreibenden Namen (z. B. `entity.routes.integration.test.ts`).
-- Halte Tests deterministisch und mocke externe Abhängigkeiten, damit `vitest` zuverlässig läuft.
-- Beschreibe in PRs unzureichend abgedeckte Bereiche; Coverage wird aktuell nicht erzwungen, aber Transparenz ist gewünscht.
+- Tests landen in `tests/unit` oder `tests/integration` und heißen `*.test.tsx`/`*.spec.ts`.
+- Mock externe Abhängigkeiten (DB, PDF-Service) damit Vitest stabil bleibt.
+- Baue neue Tests zusammen mit BAUPLAN-Updates und verweise im CHANGELOG darauf.
 
 ## Commit- & PR-Richtlinien
-- Commitze im Format `type(scope): beschreibung` (z. B. `feat(frontend): Phase 2`), damit die Historie übersichtlich bleibt.
-- PRs brauchen Zusammenfassung, Teststatus und verlinkte Issues; UI-Änderungen ergänze mit Screenshots oder Mockups.
-- Gib manuelle Validierung an (etwa `npm run dev` + `npm test`); dokumentiere Config-first-Entscheidungen wenn du eine TOML-Datei angepasst hast.
+- Commit-Messages: `type(scope): beschreibung` (z. B. `feat(client): Phase 5 Dashboard`); erwähne betroffene BAUPLAN-Section.
+- PRs brauchen Ziel, Teststatus, Screenshots (falls UI) und Referenz zu BAUPLAN/Issue.
+- Dokumentiere Config-Änderungen immer in AGENTS + CHANGELOG bevor du pushst.
 
-## Sicherheit & Konfigurationstipps
-- Konfiguriere Entitäten über `config/entities`; direkte DB-Änderungen nur über Migrationen (`npm run db:migrate`) oder `scripts/` durchführen.
-- Halte sensible Daten aus dem Repository; `data/backups` bleibt lokal und dient als Wiederherstellungsgrundlage vor riskanten Änderungen.
-- Nutze `npm run db:backup` vor Eingriffen in die Datenbank und documentiere neue Felder stets in den TOML-Dateien sowie im CHANGELOG.
+## Dokumentationserweiterung
+- Jede Änderung erhält Einträge in AGENTS, CHANGELOG und BAUPLAN, damit die Wissensbasis konsistent bleibt.
+- Verweise innerhalb AGENTS auf die anderen Dokumente, damit kommende Agenten schnell Orientierung finden.
+- Bei neuen Prozessschritten oder Tools beschreibe kurz, wo die Recourcen liegen (z. B. `config/*.toml`, `.codex/`).

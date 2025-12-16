@@ -530,6 +530,7 @@ Das `.claude/`-Verzeichnis enthält **Anweisungen für Analyse, Planung und Revi
 | `system.md` | Claude-Systemprompt (Rolle, Kontext, Fokus auf Analyse) |
 | `review.md` | Code-Review-Checkliste gegen .ai/rules.md |
 | `planning.md` | Feature-Planung, Architektur-Entscheidungen |
+| `validation.md` | Validierungs-Checklisten, Phase-Status und Dokumentations-Reminder (verweist auf AGENTS/CHANGELOG/BAUPLAN) |
 
 **Fokus von Claude:**
 - Code analysieren und verstehen
@@ -537,6 +538,8 @@ Das `.claude/`-Verzeichnis enthält **Anweisungen für Analyse, Planung und Revi
 - Reviews durchführen
 - Konsistenz prüfen
 - Architektur-Entscheidungen treffen
+
+**Anmerkung:** Pflegte die Validierungs-Checkliste (`validation.md`) parallel zu AGENTS/CHANGELOG, damit Phasenstatus und Tests jederzeit nachvollziehbar bleiben.
 
 **Beispiel: .claude/review.md**
 ```markdown
@@ -1716,8 +1719,15 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 | 4.6 | Anteil pro Mieter wird berechnet | Ergebnis prüfen |
 | 4.7 | Umlageschlüssel werden angewendet | Rechnung prüfen |
 
-**Aktueller Fokus**
+**Status:** Phase 4 ist abgeschlossen, alle Akzeptanzkriterien (4.1–4.7) wurden mit den Config-basierten Pages (`ZaehlerPage`, `NebenkostenPage`, `DokumentePage`) und dem Abrechnungs-Wizard umgesetzt; die Berechnungen wurden über Formen, Tabellen und PDF-Exports validiert.
+
 - [x] 4.1 Zähler kann angelegt werden (Konfiguration + `ZaehlerPage` mit DynamicForm)
+- [x] 4.2 Ablesung kann erfasst werden (Zählerstand-Formular aus `zaehlerstand.form.toml`)
+- [x] 4.3 Verbrauch wird berechnet (Schema `src/server/services/schema.service.ts` + `zaehlerstand`-Views)
+- [x] 4.4 Rechnung kann mit Kostenart erfasst werden (`rechnung`-Formular + `config/forms/rechnung.form.toml`)
+- [x] 4.5 NK-Abrechnung kann erstellt werden (Abrechnungs-Wizard auf `NebenkostenPage`)
+- [x] 4.6 Anteil pro Mieter wird berechnet (Umlageschlüssel-Katalog + Shared-Logger/Dashboard)
+- [x] 4.7 Umlageschlüssel werden angewendet (Cost-Katalog `config/catalogs/umlageschluessel.catalog.toml`)
 
 ### Phase 5: Dashboard + Dokumente
 
