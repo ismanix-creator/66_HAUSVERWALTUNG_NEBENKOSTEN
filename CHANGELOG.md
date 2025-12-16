@@ -8,6 +8,11 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-16
 
+### [04:02] - Feature - Phase 5: Dashboard, Dokumente & PDF
+- Dashboard liefert jetzt echte Zähler (Objekte, Einheiten, Verträge, offene Rechnungen, Dokumente, Erinnerungen) aus `/dashboard/summary`.
+- Dokumente-Ansicht ermöglicht Upload/Preview, nutzt die neue `documents.table`/`document.form` und greift auf `Steuerberater-Export` zurück.
+- PDF-Service (`/api/export/steuerberater`) erstellt einen PDF-Report basierend auf der Dashboard-Zusammenfassung.
+
 ### [03:41] - Feature - Phase 4: Nebenkosten & Ablesungen
 - `ZaehlerPage` liefert jetzt Ablesungen mit Verbrauchsvergleich plus `zaehlerstand`-Formular für neue Messwerte.
 - `NebenkostenPage` (Route `/nebenkosten`) bietet Rechnungs-Tab mit Konfigurations-Formen und Abrechnungs-Tab inklusive Share-Rechner basierend auf Umlageschlüsseln.

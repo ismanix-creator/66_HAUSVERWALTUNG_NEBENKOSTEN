@@ -80,6 +80,10 @@ class ApiService {
     return this.fetch<T>(`/catalog/${catalogName}`)
   }
 
+  async getDashboardSummary<T>(): Promise<T> {
+    return this.fetch<T>('/dashboard/summary')
+  }
+
   /**
    * Lädt Entity-Konfiguration
    */

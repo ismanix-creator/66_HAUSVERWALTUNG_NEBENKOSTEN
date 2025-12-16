@@ -1,6 +1,47 @@
-import { Building2, Users, FileText, Wallet } from 'lucide-react'
+import {
+  Building2,
+  Users,
+  FileText,
+  Wallet,
+  FileArchive,
+  FileCheck,
+} from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { useDashboardSummary } from '../hooks/useConfig'
 
 export function DashboardPage() {
+  const navigate = useNavigate()
+  const { data: summary, isLoading } = useDashboardSummary()
+
+  if (isLoading) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <div className="text-gray-500">Lade Dashboard...</div>
+      </div>
+    )
+  }
+
+  if (!summary) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <div className="text-gray-500">Keine Dashboard-Daten verfügbar.</div>
+      </div>
+    )
+  }
+
+  const stats = [
+    { title: 'Objekte', value: summary.objekte, icon: Building2, color: 'blue' },
+    { title: 'Mieter', value: summary.mieter, icon: Users, color: 'green' },
+    { title: 'Verträge', value: summary.vertraege, icon: FileText, color: 'purple' },
+    { title: 'Offene Rechnungen', value: summary.offeneRechnungen, icon: Wallet, color: 'orange' },
+    { title: 'Dokumente', value: summary.dokumente, icon: FileArchive, color: 'blue' },
+    { title: 'Erinnerungen', value: summary.offeneErinnerungen, icon: FileCheck, color: 'green' },
+  ]
+
+  const openExport = () => {
+    window.open('/api/export/steuerberater', '_blank')
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -8,30 +49,66 @@ export function DashboardPage() {
         <p className="text-gray-500">Übersicht Ihrer Mietverwaltung</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <StatsCard title="Objekte" value="0" icon={Building2} color="blue" />
-        <StatsCard title="Mieter" value="0" subtitle="aktiv" icon={Users} color="green" />
-        <StatsCard title="Verträge" value="0" subtitle="aktiv" icon={FileText} color="purple" />
-        <StatsCard title="Offene Posten" value="0,00 €" icon={Wallet} color="orange" />
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {stats.map((stat) => (
+          <StatsCard
+            key={stat.title}
+            title={stat.title}
+            value={stat.value.toString()}
+            icon={stat.icon}
+            color={stat.color}
+          />
+        ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <section className="grid gap-4 lg:grid-cols-2">
         <div className="rounded-lg border border-gray-200 bg-white p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Erinnerungen</h2>
-          <p className="text-gray-500 text-sm">Keine anstehenden Erinnerungen</p>
-        </div>
-        <div className="rounded-lg border border-gray-200 bg-white p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Schnellzugriff</h2>
-          <div className="flex gap-2">
-            <button className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700">
-              Zahlung erfassen
+          <h2 className="text-lg font-semibold text-gray-900 mb-2">Schnellzugriff</h2>
+          <p className="text-sm text-gray-500 mb-4">
+            Öffne Dokumente, Rechnungen oder Abrechnungen direkt aus dem Dashboard.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => navigate('/dokumente')}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700"
+            >
+              Dokumente
             </button>
-            <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
-              Rechnung erfassen
+            <button
+              onClick={() => navigate('/nebenkosten/rechnungen')}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700"
+            >
+              Rechnungen
+            </button>
+            <button
+              onClick={() => navigate('/nebenkosten/abrechnungen')}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700"
+            >
+              Abrechnungen
+            </button>
+            <button
+              onClick={openExport}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-900"
+            >
+              Steuerberater-Export
             </button>
           </div>
         </div>
-      </div>
+
+        <div className="rounded-lg border border-gray-200 bg-white p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-2">Status</h2>
+          <p className="text-sm text-gray-500">
+            {summary.offeneErinnerungen} Erinnerung(en) offen, {summary.offeneRechnungen} offene Rechnung(en).
+          </p>
+          <div className="mt-4 space-y-2">
+            <p className="text-sm text-gray-500">
+              {summary.objekte} Objekte &middot; {summary.einheiten} Einheiten verwaltet.
+            </p>
+            <p className="text-sm text-gray-500">Letzte Dokumente: {summary.dokumente}</p>
+            <p className="text-sm text-gray-500">Alle Zahlen basieren auf der aktuellen Datenbank.</p>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
@@ -39,12 +116,11 @@ export function DashboardPage() {
 interface StatsCardProps {
   title: string
   value: string
-  subtitle?: string
   icon: React.ComponentType<{ className?: string }>
   color: 'blue' | 'green' | 'purple' | 'orange'
 }
 
-function StatsCard({ title, value, subtitle, icon: Icon, color }: StatsCardProps) {
+function StatsCard({ title, value, icon: Icon, color }: StatsCardProps) {
   const colorClasses = {
     blue: 'bg-blue-50 text-blue-600',
     green: 'bg-green-50 text-green-600',
@@ -62,7 +138,6 @@ function StatsCard({ title, value, subtitle, icon: Icon, color }: StatsCardProps
       <div className="mt-4">
         <p className="text-sm font-medium text-gray-500">{title}</p>
         <p className="text-2xl font-semibold text-gray-900">{value}</p>
-        {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
       </div>
     </div>
   )

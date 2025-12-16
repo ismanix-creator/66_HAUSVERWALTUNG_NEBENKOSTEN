@@ -1607,6 +1607,8 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 - PDF-Export funktioniert
 - App ist feature-complete
 
+**Status:** Dashboard zeigt echte Summen, Dokumente sind uploadbar inkl. Preview, und der PDF-Pfad liefert den Steuerberater-Export.
+
 ---
 
 ### Phase 6: Mobile-Ansicht + Polish
@@ -1846,7 +1848,7 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 - [x] Phase 2 – Frontend-Grundgerüst & generische Komponenten (Navigation, DataTable, DynamicForm, ObjektePage)
 - [x] Phase 3 – Verträge & Finanzen (Routes `/vertraege`, `/finanzen`, Forms/Tables für Kaution/Zahlung/Sollstellung, Shared Logger, Tests)
 - [x] Phase 4 – Nebenkosten & Zähler
-- [ ] Phase 5 – Dashboard, Dokumente & PDF
+- [x] Phase 5 – Dashboard, Dokumente & PDF (Metriken, Dokumente + Steuerberater-Export)
 - [ ] Phase 6 – Mobile-Ansicht & Polish
 
 ---

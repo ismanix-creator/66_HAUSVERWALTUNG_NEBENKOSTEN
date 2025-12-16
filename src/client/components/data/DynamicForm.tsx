@@ -185,6 +185,18 @@ export function DynamicForm({
           />
         )}
 
+        {/* File input placeholder */}
+        {fieldConfig.type === 'file' && (
+          <input
+            type="text"
+            value={(value as string) || ''}
+            onChange={(e) => handleChange(formField.field, e.target.value)}
+            placeholder={fieldConfig.placeholder || 'Pfad oder URL'}
+            className={baseClasses}
+            disabled={fieldConfig.readonly}
+          />
+        )}
+
         {/* Text area */}
         {fieldConfig.type === 'text' && (
           <textarea

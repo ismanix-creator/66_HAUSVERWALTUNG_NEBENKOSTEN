@@ -7,6 +7,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { apiService } from '../services/api.service'
 import type { AppConfig, NavigationConfig, EntityConfig } from '@shared/types/config'
+import type { DashboardSummary } from '@shared/types/dashboard'
 
 /**
  * Hook für App-Konfiguration
@@ -63,6 +64,14 @@ export function useFormConfig<T = unknown>(formName: string) {
     queryFn: () => apiService.getFormConfig<T>(formName),
     staleTime: Infinity,
     enabled: !!formName,
+  })
+}
+
+export function useDashboardSummary() {
+  return useQuery({
+    queryKey: ['dashboard', 'summary'],
+    queryFn: () => apiService.getDashboardSummary<DashboardSummary>(),
+    staleTime: 60_000,
   })
 }
 

@@ -6,6 +6,7 @@ import { VertraegePage } from './pages/VertraegePage'
 import { FinanzenPage } from './pages/FinanzenPage'
 import { ZaehlerPage } from './pages/ZaehlerPage'
 import { NebenkostenPage } from './pages/NebenkostenPage'
+import { DokumentePage } from './pages/DokumentePage'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/finanzen/:tab" element={<FinanzenPage />} />
         <Route path="/nebenkosten" element={<NebenkostenPage />} />
         <Route path="/nebenkosten/:tab" element={<NebenkostenPage />} />
+        <Route path="/dokumente" element={<DokumentePage />} />
         <Route path="/nebenkosten/zaehler" element={<ZaehlerPage />} />
         {/* Weitere Routes werden config-gesteuert hinzugefügt */}
       </Routes>

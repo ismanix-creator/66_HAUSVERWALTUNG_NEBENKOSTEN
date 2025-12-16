@@ -6,6 +6,8 @@
 
 import { Router } from 'express'
 import { configService } from '../services/config.service'
+import { dashboardService } from '../services/dashboard.service'
+import { pdfService } from '../services/pdf.service'
 import { schemaService } from '../services/schema.service'
 import { entityRoutes } from './entity.routes'
 
@@ -64,6 +66,28 @@ apiRoutes.get('/config/form/:name', async (req, res, next) => {
   try {
     const config = await configService.getFormConfig(req.params.name)
     res.json(config)
+  } catch (error) {
+    next(error)
+  }
+})
+
+apiRoutes.get('/dashboard/summary', async (_req, res, next) => {
+  try {
+    const summary = await dashboardService.getSummary()
+    res.json(summary)
+  } catch (error) {
+    next(error)
+  }
+})
+
+apiRoutes.get('/export/steuerberater', async (_req, res, next) => {
+  try {
+    const summary = await dashboardService.getSummary()
+    res.setHeader('Content-Type', 'application/pdf')
+    res.setHeader('Content-Disposition', 'attachment; filename=steuerberater-export.pdf')
+    const pdfDoc = pdfService.createSteuerberaterExport(summary)
+    pdfDoc.pipe(res)
+    pdfDoc.end()
   } catch (error) {
     next(error)
   }
