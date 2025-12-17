@@ -42,7 +42,7 @@ async function startServer() {
     const host = serverConfig?.host ?? '0.0.0.0'
 
     // Datenbank initialisieren
-    databaseService.initialize()
+    await databaseService.initialize()
 
     // Schema initialisieren (Tabellen erstellen)
     await schemaService.initializeAllTables()

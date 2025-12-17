@@ -1,42 +1,67 @@
 import Database from 'better-sqlite3'
-import path from 'path'
-import { fileURLToPath } from 'url'
 import fs from 'fs'
+import path from 'path'
+import { configLoader } from './config-loader.service'
 import { logger } from '../utils/logger'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const DATA_DIR = path.resolve(__dirname, '../../../data')
-const DB_PATH = path.join(DATA_DIR, 'database.sqlite')
 
 class DatabaseService {
   private db: Database.Database | null = null
+  private initPromise: Promise<Database.Database> | null = null
 
-  initialize(): Database.Database {
+  /**
+   * Initialisiert die Datenbank auf Basis der TOML-Konfiguration.
+   * Muss genau einmal zu Serverstart aufgerufen werden, bevor Queries ausgeführt werden.
+   */
+  async initialize(): Promise<Database.Database> {
     if (this.db) {
       return this.db
     }
-
-    // Ensure data directory exists
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true })
+    if (this.initPromise) {
+      return this.initPromise
     }
 
-    this.db = new Database(DB_PATH)
-
-    // Enable WAL mode for better concurrency
-    this.db.pragma('journal_mode = WAL')
-
-    // Enable foreign keys
-    this.db.pragma('foreign_keys = ON')
-
-    logger.info(`SQLite-Datenbank initialisiert: ${DB_PATH}`)
+    this.initPromise = this.createConnection()
+    this.db = await this.initPromise
+    this.initPromise = null
     return this.db
   }
 
-  getDb(): Database.Database {
+  private async createConnection(): Promise<Database.Database> {
+    const master = await configLoader.getMaster()
+    const dbConfig = master.database
+
+    const resolvedPath = path.isAbsolute(dbConfig.path)
+      ? dbConfig.path
+      : path.resolve(process.cwd(), dbConfig.path)
+
+    const dataDir = path.dirname(resolvedPath)
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true })
+    }
+
+    const db = new Database(resolvedPath)
+
+    if (dbConfig.wal_mode) {
+      db.pragma('journal_mode = WAL')
+    }
+
+    if (dbConfig.busy_timeout_ms) {
+      db.pragma(`busy_timeout = ${dbConfig.busy_timeout_ms}`)
+    }
+
+    if (dbConfig.cache_size) {
+      db.pragma(`cache_size = ${dbConfig.cache_size}`)
+    }
+
+    db.pragma('foreign_keys = ON')
+
+    logger.info(`SQLite-Datenbank initialisiert: ${resolvedPath}`)
+    return db
+  }
+
+  private getDb(): Database.Database {
     if (!this.db) {
-      return this.initialize()
+      throw new Error('DatabaseService nicht initialisiert. Bitte initialize() aufrufen.')
     }
     return this.db
   }

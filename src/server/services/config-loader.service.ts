@@ -28,7 +28,6 @@
 
 import fs from 'fs/promises'
 import path from 'path'
-import { fileURLToPath } from 'url'
 import TOML from '@iarna/toml'
 import { z } from 'zod'
 import {
@@ -46,11 +45,9 @@ import {
   type DesignSystem,
   type FeatureFlags,
   type ValidationRules,
-} from '@shared/config/schemas'
+} from '../../shared/config/schemas'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const CONFIG_DIR = path.resolve(__dirname, '../../../config')
+const CONFIG_DIR = path.resolve(process.cwd(), 'config')
 const MASTER_CONFIG_FILE = 'config.toml'
 const ALLOWED_META_ENVIRONMENTS = ['development', 'staging', 'production'] as const
 

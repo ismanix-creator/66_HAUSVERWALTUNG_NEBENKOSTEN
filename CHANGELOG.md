@@ -11,6 +11,7 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 ### [12:00] - Config - Master-Loader & ENV-Validation
 - Server und API ziehen Konfigurationswerte jetzt zentral aus `config/config.toml` via `ConfigLoaderService`, inklusive ENV-Overrides und Zod-Validierung (`src/server/index.ts`, `src/server/services/config-loader.service.ts`, `src/server/services/config.service.ts`, `config/config.toml`).
 - Typen spiegeln die Zod-Schemas statt Legacy-Interfaces; Schema-Initialisierung nutzt die geladene Entity-Liste und Vitest kennt die Projekt-Aliasse (`src/shared/types/config.ts`, `src/server/services/schema.service.ts`, `vitest.config.ts`).
+- SQLite-Setup ist config-driven (Pfad, WAL, busy_timeout, cache_size) und der Server startet konsistent auf Port 3002 aus der Master-Config (`src/server/services/database.service.ts`, `src/server/index.ts`).
 - Neuer Vitest-Check stellt sicher, dass Master-Config/Imports geladen und ENV-Werte angewandt werden; Zod-Schema für Design-Shadows korrigiert (`tests/unit/config-loader.service.test.ts`, `src/shared/config/schemas.ts`).
 
 ## 2025-12-16

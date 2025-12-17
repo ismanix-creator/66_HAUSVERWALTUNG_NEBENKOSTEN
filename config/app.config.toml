@@ -1,3 +1,6 @@
+## DEPRECATED: Diese Datei wird nicht mehr für den Betrieb genutzt. Quelle ist `config/config.toml`.
+## Nur zur historischen Referenz behalten; bitte Änderungen ausschließlich in `config/config.toml` vornehmen.
+
 [app]
 name = "Mietverwaltung"
 version = "1.0.0"

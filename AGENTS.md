@@ -41,9 +41,9 @@
 - Bei neuen Prozessschritten oder Tools beschreibe kurz, wo die Recourcen liegen (z. B. `config/*.toml`, `.codex/`).
 
 ## Laufende Änderungen
- - [2025-12-17 12:00] Config – Master Loader & ENV-Zod
+- [2025-12-17 12:00] Config – Master Loader & ENV-Zod
   - `config-loader.service.ts` ist jetzt Single Source of Truth für Server/API (Master `config/config.toml` + ENV-Overrides + Zod), `config.service.ts` routed nur noch dorthin; Serverstart, Schema-Service und Typ-Aliasse hängen an den neuen Schemas (`src/server/index.ts`, `src/server/services/{config-loader.service,config.service,schema.service}.ts`, `src/shared/types/config.ts`, `vitest.config.ts`).
-  - Tests decken Master-Load + ENV-Overrides ab, Zod-Design-Schema gefixt; Default-Eigentümer in `config/config.toml` gesetzt. Dokumentiert in `CHANGELOG.md` (2025-12-17) und `planning/BAUPLAN_MIETVERWALTUNG.md` (Abschnitt 4/12).
+  - Tests decken Master-Load + ENV-Overrides ab, Zod-Design-Schema gefixt; Default-Eigentümer in `config/config.toml` gesetzt. Datenbank-Setup liest Pfad/WAL/Timeouts aus der Master-Config und der Server läuft konsistent auf Port 3002. Dokumentiert in `CHANGELOG.md` (2025-12-17) und `planning/BAUPLAN_MIETVERWALTUNG.md` (Abschnitt 4/12).
 - [2025-12-16 05:48] Bugfix – API-Routing
   - Konfigurations-, Dashboard-, Export- und `/entities`-Endpoints regeln sich nun vor den generischen `entityRoutes`, sodass `/api/config/navigation` und `/api/dashboard/summary` wieder erreichbar sind (`src/server/routes/api.routes.ts:16-104`).
   - Dokumentiert in `CHANGELOG.md` und `planning/BAUPLAN_MIETVERWALTUNG.md` (Abschnitt 12 "Laufende Fixes").
