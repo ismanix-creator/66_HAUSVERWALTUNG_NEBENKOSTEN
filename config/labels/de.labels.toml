@@ -40,7 +40,7 @@ unsaved_changes = "Ungespeicherte Änderungen vorhanden"
 # -----------------------------------------------------------------------------
 [nav]
 dashboard = "Dashboard"
-objekte = "Objekte"
+objekte_einheiten = "Objekte/Einheiten"
 einheiten = "Einheiten"
 mieter = "Mieter"
 vertraege = "Verträge"
@@ -341,6 +341,21 @@ email = "E-Mail"
 telefon = "Telefon"
 mobil = "Mobil"
 fax = "Fax"
+
+[mieter]
+name = "Name"
+anrede = "Anrede"
+vorname = "Vorname"
+nachname = "Nachname"
+email = "E-Mail"
+telefon = "Telefon"
+mobil = "Mobil"
+status = "Status"
+einheit = "Einheit"
+iban = "IBAN"
+bic = "BIC"
+bankname = "Bank"
+adresse_vorher = "Vorherige Anschrift"
 
 [fields.financial]
 iban = "IBAN"

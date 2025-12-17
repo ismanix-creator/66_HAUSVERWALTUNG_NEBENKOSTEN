@@ -68,6 +68,15 @@ apiRoutes.get('/config/form/:name', async (req, res, next) => {
   }
 })
 
+apiRoutes.get('/config/view/:name', async (req, res, next) => {
+  try {
+    const config = await configService.getViewConfig(req.params.name)
+    res.json(config)
+  } catch (error) {
+    next(error)
+  }
+})
+
 apiRoutes.get('/dashboard/summary', async (_req, res, next) => {
   try {
     const summary = await dashboardService.getSummary()

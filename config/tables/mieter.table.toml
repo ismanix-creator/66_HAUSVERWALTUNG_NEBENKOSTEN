@@ -9,9 +9,11 @@ label = "labels.mieter.name"
 sortable = true
 sort_field = "nachname"
 width = "25%"
+template = "{vorname} {nachname}"
 
 [[table.columns]]
-field = "telefon"
+field = "mobil"
+fallback_fields = ["telefon"]
 label = "labels.mieter.telefon"
 width = "15%"
 
@@ -34,5 +36,11 @@ width = "10%"
 display = "badge"
 badge_colors = { aktiv = "green", gekuendigt = "yellow", ehemalig = "gray" }
 
+[table.actions]
+label = "labels.table.actions"
+width = "8rem"
+
 [table.row_actions]
-edit = { icon = "Pencil", dialog = "forms/mieter.form" }
+edit = { icon = "Pencil", dialog = "forms/mieter.form", label = "" }
+vertrag = { icon = "FileSignature", label = "", handler = "navigate_vertrag" }
+einheit = { icon = "Home", label = "", handler = "navigate_einheit" }

@@ -8,6 +8,73 @@
 import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 import type { EntityConfig } from '@shared/types/config'
+import { useCatalog } from '../../hooks/useConfig'
+
+type BankCatalogItem = {
+  value?: string
+  label?: string
+  bic?: string
+}
+
+type BankCatalogConfig = {
+  catalog?: {
+    name?: string
+    items?: BankCatalogItem[]
+  }
+}
+
+const normalizeIban = (iban?: string) =>
+  (iban || '')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, '')
+
+const ensureGermanPrefix = (iban: string) => {
+  if (!iban) return ''
+  if (iban.startsWith('DE')) return iban
+  return `DE${iban}`
+}
+
+const normalizeIbanInput = (raw: string) => {
+  const cleaned = normalizeIban(raw)
+  if (!cleaned) return ''
+  return ensureGermanPrefix(cleaned)
+}
+
+const formatIbanDisplay = (iban: string) => {
+  if (!iban) return ''
+  const normalized = normalizeIbanInput(iban)
+  const country = normalized.slice(0, 2)
+  const check = normalized.slice(2, 4)
+  const rest = normalized.slice(4)
+  const chunks: string[] = []
+  if (country || check) {
+    chunks.push(`${country}${check}`)
+  }
+  for (let i = 0; i < rest.length; i += 4) {
+    chunks.push(rest.slice(i, i + 4))
+  }
+  return chunks.filter(Boolean).join(' ').trim()
+}
+
+const extractGermanBankCode = (iban: string) => {
+  if (!iban.startsWith('DE')) return null
+  if (iban.length < 12) return null
+  return iban.slice(4, 12)
+}
+
+const handleEnterAsTab = (e: React.KeyboardEvent<HTMLElement>) => {
+  if (e.key !== 'Enter') return
+  e.preventDefault()
+  const form = (e.target as HTMLElement).closest('form')
+  if (!form) return
+  const focusables = Array.from(
+    form.querySelectorAll<HTMLElement>('input, select, textarea, button')
+  ).filter(el => !el.hasAttribute('disabled') && el.tabIndex !== -1)
+  const currentIndex = focusables.indexOf(e.target as HTMLElement)
+  if (currentIndex >= 0 && currentIndex < focusables.length - 1) {
+    focusables[currentIndex + 1].focus()
+  }
+}
 
 export interface FormField {
   field: string
@@ -57,10 +124,21 @@ export function DynamicForm({
 }: DynamicFormProps) {
   const [formData, setFormData] = useState<Record<string, unknown>>({})
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const entityName = entityConfig.entity.name
+  const isMieterForm = entityName === 'mieter'
+  const { data: bankCatalog } = useCatalog<BankCatalogConfig>(
+    isMieterForm ? 'bankleitzahlen' : ''
+  )
+  const ibanValue = typeof formData['iban'] === 'string' ? (formData['iban'] as string) : ''
 
   // Initialize form data
   useEffect(() => {
     if (initialData) {
+      if (isMieterForm && typeof initialData['iban'] === 'string') {
+        const normalized = normalizeIbanInput(initialData['iban'] as string)
+        setFormData({ ...initialData, iban: normalized })
+        return
+      }
       setFormData(initialData)
     } else {
       // Set defaults from entity config
@@ -72,7 +150,36 @@ export function DynamicForm({
       }
       setFormData(defaults)
     }
-  }, [initialData, entityConfig])
+  }, [initialData, entityConfig, isMieterForm])
+
+  useEffect(() => {
+    if (!isMieterForm) return
+    if (!bankCatalog?.catalog?.items?.length) return
+    const normalized = normalizeIbanInput(ibanValue)
+    if (!normalized) return
+    const bankCode = extractGermanBankCode(normalized)
+    if (!bankCode) return
+    const match = bankCatalog.catalog.items.find(item => item.value === bankCode)
+    if (!match?.label && !match?.bic) return
+    setFormData(prev => {
+      const currentBankname = typeof prev['bankname'] === 'string' ? (prev['bankname'] as string) : ''
+      const currentBic = typeof prev['bic'] === 'string' ? (prev['bic'] as string) : ''
+      if (currentBankname.trim().length > 0) {
+        if (currentBic.trim().length > 0 || !match?.bic) {
+          return prev
+        }
+        return { ...prev, bic: match.bic }
+      }
+      const next: Record<string, unknown> = { ...prev }
+      if (match.label) {
+        next.bankname = match.label
+      }
+      if (!currentBic.trim().length && match.bic) {
+        next.bic = match.bic
+      }
+      return next
+    })
+  }, [ibanValue, bankCatalog, isMieterForm])
 
   // Handle field change
   const handleChange = (fieldName: string, value: unknown) => {
@@ -108,7 +215,9 @@ export function DynamicForm({
 
       // Pattern validation
       if (fieldConfig.pattern && typeof value === 'string') {
-        if (!new RegExp(fieldConfig.pattern).test(value)) {
+        const candidate =
+          fieldName === 'iban' ? normalizeIbanInput(value as string) : (value as string)
+        if (!new RegExp(fieldConfig.pattern).test(candidate)) {
           newErrors[fieldName] = 'Ungültiges Format'
         }
       }
@@ -146,10 +255,10 @@ export function DynamicForm({
     }
   }
 
-  // Render field input based on type
-  const renderField = (formField: FormField) => {
-    const fieldConfig = entityConfig.entity.fields[formField.field]
-    if (!fieldConfig) return null
+    // Render field input based on type
+    const renderField = (formField: FormField) => {
+      const fieldConfig = entityConfig.entity.fields[formField.field]
+      if (!fieldConfig) return null
 
     // Skip auto-generated and hidden fields
     if (fieldConfig.auto_generate || fieldConfig.visible === false) return null
@@ -159,8 +268,9 @@ export function DynamicForm({
     const fieldError = errors[formField.field]
     const label = fieldConfig.label?.replace('labels.', '') || formField.field
 
-    const baseClasses = `w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 ${
-      fieldError ? 'border-red-500' : 'border-gray-300'
+    const placeholderText = fieldConfig.placeholder || ''
+    const baseClasses = `w-full px-3 py-2 border rounded-lg h-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-slate-100 text-slate-900 placeholder-slate-400 ${
+      fieldError ? 'border-red-500' : 'border-slate-300'
     }`
 
     const widthClasses: Record<string, string> = {
@@ -178,12 +288,24 @@ export function DynamicForm({
         </label>
 
         {/* Text input */}
-        {(fieldConfig.type === 'string' || fieldConfig.type === 'uuid') && (
+        {(fieldConfig.type === 'string' || fieldConfig.type === 'uuid' || fieldConfig.type === 'email') && (
           <input
-            type="text"
-            value={(value as string) || ''}
-            onChange={e => handleChange(formField.field, e.target.value)}
-            placeholder={fieldConfig.placeholder}
+            type={fieldConfig.type === 'email' ? 'email' : 'text'}
+            value={
+              formField.field === 'iban'
+                ? formatIbanDisplay((value as string) || '')
+                : ((value as string) || '')
+            }
+            onChange={e => {
+              if (formField.field === 'iban') {
+                const normalized = normalizeIbanInput(e.target.value)
+                handleChange(formField.field, normalized)
+              } else {
+                handleChange(formField.field, e.target.value)
+              }
+            }}
+            onKeyDown={handleEnterAsTab}
+            placeholder={placeholderText}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           />
@@ -195,7 +317,7 @@ export function DynamicForm({
             type="text"
             value={(value as string) || ''}
             onChange={e => handleChange(formField.field, e.target.value)}
-            placeholder={fieldConfig.placeholder || 'Pfad oder URL'}
+            placeholder={fieldConfig.placeholder || placeholderText}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           />
@@ -207,6 +329,7 @@ export function DynamicForm({
             value={(value as string) || ''}
             onChange={e => handleChange(formField.field, e.target.value)}
             rows={formField.rows || 3}
+            onKeyDown={handleEnterAsTab}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           />
@@ -225,6 +348,7 @@ export function DynamicForm({
             min={fieldConfig.min}
             max={fieldConfig.max}
             step={fieldConfig.type === 'integer' ? 1 : 0.01}
+            onKeyDown={handleEnterAsTab}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           />
@@ -237,6 +361,7 @@ export function DynamicForm({
               type="checkbox"
               checked={Boolean(value)}
               onChange={e => handleChange(formField.field, e.target.checked)}
+              onKeyDown={handleEnterAsTab}
               className="h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
               disabled={fieldConfig.readonly}
             />
@@ -251,6 +376,7 @@ export function DynamicForm({
           <select
             value={(value as string) || ''}
             onChange={e => handleChange(formField.field, e.target.value)}
+            onKeyDown={handleEnterAsTab}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           >
@@ -269,6 +395,7 @@ export function DynamicForm({
             type="date"
             value={(value as string) || ''}
             onChange={e => handleChange(formField.field, e.target.value)}
+            onKeyDown={handleEnterAsTab}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           />
@@ -280,6 +407,7 @@ export function DynamicForm({
             type="datetime-local"
             value={(value as string)?.slice(0, 16) || ''}
             onChange={e => handleChange(formField.field, e.target.value)}
+            onKeyDown={handleEnterAsTab}
             className={baseClasses}
             disabled={fieldConfig.readonly}
           />
@@ -296,11 +424,11 @@ export function DynamicForm({
     : formConfig.form.title_create.replace('labels.', '')
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+      <div className="bg-slate-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden border border-slate-800">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+          <h2 className="text-lg font-semibold text-white">{title}</h2>
           <button onClick={onCancel} className="p-1 text-gray-400 hover:text-gray-600">
             <X className="h-5 w-5" />
           </button>
@@ -308,34 +436,38 @@ export function DynamicForm({
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="overflow-y-auto max-h-[calc(90vh-140px)]">
-          <div className="p-6 space-y-6">
-            {error && <div className="p-4 text-sm text-red-600 bg-red-50 rounded-lg">{error}</div>}
+        <div className="p-6 space-y-6 text-slate-900">
+          {error && (
+            <div className="p-4 text-sm text-red-700 bg-red-50 rounded-lg border border-red-200">
+              {error}
+            </div>
+          )}
 
-            {formConfig.form.sections.map(section => (
-              <div key={section.id}>
-                <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">
-                  {section.label.replace('labels.', '')}
-                </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {section.fields.map(field => renderField(field))}
-                </div>
+          {formConfig.form.sections.map(section => (
+            <div key={section.id}>
+              <h3 className="text-sm font-medium uppercase tracking-wider text-slate-500 mb-4">
+                {section.label.replace('labels.', '')}
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                {section.fields.map(field => renderField(field))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50">
+          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-800 bg-slate-900/60">
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 text-sm font-medium text-slate-100 border border-slate-700 rounded-lg bg-slate-800 hover:border-slate-500 hover:text-white"
               disabled={isLoading}
             >
               {formConfig.form.actions?.cancel?.label?.replace('labels.', '') || 'Abbrechen'}
             </button>
             <button
               type="submit"
-              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:opacity-50"
+              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-500 disabled:opacity-50"
               disabled={isLoading}
             >
               {isLoading

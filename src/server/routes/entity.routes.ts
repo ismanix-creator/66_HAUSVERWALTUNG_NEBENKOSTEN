@@ -8,6 +8,8 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { entityService, EntityNotFoundError, ValidationError } from '../services/entity.service'
 import { schemaService } from '../services/schema.service'
+import { configLoader } from '../services/config-loader.service'
+import { resolvePaginationParams } from '../utils/pagination'
 
 export const entityRoutes = Router()
 
@@ -68,13 +70,25 @@ entityRoutes.get(
       for (const [key, value] of Object.entries(rest)) {
         if (key.startsWith('filter[') && key.endsWith(']')) {
           const fieldName = key.slice(7, -1)
-          filters[fieldName] = value
+          const candidates = Array.isArray(value) ? value : [value]
+          const normalized = candidates
+            .map(v => (v === undefined || v === null ? '' : String(v).trim()))
+            .filter(v => v.length > 0)
+          if (normalized.length === 0) continue
+          filters[fieldName] = normalized.length === 1 ? normalized[0] : normalized
         }
       }
 
+      const paginationConfig = await configLoader.getPagination()
+      const { limit: safeLimit, offset: safeOffset } = resolvePaginationParams(
+        limit,
+        offset,
+        paginationConfig
+      )
+
       const options = {
-        limit: limit ? parseInt(limit as string, 10) : 100,
-        offset: offset ? parseInt(offset as string, 10) : 0,
+        limit: safeLimit,
+        offset: safeOffset,
         orderBy: orderBy as string | undefined,
         orderDir: (orderDir as 'ASC' | 'DESC') || 'DESC',
         filters: Object.keys(filters).length > 0 ? filters : undefined,

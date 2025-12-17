@@ -10,7 +10,7 @@ order = 1
 
 [[navigation.items]]
 id = "objekte"
-label = "labels.nav.objekte"
+label = "Objekte/Einheiten"
 icon = "Building2"
 route = "/objekte"
 order = 2
@@ -20,21 +20,21 @@ id = "mieter"
 label = "labels.nav.mieter"
 icon = "Users"
 route = "/mieter"
-order = 3
+order = 4
 
 [[navigation.items]]
 id = "vertraege"
 label = "labels.nav.vertraege"
 icon = "FileText"
 route = "/vertraege"
-order = 4
+order = 5
 
 [[navigation.items]]
 id = "finanzen"
 label = "labels.nav.finanzen"
 icon = "Wallet"
 route = "/finanzen"
-order = 5
+order = 6
 
   [[navigation.items.children]]
   id = "zahlungen"
@@ -56,7 +56,7 @@ id = "nebenkosten"
 label = "labels.nav.nebenkosten"
 icon = "Calculator"
 route = "/nebenkosten"
-order = 6
+order = 7
 
   [[navigation.items.children]]
   id = "rechnungen"
@@ -78,7 +78,7 @@ id = "dokumente"
 label = "labels.nav.dokumente"
 icon = "FolderOpen"
 route = "/dokumente"
-order = 7
+order = 8
 
 [[navigation.items]]
 id = "einstellungen"

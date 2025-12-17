@@ -13,6 +13,7 @@ import { databaseService } from './services/database.service'
 import { schemaService } from './services/schema.service'
 import { configLoader } from './services/config-loader.service'
 import { logger } from './utils/logger'
+import { rateLimitMiddleware } from './middleware/rate-limit.middleware'
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }))
 // API Routes
 app.use('/mobile', mobileReadOnlyMiddleware)
 app.use('/mobile', mobileRoutes)
+app.use('/api', rateLimitMiddleware)
 app.use('/api', apiRoutes)
 
 // Health Check
@@ -46,6 +48,10 @@ async function startServer() {
 
     // Schema initialisieren (Tabellen erstellen)
     await schemaService.initializeAllTables()
+    await schemaService.verifyTables()
+
+    // SQLite-Integrität prüfen
+    databaseService.integrityCheck()
 
     // Server starten
     app.listen(port, host, () => {

@@ -15,6 +15,7 @@ import {
   Calculator,
   FolderOpen,
   Settings,
+  DoorOpen,
   ChevronDown,
   type LucideIcon,
 } from 'lucide-react'
@@ -33,12 +34,13 @@ const iconMap: Record<string, LucideIcon> = {
   Calculator,
   FolderOpen,
   Settings,
+  DoorOpen,
 }
 
 // Fallback-Navigation falls Config nicht geladen
 const fallbackNav: NavigationItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: 'LayoutDashboard', route: '/dashboard', order: 1 },
-  { id: 'objekte', label: 'Objekte', icon: 'Building2', route: '/objekte', order: 2 },
+  { id: 'objekte', label: 'Objekte/Einheiten', icon: 'Building2', route: '/objekte', order: 2 },
 ]
 
 export function Sidebar() {
@@ -93,7 +95,7 @@ export function Sidebar() {
             onClick={() => toggleExpand(item.id)}
             className={clsx(
               'flex items-center w-full px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-              'text-gray-700 hover:bg-gray-100',
+              'text-slate-200 hover:bg-slate-800/80',
               isNested && 'pl-8'
             )}
           >
@@ -119,7 +121,9 @@ export function Sidebar() {
         className={({ isActive }) =>
           clsx(
             'flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-            isActive ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:bg-gray-100',
+            isActive
+              ? 'bg-emerald-900/60 text-emerald-100 border border-emerald-800/70'
+              : 'text-slate-200 hover:bg-slate-800/80',
             isNested && 'pl-8'
           )
         }
@@ -132,17 +136,17 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="flex w-64 flex-col bg-white border-r border-gray-200">
+    <aside className="flex w-64 flex-col bg-slate-900 border-r border-slate-800">
       {/* Header */}
-      <div className="flex h-16 items-center px-6 border-b border-gray-200">
-        <Building2 className="h-8 w-8 text-primary-600" />
-        <span className="ml-3 text-xl font-semibold text-gray-900">Mietverwaltung</span>
+      <div className="flex h-16 items-center px-6 border-b border-slate-800">
+        <Building2 className="h-8 w-8 text-emerald-400" />
+        <span className="ml-3 text-xl font-semibold text-slate-100">Mietverwaltung</span>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         {isLoading ? (
-          <div className="px-3 py-2 text-sm text-gray-500">Laden...</div>
+          <div className="px-3 py-2 text-sm text-slate-500">Laden...</div>
         ) : (
           topItems.map(item => renderNavItem(item))
         )}
@@ -150,7 +154,7 @@ export function Sidebar() {
 
       {/* Bottom Items */}
       {bottomItems.length > 0 && (
-        <div className="px-3 py-4 border-t border-gray-200">
+        <div className="px-3 py-4 border-t border-slate-800">
           {bottomItems.map(item => renderNavItem(item))}
         </div>
       )}

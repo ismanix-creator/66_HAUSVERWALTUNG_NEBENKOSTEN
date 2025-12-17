@@ -39,7 +39,12 @@ class EntityService {
     if (options.filters && Object.keys(options.filters).length > 0) {
       const whereClauses: string[] = []
       for (const [field, value] of Object.entries(options.filters)) {
-        if (this.isValidField(config, field)) {
+        if (!this.isValidField(config, field)) continue
+        if (Array.isArray(value)) {
+          const placeholders = value.map(() => '?').join(', ')
+          whereClauses.push(`${field} IN (${placeholders})`)
+          params.push(...value)
+        } else {
           whereClauses.push(`${field} = ?`)
           params.push(value)
         }
@@ -175,7 +180,12 @@ class EntityService {
     if (filters && Object.keys(filters).length > 0) {
       const whereClauses: string[] = []
       for (const [field, value] of Object.entries(filters)) {
-        if (this.isValidField(config, field)) {
+        if (!this.isValidField(config, field)) continue
+        if (Array.isArray(value)) {
+          const placeholders = value.map(() => '?').join(', ')
+          whereClauses.push(`${field} IN (${placeholders})`)
+          params.push(...value)
+        } else {
           whereClauses.push(`${field} = ?`)
           params.push(value)
         }

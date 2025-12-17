@@ -74,7 +74,7 @@ export interface ActionConfig {
 export interface TabConfig {
   id: string
   label: string
-  type: 'form' | 'table' | 'custom'
+  type: 'form_readonly' | 'table' | 'custom'
   form?: string
   table?: string
   readonly?: boolean

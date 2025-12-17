@@ -10,19 +10,19 @@ export function StatusBar() {
     : `entwickelt von ${appConfig?.app?.name || 'Mietverwaltung'}`
 
   return (
-    <footer className="flex h-8 items-center px-4 bg-gray-100 border-t border-gray-200 text-xs text-gray-500">
+    <footer className="flex h-8 items-center px-4 bg-slate-900 border-t border-slate-800 text-xs text-slate-400">
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-1">
-          <Database className="h-3 w-3" />
+          <Database className="h-3 w-3 text-emerald-400" />
           SQLite verbunden
         </span>
       </div>
       <div className="flex flex-1 justify-center">
-        <span className="text-gray-500">{brandingLabel}</span>
+        <span className="text-slate-400">{brandingLabel}</span>
       </div>
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-1">
-          <Wifi className="h-3 w-3 text-green-500" />
+          <Wifi className="h-3 w-3 text-emerald-400" />
           Server aktiv
         </span>
         <span>v{version}</span>

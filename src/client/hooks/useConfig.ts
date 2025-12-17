@@ -6,7 +6,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { apiService } from '../services/api.service'
-import type { AppConfig, NavigationConfig, EntityConfig } from '@shared/types/config'
+import type { AppConfig, NavigationConfig, EntityConfig, ViewConfig } from '@shared/types/config'
 import type { DashboardSummary } from '@shared/types/dashboard'
 
 /**
@@ -64,6 +64,15 @@ export function useFormConfig<T = unknown>(formName: string) {
     queryFn: () => apiService.getFormConfig<T>(formName),
     staleTime: Infinity,
     enabled: !!formName,
+  })
+}
+
+export function useViewConfig(viewName: string) {
+  return useQuery({
+    queryKey: ['config', 'view', viewName],
+    queryFn: () => apiService.getViewConfig<ViewConfig>(viewName),
+    staleTime: Infinity,
+    enabled: !!viewName,
   })
 }
 

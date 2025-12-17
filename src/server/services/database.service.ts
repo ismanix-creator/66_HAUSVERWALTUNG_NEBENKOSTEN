@@ -74,6 +74,23 @@ class DatabaseService {
     }
   }
 
+  /**
+   * Führt einen SQLite-Integritätscheck durch und wirft bei Fehlern
+   */
+  integrityCheck(): void {
+    const result = this.getDb()
+      .prepare('PRAGMA integrity_check')
+      .get() as { integrity_check?: string } | undefined
+
+    if (!result || result.integrity_check !== 'ok') {
+      throw new Error(
+        `SQLite-Integritätscheck fehlgeschlagen: ${result?.integrity_check ?? 'unbekannt'}`
+      )
+    }
+
+    logger.info('SQLite-Integritätscheck erfolgreich')
+  }
+
   // Run a single statement
   run(sql: string, params: unknown[] = []) {
     return this.getDb()

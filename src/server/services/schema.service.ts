@@ -224,6 +224,42 @@ export class SchemaService {
 
     logger.info('Datenbank-Schema initialisiert.')
   }
+
+  /**
+   * Prüft, ob alle Tabellen vorhanden sind und wirft andernfalls einen Fehler
+   */
+  async verifyTables(): Promise<void> {
+    const entityNames = await this.getEntityNames()
+    const missingTables: string[] = []
+
+    for (const entityName of entityNames) {
+      const tableName = await this.getTableNameFromConfig(entityName)
+      if (!this.tableExists(tableName)) {
+        missingTables.push(tableName)
+      }
+    }
+
+    if (missingTables.length > 0) {
+      throw new Error(
+        `[SchemaService] Fehlende Tabellen: ${missingTables.join(
+          ', '
+        )}. Bitte schemaService.initializeAllTables() ausführen.`
+      )
+    }
+
+    logger.info(`[SchemaService] Schema geprüft (${entityNames.length} Entities vorhanden).`)
+  }
+
+  /**
+   * Prüft, ob eine Tabelle in SQLite existiert
+   */
+  private tableExists(tableName: string): boolean {
+    const result = databaseService.get<{ name: string }>(
+      "SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?",
+      [tableName]
+    )
+    return Boolean(result)
+  }
 }
 
 export const schemaService = new SchemaService()

@@ -30,4 +30,19 @@ describe('ConfigLoaderService', () => {
     expect(config.master.server.port).toBe(4000)
     expect(config.master.security.require_https).toBe(true)
   })
+
+  test('reload invalidiert Cache und übernimmt geänderte Env-Overrides', async () => {
+    process.env.APP_NAME = 'Alpha-Test'
+
+    const firstLoad = await configLoader.reload()
+    expect(firstLoad.master.app.name).toBe('Alpha-Test')
+
+    process.env.APP_NAME = 'Beta-Test'
+
+    const cachedMaster = await configLoader.getMaster()
+    expect(cachedMaster.app.name).toBe('Alpha-Test')
+
+    const secondLoad = await configLoader.reload()
+    expect(secondLoad.master.app.name).toBe('Beta-Test')
+  })
 })

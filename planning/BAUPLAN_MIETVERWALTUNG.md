@@ -4,7 +4,7 @@
 |------|------|
 | Dokumentversion | 1.0 |
 | Datum | 2025-12-15 |
-| Status | Blueprint (keine Implementierung) |
+| Status | Blueprint (keine Implementierung – Backend-Konfiguration finalisiert) |
 | Projektpräfix | 66_HAUSVERWALTUNG_NEBENKOSTEN |
 
 ---
@@ -71,7 +71,7 @@
 |---------|-------------|------------|
 | **Frontend** | React + TypeScript + Vite | Modern, schnell, typsicher |
 | **UI-Framework** | shadcn/ui + Tailwind CSS | Config-driven, konsistent |
-| **Backend** | Node.js + Express + TypeScript | Gleiche Sprache wie Frontend |
+| **Backend** | Node.js + Express + TypeScript | Gleiche Sprache wie Frontend, Config-Driven via `ConfigLoaderService` |
 | **Datenbank** | SQLite | Lokal, keine Installation nötig, portabel |
 | **Config-Format** | TOML | Lesbar, typsicher, gut für komplexe Strukturen |
 | **PDF-Generierung** | pdfmake oder puppeteer | Nebenkostenabrechnungen |
@@ -141,7 +141,7 @@ User → Browser → REST API (GET only) → SQLite
 | FritzBox-URL + Port | ⚠️ Mittel | Nur wenn VPN nicht geht, HTTPS verwenden |
 | Ohne VPN | ❌ Nicht empfohlen | Server nur im LAN erreichbar |
 
-**Konfiguration im Server:**
+**Konfiguration im Server (geladen aus `config/config.toml`):**
 ```toml
 [app.server]
 host = "0.0.0.0"           # Lauscht auf allen Interfaces (LAN-Zugriff)
@@ -652,6 +652,8 @@ Das `.claude/`-Verzeichnis enthält **Anweisungen für Analyse, Planung und Revi
 ---
 
 ## 4. TOML-CONFIG-SYSTEM
+
+Der Backend-Stack lädt ausschließlich die Master-Datei `config/config.toml`. `ConfigLoaderService` löst sämtliche Imports (Entities, Views, Forms, Tables, Catalogs, Labels, Design, Validation, Feature-Flags) auf, appliziert definierte ENV-Overrides (PORT, HOST, DB-Pfad, Security-Flags etc.), validiert alles per Zod (`src/shared/config/schemas.ts`) und stellt typisierte Getter für alle Dienste bereit. Der Root-Stub `./config.toml` existiert nur, um die Pflichtdatei im Projekt-Root zu dokumentieren; Änderungen erfolgen ausschließlich unter `config/`. Jeder Backend-Service (Schema, Database, Dashboard, Mobile) muss diese zentralen Getter verwenden; direkte Dateizugriffe sind untersagt.
 
 ### 4.1 Warum TOML?
 
@@ -1175,7 +1177,7 @@ position = "bottom"
 | Layout | Beschreibung | Verwendung |
 |--------|--------------|------------|
 | `dashboard` | Widget-Grid | Dashboard |
-| `list_detail` | Liste links, Detail rechts | Objekte, Mieter |
+| `list_detail` | Liste links, Detail rechts | Objekte, Mieter, Einheiten |
 | `tabbed` | Tab-Navigation | Finanzen, Nebenkosten |
 | `single` | Einzelne Tabelle/Liste | Dokumente |
 | `settings` | Settings-Sektionen | Einstellungen |
@@ -1486,6 +1488,28 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 5. **Erste Views implementieren**
    - Objekte-View (Liste + Detail)
    - Mieter-View (Liste + Detail)
+
+#### Mieter-View – Detailplanung
+- **Quelle:** `config/views/mieter.config.toml` steuert Layout `list_detail`, Action-Dialoge und Tab-Definitionen für `stammdaten`, `vertrag`, `zahlungen`, `dokumente`, `kaution`. Die UI muss List-Seite (`/mieter`) und Detail-Route (`/mieter/:id`) entsprechend orchestrieren.
+- **Listenseite `/mieter`:**
+  - Hooks `useEntityList('mieter')`, `useTableConfig('mieter')`, `useFormConfig('mieter')` liefern Daten, Column-Definitionen, Buttons (z. B. `edit` row action).
+  - `DataTable` nutzt `row_click_route = "/mieter/:id"` (jetzt mit `row_click = "navigate"`) plus Filter/Sort-Optionen (search_fields, status filter) aus der Config.
+  - Toolbar verbindet `DynamicForm` (Create/Edit) mittels `useCreateEntity`, `useUpdateEntity`, `useDeleteEntity`.
+  - Neue `row_actions` stehen für jede Konfigurations-Aktion bereit; Confirm/Visibility/Label-Logik muss durch `DataTable` unterstützt werden (z. B. `edit` mit Dialog `forms/mieter.form`).
+  - Zusatz: Filterleiste muss Zustand `status` + Suchfeld aus Config abbilden und `useEntityList`-Parameter erweitern.
+- **Detailseite `/mieter/:id`:**
+  - Muss über einen Router-/Layout-Provider `MieterDetailPage` mit Tabs des View-Configs rendern; `DynamicForm` mit `entity`-Schema zeigt readonly Stammdaten und ermöglicht Edit-Dialog.
+  - Tab-Tabellen (`tables/vertraege.table`, `tables/zahlungen.table`, `tables/dokumente.table`) benötigen Filter `mieter_id` oder `vertrag.mieter_id` aus `view.detail.tabs`.
+  - Teilweise Aktionen (`forms/vertrag.form`, `forms/zahlung.form`, `forms/dokument.form`, `forms/kaution.form`) müssen durch `useRowAction`-Callback oder Dialog-Service verbunden werden.
+- **Verknüpfungen:**
+  - Entity-Link `Mieter` ↔ `Vertrag` ↔ `Einheit` (computed fields `aktiver_vertrag`, `aktuelle_einheit`) liefert Daten für Spalten `computed.display_name` und `computed.aktuelle_einheit`.
+  - Backend-Routen `/api/entities/mieter` liefern `Meta` für Pagination/Filters; Response muss `Computed`-Felder enthalten.
+  - `config/forms/mieter.form.toml` definiert Feldlayout/Sections, `config/entities/mieter.config.toml` legt Relationen/Validierung fest.
+- **Offene Aufgaben:**
+  1. Detailroute `/mieter/:id` implementieren (Page + Router + Tabs) und DataTable-RowClick auslösen.
+  2. Filterleiste/Status-Auswahl in `MieterPage` hinzufügen, damit `view.list.filters` wirksam wird.
+  3. `DynamicForm`-Dialog `forms/mieter.form` für Edit/Create integrieren (limits aus Entity).
+  4. Weitere Cross-Links (Verträge, Zahlungen, Dokumente, Kautionen) über `onRowAction` oder zusätzliche Hooks anbinden.
 
 **Deliverables:**
 - Navigation funktioniert
@@ -1855,7 +1879,15 @@ Bei Schema-Änderungen (neue Entity-Felder etc.):
 
 ### Laufende Fixes
 
-- [2025-12-17 12:00] Config – Master-Loader & ENV-Validation: `config-loader.service.ts` lädt `config/config.toml` einmalig, wendet ENV-Overrides an, validiert per Zod und versorgt Server/API/Schema-Service; Typ-Aliasse spiegeln die Zod-Schemas, Vitest kennt die Projekt-Aliasse und ein Test prüft Master-Load + ENV (`src/server/index.ts`, `src/server/services/{config-loader.service,config.service,schema.service}.ts`, `src/shared/types/config.ts`, `vitest.config.ts`, `tests/unit/config-loader.service.test.ts`). Datenbank-Setup liest Pfad/WAL/Timeouts aus der Master-Config und der Server läuft konsistent auf Port 3002. Dokumentiert in AGENTS.md + CHANGELOG.md.
+- [2025-12-17 07:32] Feature – IBAN-Autofill Bankname/BIC: Neuer Katalog `config/catalogs/bankleitzahlen.catalog.toml` speichert die BLZ→Bankname/BIC-Mappings und ist in `config/config.toml` importiert; `DynamicForm` lädt ihn für die Mieter-Form, formatiert IBANs mit DE-Prefix (`DEkk xxxx xxxx ...`), prüft ohne Leerzeichen und setzt `bankname`/`bic` automatisch, wenn die BLZ gefunden wird und die Felder noch leer sind. Keine Hardcodes – Erweiterungen erfolgen ausschließlich über die TOML-Datei.
+- [2025-12-17 07:52] UX/Config – Placeholder & IBAN-Default: Placeholder sind wieder in den Entity-Configs (`mieter`, `einheit`) hinterlegt, sodass Dialoge ohne Code-Fallback Beispiele zeigen; die Mieter-IBAN startet mit Default `DE`, wird gruppiert angezeigt und bei der Validierung ohne Leerzeichen geprüft.
+- [2025-12-17 08:55] Data – CSV-Kataloge integriert: Die vollständigen Listen `german_banks_blz_bic.csv` und `german_postcodes_cities.csv` sind als TOML-Kataloge in `config/catalogs/` abgelegt und in `config/config.toml` importiert. Bankkatalog (~14k BLZ mit Bankname/BIC/Ort) und PLZ-Katalog (~8k PLZ→Ort) dienen künftig als Quelle für Autofill/Autocomplete (Bankname/BIC, Adresse).
+- [2025-12-17 09:10] Rule – Zustelladresse aus Einheit: Die aktuelle Anschrift des Mieters wird aus der verbundenen Einheit/Objektadresse abgeleitet (keine getrennte Pflege im Mieter-Record). In den Mieter-Forms bleibt nur `adresse_vorher`; die Wohn-/Zustelladresse folgt dem zugeordneten Vertrag/Einheit ab Einzug/Vertragsbeginn (wohnraum: ggf. +1 Monat).
+- [2025-12-17 10:12] UX – Mieter-Aktionsnavigation mit Guard: Aktionsspalte (icon-only) prüft verknüpfte Vertrag-/Einheit-IDs und navigiert nur bei vorhandenen Links; andernfalls Blocker/Alert, um Fehlzustände zu vermeiden. Header/Breite kommen aus `table.actions { label, width }`.
+- [2025-12-17 06:20] Docs – Design-Spezifikation: `design/design_spec.md` erstellt (UI/UX-Spezifikation basierend auf `config/config.toml` und `wireframe.md`, PC-First, Mobile Read-Only, Interaktionen/States, Responsive-Notizen). Dokumentiert in AGENTS.md + CHANGELOG.md.
+- [2025-12-17 06:06] Docs – Handover-Guides: Handoff-Richtlinien für Designer, Frontend, Backend und Tester in AGENTS.md ergänzt (Bezug auf `config/config.toml`, Bauplan, Wireframe; config-driven, PC-First, Mobile Read-Only). Dokumentiert in CHANGELOG.md.
+- [2025-12-17 05:58] Config – Master-Loader & ENV-Validation: `config-loader.service.ts` lädt `config/config.toml` einmalig, wendet ENV-Overrides an, validiert per Zod und versorgt Server/API/Schema-Service; Typ-Aliasse spiegeln die Zod-Schemas, Vitest kennt die Projekt-Aliasse und ein Test prüft Master-Load + ENV (`src/server/index.ts`, `src/server/services/{config-loader.service,config.service,schema.service}.ts`, `src/shared/types/config.ts`, `vitest.config.ts`, `tests/unit/config-loader.service.test.ts`). Datenbank-Setup liest Pfad/WAL/Timeouts aus der Master-Config und der Server läuft konsistent auf Port 3002. Dokumentiert in AGENTS.md + CHANGELOG.md.
+- [2025-12-17 06:04] Docs – Blueprint-Basis & Wireframe: README.md, BLUEPRINT_PROMPT_DE.md und wireframe.md angelegt, verankern den Blueprint-/Handoff-Flow und die UI-Struktur (PC-First, Mobile Read-Only, config-driven mit `config/config.toml` als Single Source of Truth). Dokumentiert in AGENTS.md + CHANGELOG.md.
 - [2025-12-16 05:48] Bugfix – API-Routing: Konfigurations-, Dashboard-, Export- und `/entities`-Endpoints werden nun vor den generischen `/api/:entity`-Routes registriert, damit `/api/config/navigation` und `/api/dashboard/summary` wieder erreichbar sind (`src/server/routes/api.routes.ts:16-104`). Dokumentiert in AGENTS.md + CHANGELOG.md.
 - [2025-12-16 05:51] UI – Statusleiste: Branding (Owner & Version) stammt jetzt aus `config/app.config.toml` (`app.owner.name`, `app.version`), was den Text/Rechtsmeldungen zwischen den SQLite- und Server-Indikatoren zentriert und config-driven macht (`src/client/components/layout/StatusBar.tsx`). Dokumentiert in AGENTS.md + CHANGELOG.md.
 - [2025-12-16 06:03] Typisierung – Query & Entity-Types: `BaseEntity` erweitert nun `Record<string, unknown>`, `Nebenkostenabrechnung` wurde ergänzt und `useEntityList`-Payloads werden konsequent mit `*.data` verwendet, sodass `DataTable`/`DynamicForm` Zugriff auf `Record<string, unknown>`-kompatible Daten in `FinanzenPage`, `NebenkostenPage`, `ZaehlerPage` und `DashboardPage` haben (`src/shared/types/entities.ts`, `src/client/pages/{Finanzen,Nebenkosten,Zaehler,Dashboard}.tsx`). Dokumentiert in AGENTS.md + CHANGELOG.md.

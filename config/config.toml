@@ -147,6 +147,8 @@ catalogs = [
   "catalogs/objekttypen.catalog.toml",
   "catalogs/einheittypen.catalog.toml",
   "catalogs/anrede.catalog.toml",
+  "catalogs/bankleitzahlen.catalog.toml",
+  "catalogs/plz_orte.catalog.toml",
   "catalogs/zaehlertypen.catalog.toml",
   "catalogs/dokumenttypen.catalog.toml",
   "catalogs/zahlungsarten.catalog.toml",
@@ -190,6 +192,8 @@ views = [
 # Forms
 forms = [
   "forms/objekt.form.toml",
+  "forms/einheit.form.toml",
+  "forms/mieter.form.toml",
   "forms/vertrag.form.toml",
   "forms/kaution.form.toml",
   "forms/zahlung.form.toml",
@@ -276,13 +280,10 @@ order = 1
 
 [[navigation.items]]
 id = "objekte"
-label = "labels.nav.objekte"
+label = "Objekte/Einheiten"
 icon = "Building2"
 route = "/objekte"
 order = 2
-children = [
-  { id = "einheiten", label = "labels.nav.einheiten", route = "/objekte/:id/einheiten" }
-]
 
 [[navigation.items]]
 id = "mieter"

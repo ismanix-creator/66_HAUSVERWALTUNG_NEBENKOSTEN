@@ -1,0 +1,2 @@
+# Root-Stubs greifen auf die tatsächliche Master-Konfiguration unter config/config.toml zu.
+# Die Implementierung lädt ausschließlich config/config.toml; bitte dort Änderungen vornehmen.

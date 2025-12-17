@@ -106,6 +106,10 @@ class ApiService {
     return this.fetch<T>(`/config/form/${formName}`)
   }
 
+  async getViewConfig<T>(viewName: string): Promise<T> {
+    return this.fetch<T>(`/config/view/${viewName}`)
+  }
+
   // ==================== ENTITY CRUD ====================
 
   /**

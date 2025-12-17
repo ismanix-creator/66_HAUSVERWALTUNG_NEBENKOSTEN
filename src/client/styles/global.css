@@ -4,11 +4,11 @@
 
 @layer base {
   * {
-    @apply border-gray-200;
+    @apply border-slate-800;
   }
 
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply bg-slate-950 text-slate-100 antialiased;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;

@@ -9,7 +9,7 @@ export function DashboardPage() {
   if (isLoading) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="text-gray-500">Lade Dashboard...</div>
+        <div className="text-slate-500">Lade Dashboard...</div>
       </div>
     )
   }
@@ -17,7 +17,7 @@ export function DashboardPage() {
   if (!summary) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="text-gray-500">Keine Dashboard-Daten verfügbar.</div>
+        <div className="text-slate-500">Keine Dashboard-Daten verfügbar.</div>
       </div>
     )
   }
@@ -36,10 +36,10 @@ export function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-slate-100">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-500">Übersicht Ihrer Mietverwaltung</p>
+        <h1 className="text-2xl font-bold text-slate-100">Dashboard</h1>
+        <p className="text-slate-400">Übersicht Ihrer Mietverwaltung</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -55,51 +55,51 @@ export function DashboardPage() {
       </div>
 
       <section className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-lg border border-gray-200 bg-white p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">Schnellzugriff</h2>
-          <p className="text-sm text-gray-500 mb-4">
+        <div className="rounded-lg border border-slate-800 bg-slate-900 p-6 shadow-lg shadow-black/30">
+          <h2 className="text-lg font-semibold text-slate-100 mb-2">Schnellzugriff</h2>
+          <p className="text-sm text-slate-400 mb-4">
             Öffne Dokumente, Rechnungen oder Abrechnungen direkt aus dem Dashboard.
           </p>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => navigate('/dokumente')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-800 border border-slate-700 rounded-lg hover:bg-slate-700"
             >
               Dokumente
             </button>
             <button
               onClick={() => navigate('/nebenkosten/rechnungen')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-800 border border-slate-700 rounded-lg hover:bg-slate-700"
             >
               Rechnungen
             </button>
             <button
               onClick={() => navigate('/nebenkosten/abrechnungen')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-800 border border-slate-700 rounded-lg hover:bg-slate-700"
             >
               Abrechnungen
             </button>
             <button
               onClick={openExport}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-900"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 bg-emerald-900/50 border border-emerald-800 rounded-lg hover:bg-emerald-800/70"
             >
               Steuerberater-Export
             </button>
           </div>
         </div>
 
-        <div className="rounded-lg border border-gray-200 bg-white p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">Status</h2>
-          <p className="text-sm text-gray-500">
+        <div className="rounded-lg border border-slate-800 bg-slate-900 p-6 shadow-lg shadow-black/30">
+          <h2 className="text-lg font-semibold text-slate-100 mb-2">Status</h2>
+          <p className="text-sm text-slate-400">
             {summary.offeneErinnerungen} Erinnerung(en) offen, {summary.offeneRechnungen} offene
             Rechnung(en).
           </p>
           <div className="mt-4 space-y-2">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-400">
               {summary.objekte} Objekte &middot; {summary.einheiten} Einheiten verwaltet.
             </p>
-            <p className="text-sm text-gray-500">Letzte Dokumente: {summary.dokumente}</p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-400">Letzte Dokumente: {summary.dokumente}</p>
+            <p className="text-sm text-slate-400">
               Alle Zahlen basieren auf der aktuellen Datenbank.
             </p>
           </div>
@@ -127,22 +127,22 @@ interface StatsCardProps {
 
 function StatsCard({ title, value, icon: Icon, color }: StatsCardProps) {
   const colorClasses = {
-    blue: 'bg-blue-50 text-blue-600',
-    green: 'bg-green-50 text-green-600',
-    purple: 'bg-purple-50 text-purple-600',
-    orange: 'bg-orange-50 text-orange-600',
+    blue: 'bg-blue-900/40 text-blue-100 border border-blue-800',
+    green: 'bg-emerald-900/40 text-emerald-100 border border-emerald-800',
+    purple: 'bg-purple-900/40 text-purple-100 border border-purple-800',
+    orange: 'bg-amber-900/40 text-amber-100 border border-amber-800',
   }
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-6">
+    <div className="rounded-lg border border-slate-800 bg-slate-900 p-6 shadow-lg shadow-black/30">
       <div className="flex items-center">
         <div className={`rounded-lg p-3 ${colorClasses[color]}`}>
           <Icon className="h-6 w-6" />
         </div>
       </div>
       <div className="mt-4">
-        <p className="text-sm font-medium text-gray-500">{title}</p>
-        <p className="text-2xl font-semibold text-gray-900">{value}</p>
+        <p className="text-sm font-medium text-slate-400">{title}</p>
+        <p className="text-2xl font-semibold text-slate-100">{value}</p>
       </div>
     </div>
   )

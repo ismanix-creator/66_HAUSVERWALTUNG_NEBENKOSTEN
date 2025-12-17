@@ -2,6 +2,9 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AppShell } from './components/layout/AppShell'
 import { DashboardPage } from './pages/DashboardPage'
 import { ObjektePage } from './pages/ObjektePage'
+import { EinheitenPage } from './pages/EinheitenPage'
+import { MieterDetailPage } from './pages/MieterDetailPage'
+import { MieterPage } from './pages/MieterPage'
 import { VertraegePage } from './pages/VertraegePage'
 import { FinanzenPage } from './pages/FinanzenPage'
 import { ZaehlerPage } from './pages/ZaehlerPage'
@@ -29,6 +32,9 @@ export default function App() {
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/objekte" element={<ObjektePage />} />
+        <Route path="/einheiten" element={<EinheitenPage />} />
+        <Route path="/mieter" element={<MieterPage />} />
+        <Route path="/mieter/:id" element={<MieterDetailPage />} />
         <Route path="/vertraege" element={<VertraegePage />} />
         <Route path="/vertraege/:id" element={<VertraegePage />} />
         <Route path="/finanzen" element={<FinanzenPage />} />
