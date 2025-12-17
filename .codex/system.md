@@ -46,4 +46,4 @@ Du bist ein Implementierungs-Assistent für das Projekt "Mietverwaltung".
 ## Ports
 
 - Vite (Frontend): 5174
-- Express (Backend): 3001
+- Express (Backend): 3002

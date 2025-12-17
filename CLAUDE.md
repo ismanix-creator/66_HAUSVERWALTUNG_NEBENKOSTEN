@@ -28,7 +28,7 @@ graph TB
         State[Zustand + TanStack Query]
     end
 
-    subgraph Backend["Backend (Express :3001)"]
+    subgraph Backend["Backend (Express :3002)"]
         API[REST API]
         ConfigSvc[Config Service]
         GenericSvc[Generic CRUD Service]
@@ -152,7 +152,7 @@ GET    /health                    # Health-Check
 ```bash
 npm run dev           # Client + Server parallel starten
 npm run dev:client    # Nur Frontend (Vite :5174)
-npm run dev:server    # Nur Backend (Express :3001)
+npm run dev:server    # Nur Backend (Express :3002)
 npm run build         # Production Build
 npm run typecheck     # TypeScript prüfen
 npm run lint          # ESLint ausführen
@@ -161,7 +161,7 @@ npm run lint          # ESLint ausführen
 ## Ports
 
 - **Frontend (Vite):** 5174
-- **Backend (Express):** 3001
+- **Backend (Express):** 3002
 
 ## Dokumentationsverweise
 

@@ -1,0 +1,210 @@
+# =============================================================================
+# VALIDATION RULES - Validierungsregeln
+# =============================================================================
+# Zentrale Validierungsregeln für alle Entities
+# Referenzierung: validation.{rule_name}
+# @lastModified: 2025-12-17
+# =============================================================================
+
+[validation]
+version = "1.0.0"
+strict_mode = true
+
+# -----------------------------------------------------------------------------
+# PATTERN RULES - Reguläre Ausdrücke
+# -----------------------------------------------------------------------------
+[validation.patterns]
+
+[validation.patterns.email]
+pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+message = "labels.validation.invalid_email"
+
+[validation.patterns.telefon]
+pattern = "^[\\+]?[(]?[0-9]{1,4}[)]?[-\\s\\./0-9]*$"
+message = "labels.validation.invalid_phone"
+
+[validation.patterns.iban]
+pattern = "^[A-Z]{2}[0-9]{2}[A-Z0-9]{4}[0-9]{7}([A-Z0-9]?){0,16}$"
+message = "labels.validation.invalid_iban"
+
+[validation.patterns.bic]
+pattern = "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$"
+message = "labels.validation.invalid_bic"
+
+[validation.patterns.plz_de]
+pattern = "^[0-9]{5}$"
+message = "labels.validation.invalid_plz"
+
+[validation.patterns.steuernummer]
+pattern = "^[0-9]{10,13}$"
+message = "labels.validation.invalid_steuernummer"
+
+[validation.patterns.ust_id]
+pattern = "^DE[0-9]{9}$"
+message = "labels.validation.invalid_ust_id"
+
+[validation.patterns.zaehlernummer]
+pattern = "^[A-Z0-9]{6,20}$"
+message = "labels.validation.invalid_zaehlernummer"
+
+# -----------------------------------------------------------------------------
+# FIELD RULES - Feldspezifische Regeln
+# -----------------------------------------------------------------------------
+[validation.fields]
+
+[validation.fields.betrag]
+type = "number"
+min = 0
+max = 999999999.99
+decimal_places = 2
+message_min = "labels.validation.positive_number"
+message_max = "labels.validation.max_value"
+message_decimal = "labels.validation.decimal_places"
+
+[validation.fields.prozent]
+type = "number"
+min = 0
+max = 100
+decimal_places = 2
+message_range = "labels.validation.percent_range"
+
+[validation.fields.flaeche]
+type = "number"
+min = 0.1
+max = 99999.99
+decimal_places = 2
+unit = "m²"
+message_min = "labels.validation.positive_number"
+
+[validation.fields.zimmer]
+type = "number"
+min = 0.5
+max = 99
+decimal_places = 1
+message_range = "labels.validation.zimmer_range"
+
+[validation.fields.baujahr]
+type = "integer"
+min = 1800
+max = 2100
+message_range = "labels.validation.baujahr_range"
+
+[validation.fields.stockwerk]
+type = "integer"
+min = -5
+max = 100
+message_range = "labels.validation.stockwerk_range"
+
+# -----------------------------------------------------------------------------
+# ENTITY RULES - Entity-spezifische Regeln
+# -----------------------------------------------------------------------------
+[validation.entities]
+
+[validation.entities.vertrag]
+# Mietende muss nach Mietbeginn liegen
+date_order = { start = "mietbeginn", end = "mietende", message = "labels.validation.date_range" }
+# Gesamtmiete = Grundmiete + NK-Vorauszahlung
+computed_check = { formula = "gesamtmiete = grundmiete + nebenkosten_vorauszahlung", tolerance = 0.01 }
+
+[validation.entities.zahlung]
+# Zahlungsdatum nicht in der Zukunft
+date_not_future = { field = "zahlungsdatum", message = "labels.validation.date_past" }
+# Betrag muss positiv sein
+positive_betrag = { field = "betrag", min = 0.01, message = "labels.validation.positive_number" }
+
+[validation.entities.sollstellung]
+# Monat zwischen 1 und 12
+month_range = { field = "monat", min = 1, max = 12 }
+# Jahr plausibel
+year_range = { field = "jahr", min = 2000, max = 2100 }
+
+[validation.entities.zaehlerstand]
+# Zählerstand nicht negativ
+non_negative = { field = "stand", min = 0, message = "labels.validation.positive_number" }
+# Ablesedatum nicht in der Zukunft
+date_not_future = { field = "ablesedatum", message = "labels.validation.date_past" }
+
+[validation.entities.kaution]
+# Rückzahlung nach Zahlung
+date_order = { start = "gezahlt_am", end = "rueckzahlung_am", message = "labels.validation.date_range", allow_null = true }
+
+[validation.entities.rechnung]
+# Fälligkeit nach Rechnungsdatum
+date_order = { start = "rechnungsdatum", end = "faelligkeitsdatum", message = "labels.validation.date_range" }
+
+# -----------------------------------------------------------------------------
+# CROSS-ENTITY RULES - Entity-übergreifende Regeln
+# -----------------------------------------------------------------------------
+[validation.cross_entity]
+
+[validation.cross_entity.einheit_objekt]
+description = "Einheit muss zu existierendem Objekt gehören"
+source = "einheit"
+target = "objekt"
+field = "objekt_id"
+type = "foreign_key"
+
+[validation.cross_entity.vertrag_einheit]
+description = "Vertrag muss zu existierender Einheit gehören"
+source = "vertrag"
+target = "einheit"
+field = "einheit_id"
+type = "foreign_key"
+
+[validation.cross_entity.vertrag_mieter]
+description = "Vertrag muss zu existierendem Mieter gehören"
+source = "vertrag"
+target = "mieter"
+field = "mieter_id"
+type = "foreign_key"
+
+[validation.cross_entity.zahlung_vertrag]
+description = "Zahlung muss zu existierendem Vertrag gehören"
+source = "zahlung"
+target = "vertrag"
+field = "vertrag_id"
+type = "foreign_key"
+
+[validation.cross_entity.zaehler_einheit]
+description = "Zähler muss zu existierender Einheit gehören"
+source = "zaehler"
+target = "einheit"
+field = "einheit_id"
+type = "foreign_key"
+
+[validation.cross_entity.zaehlerstand_zaehler]
+description = "Zählerstand muss zu existierendem Zähler gehören"
+source = "zaehlerstand"
+target = "zaehler"
+field = "zaehler_id"
+type = "foreign_key"
+
+# -----------------------------------------------------------------------------
+# BUSINESS RULES - Geschäftslogik-Regeln
+# -----------------------------------------------------------------------------
+[validation.business]
+
+[validation.business.max_vertraege_pro_einheit]
+description = "Maximal ein aktiver Vertrag pro Einheit"
+entity = "vertrag"
+rule = "count(vertrag where einheit_id = $einheit_id and status = 'aktiv') <= 1"
+message = "labels.validation.max_active_contracts"
+
+[validation.business.kaution_max_monate]
+description = "Kaution maximal 3 Monatsmieten"
+entity = "kaution"
+rule = "kautionsbetrag <= vertrag.gesamtmiete * 3"
+message = "labels.validation.kaution_max"
+
+[validation.business.kuendigungsfrist]
+description = "Kündigungsfrist beachten"
+entity = "vertrag"
+rule = "mietende >= today + kuendigungsfrist_monate * 30"
+message = "labels.validation.kuendigungsfrist"
+applies_when = "status = 'gekuendigt'"
+
+[validation.business.nk_abrechnung_frist]
+description = "NK-Abrechnung innerhalb 12 Monaten"
+entity = "nebenkostenabrechnung"
+rule = "zugestellt_am <= abrechnungsjahr_ende + 365"
+message = "labels.validation.nk_frist"

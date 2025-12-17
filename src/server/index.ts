@@ -11,11 +11,10 @@ import { errorMiddleware } from './middleware/error.middleware'
 import { mobileReadOnlyMiddleware } from './middleware/mobile.middleware'
 import { databaseService } from './services/database.service'
 import { schemaService } from './services/schema.service'
+import { configLoader } from './services/config-loader.service'
 import { logger } from './utils/logger'
 
 const app = express()
-const PORT = Number(process.env.PORT) || 3001
-const HOST = process.env.HOST || '0.0.0.0'
 
 // Middleware
 app.use(express.json())
@@ -37,6 +36,11 @@ app.use(errorMiddleware)
 // Initialize and Start Server
 async function startServer() {
   try {
+    const masterConfig = await configLoader.getMaster()
+    const serverConfig = masterConfig.server
+    const port = serverConfig?.port ?? 3002
+    const host = serverConfig?.host ?? '0.0.0.0'
+
     // Datenbank initialisieren
     databaseService.initialize()
 
@@ -44,9 +48,9 @@ async function startServer() {
     await schemaService.initializeAllTables()
 
     // Server starten
-    app.listen(PORT, HOST, () => {
-      logger.info(`Server läuft auf http://localhost:${PORT}`)
-      logger.info(`API verfügbar unter http://localhost:${PORT}/api`)
+    app.listen(port, host, () => {
+      logger.info(`Server läuft auf http://${host}:${port}`)
+      logger.info(`API verfügbar unter http://${host}:${port}/api`)
     })
   } catch (error) {
     console.error('Fehler beim Starten des Servers:', error)

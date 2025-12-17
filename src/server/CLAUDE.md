@@ -30,7 +30,7 @@ Das Server-Modul ist die Express-basierte Backend-Anwendung der Mietverwaltung. 
 // Middleware (JSON, URL-encoded)
 // API Routes unter /api
 // Error Handling Middleware
-// Server starten auf Port 3001
+// Server starten auf Port 3002
 ```
 
 **Wichtige Middleware:**
@@ -111,7 +111,7 @@ DELETE /api/:entity/:id            - Eintrag löschen
 
 ### Konfiguration
 
-**Port:** 3001 (default, überschreibbar via `process.env.PORT`)
+**Port:** 3002 (default, überschreibbar via `process.env.PORT`)
 
 **Config-Verzeichnis:** `config/` (relativ zum Projektroot)
 - Wird vom ConfigService geladen

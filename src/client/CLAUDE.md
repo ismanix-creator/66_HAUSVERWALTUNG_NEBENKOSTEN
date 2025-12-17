@@ -15,7 +15,7 @@ Das Client-Modul ist die React-basierte Frontend-Anwendung der Mietverwaltung. E
 **Kernaufgaben:**
 - Config-gesteuertes UI-Rendering (Formulare, Tabellen, Views)
 - State Management mit Zustand + TanStack Query
-- API-Kommunikation mit Backend (Port 3001)
+- API-Kommunikation mit Backend (Port 3002)
 - Responsive Design (PC-First, Mobile Read-Only)
 - Client-seitige Validierung aus Entity-Configs
 
@@ -57,7 +57,7 @@ Die App-Komponente definiert das Routing. Zukünftig werden Routes aus `config/n
 
 ### API-Kommunikation
 
-**Basis-URL:** `http://localhost:3001/api`
+**Basis-URL:** `http://localhost:3002/api`
 
 **Config-Endpunkte:**
 ```
@@ -111,7 +111,7 @@ DELETE /api/:entity/:id          - Eintrag löschen
 
 **Vite:** `vite.config.ts` im Root
 - Port: 5174
-- Proxy zu Backend: `/api` → `http://localhost:3001`
+- Proxy zu Backend: `/api` → `http://localhost:3002`
 - React Plugin mit Fast Refresh
 - TypeScript-Unterstützung
 

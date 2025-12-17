@@ -16,7 +16,7 @@
 ```
 PC (Linux/Windows/Surface)
 ├── Voller Zugriff (CRUD)
-├── Lokaler Server (Port 3001)
+├── Lokaler Server (Port 3002)
 └── SQLite-Datenbank lokal
 
 Smartphone (Optional, via VPN)
@@ -61,4 +61,4 @@ TOML-Config → Config-Service → Generischer Service → SQLite
 ## Ports
 
 - Frontend (Vite): 5174
-- Backend (Express): 3001
+- Backend (Express): 3002

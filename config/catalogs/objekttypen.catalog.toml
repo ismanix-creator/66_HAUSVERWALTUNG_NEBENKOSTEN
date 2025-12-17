@@ -1,0 +1,58 @@
+# =============================================================================
+# KATALOG: Objekttypen
+# =============================================================================
+# Arten von Immobilien
+# @lastModified: 2025-12-17
+# =============================================================================
+
+[catalog]
+name = "objekttypen"
+description = "Arten von Immobilien/Objekten"
+
+[[catalog.items]]
+value = "mehrfamilienhaus"
+label = "labels.enums.objektart.mehrfamilienhaus"
+icon = "Building2"
+sortierung = 10
+
+[[catalog.items]]
+value = "einfamilienhaus"
+label = "labels.enums.objektart.einfamilienhaus"
+icon = "Home"
+sortierung = 20
+
+[[catalog.items]]
+value = "doppelhaushaelfte"
+label = "labels.enums.objektart.doppelhaushaelfte"
+icon = "Home"
+sortierung = 30
+
+[[catalog.items]]
+value = "reihenhaus"
+label = "labels.enums.objektart.reihenhaus"
+icon = "Building"
+sortierung = 40
+
+[[catalog.items]]
+value = "eigentumswohnung"
+label = "labels.enums.objektart.eigentumswohnung"
+icon = "Building"
+sortierung = 50
+
+[[catalog.items]]
+value = "gewerbe"
+label = "labels.enums.objektart.gewerbe"
+icon = "Briefcase"
+sortierung = 60
+
+[[catalog.items]]
+value = "gemischt"
+label = "labels.enums.objektart.gemischt"
+icon = "Building2"
+sortierung = 70
+
+[[catalog.items]]
+value = "grundstueck"
+label = "labels.enums.objektart.grundstueck"
+icon = "Map"
+sortierung = 80

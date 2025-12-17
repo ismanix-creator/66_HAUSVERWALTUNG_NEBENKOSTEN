@@ -1,0 +1,58 @@
+# =============================================================================
+# KATALOG: Einheittypen
+# =============================================================================
+# Arten von Mieteinheiten
+# @lastModified: 2025-12-17
+# =============================================================================
+
+[catalog]
+name = "einheittypen"
+description = "Arten von Mieteinheiten"
+
+[[catalog.items]]
+value = "wohnung"
+label = "labels.enums.einheitart.wohnung"
+icon = "Home"
+sortierung = 10
+
+[[catalog.items]]
+value = "gewerbe"
+label = "labels.enums.einheitart.gewerbe"
+icon = "Briefcase"
+sortierung = 20
+
+[[catalog.items]]
+value = "buero"
+label = "labels.enums.einheitart.buero"
+icon = "Building"
+sortierung = 30
+
+[[catalog.items]]
+value = "laden"
+label = "labels.enums.einheitart.laden"
+icon = "Store"
+sortierung = 40
+
+[[catalog.items]]
+value = "lager"
+label = "labels.enums.einheitart.lager"
+icon = "Warehouse"
+sortierung = 50
+
+[[catalog.items]]
+value = "stellplatz"
+label = "labels.enums.einheitart.stellplatz"
+icon = "Car"
+sortierung = 60
+
+[[catalog.items]]
+value = "garage"
+label = "labels.enums.einheitart.garage"
+icon = "Garage"
+sortierung = 70
+
+[[catalog.items]]
+value = "keller"
+label = "labels.enums.einheitart.keller"
+icon = "Archive"
+sortierung = 80

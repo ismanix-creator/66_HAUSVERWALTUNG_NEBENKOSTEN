@@ -1,65 +1,58 @@
-import fs from 'fs/promises'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import TOML from '@iarna/toml'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const CONFIG_DIR = path.resolve(__dirname, '../../../config')
+import { configLoader } from './config-loader.service'
 
 class ConfigService {
-  private cache: Map<string, unknown> = new Map()
-
-  private async loadToml<T>(filePath: string): Promise<T> {
-    const cacheKey = filePath
-
-    if (this.cache.has(cacheKey)) {
-      return this.cache.get(cacheKey) as T
-    }
-
-    try {
-      const content = await fs.readFile(filePath, 'utf-8')
-      const parsed = TOML.parse(content) as T
-      this.cache.set(cacheKey, parsed)
-      return parsed
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-        throw new Error(`Config-Datei nicht gefunden: ${filePath}`)
-      }
-      throw error
-    }
-  }
-
   async getAppConfig() {
-    return this.loadToml(path.join(CONFIG_DIR, 'app.config.toml'))
+    const master = await configLoader.getMaster()
+    return { app: master.app }
   }
 
   async getNavigationConfig() {
-    return this.loadToml(path.join(CONFIG_DIR, 'navigation.config.toml'))
+    const navigation = await configLoader.getNavigation()
+    return { navigation }
   }
 
   async getEntityConfig(entityName: string) {
-    return this.loadToml(path.join(CONFIG_DIR, 'entities', `${entityName}.config.toml`))
+    const entity = await configLoader.getEntity(entityName)
+    if (!entity) {
+      throw new Error(`Entity-Config nicht gefunden: ${entityName}`)
+    }
+    return entity
   }
 
   async getViewConfig(viewName: string) {
-    return this.loadToml(path.join(CONFIG_DIR, 'views', `${viewName}.config.toml`))
+    const view = await configLoader.getView(viewName)
+    if (!view) {
+      throw new Error(`View-Config nicht gefunden: ${viewName}`)
+    }
+    return view
   }
 
   async getFormConfig(formName: string) {
-    return this.loadToml(path.join(CONFIG_DIR, 'forms', `${formName}.form.toml`))
+    const form = await configLoader.getForm(formName)
+    if (!form) {
+      throw new Error(`Form-Config nicht gefunden: ${formName}`)
+    }
+    return form
   }
 
   async getCatalog<T>(catalogName: string) {
-    return this.loadToml<T>(path.join(CONFIG_DIR, 'catalogs', `${catalogName}.catalog.toml`))
+    const catalog = await configLoader.getCatalog(catalogName)
+    if (!catalog) {
+      throw new Error(`Catalog nicht gefunden: ${catalogName}`)
+    }
+    return catalog as T
   }
 
   async getTableConfig(tableName: string) {
-    return this.loadToml(path.join(CONFIG_DIR, 'tables', `${tableName}.table.toml`))
+    const table = await configLoader.getTable(tableName)
+    if (!table) {
+      throw new Error(`Table-Config nicht gefunden: ${tableName}`)
+    }
+    return table
   }
 
   clearCache() {
-    this.cache.clear()
+    void configLoader.reload()
   }
 }
 

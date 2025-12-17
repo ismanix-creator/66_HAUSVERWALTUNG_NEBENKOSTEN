@@ -1,130 +1,33 @@
+import type {
+  AppConfig as AppSection,
+  NavigationConfig as NavigationSection,
+  NavigationItem as NavigationItemSchema,
+  EntityConfig as EntityConfigSchema,
+  FieldConfig as FieldConfigSchema,
+  FieldType as FieldTypeSchema,
+} from '../config/schemas'
+
+type EntitySection = EntityConfigSchema['entity']
+
 // App Config
 export interface AppConfig {
-  app: {
-    name: string
-    version: string
-    description: string
-    locale: string
-    currency: string
-    timezone: string
-    owner?: {
-      name: string
-      address: string
-      tax_number: string
-    }
-    features: {
-      dokumente_upload: boolean
-      pdf_generation: boolean
-      zaehler_management: boolean
-      mahnwesen_hinweis: boolean
-      mieterhoehung_reminder: boolean
-    }
-    storage: {
-      dokumente_pfad: string
-      backup_pfad: string
-      max_upload_size_mb: number
-    }
-    defaults: {
-      kuendigungsfrist_monate: number
-      kaution_monate: number
-      nk_abrechnungsfrist_monate: number
-      mieterhoehung_sperrfrist_monate: number
-    }
-  }
+  app: AppSection
 }
 
 // Navigation Config
 export interface NavigationConfig {
-  navigation: {
-    default_route: string
-    items: NavigationItem[]
-  }
+  navigation: NavigationSection
 }
 
-export interface NavigationItem {
-  id: string
-  label: string
-  icon: string
-  route: string
-  order: number
-  position?: 'top' | 'bottom'
-  children?: NavigationItem[]
-}
+export type NavigationItem = NavigationItemSchema
 
 // Entity Config
-export interface EntityConfig {
-  entity: {
-    name: string
-    table_name: string
-    label: string
-    label_plural: string
-    icon: string
-    primary_key: string
-    fields: Record<string, FieldConfig>
-    relations?: Record<string, RelationConfig>
-    computed?: Record<string, ComputedFieldConfig>
-    validation?: Record<string, ValidationRule>
-  }
-}
-
-export interface FieldConfig {
-  type: FieldType
-  required?: boolean
-  default?: unknown
-  label?: string
-  description?: string
-  placeholder?: string
-  // String
-  max_length?: number
-  min_length?: number
-  pattern?: string
-  // Number
-  min?: number
-  max?: number
-  // Enum
-  options?: string[]
-  // Reference
-  reference?: string
-  // Display
-  visible?: boolean
-  visible_in_form?: boolean
-  readonly?: boolean
-  auto_generate?: boolean
-  suffix?: string
-}
-
-export type FieldType =
-  | 'uuid'
-  | 'string'
-  | 'text'
-  | 'integer'
-  | 'decimal'
-  | 'currency'
-  | 'boolean'
-  | 'date'
-  | 'datetime'
-  | 'enum'
-  | 'multiselect'
-  | 'json'
-  | 'file'
-  | 'reference'
-
-export interface RelationConfig {
-  type: 'one_to_one' | 'one_to_many' | 'many_to_one' | 'many_to_many'
-  target: string
-  foreign_key: string
-}
-
-export interface ComputedFieldConfig {
-  formula: string
-  type?: FieldType
-  suffix?: string
-}
-
-export interface ValidationRule {
-  rule: string
-  message: string
-}
+export type EntityConfig = EntityConfigSchema
+export type FieldConfig = FieldConfigSchema
+export type FieldType = FieldTypeSchema
+export type RelationConfig = EntitySection['relations'] extends Record<string, infer T> ? T : never
+export type ComputedFieldConfig = EntitySection['computed'] extends Record<string, infer T> ? T : never
+export type ValidationRule = EntitySection['validation'] extends Record<string, infer T> ? T : never
 
 // View Config
 export interface ViewConfig {

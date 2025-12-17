@@ -6,6 +6,13 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ---
 
+## 2025-12-17
+
+### [12:00] - Config - Master-Loader & ENV-Validation
+- Server und API ziehen Konfigurationswerte jetzt zentral aus `config/config.toml` via `ConfigLoaderService`, inklusive ENV-Overrides und Zod-Validierung (`src/server/index.ts`, `src/server/services/config-loader.service.ts`, `src/server/services/config.service.ts`, `config/config.toml`).
+- Typen spiegeln die Zod-Schemas statt Legacy-Interfaces; Schema-Initialisierung nutzt die geladene Entity-Liste und Vitest kennt die Projekt-Aliasse (`src/shared/types/config.ts`, `src/server/services/schema.service.ts`, `vitest.config.ts`).
+- Neuer Vitest-Check stellt sicher, dass Master-Config/Imports geladen und ENV-Werte angewandt werden; Zod-Schema für Design-Shadows korrigiert (`tests/unit/config-loader.service.test.ts`, `src/shared/config/schemas.ts`).
+
 ## 2025-12-16
 
 ### [06:03] - Bugfix - Typisierung & Query Handling

@@ -5,17 +5,11 @@
  * @lastModified 2025-12-16
  */
 
-import fs from 'fs/promises'
-import path from 'path'
-import { fileURLToPath } from 'url'
 import { configService } from './config.service'
+import { configLoader } from './config-loader.service'
 import { databaseService } from './database.service'
 import { logger } from '../utils/logger'
 import type { EntityConfig, FieldConfig, FieldType } from '../../shared/types/config'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const CONFIG_DIR = path.resolve(__dirname, '../../../config')
 
 export class SchemaService {
   /**
@@ -26,6 +20,7 @@ export class SchemaService {
       uuid: 'TEXT',
       string: 'TEXT',
       text: 'TEXT',
+      email: 'TEXT',
       integer: 'INTEGER',
       decimal: 'REAL',
       currency: 'REAL',
@@ -189,9 +184,8 @@ export class SchemaService {
    * 100% dynamisch - keine hardcodierten Entity-Listen
    */
   async getEntityNames(): Promise<string[]> {
-    const entitiesDir = path.join(CONFIG_DIR, 'entities')
-    const files = await fs.readdir(entitiesDir)
-    return files.filter(f => f.endsWith('.config.toml')).map(f => f.replace('.config.toml', ''))
+    const entities = await configLoader.getEntities()
+    return Object.keys(entities)
   }
 
   /**

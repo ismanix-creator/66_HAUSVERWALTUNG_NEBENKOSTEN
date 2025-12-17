@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # @file        restart-project-server.sh
-# @description Stoppt und startet nur 66_HAUSVERWALTUNG_NEBENKOSTEN (Ports 5174/3001)
+# @description Stoppt und startet nur 66_HAUSVERWALTUNG_NEBENKOSTEN (Ports 5174/3002)
 # @version     1.0.0
 # @updated     2025-12-16 12:50:00 CET
 # @author      Claude Code CLI
@@ -11,7 +11,7 @@ set -euo pipefail
 PROJECT_DIR="/home/akki/codes/66_HAUSVERWALTUNG_NEBENKOSTEN"
 cd "$PROJECT_DIR"
 
-BACKEND_PORT=3001
+BACKEND_PORT=3002
 FRONTEND_PORT=5174
 BACKEND_HOST="127.0.0.1"
 
@@ -19,7 +19,7 @@ LOG="$PROJECT_DIR/logs/restart-project.log"
 mkdir -p "$(dirname "$LOG")"
 
 # Ports, die für dieses Projekt gekillt werden sollen
-PORTS_TO_KILL=(5174 3001)
+PORTS_TO_KILL=(5174 3002)
 
 stop_port() {
   local port=$1
@@ -53,14 +53,14 @@ done
 
 echo "" | tee -a "$LOG"
 echo "========================================" | tee -a "$LOG"
-echo "Starting 66_HAUSVERWALTUNG_NEBENKOSTEN (5174/3001)" | tee -a "$LOG"
+echo "Starting 66_HAUSVERWALTUNG_NEBENKOSTEN (5174/3002)" | tee -a "$LOG"
 echo "========================================" | tee -a "$LOG"
 
 echo "Building backend for 66_HAUSVERWALTUNG_NEBENKOSTEN..." | tee -a "$LOG"
 if npm run build:server >>"$LOG" 2>&1; then
   echo "Backend build successful" | tee -a "$LOG"
 
-  echo "Starting backend on port 3001..." | tee -a "$LOG"
+  echo "Starting backend on port 3002..." | tee -a "$LOG"
   nohup env HOST="$BACKEND_HOST" PORT="$BACKEND_PORT" NODE_OPTIONS="--experimental-loader=./loaders/resolve-js-extension.mjs" node dist/server/server/index.js >>"$LOG" 2>&1 &
   backend_pid=$!
   disown
@@ -111,7 +111,7 @@ echo "========================================" | tee -a "$LOG"
 backend_status="❌"
 frontend_status="❌"
 
-if lsof -ti tcp:3001 >/dev/null 2>&1; then
+if lsof -ti tcp:3002 >/dev/null 2>&1; then
   backend_status="✅"
 fi
 
@@ -121,7 +121,7 @@ fi
 
 echo "66_HAUSVERWALTUNG_NEBENKOSTEN:" | tee -a "$LOG"
 echo "  - Frontend: http://localhost:5174 $frontend_status" | tee -a "$LOG"
-echo "  - Backend:  http://localhost:3001 $backend_status" | tee -a "$LOG"
+echo "  - Backend:  http://localhost:3002 $backend_status" | tee -a "$LOG"
 echo "" | tee -a "$LOG"
 echo "Log: $LOG" | tee -a "$LOG"
 echo "=== $(date '+%Y-%m-%d %H:%M:%S %Z') Restart finished ===" | tee -a "$LOG"

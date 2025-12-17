@@ -22,7 +22,7 @@ graph TB
         State[Zustand + TanStack Query]
     end
 
-    subgraph Backend["Backend (Express :3001)"]
+    subgraph Backend["Backend (Express :3002)"]
         API[REST API]
         ConfigSvc[Config Service]
         GenericSvc[Generic CRUD Service]
@@ -161,7 +161,7 @@ npm run build         # Production Build
 ## Ports
 
 - **Frontend (Vite):** 5174
-- **Backend (Express):** 3001
+- **Backend (Express):** 3002
 
 ## Änderungs-Workflow
 
