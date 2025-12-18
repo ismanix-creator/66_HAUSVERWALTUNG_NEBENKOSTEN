@@ -836,3 +836,18 @@
   "notes": "config/config.toml von 8KB auf 3KB konsolidiert (3084 Zeilen). Kataloge bleiben separat, Labels/Validation/Design als Imports. TOML-Syntax validiert: 14 entities, 12 forms, 11 tables, 8 views, 4 imports."
 }
 ```
+
+## 2025-12-18T17:55:00Z – ConfigLoaderService + Integration Test
+```json
+{
+  "agent": "Claude Code PM",
+  "ziel": "Option 1 + 3: ConfigLoaderService auf neue [entities.*], [forms.*], [tables.*], [views.*] Struktur validieren + Integrations-Test durchführen",
+  "geändert": [
+    "tests/unit/config-loader.service.test.ts"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Frontend-Fehler beheben (ESLint/Typecheck) oder weitere Entity-Views implementieren",
+  "notes": "✅ ConfigLoader arbeitet bereits perfekt mit konsolidierter config.toml. Server-Startup zeigt: 14 Entities, 12 Forms, 11 Tables, 8 Views geladen (26ms). Integration-Tests bestätigen: /api/config/entity/*, /api/config/form/*, /api/config/table/*, /api/entities alle funktionierend. Tests erweitert um 5 neue Test-Cases für die neue Struktur."
+}
+```

@@ -8,6 +8,12 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-18
 
+### [17:55] - Test/Backend - ConfigLoaderService Tests erweitert für konsolidierte Struktur
+- Tests aktualisiert: 5 neue Test-Cases prüfen die Laden von [entities.*], [forms.*], [tables.*], [views.*] aus konsolidierter `config.toml`.
+- Integrations-Test durchgeführt: ConfigLoader lädt perfekt (14 Entities, 12 Forms, 11 Tables, 8 Views in 26ms).
+- API-Endpunkte validiert: `/api/config/entity/*`, `/api/config/form/*`, `/api/config/table/*`, `/api/entities` antworten korrekt.
+- Blockers: Keine. ConfigLoader-Service funktioniert bereits mit neuer Struktur.
+
 ### [04:38] - Docs/Tooling - Read/Commit-Gates erweitert
 - Read-Gate und Session-Start verweisen jetzt auf Pflichtdokumente (.claude/.codex/.ai, Root-Docs, `config/config.toml`, wireframe, todo.md) sowie die detaillierten Agentenprompts unter `.github/agents/*.agent.md`.
 - Commit-Gate blockt, wenn kein neuer JSON-Statusblock in `PM_STATUS.md` vorhanden ist; Pflichtlektüre und READY_FOR_CHANGES werden explizit vor Tool-Nutzung eingefordert.
