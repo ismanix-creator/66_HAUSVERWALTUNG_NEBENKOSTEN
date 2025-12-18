@@ -65,6 +65,13 @@ graph TB
 3. Prüfe ob TOML-Änderung ausreicht (Config-First!)
 4. Verwende `.codex/workflows/implement.md` als Leitfaden
 
+## Pflicht-Gates & Referenzen
+
+- `config/config.toml` ist Single Source of Truth; Anpassungen daran müssen in Blueprint/BAUPLAN, CHANGELOG und relevanten Docs gespiegelt werden.
+- Pflichtlektüre vor Write-Tools: `.claude/*`, `.codex/*`, `.ai/*`, `CLAUDE.md`, `CODEX.md`, `AGENTS.md`, `PM_STATUS.md` (letzter JSON-Block), `BLUEPRINT_PROMPT_DE.md`, `wireframe.md`, `todo.md`, `config/config.toml`, `CHANGELOG.md`.
+- `PM_STATUS.md` führt den zentralen JSON-Statuslog (`agent`, `ziel`, `geändert`, `ergebnis`, `blocker`, `next_suggestion`, `notes`); der Projektmanager liest nur den letzten Block.
+- Nutze die detaillierten Prompts unter `.github/agents/*.agent.md`; für Regeln, Architektur und Konventionen verweise auf `.ai/rules.md`, `.ai/architecture.md` und `.ai/conventions.md` anstelle redundanter Textkopien.
+
 ## Kernregeln
 
 ### 1. Kein Hardcoding

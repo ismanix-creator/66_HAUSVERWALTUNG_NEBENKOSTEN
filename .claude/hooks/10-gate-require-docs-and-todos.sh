@@ -8,7 +8,7 @@ state="$CLAUDE_PROJECT_DIR/.claude/state/state.env"
 source "$state"
 
 if [[ "${DOCS_READ}" != "1" ]]; then
-  echo "BLOCK: Erst Doku lesen: .ai/rules.md, .ai/conventions.md, .ai/architecture.md, planning/BAUPLAN_MIETVERWALTUNG.md, CHANGELOG.md. Danach DOCS_READ=1 setzen." 1>&2
+  echo "BLOCK: Erst Pflicht-Doku lesen: .claude/*, .codex/*, .ai/*, CLAUDE.md, CODEX.md, AGENTS.md, PM_STATUS.md (letzter JSON-Block), BLUEPRINT_PROMPT_DE.md, wireframe.md, todo.md, config/config.toml. Prüfe bei Rollenfragen zusätzlich .github/agents/*.agent.md. Danach DOCS_READ=1 setzen." 1>&2
   exit 2
 fi
 

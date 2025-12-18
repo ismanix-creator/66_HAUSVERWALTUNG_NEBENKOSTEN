@@ -19,6 +19,13 @@ if [[ "${LINT_RAN}" != "1" || "${TYPECHECK_RAN}" != "1" ]]; then
   exit 2
 fi
 
+# 1b) PM_STATUS.md muss nach jedem Agentenlauf einen JSON-Statusblock enthalten.
+changed_files="$(git status --porcelain)"
+if [[ -n "${changed_files}" ]] && ! echo "${changed_files}" | grep -q "PM_STATUS.md"; then
+  echo "BLOCK: Bitte PM_STATUS.md mit neuem JSON-Statusblock (agent/ziel/geändert/ergebnis/blocker/next_suggestion/notes) aktualisieren und stagen." 1>&2
+  exit 2
+fi
+
 # 2) Changelog Timestamp prüfen: heute muss ein Eintrag existieren (oder du ergänzt ihn)
 today="$(date +%Y-%m-%d)"
 if ! grep -Eq "^### \\[[0-9]{2}:[0-9]{2}\\] - " CHANGELOG.md 2>/dev/null || ! grep -q "$today" CHANGELOG.md; then

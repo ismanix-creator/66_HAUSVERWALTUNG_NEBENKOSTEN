@@ -40,6 +40,7 @@ AGENTS/
 
 # User-specific AI configs (not shared)
 .claude/CLAUDE.md
+.claude/state/
 .codex/CODEX.md
 AGENTS/
 66_HAUSVERWALTUNG_NEBENKOSTEN.code-workspace

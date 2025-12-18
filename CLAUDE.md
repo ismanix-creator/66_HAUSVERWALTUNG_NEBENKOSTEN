@@ -75,6 +75,13 @@ graph TB
 
 **Regel:** Änderungen an Business-Logik = TOML editieren, NICHT Code ändern.
 
+## Lese-Gate & Steuerlogik
+
+- **Pflichtlektüre** vor Änderungen: `.claude/*`, `.codex/*`, `.ai/*`, `CLAUDE.md`, `CODEX.md`, `AGENTS.md`, `PM_STATUS.md` (letzter JSON-Block), `BLUEPRINT_PROMPT_DE.md`, `wireframe.md`, `todo.md`, `config/config.toml`, `CHANGELOG.md`.
+- `config/config.toml` ist Single Source of Truth; jede Änderung daran muss in Blueprint/BAUPLAN, AGENTS und CHANGELOG gespiegelt werden.
+- `PM_STATUS.md` ist das zentrale Steuerlog. Nach jedem Agentenlauf kommt ein neuer JSON-Block mit `agent/ziel/geändert/ergebnis/blocker/next_suggestion/notes` hinzu; der Projektmanager liest nur den letzten Block.
+- Detaillierte Agenten-Prompts liegen unter `.github/agents/*.agent.md`. Für Regeln/Architektur/Style verweise auf `.ai/rules.md`, `.ai/conventions.md` und `.ai/architecture.md` statt Texte zu duplizieren.
+
 ## Verzeichnisstruktur
 
 ```

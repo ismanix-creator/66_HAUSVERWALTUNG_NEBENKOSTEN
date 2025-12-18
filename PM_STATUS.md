@@ -797,3 +797,28 @@
   "notes": "TableConfig kennt jetzt `actions { label, width }`; Header und Cells verwenden dieselbe Breite und zentrale Ausrichtung."
 }
 ```
+
+## 2025-12-18T04:38:00Z – PM
+```json
+{
+  "agent": "PM",
+  "ziel": "Read-/Commit-Gates und Agenten-Dokus an .github/agents und PM_STATUS-Log anpassen",
+  "geändert": [
+    ".claude/hooks/10-gate-require-docs-and-todos.sh",
+    ".claude/hooks/90-gate-finalize-changelog-stage-commit.sh",
+    ".claude/settings.json",
+    ".claude/state/state.env",
+    ".claude/state/todo.md",
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "CLAUDE.md",
+    "CODEX.md",
+    "PM_STATUS.md",
+    "todo.md"
+  ],
+  "ergebnis": "OK",
+  "blocker": "Lint/Typecheck schlagen aktuell wegen bestehender Frontend-Issues fehl (Hooks/Sidebar/Mieter-Nebenkosten-Pages).",
+  "next_suggestion": "Workflow-Agent – neuen Read/Commit-Gates folgen und offene ESLint/TS-Fehler priorisieren",
+  "notes": "Lesegate um Pflichtdokumente + .github/agents erweitert, Commit-Gate verlangt PM_STATUS-JSON; CLAUDE/CODEX/AGENTS dokumentieren PM-Log, neues todo.md als Pflichtlektüre hinterlegt."
+}
+```

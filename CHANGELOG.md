@@ -8,17 +8,18 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-18
 
-### [00:16] - Docs - Agenten-Katalog konsolidiert
-- `AGENTS.md` enthält jetzt den vollständigen, zentralen Agenten-Katalog (alle Rollen inkl. Projektmanager/Workflow/Release/Tester), vereinheitlichte Guardrails und Rückmeldelogik über `PM_STATUS.md`.
-- Bauplan ergänzt einen Hinweis auf die zentrale `AGENTS.md`, damit alle Agenten dieselbe Quelle nutzen.
+### [04:38] - Docs/Tooling - Read/Commit-Gates erweitert
+- Read-Gate und Session-Start verweisen jetzt auf Pflichtdokumente (.claude/.codex/.ai, Root-Docs, `config/config.toml`, wireframe, todo.md) sowie die detaillierten Agentenprompts unter `.github/agents/*.agent.md`.
+- Commit-Gate blockt, wenn kein neuer JSON-Statusblock in `PM_STATUS.md` vorhanden ist; Pflichtlektüre und READY_FOR_CHANGES werden explizit vor Tool-Nutzung eingefordert.
+- AGENTS/CLAUDE/CODEX dokumentieren den zentralen PM_STATUS-Log, config-first-Fluss und die Nutzung der .github/agents-Prompts; neues `todo.md` stellt die Aufgabenliste als Pflichtdoku bereit.
 
-<<<<<<< ours
-=======
 ### [00:23] - Docs - Agenten-Beschreibungen ungekürzt zusammengeführt
 - Agentenabschnitte wurden ungekürzt aus den Einzeldateien übernommen; `AGENTS.md` startet mit vollständigen Rollenbeschreibungen und enthält im Anschluss die bestehenden Repository-Guidelines.
 - Bauplan-Hinweis präzisiert die zentrale, vollständige `AGENTS.md`-Quelle.
 
->>>>>>> theirs
+### [00:16] - Docs - Agenten-Katalog konsolidiert
+- `AGENTS.md` enthält jetzt den vollständigen, zentralen Agenten-Katalog (alle Rollen inkl. Projektmanager/Workflow/Release/Tester), vereinheitlichte Guardrails und Rückmeldelogik über `PM_STATUS.md`.
+- Bauplan ergänzt einen Hinweis auf die zentrale `AGENTS.md`, damit alle Agenten dieselbe Quelle nutzen.
 ## 2025-12-17
 
 ### [07:32] - Feature - IBAN-Autofill Bankname
