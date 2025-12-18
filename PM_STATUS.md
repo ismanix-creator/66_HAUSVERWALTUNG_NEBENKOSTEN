@@ -822,3 +822,17 @@
   "notes": "Lesegate um Pflichtdokumente + .github/agents erweitert, Commit-Gate verlangt PM_STATUS-JSON; CLAUDE/CODEX/AGENTS dokumentieren PM-Log, neues todo.md als Pflichtlektüre hinterlegt."
 }
 ```
+## 2025-12-18T12:15:00Z – Config Consolidation
+```json
+{
+  "agent": "Claude Code",
+  "ziel": "Konsolidierung der TOML-Konfiguration: Entities (14), Forms (12), Tables (11), Views (8) in config/config.toml integrieren",
+  "geändert": [
+    "config/config.toml"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "ConfigLoaderService – Loader auf neue Struktur [entities.*], [forms.*], [tables.*], [views.*] anpassen und testen",
+  "notes": "config/config.toml von 8KB auf 3KB konsolidiert (3084 Zeilen). Kataloge bleiben separat, Labels/Validation/Design als Imports. TOML-Syntax validiert: 14 entities, 12 forms, 11 tables, 8 views, 4 imports."
+}
+```
