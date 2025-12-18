@@ -12,6 +12,13 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 - `AGENTS.md` enthält jetzt den vollständigen, zentralen Agenten-Katalog (alle Rollen inkl. Projektmanager/Workflow/Release/Tester), vereinheitlichte Guardrails und Rückmeldelogik über `PM_STATUS.md`.
 - Bauplan ergänzt einen Hinweis auf die zentrale `AGENTS.md`, damit alle Agenten dieselbe Quelle nutzen.
 
+<<<<<<< ours
+=======
+### [00:23] - Docs - Agenten-Beschreibungen ungekürzt zusammengeführt
+- Agentenabschnitte wurden ungekürzt aus den Einzeldateien übernommen; `AGENTS.md` startet mit vollständigen Rollenbeschreibungen und enthält im Anschluss die bestehenden Repository-Guidelines.
+- Bauplan-Hinweis präzisiert die zentrale, vollständige `AGENTS.md`-Quelle.
+
+>>>>>>> theirs
 ## 2025-12-17
 
 ### [07:32] - Feature - IBAN-Autofill Bankname
