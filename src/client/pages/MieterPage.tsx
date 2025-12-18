@@ -64,34 +64,35 @@ export function MieterPage() {
   }
 
   const handleRowAction = (item: MieterRecord, actionId: string) => {
-    const id = String(item.id)
+    const itemRecord = item as Record<string, unknown>
 
     if (actionId === 'vertrag') {
       const vertragId =
-        (item as Record<string, unknown>)['vertrag_id'] ||
-        (item as Record<string, unknown>)['aktiver_vertrag_id'] ||
-        (item as Record<string, unknown>).computed?.['aktiver_vertrag_id']
+        itemRecord['vertrag_id'] ||
+        itemRecord['aktiver_vertrag_id'] ||
+        (itemRecord['computed'] as Record<string, unknown> | undefined)?.['aktiver_vertrag_id']
 
       if (!vertragId) {
         window.alert('Kein verknüpfter Vertrag für diesen Mieter hinterlegt.')
         return
       }
 
-      navigate(`/vertraege/${vertragId}`)
+      navigate(`/vertraege/${String(vertragId)}`)
       return
     }
 
     if (actionId === 'einheit') {
+      const einheitData = (itemRecord['computed'] as Record<string, unknown> | undefined)?.['aktuelle_einheit'] as Record<string, unknown> | undefined
       const einheitId =
-        (item as Record<string, unknown>)['einheit_id'] ||
-        (item as Record<string, unknown>).computed?.['aktuelle_einheit']?.['id']
+        itemRecord['einheit_id'] ||
+        einheitData?.['id']
 
       if (!einheitId) {
         window.alert('Keine verknüpfte Einheit für diesen Mieter hinterlegt.')
         return
       }
 
-      navigate(`/einheiten/${einheitId}`)
+      navigate(`/einheiten/${String(einheitId)}`)
       return
     }
 

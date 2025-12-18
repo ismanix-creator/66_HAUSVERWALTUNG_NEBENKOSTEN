@@ -180,7 +180,10 @@ class ConfigLoaderService {
           typeof envValue === 'string' ? this.parseEnvValue(envValue) : envValue
 
         this.setNestedValue(result, configPath, parsedValue)
-        console.log(`[ConfigLoader] ENV Override: ${envKey} -> ${configPath}`)
+        if (process.env.DEBUG_CONFIG) {
+          // eslint-disable-next-line no-console
+          console.log(`[ConfigLoader] ENV Override: ${envKey} -> ${configPath}`)
+        }
       }
     }
 
@@ -246,7 +249,10 @@ class ConfigLoaderService {
    */
   private async loadAll(): Promise<LoadedConfig> {
     const startTime = Date.now()
-    console.log('[ConfigLoader] Lade konsolidierte Master-Konfiguration...')
+    if (process.env.DEBUG_CONFIG) {
+      // eslint-disable-next-line no-console
+      console.log('[ConfigLoader] Lade konsolidierte Master-Konfiguration...')
+    }
 
     // 1. Master-Config laden (enthält nun alle Sektionen)
     const rawMaster = await this.loadToml<Record<string, unknown>>(MASTER_CONFIG_FILE)
@@ -280,12 +286,20 @@ class ConfigLoaderService {
     }
 
     const loadTime = Date.now() - startTime
-    console.log(`[ConfigLoader] Konfiguration geladen in ${loadTime}ms`)
-    console.log(`[ConfigLoader] - Kataloge: ${Object.keys(catalogs).length}`)
-    console.log(`[ConfigLoader] - Entities: ${Object.keys(entities).length}`)
-    console.log(`[ConfigLoader] - Views: ${Object.keys(views).length}`)
-    console.log(`[ConfigLoader] - Forms: ${Object.keys(forms).length}`)
-    console.log(`[ConfigLoader] - Tables: ${Object.keys(tables).length}`)
+    if (process.env.DEBUG_CONFIG) {
+      // eslint-disable-next-line no-console
+      console.log(`[ConfigLoader] Konfiguration geladen in ${loadTime}ms`)
+      // eslint-disable-next-line no-console
+      console.log(`[ConfigLoader] - Kataloge: ${Object.keys(catalogs).length}`)
+      // eslint-disable-next-line no-console
+      console.log(`[ConfigLoader] - Entities: ${Object.keys(entities).length}`)
+      // eslint-disable-next-line no-console
+      console.log(`[ConfigLoader] - Views: ${Object.keys(views).length}`)
+      // eslint-disable-next-line no-console
+      console.log(`[ConfigLoader] - Forms: ${Object.keys(forms).length}`)
+      // eslint-disable-next-line no-console
+      console.log(`[ConfigLoader] - Tables: ${Object.keys(tables).length}`)
+    }
 
     return {
       master,

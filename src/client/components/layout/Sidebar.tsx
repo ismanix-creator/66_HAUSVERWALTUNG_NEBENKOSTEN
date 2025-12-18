@@ -105,9 +105,9 @@ export function Sidebar() {
               className={clsx('h-4 w-4 transition-transform', isExpanded && 'rotate-180')}
             />
           </button>
-          {isExpanded && (
+          {isExpanded && item.children && (
             <div className="mt-1 space-y-1">
-              {item.children!.map(child => renderNavItem(child, true))}
+              {(item.children as NavigationItem[]).map(child => renderNavItem(child, true))}
             </div>
           )}
         </div>

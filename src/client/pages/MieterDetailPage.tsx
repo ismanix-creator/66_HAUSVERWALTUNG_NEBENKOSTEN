@@ -35,7 +35,7 @@ export function MieterDetailPage() {
   })
   const updateMutation = useUpdateEntity<Record<string, unknown>>('mieter')
 
-  const tabs = viewConfig?.view?.detail?.tabs ?? []
+  const tabs = useMemo(() => viewConfig?.view?.detail?.tabs ?? [], [viewConfig?.view?.detail?.tabs])
   const [activeTabId, setActiveTabId] = useState<string | undefined>(tabs[0]?.id)
   const [showForm, setShowForm] = useState(false)
 
@@ -46,14 +46,10 @@ export function MieterDetailPage() {
     }
   }, [tabs, activeTabId])
 
-  const mieter = detailResponse?.data
+  const mieter = detailResponse?.data as Record<string, unknown> | undefined
   const isLoading = viewLoading || detailLoading || entityConfigLoading || formConfigLoading
 
-  const contractIds = contractList.data?.data?.map(contract => contract.id) ?? []
-  const primaryContract = contractList.data?.data?.[0]
-  const primaryUnitId =
-    (primaryContract as Record<string, unknown> | undefined)?.['einheit_id'] ||
-    (detailResponse?.data as Record<string, unknown> | undefined)?.computed?.['aktuelle_einheit']?.['id']
+  const contractIds = (contractList.data?.data?.map(contract => (contract as Record<string, unknown>).id) ?? []) as string[]
 
   const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -64,7 +60,7 @@ export function MieterDetailPage() {
   const handleFormSubmit = async (data: Record<string, unknown>) => {
     if (!mieter) return
     try {
-      await updateMutation.mutateAsync({ id: mieter.id, data })
+      await updateMutation.mutateAsync({ id: mieter.id as string, data })
       setShowForm(false)
     } catch (error) {
       // Fehler wird vom DynamicForm-Handling angezeigt
@@ -80,10 +76,6 @@ export function MieterDetailPage() {
       </div>
     )
   }
-
-  const title = mieter.computed?.display_name || `${mieter.vorname ?? ''} ${mieter.nachname ?? ''}`.trim()
-  const status = String(mieter.status ?? '—')
-  const telefon = mieter.mobil || mieter.telefon
 
   return (
     <div className="space-y-6 min-h-screen" onClick={handleBackgroundClick}>
@@ -244,15 +236,20 @@ function DetailTableTab({ tab, mieterId, contractIds }: DetailTableTabProps) {
     [tab.filter, mieterId, contractIds]
   )
 
+  // Move hook before conditional - must be called on every render
+  // If entityName is missing, query won't execute due to empty string check
+  const { data: listData, isLoading: dataLoading } = useEntityList<Record<string, unknown>>(
+    entityName ?? '',
+    {
+      limit: TABLE_PAGE_SIZE,
+      offset: (page - 1) * TABLE_PAGE_SIZE,
+      filters: Object.keys(filters).length ? filters : undefined,
+    }
+  )
+
   if (!entityName || !tableConfig) {
     return <p className="text-sm text-slate-400">Tab-Konfiguration fehlt.</p>
   }
-
-  const { data: listData, isLoading: dataLoading } = useEntityList<Record<string, unknown>>(entityName, {
-    limit: TABLE_PAGE_SIZE,
-    offset: (page - 1) * TABLE_PAGE_SIZE,
-    filters: Object.keys(filters).length ? filters : undefined,
-  })
 
   return (
     <DataTable
