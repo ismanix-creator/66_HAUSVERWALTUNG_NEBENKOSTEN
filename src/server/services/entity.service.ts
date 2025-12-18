@@ -215,7 +215,7 @@ class EntityService {
    */
   private isValidField(config: EntityConfig, fieldName: string): boolean {
     return (
-      fieldName in config.entity.fields ||
+      fieldName in config.fields ||
       fieldName === 'erstellt_am' ||
       fieldName === 'aktualisiert_am'
     )
@@ -231,7 +231,7 @@ class EntityService {
   ): void {
     const errors: string[] = []
 
-    for (const [fieldName, fieldConfig] of Object.entries(config.entity.fields)) {
+    for (const [fieldName, fieldConfig] of Object.entries(config.fields)) {
       const value = data[fieldName]
 
       // Required Check (nicht bei Update, wenn Feld nicht mitgesendet)
@@ -324,7 +324,7 @@ class EntityService {
 
     // ID generieren bei Create
     if (isCreate && !processed.id) {
-      const idField = config.entity.fields[config.entity.primary_key]
+      const idField = config.fields[config.primary_key]
       if (idField?.type === 'uuid' && idField?.auto_generate) {
         processed.id = uuidv4()
       }

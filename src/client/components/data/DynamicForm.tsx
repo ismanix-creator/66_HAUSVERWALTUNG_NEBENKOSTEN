@@ -124,7 +124,7 @@ export function DynamicForm({
 }: DynamicFormProps) {
   const [formData, setFormData] = useState<Record<string, unknown>>({})
   const [errors, setErrors] = useState<Record<string, string>>({})
-  const entityName = entityConfig.entity.name
+  const entityName = entityConfig.name
   const isMieterForm = entityName === 'mieter'
   const { data: bankCatalog } = useCatalog<BankCatalogConfig>(
     isMieterForm ? 'bankleitzahlen' : ''
@@ -143,7 +143,7 @@ export function DynamicForm({
     } else {
       // Set defaults from entity config
       const defaults: Record<string, unknown> = {}
-      for (const [fieldName, fieldConfig] of Object.entries(entityConfig.entity.fields)) {
+      for (const [fieldName, fieldConfig] of Object.entries(entityConfig.fields)) {
         if (fieldConfig.default !== undefined) {
           defaults[fieldName] = fieldConfig.default
         }
@@ -198,7 +198,7 @@ export function DynamicForm({
   const validate = (): boolean => {
     const newErrors: Record<string, string> = {}
 
-    for (const [fieldName, fieldConfig] of Object.entries(entityConfig.entity.fields)) {
+    for (const [fieldName, fieldConfig] of Object.entries(entityConfig.fields)) {
       const value = formData[fieldName]
 
       // Skip auto-generated fields
@@ -257,7 +257,7 @@ export function DynamicForm({
 
     // Render field input based on type
     const renderField = (formField: FormField) => {
-      const fieldConfig = entityConfig.entity.fields[formField.field]
+      const fieldConfig = entityConfig.fields[formField.field]
       if (!fieldConfig) return null
 
     // Skip auto-generated and hidden fields

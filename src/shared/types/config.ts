@@ -7,7 +7,8 @@ import type {
   FieldType as FieldTypeSchema,
 } from '../config/schemas'
 
-type EntitySection = EntityConfigSchema['entity']
+// EntityConfigSchema ist jetzt flach (kein genestetes 'entity' Objekt)
+type EntitySection = EntityConfigSchema
 
 // App Config
 export interface AppConfig {
