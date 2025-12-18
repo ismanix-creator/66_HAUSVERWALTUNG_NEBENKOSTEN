@@ -36,6 +36,7 @@ coverage/
 # Temp
 tmp/
 temp/
+AGENTS/
 
 # User-specific AI configs (not shared)
 .claude/CLAUDE.md
