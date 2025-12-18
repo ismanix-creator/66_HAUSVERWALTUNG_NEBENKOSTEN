@@ -8,6 +8,14 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-18
 
+### [18:02] - Fix/Frontend - TypeScript & ESLint Fehler behoben
+- **React Hook Error:** useEntityList in DetailTableTab vor conditional check verschoben (Zeile 251).
+- **Type Errors:** mieter/contractIds/primaryUnitId korrekt als Record<string, unknown> getypet.
+- **useMemo:** tabs Dependency für useEffect in MieterDetailPage optimiert.
+- **ConfigLoader:** Console.log-Statements unter DEBUG_CONFIG Flag mit eslint-disable-next-line.
+- **Sidebar:** Sichere Navigation für item.children mit Type Guard und Conditional Render.
+- **Status:** npm run typecheck ✅ (0 Fehler), npm run lint ⚠️ (3 Minor Warnings in NebenkostenPage).
+
 ### [17:55] - Test/Backend - ConfigLoaderService Tests erweitert für konsolidierte Struktur
 - Tests aktualisiert: 5 neue Test-Cases prüfen die Laden von [entities.*], [forms.*], [tables.*], [views.*] aus konsolidierter `config.toml`.
 - Integrations-Test durchgeführt: ConfigLoader lädt perfekt (14 Entities, 12 Forms, 11 Tables, 8 Views in 26ms).

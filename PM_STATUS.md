@@ -851,3 +851,21 @@
   "notes": "✅ ConfigLoader arbeitet bereits perfekt mit konsolidierter config.toml. Server-Startup zeigt: 14 Entities, 12 Forms, 11 Tables, 8 Views geladen (26ms). Integration-Tests bestätigen: /api/config/entity/*, /api/config/form/*, /api/config/table/*, /api/entities alle funktionierend. Tests erweitert um 5 neue Test-Cases für die neue Struktur."
 }
 ```
+
+## 2025-12-18T18:02:00Z – Frontend TypeScript & ESLint Fixes
+```json
+{
+  "agent": "Claude Code PM",
+  "ziel": "Option 1: Frontend-Fehler beheben (ESLint/Typecheck)",
+  "geändert": [
+    "src/client/pages/MieterDetailPage.tsx",
+    "src/client/pages/MieterPage.tsx",
+    "src/client/components/layout/Sidebar.tsx",
+    "src/server/services/config-loader.service.ts"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "NebenkostenPage Minor Hook Warnings beheben oder weitere Entity-Views implementieren",
+  "notes": "✅ npm run typecheck: GRÜN (keine Fehler). ✅ npm run lint: 3 Minor Warnungen (NebenkostenPage Hook Dependencies). Behoben: React Hook Error (DetailTableTab), Type Errors (Record<string,unknown>), Unused Variables, Console Statements unter DEBUG flag. Alle Kritischen Fehler erledigt."
+}
+```
