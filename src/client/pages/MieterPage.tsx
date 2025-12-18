@@ -34,9 +34,9 @@ export function MieterPage() {
   const [editItem, setEditItem] = useState<MieterRecord | null>(null)
   const [formError, setFormError] = useState('')
 
-  const { data: entityConfig, isLoading: entityLoading } = useEntityConfig(ENTITY_NAME)
+  const { data: entityConfig } = useEntityConfig(ENTITY_NAME)
   const { data: tableConfig, isLoading: tableLoading } = useTableConfig<TableConfig>(TABLE_NAME)
-  const { data: formConfig, isLoading: formLoading } = useFormConfig<FormConfig>(FORM_NAME)
+  const { data: formConfig } = useFormConfig<FormConfig>(FORM_NAME)
 
   const { data: listData, isLoading: listLoading } = useEntityList<MieterRecord>(ENTITY_NAME, {
     limit: PAGE_SIZE,
@@ -127,13 +127,14 @@ export function MieterPage() {
     setPage(1)
   }
 
-  const isLoading =
-    entityLoading || tableLoading || formLoading || !tableConfig || !entityConfig || !formConfig
+  // Nur warten, wenn Tabellen-Config noch nicht geladen ist
+  // Formulare können fehlschlagen ohne die Seite zu blockieren
+  const isWaitingForTableConfig = tableLoading || !tableConfig
 
-  if (isLoading) {
+  if (isWaitingForTableConfig) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-gray-500">Laden...</div>
+        <div className="text-gray-500">Lade Konfiguration...</div>
       </div>
     )
   }

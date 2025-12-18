@@ -2018,31 +2018,31 @@ label = "labels.form.section.zahlung"
 [tables.abrechnungen.table]
 entity = "nebenkostenabrechnung"
 
-[[table.columns]]
+[[tables.abrechnungen.table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.nk.objekt"
 sortable = true
 width = "20%"
 
-[[table.columns]]
+[[tables.abrechnungen.table.columns]]
 field = "jahr"
 label = "labels.nk.jahr"
 sortable = true
 width = "12%"
 
-[[table.columns]]
+[[tables.abrechnungen.table.columns]]
 field = "zeitraum_von"
 label = "labels.nk.zeitraum"
 width = "18%"
 template = "{zeitraum_von|date} – {zeitraum_bis|date}"
 
-[[table.columns]]
+[[tables.abrechnungen.table.columns]]
 field = "status"
 label = "labels.nk.status"
 width = "15%"
 display = "badge"
 
-[[table.columns]]
+[[tables.abrechnungen.table.columns]]
 field = "gesamtkosten"
 label = "labels.nk.gesamtkosten"
 width = "15%"
@@ -2055,46 +2055,46 @@ details = { icon = "Search", dialog = "dialogs/nk_abrechnung_detail" }
 entity = "dokument"
 selectable = true
 
-[[table.columns]]
+[[tables.dokumente.table.columns]]
 field = "bezeichnung"
 label = "labels.dokument.bezeichnung"
 sortable = true
 width = "25%"
 
-[[table.columns]]
+[[tables.dokumente.table.columns]]
 field = "typ"
 label = "labels.dokument.typ"
 sortable = true
 width = "10%"
 display = "badge"
 
-[[table.columns]]
+[[tables.dokumente.table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.dokument.objekt"
 sortable = true
 width = "15%"
 empty_text = "—"
 
-[[table.columns]]
+[[tables.dokumente.table.columns]]
 field = "mieter.computed.display_name"
 label = "labels.dokument.mieter"
 width = "15%"
 empty_text = "—"
 
-[[table.columns]]
+[[tables.dokumente.table.columns]]
 field = "datum"
 label = "labels.dokument.datum"
 sortable = true
 width = "10%"
 format = "date"
 
-[[table.columns]]
+[[tables.dokumente.table.columns]]
 field = "jahr"
 label = "labels.dokument.jahr"
 sortable = true
 width = "8%"
 
-[[table.columns]]
+[[tables.dokumente.table.columns]]
 field = "hochgeladen_am"
 label = "labels.dokument.hochgeladen"
 sortable = true
@@ -2111,20 +2111,20 @@ delete = { icon = "Trash2", confirm = true }
 entity = "einheit"
 row_click = "expand"
 
-[[table.columns]]
+[[tables.einheiten.table.columns]]
 field = "bezeichnung"
 label = "labels.einheit.bezeichnung"
 sortable = true
 width = "25%"
 
-[[table.columns]]
+[[tables.einheiten.table.columns]]
 field = "typ"
 label = "labels.einheit.typ"
 sortable = true
 width = "15%"
 display = "badge"
 
-[[table.columns]]
+[[tables.einheiten.table.columns]]
 field = "flaeche"
 label = "labels.einheit.flaeche"
 sortable = true
@@ -2132,13 +2132,13 @@ width = "10%"
 format = "number"
 suffix = " m²"
 
-[[table.columns]]
+[[tables.einheiten.table.columns]]
 field = "computed.aktueller_mieter.computed.display_name"
 label = "labels.einheit.mieter"
 width = "25%"
 empty_text = "—"
 
-[[table.columns]]
+[[tables.einheiten.table.columns]]
 field = "status"
 label = "labels.einheit.status"
 sortable = true
@@ -2153,39 +2153,39 @@ vertrag = { icon = "FileSignature", dialog = "forms/vertrag.form", visible_if = 
 [tables.kautionen.table]
 entity = "kaution"
 
-[[table.columns]]
+[[tables.kautionen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "labels.kaution.mieter"
 sortable = true
 width = "25%"
 
-[[table.columns]]
+[[tables.kautionen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.kaution.einheit"
 sortable = true
 width = "20%"
 
-[[table.columns]]
+[[tables.kautionen.table.columns]]
 field = "betrag"
 label = "labels.kaution.betrag"
 sortable = true
 width = "15%"
 format = "currency"
 
-[[table.columns]]
+[[tables.kautionen.table.columns]]
 field = "eingangsdatum"
 label = "labels.kaution.eingangsdatum"
 sortable = true
 width = "15%"
 format = "date"
 
-[[table.columns]]
+[[tables.kautionen.table.columns]]
 field = "status"
 label = "labels.kaution.status"
 width = "15%"
 display = "badge"
 
-[[table.columns]]
+[[tables.kautionen.table.columns]]
 field = "rueckzahlungsdatum"
 label = "labels.kaution.rueckzahlungsdatum"
 width = "10%"
@@ -2200,7 +2200,7 @@ entity = "mieter"
 row_click = "navigate"
 row_click_route = "/mieter/:id"
 
-[[table.columns]]
+[[tables.mieter.table.columns]]
 field = "computed.display_name"
 label = "labels.mieter.name"
 sortable = true
@@ -2208,24 +2208,24 @@ sort_field = "nachname"
 width = "25%"
 template = "{vorname} {nachname}"
 
-[[table.columns]]
+[[tables.mieter.table.columns]]
 field = "mobil"
 fallback_fields = ["telefon"]
 label = "labels.mieter.telefon"
 width = "15%"
 
-[[table.columns]]
+[[tables.mieter.table.columns]]
 field = "email"
 label = "labels.mieter.email"
 width = "20%"
 
-[[table.columns]]
+[[tables.mieter.table.columns]]
 field = "computed.aktuelle_einheit.bezeichnung"
 label = "labels.mieter.einheit"
 width = "20%"
 empty_text = "—"
 
-[[table.columns]]
+[[tables.mieter.table.columns]]
 field = "status"
 label = "labels.mieter.status"
 sortable = true
@@ -2247,20 +2247,20 @@ entity = "objekt"
 row_click = "navigate"
 row_click_route = "/objekte/:id"
 
-[[table.columns]]
+[[tables.objekte.table.columns]]
 field = "bezeichnung"
 label = "labels.objekt.bezeichnung"
 sortable = true
 width = "25%"
 
-[[table.columns]]
+[[tables.objekte.table.columns]]
 field = "adresse"
 label = "labels.objekt.adresse"
 sortable = true
 width = "30%"
 template = "{adresse}, {plz} {ort}"
 
-[[table.columns]]
+[[tables.objekte.table.columns]]
 field = "typ"
 label = "labels.objekt.typ"
 sortable = true
@@ -2268,14 +2268,14 @@ width = "10%"
 display = "badge"
 badge_colors = { wohnraum = "blue", gewerbe = "orange", gemischt = "purple" }
 
-[[table.columns]]
+[[tables.objekte.table.columns]]
 field = "computed.anzahl_einheiten"
 label = "labels.objekt.einheiten"
 sortable = true
 width = "10%"
 align = "center"
 
-[[table.columns]]
+[[tables.objekte.table.columns]]
 field = "computed.leerstand"
 label = "labels.objekt.leerstand"
 sortable = true
@@ -2283,7 +2283,7 @@ width = "10%"
 align = "center"
 highlight_if = { condition = "> 0", color = "yellow" }
 
-[[table.columns]]
+[[tables.objekte.table.columns]]
 field = "computed.gesamt_flaeche"
 label = "labels.objekt.flaeche"
 sortable = true
@@ -2298,44 +2298,44 @@ delete = { icon = "Trash2", confirm = true, confirm_message = "labels.confirm.ob
 [tables.rechnungen.table]
 entity = "rechnung"
 
-[[table.columns]]
+[[tables.rechnungen.table.columns]]
 field = "rechnungsdatum"
 label = "labels.rechnung.datum"
 sortable = true
 width = "10%"
 format = "date"
 
-[[table.columns]]
+[[tables.rechnungen.table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.rechnung.objekt"
 sortable = true
 width = "18%"
 
-[[table.columns]]
+[[tables.rechnungen.table.columns]]
 field = "kostenart.bezeichnung"
 label = "labels.rechnung.kostenart"
 sortable = true
 width = "15%"
 
-[[table.columns]]
+[[tables.rechnungen.table.columns]]
 field = "rechnungsnummer"
 label = "labels.rechnung.nummer"
 width = "12%"
 
-[[table.columns]]
+[[tables.rechnungen.table.columns]]
 field = "betrag"
 label = "labels.rechnung.betrag"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[table.columns]]
+[[tables.rechnungen.table.columns]]
 field = "zeitraum_von"
 label = "labels.rechnung.zeitraum"
 width = "15%"
 template = "{zeitraum_von|date} - {zeitraum_bis|date}"
 
-[[table.columns]]
+[[tables.rechnungen.table.columns]]
 field = "computed.ist_bezahlt"
 label = "labels.rechnung.bezahlt"
 sortable = true
@@ -2343,7 +2343,7 @@ width = "8%"
 display = "boolean_icon"
 icons = { true = "Check", false = "X" }
 
-[[table.columns]]
+[[tables.rechnungen.table.columns]]
 field = "dokument_id"
 label = ""
 width = "5%"
@@ -2360,39 +2360,39 @@ dokument = { icon = "Upload", dialog = "forms/dokument.form", defaults = { objek
 [tables.sollstellungen.table]
 entity = "sollstellung"
 
-[[table.columns]]
+[[tables.sollstellungen.table.columns]]
 field = "monat"
 label = "labels.sollstellung.monat"
 sortable = true
 width = "12%"
 format = "month"
 
-[[table.columns]]
+[[tables.sollstellungen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "labels.sollstellung.mieter"
 sortable = true
 width = "22%"
 
-[[table.columns]]
+[[tables.sollstellungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.sollstellung.einheit"
 width = "18%"
 
-[[table.columns]]
+[[tables.sollstellungen.table.columns]]
 field = "sollbetrag"
 label = "labels.sollstellung.soll"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[table.columns]]
+[[tables.sollstellungen.table.columns]]
 field = "istbetrag"
 label = "labels.sollstellung.ist"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[table.columns]]
+[[tables.sollstellungen.table.columns]]
 field = "computed.differenz"
 label = "labels.sollstellung.differenz"
 sortable = true
@@ -2400,7 +2400,7 @@ width = "12%"
 format = "currency"
 color_rule = { negative = "red", positive = "green", zero = "inherit" }
 
-[[table.columns]]
+[[tables.sollstellungen.table.columns]]
 field = "status"
 label = "labels.sollstellung.status"
 sortable = true
@@ -2416,32 +2416,32 @@ entity = "vertrag"
 row_click = "navigate"
 row_click_route = "/vertraege/:id"
 
-[[table.columns]]
+[[tables.vertraege.table.columns]]
 field = "vertragsnummer"
 label = "labels.vertrag.vertragsnummer"
 sortable = true
 width = "10%"
 
-[[table.columns]]
+[[tables.vertraege.table.columns]]
 field = "mieter.computed.display_name"
 label = "labels.vertrag.mieter"
 sortable = true
 width = "20%"
 
-[[table.columns]]
+[[tables.vertraege.table.columns]]
 field = "einheit.bezeichnung"
 label = "labels.vertrag.einheit"
 sortable = true
 width = "15%"
 
-[[table.columns]]
+[[tables.vertraege.table.columns]]
 field = "beginn"
 label = "labels.vertrag.beginn"
 sortable = true
 width = "10%"
 format = "date"
 
-[[table.columns]]
+[[tables.vertraege.table.columns]]
 field = "ende"
 label = "labels.vertrag.ende"
 sortable = true
@@ -2449,14 +2449,14 @@ width = "10%"
 format = "date"
 empty_text = "unbefristet"
 
-[[table.columns]]
+[[tables.vertraege.table.columns]]
 field = "computed.gesamtmiete"
 label = "labels.vertrag.gesamtmiete"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[table.columns]]
+[[tables.vertraege.table.columns]]
 field = "computed.ist_aktiv"
 label = "labels.vertrag.status"
 width = "10%"
@@ -2470,43 +2470,43 @@ kuendigen = { icon = "XCircle", dialog = "dialogs/kuendigung", visible_if = { fi
 [tables.zaehler.table]
 entity = "zaehler"
 
-[[table.columns]]
+[[tables.zaehler.table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.zaehler.objekt"
 sortable = true
 width = "20%"
 
-[[table.columns]]
+[[tables.zaehler.table.columns]]
 field = "einheit.bezeichnung"
 label = "labels.zaehler.einheit"
 width = "15%"
 empty_text = "Hauptzähler"
 
-[[table.columns]]
+[[tables.zaehler.table.columns]]
 field = "typ"
 label = "labels.zaehler.typ"
 sortable = true
 width = "12%"
 display = "badge"
 
-[[table.columns]]
+[[tables.zaehler.table.columns]]
 field = "zaehlernummer"
 label = "labels.zaehler.nummer"
 width = "15%"
 
-[[table.columns]]
+[[tables.zaehler.table.columns]]
 field = "ist_hauptzaehler"
 label = "labels.zaehler.haupt"
 width = "8%"
 display = "boolean_icon"
 
-[[table.columns]]
+[[tables.zaehler.table.columns]]
 field = "computed.letzter_stand.stand"
 label = "labels.zaehler.letzter_stand"
 width = "15%"
 template = "{value} {messeinheit}"
 
-[[table.columns]]
+[[tables.zaehler.table.columns]]
 field = "computed.letzter_stand.datum"
 label = "labels.zaehler.abgelesen_am"
 sortable = true
@@ -2521,46 +2521,46 @@ historie = { icon = "History", dialog = "dialogs/zaehler_historie" }
 [tables.zahlungen.table]
 entity = "zahlung"
 
-[[table.columns]]
+[[tables.zahlungen.table.columns]]
 field = "datum"
 label = "labels.zahlung.datum"
 sortable = true
 width = "12%"
 format = "date"
 
-[[table.columns]]
+[[tables.zahlungen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "labels.zahlung.mieter"
 sortable = true
 width = "20%"
 
-[[table.columns]]
+[[tables.zahlungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.zahlung.einheit"
 width = "15%"
 
-[[table.columns]]
+[[tables.zahlungen.table.columns]]
 field = "betrag"
 label = "labels.zahlung.betrag"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[table.columns]]
+[[tables.zahlungen.table.columns]]
 field = "typ"
 label = "labels.zahlung.typ"
 sortable = true
 width = "12%"
 display = "badge"
 
-[[table.columns]]
+[[tables.zahlungen.table.columns]]
 field = "monat_fuer"
 label = "labels.zahlung.monat_fuer"
 sortable = true
 width = "10%"
 format = "month"
 
-[[table.columns]]
+[[tables.zahlungen.table.columns]]
 field = "verwendungszweck"
 label = "labels.zahlung.verwendungszweck"
 width = "19%"

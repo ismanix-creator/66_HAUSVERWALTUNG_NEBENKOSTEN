@@ -27,8 +27,8 @@ export function MieterDetailPage() {
   const navigate = useNavigate()
   const { data: viewConfig, isLoading: viewLoading } = useViewConfig('mieter')
   const { data: detailResponse, isLoading: detailLoading } = useEntityById('mieter', id)
-  const { data: entityConfig, isLoading: entityConfigLoading } = useEntityConfig('mieter')
-  const { data: formConfig, isLoading: formConfigLoading } = useFormConfig<FormConfig>('mieter')
+  const { data: entityConfig } = useEntityConfig('mieter')
+  const { data: formConfig } = useFormConfig<FormConfig>('mieter')
   const contractList = useEntityList('vertrag', {
     filters: id ? { mieter_id: id } : undefined,
     limit: 20,
@@ -47,7 +47,8 @@ export function MieterDetailPage() {
   }, [tabs, activeTabId])
 
   const mieter = detailResponse?.data as Record<string, unknown> | undefined
-  const isLoading = viewLoading || detailLoading || entityConfigLoading || formConfigLoading
+  // Only wait for essential configs - form/entity configs can be missing without blocking display
+  const isLoading = viewLoading || detailLoading
 
   const contractIds = (contractList.data?.data?.map(contract => (contract as Record<string, unknown>).id) ?? []) as string[]
 
