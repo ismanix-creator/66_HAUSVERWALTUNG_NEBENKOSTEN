@@ -454,6 +454,8 @@ Die AI-Dokumentation folgt dem Prinzip der strikten Trennung:
 | `.codex/` | Implementierungs-Workflows, Systemprompt | Codex |
 | `.claude/` | Analyse-Workflows, Review-Checklisten | Claude |
 
+**Hinweis (2025-12-18):** Sämtliche Agenten-Prompts sind jetzt zentral in einer einzigen `AGENTS.md` gebündelt (inkl. Projektmanager/Workflow/Release/Tester usw.); alle Agenten lesen dieses Dokument als Quelle.
+
 ### 3.2 Verzeichnis .ai/ (Shared Truth)
 
 Das `.ai/`-Verzeichnis enthält **tool-agnostisches Wissen**, das von allen AI-Assistenten gelesen wird.
