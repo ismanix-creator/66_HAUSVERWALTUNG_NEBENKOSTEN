@@ -6,6 +6,12 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ---
 
+## 2025-12-18
+
+### [00:16] - Docs - Agenten-Katalog konsolidiert
+- `AGENTS.md` enthält jetzt den vollständigen, zentralen Agenten-Katalog (alle Rollen inkl. Projektmanager/Workflow/Release/Tester), vereinheitlichte Guardrails und Rückmeldelogik über `PM_STATUS.md`.
+- Bauplan ergänzt einen Hinweis auf die zentrale `AGENTS.md`, damit alle Agenten dieselbe Quelle nutzen.
+
 ## 2025-12-17
 
 ### [07:32] - Feature - IBAN-Autofill Bankname
