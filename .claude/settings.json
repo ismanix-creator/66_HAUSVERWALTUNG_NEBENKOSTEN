@@ -1,57 +1,61 @@
 {
   "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/00-reset-state.sh",
-            "timeout": 10
-          },
-          {
-            "type": "prompt",
-            "prompt": "PHASE 0 (Pflicht): Lies VOR allem Schreiben diese Doku-Dateien/Ordner:\n- .claude/* (system/planning/review/validation)\n- .codex/* und .ai/* (Regeln, Architektur, Konventionen)\n- CLAUDE.md, CODEX.md, AGENTS.md, PM_STATUS.md (letzter JSON-Block)\n- BLUEPRINT_PROMPT_DE.md, wireframe.md, todo.md\n- config/config.toml (Single Source of Truth)\n- .github/agents/*.agent.md (Agenten-Systemprompts)\n- CHANGELOG.md\n\nDann: Erstelle eine TODO-Liste (max 10 Punkte) oder frage den User nach Aufgaben. READY_FOR_CHANGES erst setzen, wenn Abgleich + Planung erfolgt sind.",
-            "timeout": 30
-          }
-        ]
-      }
-    ],
-
     "UserPromptSubmit": [
       {
         "hooks": [
           {
-            "type": "prompt",
-            "prompt": "Vor Tool-Nutzung:\n1) Doku gelesen (inkl. .github/agents + PM_STATUS letzter Block)?\n2) TODOs extrahiert und in .claude/state/todo.md festgehalten?\n3) READY_FOR_CHANGES nach Analyse/Planung setzen.\n4) Nur einen Agenten zur Zeit aktiv halten (Workflow-Phasen einhalten).",
-            "timeout": 30
-          }
-        ]
-      }
-    ],
-
-    "PreToolUse": [
-      {
-        "matcher": "Write|Edit|NotebookEdit",
-        "hooks": [
-          {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/10-gate-require-docs-and-todos.sh",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/00-session-start.sh",
             "timeout": 10
           }
         ]
       }
     ],
-
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/10-pre-tool-gate.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/20-guard-bash-and-track-tests.sh",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/30-suggest-tests-from-changes.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/90-gate-finalize-changelog-stage-commit.sh",
-            "timeout": 20
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/90-session-end.sh",
+            "timeout": 10
           }
         ]
       }
     ]
   }
 }
+

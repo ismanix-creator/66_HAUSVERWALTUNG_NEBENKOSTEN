@@ -339,19 +339,17 @@ export const RelationConfigSchema = z.object({
 })
 
 export const EntityConfigSchema = z.object({
-  entity: z.object({
-    name: z.string(),
-    table_name: z.string(),
-    label: z.string(),
-    label_plural: z.string(),
-    icon: z.string().optional(),
-    primary_key: z.string().default('id'),
-    fields: z.record(z.string(), FieldConfigSchema),
-    relations: z.record(z.string(), RelationConfigSchema).optional(),
-    computed: z.record(z.string(), z.unknown()).optional(),
-    validation: z.record(z.string(), z.unknown()).optional(),
-  }),
-})
+  name: z.string(),
+  table_name: z.string(),
+  label: z.string(),
+  label_plural: z.string(),
+  icon: z.string().optional(),
+  primary_key: z.string().default('id'),
+  fields: z.record(z.string(), FieldConfigSchema),
+  relations: z.record(z.string(), RelationConfigSchema).optional(),
+  computed: z.record(z.string(), z.unknown()).optional(),
+  validation: z.record(z.string(), z.unknown()).optional(),
+}).passthrough()
 
 // =============================================================================
 // DESIGN SYSTEM SCHEMA

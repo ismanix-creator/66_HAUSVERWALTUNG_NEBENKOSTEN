@@ -40,17 +40,16 @@ export class SchemaService {
    * Generiert SQL CREATE TABLE aus EntityConfig
    */
   generateCreateTableSql(config: EntityConfig): string {
-    const entity = config.entity
-    // table_name direkt aus Config lesen
-    const tableName = entity.table_name || this.getTableName(entity.name)
+    // Flat structure (entity properties sind direkt auf config)
+    const tableName = config.table_name || this.getTableName(config.name)
     // Cache setzen für spätere Verwendung
-    this.tableNameCache.set(entity.name, tableName)
+    this.tableNameCache.set(config.name, tableName)
     const columns: string[] = []
     const foreignKeys: string[] = []
 
     // Felder zu Spalten konvertieren
-    for (const [fieldName, field] of Object.entries(entity.fields)) {
-      const columnDef = this.generateColumnDef(fieldName, field, entity.primary_key)
+    for (const [fieldName, field] of Object.entries(config.fields)) {
+      const columnDef = this.generateColumnDef(fieldName, field, config.primary_key)
       columns.push(columnDef)
 
       // Foreign Key für reference-Felder
@@ -61,10 +60,10 @@ export class SchemaService {
     }
 
     // Timestamps hinzufügen wenn nicht vorhanden
-    if (!entity.fields['erstellt_am']) {
+    if (!config.fields['erstellt_am']) {
       columns.push("erstellt_am TEXT DEFAULT (datetime('now'))")
     }
-    if (!entity.fields['aktualisiert_am']) {
+    if (!config.fields['aktualisiert_am']) {
       columns.push("aktualisiert_am TEXT DEFAULT (datetime('now'))")
     }
 
@@ -145,9 +144,9 @@ export class SchemaService {
       return this.tableNameCache.get(entityName)!
     }
     const config = (await configService.getEntityConfig(entityName)) as EntityConfig | null
-    if (config?.entity?.table_name) {
-      this.tableNameCache.set(entityName, config.entity.table_name)
-      return config.entity.table_name
+    if (config?.table_name) {
+      this.tableNameCache.set(entityName, config.table_name)
+      return config.table_name
     }
     return `${entityName}s`
   }
@@ -156,11 +155,10 @@ export class SchemaService {
    * Generiert Index-SQL für ein Entity
    */
   generateIndexSql(config: EntityConfig): string[] {
-    const entity = config.entity
-    const tableName = this.getTableName(entity.name)
+    const tableName = this.getTableName(config.name)
     const indexes: string[] = []
 
-    for (const [fieldName, field] of Object.entries(entity.fields)) {
+    for (const [fieldName, field] of Object.entries(config.fields)) {
       // Index für reference-Felder (Foreign Keys)
       if (field.type === 'reference') {
         indexes.push(
@@ -209,7 +207,7 @@ export class SchemaService {
         // Tabelle erstellen
         const createSql = this.generateCreateTableSql(config)
         databaseService.run(createSql)
-        const tableName = config.entity.table_name || this.getTableName(entityName)
+        const tableName = config.table_name || this.getTableName(entityName)
         logger.info(`  ✓ Tabelle erstellt: ${tableName}`)
 
         // Indizes erstellen
