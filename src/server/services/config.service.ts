@@ -51,6 +51,10 @@ class ConfigService {
     return table
   }
 
+  async getLabels() {
+    return await configLoader.getLabels()
+  }
+
   clearCache() {
     void configLoader.reload()
   }

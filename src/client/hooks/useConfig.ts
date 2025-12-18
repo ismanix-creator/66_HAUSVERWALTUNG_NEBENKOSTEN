@@ -92,3 +92,14 @@ export function useCatalog<T = unknown>(catalogName: string) {
     enabled: !!catalogName,
   })
 }
+
+/**
+ * Hook für Labels-Konfiguration (UI-Texte)
+ */
+export function useLabelsConfig<T = unknown>() {
+  return useQuery({
+    queryKey: ['config', 'labels'],
+    queryFn: () => apiService.getLabelsConfig<T>(),
+    staleTime: Infinity,
+  })
+}

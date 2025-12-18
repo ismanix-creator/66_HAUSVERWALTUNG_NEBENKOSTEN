@@ -61,7 +61,10 @@ export function NebenkostenPage() {
     orderBy: 'bezeichnung',
     orderDir: 'ASC',
   })
-  const objectRows = objectList.data?.data || []
+  const objectRows = useMemo(
+    () => objectList.data?.data || [],
+    [objectList.data?.data]
+  )
   const shareCatalogQuery = useCatalog<{
     catalog: { items: { id: string; bezeichnung: string; beschreibung?: string }[] }
   }>('umlageschluessel')
@@ -96,8 +99,14 @@ export function NebenkostenPage() {
     filters: shareObjectId ? { objekt_id: shareObjectId } : undefined,
   })
 
-  const unitRows = unitList.data?.data || []
-  const invoiceRows = invoicesForShare.data?.data || []
+  const unitRows = useMemo(
+    () => unitList.data?.data || [],
+    [unitList.data?.data]
+  )
+  const invoiceRows = useMemo(
+    () => invoicesForShare.data?.data || [],
+    [invoicesForShare.data?.data]
+  )
   const rechnungRows = rechnungList.data?.data || []
   const abrechnungRows = abrechnungList.data?.data || []
 

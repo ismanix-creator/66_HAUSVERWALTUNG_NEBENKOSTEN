@@ -77,6 +77,15 @@ apiRoutes.get('/config/view/:name', async (req, res, next) => {
   }
 })
 
+apiRoutes.get('/config/labels', async (_req, res, next) => {
+  try {
+    const labels = await configService.getLabels()
+    res.json(labels)
+  } catch (error) {
+    next(error)
+  }
+})
+
 apiRoutes.get('/dashboard/summary', async (_req, res, next) => {
   try {
     const summary = await dashboardService.getSummary()

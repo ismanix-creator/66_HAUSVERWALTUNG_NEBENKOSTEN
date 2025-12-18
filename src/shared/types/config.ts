@@ -103,3 +103,35 @@ export interface StatsConfig {
   total?: { query: string }
   color_rule?: Record<string, string>
 }
+
+// Table Config
+export interface TableConfig {
+  table: {
+    entity: string
+    columns: ColumnConfig[]
+    row_actions?: Record<string, RowActionConfig>
+    pagination?: {
+      page_size?: number
+    }
+  }
+}
+
+export interface ColumnConfig {
+  field: string
+  label: string
+  sortable?: boolean
+  width?: string
+  display?: 'default' | 'badge' | 'boolean_icon' | 'currency' | 'date'
+  format?: 'date' | 'currency' | 'number'
+  template?: string
+  empty_text?: string
+}
+
+export interface RowActionConfig {
+  icon?: string
+  dialog?: string
+  form?: string
+  defaults?: Record<string, unknown>
+  confirm?: string
+  variant?: 'primary' | 'secondary' | 'danger'
+}

@@ -5,7 +5,7 @@
  * @lastModified 2025-12-16
  */
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   ChevronUp,
@@ -27,6 +27,7 @@ import {
   CheckCircle,
   type LucideIcon,
 } from 'lucide-react'
+import { useLabelsConfig } from '../../hooks/useConfig'
 
 export interface TableColumn {
   field: string
@@ -111,6 +112,7 @@ export function DataTable<T extends Record<string, unknown>>({
   const navigate = useNavigate()
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   const [confirmAction, setConfirmAction] = useState<{ itemId: string; actionId: string } | null>(null)
+  const { data: labelsData } = useLabelsConfig<Record<string, unknown>>()
 
   const iconLookup: Record<string, LucideIcon> = {
     Pencil,
@@ -284,15 +286,34 @@ export function DataTable<T extends Record<string, unknown>>({
     return evaluateVisibility(item, action.visible_if)
   }
 
-  const formatLabel = (label?: string, fallback?: string) => {
-    if (label === '') return ''
-    if (!label) return fallback || ''
-    if (label.startsWith('labels.')) {
-      const segments = label.split('.')
-      return segments[segments.length - 1].replace(/_/g, ' ')
+  // Memoized label resolution function
+  const formatLabel = useMemo(() => {
+    return (label?: string, fallback?: string) => {
+      if (label === '') return ''
+      if (!label) return fallback || ''
+
+      // If label starts with "labels.", resolve from labels config
+      if (label.startsWith('labels.')) {
+        if (!labelsData) return fallback || label
+
+        // Navigate through nested structure: "labels.tables.actions" → labelsData.tables.actions
+        const path = label.slice(7).split('.') // Remove "labels." prefix and split by dots
+        let current: unknown = labelsData
+
+        for (const segment of path) {
+          if (current && typeof current === 'object') {
+            current = (current as Record<string, unknown>)[segment]
+          } else {
+            return fallback || label
+          }
+        }
+
+        return typeof current === 'string' ? current : (fallback || label)
+      }
+
+      return label
     }
-    return label
-  }
+  }, [labelsData])
 
   const handleRowAction = (item: T, actionId: string, actionConfig: RowActionConfig) => {
     setConfirmAction(null)

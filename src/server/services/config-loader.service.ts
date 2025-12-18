@@ -207,6 +207,61 @@ class ConfigLoaderService {
   }
 
   /**
+   * Lädt alle Catalog-Dateien aus config/catalogs/
+   */
+  private async loadCatalogsFromFiles(): Promise<CatalogsRoot> {
+    const catalogsDir = path.join(CONFIG_DIR, 'catalogs')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result: any = {}
+
+    try {
+      const files = await fs.readdir(catalogsDir)
+      const catalogFiles = files.filter(f => f.endsWith('.catalog.toml'))
+
+      for (const file of catalogFiles) {
+        const filePath = path.join(catalogsDir, file)
+        try {
+          const content = await fs.readFile(filePath, 'utf-8')
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const parsed = TOML.parse(content) as any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const catalog = parsed.catalog as any
+          const catalogName = (catalog?.name as string) || file.replace('.catalog.toml', '')
+          if (catalog) {
+            result[catalogName] = catalog
+          }
+        } catch (error) {
+          console.warn(`[ConfigLoader] Fehler beim Laden von ${file}:`, error)
+        }
+      }
+    } catch (error) {
+      console.warn(`[ConfigLoader] Fehler beim Lesen von catalogs/ Verzeichnis:`, error)
+    }
+
+    return result
+  }
+
+  /**
+   * Lädt Labels-Datei aus config/labels/de.labels.toml
+   */
+  private async loadLabelsFromFile(): Promise<LabelsRoot> {
+    const labelsFile = path.join(CONFIG_DIR, 'labels', 'de.labels.toml')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result: any = {}
+
+    try {
+      const content = await fs.readFile(labelsFile, 'utf-8')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const parsed = TOML.parse(content) as any
+      return parsed
+    } catch (error) {
+      console.warn(`[ConfigLoader] Fehler beim Laden von Labels-Datei:`, error)
+    }
+
+    return result
+  }
+
+  /**
    * Validiert relevante ENV-Variablen gegen ein Schema
    */
   private validateEnv(env: NodeJS.ProcessEnv): Record<string, unknown> {
@@ -265,14 +320,20 @@ class ConfigLoaderService {
     const master = MasterConfigSchema.parse(withEnv)
 
     // 4. Root-Level Sektionen direkt aus master extrahieren
-    const labels = master.labels || {}
-    const catalogs = master.catalogs || {}
+    const labels = await this.loadLabelsFromFile()
     const views = master.views || {}
     const forms = master.forms || {}
     const tables = master.tables || {}
     const validation = master.validation || {}
     const design = master.design || {}
     const features = master.features || { features: {} }
+
+    // 4b. Catalogs aus separaten Dateien laden (noch nicht in config.toml konsolidiert)
+    const catalogs = await this.loadCatalogsFromFiles()
+    if (process.env.DEBUG_CONFIG) {
+      // eslint-disable-next-line no-console
+      console.log(`[ConfigLoader] - Geladeene Kataloge: ${Object.keys(catalogs).join(', ')}`)
+    }
 
     // 5. Entities mit EntityConfigSchema validieren
     const entities: Record<string, EntityConfig> = {}

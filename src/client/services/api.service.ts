@@ -110,6 +110,13 @@ class ApiService {
     return this.fetch<T>(`/config/view/${viewName}`)
   }
 
+  /**
+   * Lädt Labels-Konfiguration (für UI-Texte)
+   */
+  async getLabelsConfig<T>(): Promise<T> {
+    return this.fetch<T>('/config/labels')
+  }
+
   // ==================== ENTITY CRUD ====================
 
   /**
