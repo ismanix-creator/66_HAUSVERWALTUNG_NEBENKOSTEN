@@ -119,32 +119,6 @@ export const DatabaseSchema = z.object({
   backup: DatabaseBackupSchema.optional().default({}),
 })
 
-// =============================================================================
-// IMPORTS SCHEMA
-// =============================================================================
-export const ImportsSchema = z.object({
-  labels: z.string().optional(),
-  navigation: z.string().optional(),
-  catalogs: z.array(z.string()).optional().default([]),
-  entities: z.array(z.string()).optional().default([]),
-  views: z.array(z.string()).optional().default([]),
-  forms: z.array(z.string()).optional().default([]),
-  tables: z.array(z.string()).optional().default([]),
-  validation: z.string().optional(),
-  design: z.union([z.string(), z.array(z.string())]).optional(),
-  features: z.string().optional(),
-})
-
-// =============================================================================
-// ENTITIES REGISTRY SCHEMA
-// =============================================================================
-export const EntityRegistryItemSchema = z.object({
-  config: z.string(),
-  table: z.string(),
-  label: z.string(),
-})
-
-export const EntitiesRegistrySchema = z.record(z.string(), EntityRegistryItemSchema)
 
 // =============================================================================
 // NAVIGATION SCHEMA
@@ -318,36 +292,7 @@ export const DebugSchema = z.object({
 })
 
 // =============================================================================
-// MASTER CONFIG SCHEMA
-// =============================================================================
-export const MasterConfigSchema = z.object({
-  meta: MetaSchema.optional().default({}),
-  app: AppSchema.optional().default({}),
-  server: ServerSchema.optional().default({}),
-  database: DatabaseSchema.optional().default({}),
-  imports: ImportsSchema.optional().default({}),
-  entities: EntitiesRegistrySchema.optional().default({}),
-  navigation: NavigationSchema.optional().default({}),
-  routes: RoutesSchema.optional().default({}),
-  pagination: PaginationSchema.optional().default({}),
-  search: SearchSchema.optional().default({}),
-  export: ExportSchema.optional().default({}),
-  notifications: NotificationsSchema.optional().default({}),
-  autosave: AutosaveSchema.optional().default({}),
-  shortcuts: ShortcutsSchema.optional().default({}),
-  logging: LoggingSchema.optional().default({}),
-  security: SecuritySchema.optional().default({}),
-  performance: PerformanceSchema.optional().default({}),
-  debug: DebugSchema.optional().default({}),
-})
-
-// =============================================================================
-// LABELS SCHEMA
-// =============================================================================
-export const LabelsSchema = z.record(z.string(), z.unknown()).describe('UI Labels (i18n)')
-
-// =============================================================================
-// CATALOG SCHEMA
+// CATALOG ITEM SCHEMA (shared, used in both old and new format)
 // =============================================================================
 export const CatalogItemSchema = z.object({
   value: z.string().optional(),
@@ -357,14 +302,6 @@ export const CatalogItemSchema = z.object({
   color: z.string().optional(),
   sortierung: z.number().int().optional(),
 }).passthrough()
-
-export const CatalogSchema = z.object({
-  catalog: z.object({
-    name: z.string(),
-    description: z.string().optional(),
-    items: z.array(CatalogItemSchema).optional(),
-  }).passthrough(),
-})
 
 // =============================================================================
 // ENTITY CONFIG SCHEMA
@@ -536,6 +473,90 @@ export const ValidationRulesSchema = z.object({
 })
 
 // =============================================================================
+// ROOT-LEVEL SCHEMAS (für konsolidierte config.toml)
+// =============================================================================
+export const LabelsRootSchema = z.record(z.string(), z.unknown()).describe('UI Labels (i18n)')
+
+export const CatalogsRootSchema = z.record(
+  z.string(),
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    items: z.array(CatalogItemSchema).optional(),
+  }).passthrough()
+)
+
+export const EntitiesRootSchema = z.record(z.string(), EntityConfigSchema)
+
+export const FormsRootSchema = z.record(z.string(), z.unknown())
+
+export const TablesRootSchema = z.record(z.string(), z.unknown())
+
+export const ViewsRootSchema = z.record(z.string(), z.unknown())
+
+export const ValidationRootSchema = z.object({
+  version: z.string().optional(),
+  strict_mode: z.boolean().optional(),
+  patterns: z.record(z.string(), ValidationPatternSchema).optional(),
+  fields: z.record(z.string(), z.unknown()).optional(),
+  entities: z.record(z.string(), z.unknown()).optional(),
+  cross_entity: z.record(z.string(), z.unknown()).optional(),
+  business: z.record(z.string(), z.unknown()).optional(),
+}).passthrough()
+
+export const DesignRootSchema = z.object({
+  name: z.string().optional(),
+  version: z.string().optional(),
+  typography: DesignTypographySchema.optional(),
+  spacing: DesignSpacingSchema.optional(),
+  sizing: DesignSizingSchema.optional(),
+  borders: DesignBordersSchema.optional(),
+  shadows: DesignShadowsSchema.optional(),
+  transitions: DesignTransitionsSchema.optional(),
+  z_index: z.record(z.string(), z.unknown()).optional(),
+  buttons: DesignButtonsSchema.optional(),
+  inputs: DesignInputsSchema.optional(),
+  cards: z.unknown().optional(),
+  badges: z.unknown().optional(),
+  icons: z.record(z.string(), z.string()).optional(),
+  avatars: z.record(z.string(), z.string()).optional(),
+  breakpoints: z.record(z.string(), z.string()).optional(),
+  theme: z.unknown().optional(),
+}).passthrough()
+
+// =============================================================================
+// MASTER CONFIG SCHEMA (jetzt definiert, nachdem alle Subschemas da sind)
+// =============================================================================
+export const MasterConfigSchema = z.object({
+  meta: MetaSchema.optional().default({}),
+  app: AppSchema.optional().default({}),
+  server: ServerSchema.optional().default({}),
+  database: DatabaseSchema.optional().default({}),
+  navigation: NavigationSchema.optional().default({}),
+  routes: RoutesSchema.optional().default({}),
+  pagination: PaginationSchema.optional().default({}),
+  search: SearchSchema.optional().default({}),
+  export: ExportSchema.optional().default({}),
+  notifications: NotificationsSchema.optional().default({}),
+  autosave: AutosaveSchema.optional().default({}),
+  shortcuts: ShortcutsSchema.optional().default({}),
+  logging: LoggingSchema.optional().default({}),
+  security: SecuritySchema.optional().default({}),
+  performance: PerformanceSchema.optional().default({}),
+  debug: DebugSchema.optional().default({}),
+  // Root-Level Config-Sektionen (konsolidiert)
+  labels: LabelsRootSchema.optional().default({}),
+  catalogs: CatalogsRootSchema.optional().default({}),
+  entities: EntitiesRootSchema.optional().default({}),
+  forms: FormsRootSchema.optional().default({}),
+  tables: TablesRootSchema.optional().default({}),
+  views: ViewsRootSchema.optional().default({}),
+  validation: ValidationRootSchema.optional().default({}),
+  design: DesignRootSchema.optional().default({}),
+  features: FeatureFlagsSchema.optional().default({ features: {} }),
+})
+
+// =============================================================================
 // TYPE EXPORTS
 // =============================================================================
 export type MasterConfig = z.infer<typeof MasterConfigSchema>
@@ -547,8 +568,13 @@ export type NavigationItem = z.infer<typeof NavigationItemSchema>
 export type EntityConfig = z.infer<typeof EntityConfigSchema>
 export type FieldConfig = z.infer<typeof FieldConfigSchema>
 export type FieldType = z.infer<typeof FieldTypeSchema>
-export type CatalogConfig = z.infer<typeof CatalogSchema>
-export type DesignSystem = z.infer<typeof DesignSystemSchema>
+export type CatalogItem = z.infer<typeof CatalogItemSchema>
+export type LabelsRoot = z.infer<typeof LabelsRootSchema>
+export type CatalogsRoot = z.infer<typeof CatalogsRootSchema>
+export type EntitiesRoot = z.infer<typeof EntitiesRootSchema>
+export type FormsRoot = z.infer<typeof FormsRootSchema>
+export type TablesRoot = z.infer<typeof TablesRootSchema>
+export type ViewsRoot = z.infer<typeof ViewsRootSchema>
+export type ValidationRoot = z.infer<typeof ValidationRootSchema>
+export type DesignRoot = z.infer<typeof DesignRootSchema>
 export type FeatureFlags = z.infer<typeof FeatureFlagsSchema>
-export type ValidationRules = z.infer<typeof ValidationRulesSchema>
-export type Labels = z.infer<typeof LabelsSchema>

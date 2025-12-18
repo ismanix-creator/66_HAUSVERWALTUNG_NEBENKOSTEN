@@ -1,0 +1,46 @@
+[form]
+entity = "zaehler"
+title_create = "labels.form.zaehler_anlegen"
+title_edit = "labels.form.zaehler_bearbeiten"
+
+[[form.sections]]
+id = "zuordnung"
+label = "labels.form.section.zaehler_zuordnung"
+
+  [[form.sections.fields]]
+  field = "objekt_id"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "einheit_id"
+  width = "full"
+  description = "Nur für Unterzähler"
+
+[[form.sections]]
+id = "details"
+label = "labels.form.section.zaehler_details"
+
+  [[form.sections.fields]]
+  field = "typ"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "messeinheit"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "zaehlernummer"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "ist_hauptzaehler"
+  width = "half"
+
+[[form.sections]]
+id = "zusatz"
+label = "labels.form.section.zaehler_zusatz"
+
+  [[form.sections.fields]]
+  field = "notiz"
+  width = "full"
+  rows = 3

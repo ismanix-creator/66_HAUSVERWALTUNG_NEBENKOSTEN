@@ -1,0 +1,51 @@
+[entity]
+name = "kostenart"
+table_name = "kostenarten"
+label = "labels.entity.kostenart"
+label_plural = "labels.entity.kostenarten"
+icon = "Tag"
+primary_key = "id"
+
+[entity.fields.id]
+type = "uuid"
+auto_generate = true
+visible = false
+
+[entity.fields.bezeichnung]
+type = "string"
+required = true
+max_length = 100
+label = "labels.kostenart.bezeichnung"
+
+[entity.fields.kategorie]
+type = "enum"
+required = true
+options = ["umlagefaehig", "nicht_umlagefaehig"]
+default = "umlagefaehig"
+label = "labels.kostenart.kategorie"
+
+[entity.fields.umlageschluessel]
+type = "enum"
+required = true
+options = ["flaeche", "personen", "einheiten", "verbrauch", "direkt"]
+default = "flaeche"
+label = "labels.kostenart.umlageschluessel"
+description = "direkt = 1:1 Zuordnung zu Einheit"
+
+[entity.fields.nur_gewerbe]
+type = "boolean"
+default = false
+label = "labels.kostenart.nur_gewerbe"
+
+[entity.fields.sortierung]
+type = "integer"
+default = 100
+label = "labels.kostenart.sortierung"
+
+[entity.fields.aktiv]
+type = "boolean"
+default = true
+label = "labels.kostenart.aktiv"
+
+[entity.relations]
+rechnungen = { type = "one_to_many", target = "rechnung", foreign_key = "kostenart_id" }

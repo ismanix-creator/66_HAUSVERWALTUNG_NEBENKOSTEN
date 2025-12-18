@@ -1,0 +1,54 @@
+[entity]
+name = "erinnerung"
+table_name = "erinnerungen"
+label = "labels.entity.erinnerung"
+label_plural = "labels.entity.erinnerungen"
+icon = "Bell"
+primary_key = "id"
+
+[entity.fields.id]
+type = "uuid"
+auto_generate = true
+visible = false
+
+[entity.fields.typ]
+type = "enum"
+required = true
+options = ["mieterhoehung", "vertragsende", "zaehlerablesung", "rueckstand", "nk_abrechnung", "kaution_rueckzahlung", "sonstig"]
+label = "labels.erinnerung.typ"
+
+[entity.fields.bezug_typ]
+type = "enum"
+options = ["vertrag", "objekt", "mieter", "einheit"]
+label = "labels.erinnerung.bezug_typ"
+
+[entity.fields.bezug_id]
+type = "uuid"
+label = "labels.erinnerung.bezug_id"
+
+[entity.fields.faellig_am]
+type = "date"
+required = true
+label = "labels.erinnerung.faellig_am"
+
+[entity.fields.titel]
+type = "string"
+required = true
+max_length = 200
+label = "labels.erinnerung.titel"
+
+[entity.fields.beschreibung]
+type = "text"
+label = "labels.erinnerung.beschreibung"
+
+[entity.fields.status]
+type = "enum"
+required = true
+options = ["offen", "erledigt", "zurueckgestellt"]
+default = "offen"
+label = "labels.erinnerung.status"
+
+[entity.fields.erstellt_am]
+type = "datetime"
+auto_generate = true
+label = "labels.common.erstellt_am"

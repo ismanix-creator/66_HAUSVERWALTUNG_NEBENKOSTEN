@@ -1089,12 +1089,12 @@ Du stoppst sofort, wenn:
 - `/mobile` ist read-only (`mobileRoutes`, `mobileReadOnlyMiddleware`) und liefert eine vereinfachte Übersicht (`MobileDashboardPage`); dokumentiere Mobile-Entscheidungen in AGENTS/BAUPLAN/CHANGELOG.
 
 ## Backend-Dienste & Config-Ladepfad
-- Root-Stub `config.toml` im Projekt-Root dient nur als Verweis; produktiv werden ausschließlich die Dateien unter `config/` geladen (`config/config.toml` als Master + Imports).
-- `src/server/services/config-loader.service.ts` ist die Single Source für das Backend: lädt Master-TOML, zieht Imports (Entities, Forms, Tables, Views, Labels, Catalogs, Design, Validation, Feature-Flags), validiert via Zod, appliziert ENV-Overrides (`ENV_MAPPINGS`) und cached im Speicher.
+- Root-Stub `config.toml` im Projekt-Root dient nur als Verweis; produktiv wird ausschließlich `config/config.toml` geladen.
+- `src/server/services/config-loader.service.ts` ist die Single Source für das Backend: lädt nur `config/config.toml`, validiert via Zod, appliziert ENV-Overrides (`ENV_MAPPINGS`) und cached im Speicher.
 - `config.service.ts` kapselt alle Lesefunktionen (`getAppConfig`, `getEntityConfig`, `getFormConfig`, etc.) und dient sämtlichen Routen als API, damit kein anderer Teil direkt auf den Loader zugreift.
 - `schema.service.ts` nutzt die geladenen Entity-Configs zum Generieren der SQLite-Tabellen, Indizes und Entity-Liste (`/api/entities`) und cached Tabellen-Namen für spätere Queries.
 - `database.service.ts` initialisiert `better-sqlite3` strikt gemäß Master-Config (`database.path`, WAL, busy_timeout, cache_size). Alle CRUD-Operationen laufen über diesen Service; keine Direktverbindungen.
-- Bei Änderungen an TOML-Imports oder ENV-Mappings: zuerst `config/config.toml` + relevante Imports anpassen, dann `AGENTS.md`, `planning/BAUPLAN_MIETVERWALTUNG.md` und `CHANGELOG.md` aktualisieren, bevor Backend-Code geändert wird.
+- Bei Änderungen an `config/config.toml` oder ENV-Mappings: zuerst `config/config.toml` anpassen, dann `AGENTS.md`, `planning/BAUPLAN_MIETVERWALTUNG.md` und `CHANGELOG.md` aktualisieren, bevor Backend-Code geändert wird.
 
 ## Build-, Test- und Entwicklungsbefehle
 - `npm run dev` startet Client (Vite) plus Server (ts-node) für lokale Arbeit.
@@ -1210,8 +1210,8 @@ Du stoppst sofort, wenn:
 
 ## Übergaben (Handoff-Guides)
 - Designer: Nutzt `wireframe.md` als Strukturvorgabe, hält Navigation/Views aus `config/config.toml` konsistent und passt nur visuelle Details an; keine neuen Funktionen ohne Bauplan-Update.
-- Frontend: Implementiert strikt config-driven nach `config/config.toml` + Imports, referenziert `BLUEPRINT_PROMPT_DE.md` und `planning/BAUPLAN_MIETVERWALTUNG.md` für Phasen/Akzeptanzkriterien; Labels/Texte aus TOML, keine Hardcodings.
-- Backend: Orientiert sich an `config/config.toml` (Server/DB/Imports) und Bauplan; nur generische Services/Routes, Business-Logik bleibt in TOML; ENV-Overrides via Config-Loader.
+- Frontend: Implementiert strikt config-driven nach `config/config.toml`, referenziert `BLUEPRINT_PROMPT_DE.md` und `planning/BAUPLAN_MIETVERWALTUNG.md` für Phasen/Akzeptanzkriterien; Labels/Texte aus TOML, keine Hardcodings.
+- Backend: Orientiert sich an `config/config.toml` (Server/DB) und Bauplan; nur generische Services/Routes, Business-Logik bleibt in TOML; ENV-Overrides via Config-Loader.
 - Tester: Prüft gegen Akzeptanzkriterien im Bauplan und geladene TOML-Configs; Mobile bleibt GET-only; Regressionstests nach jeder Config-Änderung.
 
 ---

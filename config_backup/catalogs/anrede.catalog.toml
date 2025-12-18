@@ -1,0 +1,35 @@
+# =============================================================================
+# KATALOG: Anrede
+# =============================================================================
+# Anrede-Optionen für Personen
+# @lastModified: 2025-12-17
+# =============================================================================
+
+[catalog]
+name = "anrede"
+description = "Anrede-Optionen für Personen"
+
+[[catalog.items]]
+value = "herr"
+label = "labels.enums.anrede.herr"
+sortierung = 10
+
+[[catalog.items]]
+value = "frau"
+label = "labels.enums.anrede.frau"
+sortierung = 20
+
+[[catalog.items]]
+value = "firma"
+label = "labels.enums.anrede.firma"
+sortierung = 30
+
+[[catalog.items]]
+value = "divers"
+label = "labels.enums.anrede.divers"
+sortierung = 40
+
+[[catalog.items]]
+value = "keine"
+label = "labels.enums.anrede.keine"
+sortierung = 50

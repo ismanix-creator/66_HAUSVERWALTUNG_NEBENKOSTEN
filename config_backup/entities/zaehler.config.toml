@@ -1,0 +1,61 @@
+[entity]
+name = "zaehler"
+table_name = "zaehler"
+label = "labels.entity.zaehler"
+label_plural = "labels.entity.zaehler_plural"
+icon = "Gauge"
+primary_key = "id"
+
+[entity.fields.id]
+type = "uuid"
+auto_generate = true
+visible = false
+
+[entity.fields.objekt_id]
+type = "uuid"
+required = true
+reference = "objekt"
+label = "labels.zaehler.objekt"
+
+[entity.fields.einheit_id]
+type = "uuid"
+reference = "einheit"
+label = "labels.zaehler.einheit"
+description = "Leer = Hauptzähler"
+
+[entity.fields.typ]
+type = "enum"
+required = true
+options = ["strom", "gas", "wasser", "heizung", "warmwasser"]
+label = "labels.zaehler.typ"
+
+[entity.fields.zaehlernummer]
+type = "string"
+required = true
+max_length = 50
+label = "labels.zaehler.zaehlernummer"
+
+[entity.fields.ist_hauptzaehler]
+type = "boolean"
+default = false
+label = "labels.zaehler.ist_hauptzaehler"
+
+[entity.fields.messeinheit]
+type = "enum"
+required = true
+options = ["kWh", "m3"]
+label = "labels.zaehler.messeinheit"
+auto_from_typ = { strom = "kWh", gas = "m3", wasser = "m3", heizung = "kWh", warmwasser = "m3" }
+
+[entity.fields.notiz]
+type = "text"
+label = "labels.common.notiz"
+
+[entity.relations]
+objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
+einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
+staende = { type = "one_to_many", target = "zaehlerstand", foreign_key = "zaehler_id" }
+
+[entity.computed]
+letzter_stand = { formula = "last(staende order by datum)" }
+bezeichnung_display = { formula = "concat(typ, ' - ', zaehlernummer, ist_hauptzaehler ? ' (Haupt)' : '')" }

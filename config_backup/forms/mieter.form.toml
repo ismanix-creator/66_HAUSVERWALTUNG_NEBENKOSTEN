@@ -1,0 +1,81 @@
+[form]
+entity = "mieter"
+title_create = "labels.actions.add"
+title_edit = "labels.actions.edit"
+
+[[form.sections]]
+id = "basis"
+label = "labels.form.section.basic"
+
+  [[form.sections.fields]]
+  field = "anrede"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "vorname"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "nachname"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "firma_zusatz"
+  width = "full"
+
+[[form.sections]]
+id = "kontakt"
+label = "labels.form.section.contact"
+
+  [[form.sections.fields]]
+  field = "email"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "telefon"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "mobil"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "status"
+  width = "half"
+
+[[form.sections]]
+id = "adressen"
+label = "labels.form.section.addresses"
+
+  [[form.sections.fields]]
+  field = "adresse_vorher"
+  width = "full"
+
+[[form.sections]]
+id = "banking"
+label = "labels.form.section.financial"
+
+  [[form.sections.fields]]
+  field = "iban"
+  width = "full"
+
+  [[form.sections.fields]]
+  field = "bic"
+  width = "half"
+
+  [[form.sections.fields]]
+  field = "bankname"
+  width = "half"
+
+[[form.sections]]
+id = "notizen"
+label = "labels.form.section.notes"
+
+  [[form.sections.fields]]
+  field = "notiz"
+  width = "full"
+  rows = 3
+
+[form.actions]
+submit = { label = "labels.buttons.save" }
+cancel = { label = "labels.buttons.cancel" }

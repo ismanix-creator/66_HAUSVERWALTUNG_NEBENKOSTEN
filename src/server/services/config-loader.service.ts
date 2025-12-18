@@ -32,19 +32,14 @@ import TOML from '@iarna/toml'
 import { z } from 'zod'
 import {
   MasterConfigSchema,
-  LabelsSchema,
-  CatalogSchema,
   EntityConfigSchema,
-  DesignSystemSchema,
-  FeatureFlagsSchema,
-  ValidationRulesSchema,
   type MasterConfig,
-  type Labels,
-  type CatalogConfig,
+  type LabelsRoot,
+  type CatalogsRoot,
   type EntityConfig,
-  type DesignSystem,
   type FeatureFlags,
-  type ValidationRules,
+  type ValidationRoot,
+  type DesignRoot,
 } from '../../shared/config/schemas'
 
 const CONFIG_DIR = path.resolve(process.cwd(), 'config')
@@ -110,15 +105,15 @@ const EnvSchema = z.object({
 // =============================================================================
 interface LoadedConfig {
   master: MasterConfig
-  labels: Labels
-  catalogs: Record<string, CatalogConfig>
+  labels: LabelsRoot
+  catalogs: CatalogsRoot
   entities: Record<string, EntityConfig>
   views: Record<string, unknown>
   forms: Record<string, unknown>
   tables: Record<string, unknown>
-  design: DesignSystem
+  design: DesignRoot
   features: FeatureFlags
-  validation: ValidationRules
+  validation: ValidationRoot
 }
 
 // =============================================================================
@@ -154,30 +149,6 @@ class ConfigLoaderService {
     }
   }
 
-  /**
-   * Lädt mehrere TOML-Dateien parallel und gibt ein Record zurück
-   */
-  private async loadMultiple<T>(
-    files: string[],
-    keyExtractor?: (file: string) => string
-  ): Promise<Record<string, T>> {
-    const results: Record<string, T> = {}
-
-    await Promise.all(
-      files.map(async (file) => {
-        const key = keyExtractor
-          ? keyExtractor(file)
-          : path.basename(file, path.extname(file))
-              .replace('.config', '')
-              .replace('.catalog', '')
-              .replace('.form', '')
-              .replace('.table', '')
-        results[key] = await this.loadToml<T>(file)
-      })
-    )
-
-    return results
-  }
 
   // ---------------------------------------------------------------------------
   // PRIVATE: Env Overrides
@@ -265,48 +236,19 @@ class ConfigLoaderService {
     return JSON.parse(JSON.stringify(obj))
   }
 
-  /**
-   * Deep Merge von zwei Objekten
-   */
-  private deepMerge<T extends Record<string, unknown>>(target: T, source: Partial<T>): T {
-    const result = { ...target }
-
-    for (const key of Object.keys(source) as (keyof T)[]) {
-      const sourceValue = source[key]
-      const targetValue = result[key]
-
-      if (
-        sourceValue &&
-        typeof sourceValue === 'object' &&
-        !Array.isArray(sourceValue) &&
-        targetValue &&
-        typeof targetValue === 'object' &&
-        !Array.isArray(targetValue)
-      ) {
-        result[key] = this.deepMerge(
-          targetValue as Record<string, unknown>,
-          sourceValue as Record<string, unknown>
-        ) as T[keyof T]
-      } else if (sourceValue !== undefined) {
-        result[key] = sourceValue as T[keyof T]
-      }
-    }
-
-    return result
-  }
 
   // ---------------------------------------------------------------------------
   // PRIVATE: Main Loading Logic
   // ---------------------------------------------------------------------------
 
   /**
-   * Lädt die gesamte Konfiguration
+   * Lädt die gesamte Konfiguration aus konsolidierter config.toml
    */
   private async loadAll(): Promise<LoadedConfig> {
     const startTime = Date.now()
-    console.log('[ConfigLoader] Lade Master-Konfiguration...')
+    console.log('[ConfigLoader] Lade konsolidierte Master-Konfiguration...')
 
-    // 1. Master-Config laden
+    // 1. Master-Config laden (enthält nun alle Sektionen)
     const rawMaster = await this.loadToml<Record<string, unknown>>(MASTER_CONFIG_FILE)
 
     // 2. Env-Overrides anwenden
@@ -316,33 +258,19 @@ class ConfigLoaderService {
     // 3. Zod-Validierung mit Defaults
     const master = MasterConfigSchema.parse(withEnv)
 
-    // 4. Imports auflösen
-    const imports = master.imports || {}
+    // 4. Root-Level Sektionen direkt aus master extrahieren
+    const labels = master.labels || {}
+    const catalogs = master.catalogs || {}
+    const views = master.views || {}
+    const forms = master.forms || {}
+    const tables = master.tables || {}
+    const validation = master.validation || {}
+    const design = master.design || {}
+    const features = master.features || { features: {} }
 
-    // 5. Labels laden
-    const labelsRaw = imports.labels
-      ? await this.loadToml<Record<string, unknown>>(imports.labels)
-      : {}
-    const labels = LabelsSchema.parse(labelsRaw)
-
-    // 6. Kataloge laden
-    const catalogFiles = imports.catalogs || []
-    const catalogsRaw = await this.loadMultiple<Record<string, unknown>>(catalogFiles)
-    const catalogs: Record<string, CatalogConfig> = {}
-    for (const [key, value] of Object.entries(catalogsRaw)) {
-      try {
-        catalogs[key] = CatalogSchema.parse(value)
-      } catch (e) {
-        console.warn(`[ConfigLoader] Katalog ${key} ungültig:`, e)
-        catalogs[key] = value as CatalogConfig
-      }
-    }
-
-    // 7. Entities laden
-    const entityFiles = imports.entities || []
-    const entitiesRaw = await this.loadMultiple<Record<string, unknown>>(entityFiles)
+    // 5. Entities mit EntityConfigSchema validieren
     const entities: Record<string, EntityConfig> = {}
-    for (const [key, value] of Object.entries(entitiesRaw)) {
+    for (const [key, value] of Object.entries(master.entities || {})) {
       try {
         entities[key] = EntityConfigSchema.parse(value)
       } catch (e) {
@@ -350,42 +278,6 @@ class ConfigLoaderService {
         entities[key] = value as EntityConfig
       }
     }
-
-    // 8. Views laden
-    const viewFiles = imports.views || []
-    const views = await this.loadMultiple<unknown>(viewFiles)
-
-    // 9. Forms laden
-    const formFiles = imports.forms || []
-    const forms = await this.loadMultiple<unknown>(formFiles)
-
-    // 10. Tables laden
-    const tableFiles = imports.tables || []
-    const tables = await this.loadMultiple<unknown>(tableFiles)
-
-    // 11. Design System laden
-    const designFiles = imports.design || []
-    const designArray = Array.isArray(designFiles) ? designFiles : [designFiles].filter(Boolean)
-    const designConfigs = await Promise.all(
-      designArray.map((f) => this.loadToml<Record<string, unknown>>(f))
-    )
-    const mergedDesign = designConfigs.reduce(
-      (acc, curr) => this.deepMerge(acc, curr),
-      {} as Record<string, unknown>
-    )
-    const design = DesignSystemSchema.parse(mergedDesign)
-
-    // 12. Features laden
-    const featuresRaw = imports.features
-      ? await this.loadToml<Record<string, unknown>>(imports.features)
-      : { features: {} }
-    const features = FeatureFlagsSchema.parse(featuresRaw)
-
-    // 13. Validation laden
-    const validationRaw = imports.validation
-      ? await this.loadToml<Record<string, unknown>>(imports.validation)
-      : { validation: {} }
-    const validation = ValidationRulesSchema.parse(validationRaw)
 
     const loadTime = Date.now() - startTime
     console.log(`[ConfigLoader] Konfiguration geladen in ${loadTime}ms`)
@@ -492,7 +384,7 @@ class ConfigLoaderService {
   /**
    * Labels (i18n)
    */
-  async getLabels(): Promise<Labels> {
+  async getLabels(): Promise<LabelsRoot> {
     return (await this.getConfig()).labels
   }
 
@@ -520,14 +412,14 @@ class ConfigLoaderService {
   /**
    * Alle Kataloge
    */
-  async getCatalogs(): Promise<Record<string, CatalogConfig>> {
+  async getCatalogs(): Promise<CatalogsRoot> {
     return (await this.getConfig()).catalogs
   }
 
   /**
    * Einzelner Katalog
    */
-  async getCatalog(name: string): Promise<CatalogConfig | undefined> {
+  async getCatalog(name: string): Promise<unknown> {
     return (await this.getCatalogs())[name]
   }
 
@@ -590,7 +482,7 @@ class ConfigLoaderService {
   /**
    * Design System
    */
-  async getDesign(): Promise<DesignSystem> {
+  async getDesign(): Promise<DesignRoot> {
     return (await this.getConfig()).design
   }
 
@@ -628,7 +520,7 @@ class ConfigLoaderService {
   /**
    * Validierungsregeln
    */
-  async getValidation(): Promise<ValidationRules> {
+  async getValidation(): Promise<ValidationRoot> {
     return (await this.getConfig()).validation
   }
 

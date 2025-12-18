@@ -1,0 +1,771 @@
+# =============================================================================
+# LABELS - Deutsche UI-Texte
+# =============================================================================
+# Alle sichtbaren Texte der Anwendung
+# Struktur: [bereich.unterbereich]
+# Referenzierung: "labels.bereich.unterbereich.key"
+# @lastModified: 2025-12-17
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# APP - Allgemeine Anwendungstexte
+# -----------------------------------------------------------------------------
+[app]
+name = "Mietverwaltung"
+tagline = "Private Mietobjekt-Verwaltung"
+version_prefix = "Version"
+copyright = "© {year} Alle Rechte vorbehalten"
+
+[app.states]
+loading = "Laden..."
+saving = "Speichern..."
+deleting = "Löschen..."
+processing = "Verarbeitung..."
+uploading = "Hochladen..."
+generating = "Generieren..."
+
+[app.messages]
+no_data = "Keine Einträge vorhanden"
+no_results = "Keine Ergebnisse gefunden"
+empty_list = "Liste ist leer"
+not_found = "Nicht gefunden"
+error_generic = "Ein Fehler ist aufgetreten"
+success_save = "Erfolgreich gespeichert"
+success_delete = "Erfolgreich gelöscht"
+confirm_delete = "Möchten Sie diesen Eintrag wirklich löschen?"
+unsaved_changes = "Ungespeicherte Änderungen vorhanden"
+
+# -----------------------------------------------------------------------------
+# NAVIGATION - Menüpunkte
+# -----------------------------------------------------------------------------
+[nav]
+dashboard = "Dashboard"
+objekte_einheiten = "Objekte/Einheiten"
+einheiten = "Einheiten"
+mieter = "Mieter"
+vertraege = "Verträge"
+finanzen = "Finanzen"
+zahlungen = "Zahlungen"
+kautionen = "Kautionen"
+sollstellung = "Sollstellung"
+nebenkosten = "Nebenkosten"
+rechnungen = "Rechnungen"
+abrechnungen = "Abrechnungen"
+zaehler = "Zähler"
+dokumente = "Dokumente"
+einstellungen = "Einstellungen"
+hilfe = "Hilfe"
+logout = "Abmelden"
+
+# -----------------------------------------------------------------------------
+# BUTTONS - Schaltflächen
+# -----------------------------------------------------------------------------
+[buttons]
+save = "Speichern"
+cancel = "Abbrechen"
+delete = "Löschen"
+edit = "Bearbeiten"
+create = "Erstellen"
+add = "Hinzufügen"
+remove = "Entfernen"
+close = "Schließen"
+back = "Zurück"
+next = "Weiter"
+previous = "Vorherige"
+search = "Suchen"
+filter = "Filtern"
+reset = "Zurücksetzen"
+export = "Exportieren"
+import = "Importieren"
+download = "Herunterladen"
+upload = "Hochladen"
+print = "Drucken"
+copy = "Kopieren"
+refresh = "Aktualisieren"
+confirm = "Bestätigen"
+submit = "Absenden"
+apply = "Anwenden"
+clear = "Leeren"
+select_all = "Alle auswählen"
+deselect_all = "Auswahl aufheben"
+more = "Mehr"
+less = "Weniger"
+show_more = "Mehr anzeigen"
+show_less = "Weniger anzeigen"
+view_details = "Details anzeigen"
+
+# -----------------------------------------------------------------------------
+# FORMS - Formular-Elemente
+# -----------------------------------------------------------------------------
+[forms]
+required_hint = "* Pflichtfeld"
+optional = "Optional"
+select_placeholder = "Bitte wählen..."
+search_placeholder = "Suchen..."
+date_placeholder = "TT.MM.JJJJ"
+time_placeholder = "HH:MM"
+file_placeholder = "Datei auswählen..."
+no_file_selected = "Keine Datei ausgewählt"
+drag_drop_hint = "Datei hierher ziehen oder klicken zum Auswählen"
+max_file_size = "Maximale Dateigröße: {size} MB"
+allowed_formats = "Erlaubte Formate: {formats}"
+
+[forms.sections]
+basic_info = "Grunddaten"
+address = "Adresse"
+contact = "Kontakt"
+financial = "Finanzen"
+notes = "Notizen"
+documents = "Dokumente"
+settings = "Einstellungen"
+metadata = "Metadaten"
+
+# -----------------------------------------------------------------------------
+# VALIDATION - Validierungsmeldungen
+# -----------------------------------------------------------------------------
+[validation]
+required = "Dieses Feld ist erforderlich"
+invalid_format = "Ungültiges Format"
+invalid_email = "Ungültige E-Mail-Adresse"
+invalid_phone = "Ungültige Telefonnummer"
+invalid_iban = "Ungültige IBAN"
+invalid_date = "Ungültiges Datum"
+invalid_number = "Ungültige Zahl"
+min_value = "Mindestwert: {min}"
+max_value = "Maximalwert: {max}"
+min_length = "Mindestens {min} Zeichen erforderlich"
+max_length = "Maximal {max} Zeichen erlaubt"
+pattern_mismatch = "Format stimmt nicht überein"
+unique_violation = "Dieser Wert existiert bereits"
+date_past = "Datum muss in der Vergangenheit liegen"
+date_future = "Datum muss in der Zukunft liegen"
+date_range = "Enddatum muss nach Startdatum liegen"
+positive_number = "Wert muss positiv sein"
+negative_number = "Wert muss negativ sein"
+integer_required = "Ganzzahl erforderlich"
+decimal_places = "Maximal {places} Dezimalstellen erlaubt"
+file_too_large = "Datei zu groß (max. {size} MB)"
+file_type_invalid = "Dateityp nicht erlaubt"
+
+# -----------------------------------------------------------------------------
+# TABLES - Tabellen-Elemente
+# -----------------------------------------------------------------------------
+[tables]
+actions = "Aktionen"
+no_entries = "Keine Einträge vorhanden"
+loading = "Daten werden geladen..."
+error_loading = "Fehler beim Laden der Daten"
+page_info = "Seite {page} von {total}"
+showing_entries = "Zeige {from} bis {to} von {total} Einträgen"
+rows_per_page = "Zeilen pro Seite"
+sort_asc = "Aufsteigend sortieren"
+sort_desc = "Absteigend sortieren"
+filter_by = "Filtern nach {column}"
+clear_filters = "Filter zurücksetzen"
+select_row = "Zeile auswählen"
+selected_count = "{count} ausgewählt"
+bulk_actions = "Massenaktionen"
+export_csv = "Als CSV exportieren"
+export_pdf = "Als PDF exportieren"
+column_settings = "Spalteneinstellungen"
+
+# -----------------------------------------------------------------------------
+# DASHBOARD - Dashboard-Texte
+# -----------------------------------------------------------------------------
+[dashboard]
+title = "Dashboard"
+subtitle = "Übersicht Ihrer Mietverwaltung"
+monatsuebersicht = "Monatsübersicht"
+soll_gesamt = "Soll gesamt"
+ist_gesamt = "Ist gesamt"
+offen = "Offen"
+offene_posten = "Offene Posten"
+erinnerungen = "Erinnerungen"
+keine_erinnerungen = "Keine offenen Erinnerungen"
+leerstand = "Leerstand"
+einheiten_leer = "Leere Einheiten"
+schnellzugriff = "Schnellzugriff"
+aktuelle_mieter = "Aktuelle Mieter"
+naechste_kuendigungen = "Nächste Kündigungen"
+faellige_zahlungen = "Fällige Zahlungen"
+letzte_aktivitaeten = "Letzte Aktivitäten"
+
+[dashboard.stats]
+objekte = "Objekte"
+einheiten = "Einheiten"
+mieter = "Aktive Mieter"
+vertraege = "Aktive Verträge"
+offene_betraege = "Offene Beträge"
+monatliche_einnahmen = "Monatliche Einnahmen"
+vermietungsquote = "Vermietungsquote"
+durchschnittsmiete = "Durchschnittsmiete"
+
+[dashboard.actions]
+neue_zahlung = "Neue Zahlung"
+neuer_mieter = "Neuer Mieter"
+neues_objekt = "Neues Objekt"
+nk_abrechnung = "NK-Abrechnung erstellen"
+zaehler_ablesen = "Zähler ablesen"
+
+# -----------------------------------------------------------------------------
+# ENTITIES - Entity-Labels
+# -----------------------------------------------------------------------------
+[entities.objekt]
+singular = "Objekt"
+plural = "Objekte"
+new = "Neues Objekt"
+edit = "Objekt bearbeiten"
+delete = "Objekt löschen"
+
+[entities.einheit]
+singular = "Einheit"
+plural = "Einheiten"
+new = "Neue Einheit"
+edit = "Einheit bearbeiten"
+delete = "Einheit löschen"
+
+[entities.mieter]
+singular = "Mieter"
+plural = "Mieter"
+new = "Neuer Mieter"
+edit = "Mieter bearbeiten"
+delete = "Mieter löschen"
+
+[entities.vertrag]
+singular = "Vertrag"
+plural = "Verträge"
+new = "Neuer Vertrag"
+edit = "Vertrag bearbeiten"
+delete = "Vertrag löschen"
+
+[entities.kaution]
+singular = "Kaution"
+plural = "Kautionen"
+new = "Neue Kaution"
+edit = "Kaution bearbeiten"
+delete = "Kaution löschen"
+
+[entities.zahlung]
+singular = "Zahlung"
+plural = "Zahlungen"
+new = "Neue Zahlung"
+edit = "Zahlung bearbeiten"
+delete = "Zahlung löschen"
+
+[entities.sollstellung]
+singular = "Sollstellung"
+plural = "Sollstellungen"
+new = "Neue Sollstellung"
+edit = "Sollstellung bearbeiten"
+delete = "Sollstellung löschen"
+
+[entities.nebenkostenabrechnung]
+singular = "Nebenkostenabrechnung"
+plural = "Nebenkostenabrechnungen"
+new = "Neue Nebenkostenabrechnung"
+edit = "Nebenkostenabrechnung bearbeiten"
+delete = "Nebenkostenabrechnung löschen"
+
+[entities.zaehler]
+singular = "Zähler"
+plural = "Zähler"
+new = "Neuer Zähler"
+edit = "Zähler bearbeiten"
+delete = "Zähler löschen"
+
+[entities.zaehlerstand]
+singular = "Zählerstand"
+plural = "Zählerstände"
+new = "Neuer Zählerstand"
+edit = "Zählerstand bearbeiten"
+delete = "Zählerstand löschen"
+
+[entities.dokument]
+singular = "Dokument"
+plural = "Dokumente"
+new = "Neues Dokument"
+edit = "Dokument bearbeiten"
+delete = "Dokument löschen"
+
+[entities.kostenart]
+singular = "Kostenart"
+plural = "Kostenarten"
+new = "Neue Kostenart"
+edit = "Kostenart bearbeiten"
+delete = "Kostenart löschen"
+
+[entities.rechnung]
+singular = "Rechnung"
+plural = "Rechnungen"
+new = "Neue Rechnung"
+edit = "Rechnung bearbeiten"
+delete = "Rechnung löschen"
+
+[entities.erinnerung]
+singular = "Erinnerung"
+plural = "Erinnerungen"
+new = "Neue Erinnerung"
+edit = "Erinnerung bearbeiten"
+delete = "Erinnerung löschen"
+
+# -----------------------------------------------------------------------------
+# FIELDS - Feldbezeichnungen
+# -----------------------------------------------------------------------------
+[fields.common]
+id = "ID"
+name = "Name"
+bezeichnung = "Bezeichnung"
+beschreibung = "Beschreibung"
+status = "Status"
+typ = "Typ"
+datum = "Datum"
+betrag = "Betrag"
+notizen = "Notizen"
+erstellt_am = "Erstellt am"
+aktualisiert_am = "Aktualisiert am"
+
+[fields.address]
+strasse = "Straße"
+hausnummer = "Hausnummer"
+plz = "PLZ"
+ort = "Ort"
+land = "Land"
+stockwerk = "Stockwerk"
+lage = "Lage"
+
+[fields.contact]
+anrede = "Anrede"
+vorname = "Vorname"
+nachname = "Nachname"
+email = "E-Mail"
+telefon = "Telefon"
+mobil = "Mobil"
+fax = "Fax"
+
+[mieter]
+name = "Name"
+anrede = "Anrede"
+vorname = "Vorname"
+nachname = "Nachname"
+email = "E-Mail"
+telefon = "Telefon"
+mobil = "Mobil"
+status = "Status"
+einheit = "Einheit"
+iban = "IBAN"
+bic = "BIC"
+bankname = "Bank"
+adresse_vorher = "Vorherige Anschrift"
+
+[fields.financial]
+iban = "IBAN"
+bic = "BIC"
+kontoinhaber = "Kontoinhaber"
+bank = "Bank"
+steuernummer = "Steuernummer"
+ust_id = "USt-ID"
+nettobetrag = "Nettobetrag"
+bruttobetrag = "Bruttobetrag"
+mwst = "MwSt."
+mwst_satz = "MwSt.-Satz"
+
+[fields.objekt]
+objektart = "Objektart"
+baujahr = "Baujahr"
+wohnflaeche = "Wohnfläche"
+grundstuecksflaeche = "Grundstücksfläche"
+anzahl_einheiten = "Anzahl Einheiten"
+anzahl_stellplaetze = "Anzahl Stellplätze"
+heizungsart = "Heizungsart"
+energieausweis = "Energieausweis vorhanden"
+kaufpreis = "Kaufpreis"
+kaufdatum = "Kaufdatum"
+verkehrswert = "Verkehrswert"
+
+[fields.einheit]
+einheit_nr = "Einheit-Nr."
+wohnflaeche = "Wohnfläche (m²)"
+nutzflaeche = "Nutzfläche (m²)"
+zimmer = "Zimmer"
+balkon = "Balkon"
+terrasse = "Terrasse"
+garten = "Garten"
+stellplatz = "Stellplatz"
+keller = "Keller"
+ausstattung = "Ausstattung"
+
+[fields.mieter]
+geburtsdatum = "Geburtsdatum"
+nationalitaet = "Nationalität"
+beruf = "Beruf"
+arbeitgeber = "Arbeitgeber"
+einkommen = "Einkommen"
+schufa_score = "SCHUFA-Score"
+notfallkontakt = "Notfallkontakt"
+
+[fields.vertrag]
+vertragsnummer = "Vertragsnummer"
+mietbeginn = "Mietbeginn"
+mietende = "Mietende"
+befristet = "Befristet"
+grundmiete = "Grundmiete (Kalt)"
+nebenkosten_vorauszahlung = "NK-Vorauszahlung"
+gesamtmiete = "Gesamtmiete (Warm)"
+kuendigungsfrist = "Kündigungsfrist"
+mietanpassung = "Nächste Mietanpassung"
+staffelmiete = "Staffelmiete"
+indexmiete = "Indexmiete"
+
+[fields.kaution]
+kautionsbetrag = "Kautionsbetrag"
+gezahlt_am = "Gezahlt am"
+anlageform = "Anlageform"
+zinssatz = "Zinssatz"
+rueckzahlung_am = "Rückzahlung am"
+abzuege = "Abzüge"
+abzuege_grund = "Grund für Abzüge"
+
+[fields.zahlung]
+zahlungsdatum = "Zahlungsdatum"
+verwendungszweck = "Verwendungszweck"
+zahlungsart = "Zahlungsart"
+buchungsreferenz = "Buchungsreferenz"
+
+[fields.sollstellung]
+monat = "Monat"
+jahr = "Jahr"
+sollbetrag = "Sollbetrag"
+istbetrag = "Istbetrag"
+differenz = "Differenz"
+faellig_am = "Fällig am"
+
+[fields.zaehler]
+zaehlernummer = "Zählernummer"
+zaehlertyp = "Zählertyp"
+einheit_messung = "Messeinheit"
+einbaudatum = "Einbaudatum"
+eichdatum = "Eichdatum"
+naechste_eichung = "Nächste Eichung"
+
+[fields.zaehlerstand]
+ablesedatum = "Ablesedatum"
+stand = "Stand"
+verbrauch = "Verbrauch"
+schaetzung = "Schätzung"
+
+[fields.dokument]
+dokumenttyp = "Dokumenttyp"
+dateiname = "Dateiname"
+dateigroesse = "Dateigröße"
+hochgeladen_am = "Hochgeladen am"
+gueltigkeit = "Gültigkeit"
+
+[fields.rechnung]
+rechnungsnummer = "Rechnungsnummer"
+rechnungsdatum = "Rechnungsdatum"
+faelligkeitsdatum = "Fälligkeitsdatum"
+lieferant = "Lieferant"
+kostenstelle = "Kostenstelle"
+abrechnungszeitraum = "Abrechnungszeitraum"
+
+[fields.nebenkostenabrechnung]
+abrechnungsjahr = "Abrechnungsjahr"
+gesamtkosten = "Gesamtkosten"
+vorauszahlungen = "Vorauszahlungen"
+nachzahlung = "Nachzahlung"
+guthaben = "Guthaben"
+zugestellt_am = "Zugestellt am"
+
+[fields.erinnerung]
+titel = "Titel"
+faellig_am = "Fällig am"
+erledigt = "Erledigt"
+prioritaet = "Priorität"
+wiederholung = "Wiederholung"
+
+# -----------------------------------------------------------------------------
+# ACTIONS - Aktionen
+# -----------------------------------------------------------------------------
+[actions]
+zahlung_erfassen = "Zahlung erfassen"
+rechnung_erfassen = "Rechnung erfassen"
+zaehler_ablesen = "Zähler ablesen"
+nk_abrechnung = "NK-Abrechnung erstellen"
+vertrag_erstellen = "Vertrag erstellen"
+vertrag_kuendigen = "Vertrag kündigen"
+mahnung_erstellen = "Mahnung erstellen"
+dokument_hochladen = "Dokument hochladen"
+export_steuerberater = "Steuerberater-Export"
+backup_erstellen = "Backup erstellen"
+daten_importieren = "Daten importieren"
+
+# -----------------------------------------------------------------------------
+# STATUS - Status-Werte
+# -----------------------------------------------------------------------------
+[status.general]
+aktiv = "Aktiv"
+inaktiv = "Inaktiv"
+archiviert = "Archiviert"
+geloescht = "Gelöscht"
+
+[status.vertrag]
+entwurf = "Entwurf"
+aktiv = "Aktiv"
+gekuendigt = "Gekündigt"
+beendet = "Beendet"
+pausiert = "Pausiert"
+
+[status.zahlung]
+offen = "Offen"
+teilweise = "Teilweise bezahlt"
+bezahlt = "Bezahlt"
+ueberfaellig = "Überfällig"
+gemahnt = "Gemahnt"
+storniert = "Storniert"
+
+[status.einheit]
+vermietet = "Vermietet"
+leer = "Leerstand"
+renovierung = "In Renovierung"
+reserviert = "Reserviert"
+eigennutzung = "Eigennutzung"
+
+[status.dokument]
+entwurf = "Entwurf"
+aktiv = "Aktiv"
+abgelaufen = "Abgelaufen"
+archiviert = "Archiviert"
+
+[status.erinnerung]
+offen = "Offen"
+erledigt = "Erledigt"
+verschoben = "Verschoben"
+abgebrochen = "Abgebrochen"
+
+# -----------------------------------------------------------------------------
+# ENUMS - Aufzählungswerte
+# -----------------------------------------------------------------------------
+[enums.anrede]
+herr = "Herr"
+frau = "Frau"
+firma = "Firma"
+divers = "Divers"
+keine = "Keine Anrede"
+
+[enums.objektart]
+mehrfamilienhaus = "Mehrfamilienhaus"
+einfamilienhaus = "Einfamilienhaus"
+doppelhaushaelfte = "Doppelhaushälfte"
+reihenhaus = "Reihenhaus"
+eigentumswohnung = "Eigentumswohnung"
+gewerbe = "Gewerbeobjekt"
+gemischt = "Gemischt genutztes Objekt"
+grundstueck = "Grundstück"
+
+[enums.einheitart]
+wohnung = "Wohnung"
+gewerbe = "Gewerbe"
+buero = "Büro"
+laden = "Laden"
+lager = "Lager"
+stellplatz = "Stellplatz"
+garage = "Garage"
+keller = "Keller"
+
+[enums.zaehlertyp]
+strom = "Strom"
+gas = "Gas"
+wasser_kalt = "Kaltwasser"
+wasser_warm = "Warmwasser"
+heizung = "Heizung"
+fernwaerme = "Fernwärme"
+
+[enums.dokumenttyp]
+mietvertrag = "Mietvertrag"
+kuendigung = "Kündigung"
+protokoll = "Protokoll"
+rechnung = "Rechnung"
+bescheid = "Bescheid"
+korrespondenz = "Korrespondenz"
+nachweis = "Nachweis"
+sonstiges = "Sonstiges"
+
+[enums.zahlungsart]
+ueberweisung = "Überweisung"
+lastschrift = "Lastschrift"
+bar = "Bar"
+scheck = "Scheck"
+paypal = "PayPal"
+
+[enums.prioritaet]
+niedrig = "Niedrig"
+mittel = "Mittel"
+hoch = "Hoch"
+dringend = "Dringend"
+
+[enums.wiederholung]
+keine = "Keine"
+taeglich = "Täglich"
+woechentlich = "Wöchentlich"
+monatlich = "Monatlich"
+quartal = "Vierteljährlich"
+jaehrlich = "Jährlich"
+
+[enums.heizungsart]
+gas = "Gas"
+oel = "Öl"
+fernwaerme = "Fernwärme"
+waermepumpe = "Wärmepumpe"
+elektro = "Elektro"
+pellet = "Pellet"
+solar = "Solar"
+
+[enums.ausstattung]
+standard = "Standard"
+gehoben = "Gehoben"
+luxus = "Luxus"
+einfach = "Einfach"
+
+# -----------------------------------------------------------------------------
+# DIALOGS - Dialog-Texte
+# -----------------------------------------------------------------------------
+[dialogs.confirm_delete]
+title = "Löschen bestätigen"
+message = "Möchten Sie \"{item}\" wirklich löschen?"
+message_plural = "Möchten Sie {count} Einträge wirklich löschen?"
+warning = "Diese Aktion kann nicht rückgängig gemacht werden."
+confirm = "Löschen"
+cancel = "Abbrechen"
+
+[dialogs.unsaved_changes]
+title = "Ungespeicherte Änderungen"
+message = "Sie haben ungespeicherte Änderungen. Möchten Sie die Seite wirklich verlassen?"
+confirm = "Verwerfen"
+cancel = "Zurück zum Bearbeiten"
+save = "Speichern und verlassen"
+
+[dialogs.error]
+title = "Fehler"
+default_message = "Ein unerwarteter Fehler ist aufgetreten."
+retry = "Erneut versuchen"
+close = "Schließen"
+
+[dialogs.success]
+title = "Erfolg"
+saved = "Die Änderungen wurden erfolgreich gespeichert."
+deleted = "Der Eintrag wurde erfolgreich gelöscht."
+created = "Der Eintrag wurde erfolgreich erstellt."
+
+# -----------------------------------------------------------------------------
+# ERRORS - Fehlermeldungen
+# -----------------------------------------------------------------------------
+[errors]
+network = "Netzwerkfehler. Bitte überprüfen Sie Ihre Internetverbindung."
+server = "Serverfehler. Bitte versuchen Sie es später erneut."
+not_found = "Die angeforderte Ressource wurde nicht gefunden."
+unauthorized = "Sie sind nicht berechtigt, diese Aktion auszuführen."
+forbidden = "Zugriff verweigert."
+timeout = "Die Anfrage hat zu lange gedauert. Bitte versuchen Sie es erneut."
+validation = "Bitte überprüfen Sie Ihre Eingaben."
+conflict = "Ein Konflikt ist aufgetreten. Die Daten wurden möglicherweise von jemand anderem geändert."
+file_upload = "Beim Hochladen der Datei ist ein Fehler aufgetreten."
+file_too_large = "Die Datei ist zu groß."
+file_type = "Dieser Dateityp wird nicht unterstützt."
+database = "Datenbankfehler. Bitte kontaktieren Sie den Support."
+
+# -----------------------------------------------------------------------------
+# UNITS - Maßeinheiten
+# -----------------------------------------------------------------------------
+[units]
+currency = "€"
+currency_code = "EUR"
+area_sqm = "m²"
+volume_cbm = "m³"
+power_kwh = "kWh"
+months = "Monate"
+days = "Tage"
+percent = "%"
+pieces = "Stk."
+liters = "l"
+
+# -----------------------------------------------------------------------------
+# DATE/TIME - Datum und Zeit
+# -----------------------------------------------------------------------------
+[datetime]
+today = "Heute"
+yesterday = "Gestern"
+tomorrow = "Morgen"
+this_week = "Diese Woche"
+last_week = "Letzte Woche"
+this_month = "Dieser Monat"
+last_month = "Letzter Monat"
+this_year = "Dieses Jahr"
+last_year = "Letztes Jahr"
+ago = "vor {time}"
+in_future = "in {time}"
+minutes = "Minuten"
+hours = "Stunden"
+
+[datetime.months]
+january = "Januar"
+february = "Februar"
+march = "März"
+april = "April"
+may = "Mai"
+june = "Juni"
+july = "Juli"
+august = "August"
+september = "September"
+october = "Oktober"
+november = "November"
+december = "Dezember"
+
+[datetime.weekdays]
+monday = "Montag"
+tuesday = "Dienstag"
+wednesday = "Mittwoch"
+thursday = "Donnerstag"
+friday = "Freitag"
+saturday = "Samstag"
+sunday = "Sonntag"
+
+# -----------------------------------------------------------------------------
+# TOOLTIPS - Hilfetexte
+# -----------------------------------------------------------------------------
+[tooltips]
+edit = "Bearbeiten"
+delete = "Löschen"
+view = "Anzeigen"
+download = "Herunterladen"
+upload = "Hochladen"
+print = "Drucken"
+copy = "Kopieren"
+refresh = "Aktualisieren"
+filter = "Filtern"
+sort = "Sortieren"
+expand = "Erweitern"
+collapse = "Einklappen"
+settings = "Einstellungen"
+help = "Hilfe"
+info = "Information"
+warning = "Warnung"
+error = "Fehler"
+success = "Erfolg"
+
+# -----------------------------------------------------------------------------
+# ACCESSIBILITY - Barrierefreiheit
+# -----------------------------------------------------------------------------
+[a11y]
+skip_to_main = "Zum Hauptinhalt springen"
+menu_open = "Menü öffnen"
+menu_close = "Menü schließen"
+search = "Suchen"
+loading = "Inhalt wird geladen"
+required_field = "Pflichtfeld"
+error_field = "Dieses Feld enthält einen Fehler"
+pagination_first = "Erste Seite"
+pagination_last = "Letzte Seite"
+pagination_prev = "Vorherige Seite"
+pagination_next = "Nächste Seite"
+modal_close = "Dialog schließen"
+notification_dismiss = "Benachrichtigung schließen"

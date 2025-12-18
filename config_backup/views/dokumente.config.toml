@@ -1,0 +1,32 @@
+[view]
+id = "dokumente"
+title = "labels.views.dokumente"
+route = "/dokumente"
+layout = "single"
+
+[view.content]
+table = "tables/dokumente.table"
+default_sort = { field = "hochgeladen_am", direction = "desc" }
+
+  [[view.content.filters]]
+  field = "objekt_id"
+  type = "select"
+  label = "labels.filter.objekt"
+  options_from = "objekt"
+
+  [[view.content.filters]]
+  field = "typ"
+  type = "select"
+  label = "labels.filter.typ"
+
+  [[view.content.filters]]
+  field = "jahr"
+  type = "year_picker"
+  label = "labels.filter.jahr"
+
+[view.content.actions]
+upload = { label = "labels.actions.dokument_hochladen", dialog = "forms/dokument.form" }
+
+[view.content.bulk_actions]
+export = { label = "labels.actions.steuerberater_export", dialog = "dialogs/steuerberater_export" }
+delete = { label = "labels.actions.loeschen", confirm = true }

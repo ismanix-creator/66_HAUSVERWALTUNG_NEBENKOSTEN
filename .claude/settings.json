@@ -1,0 +1,57 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/00-reset-state.sh",
+            "timeout": 10
+          },
+          {
+            "type": "prompt",
+            "prompt": "PHASE 0 (Pflicht): Lies VOR allem Schreiben diese Doku-Dateien:\n- CLAUDE.md\n- planning.md\n- review.md\n- validation.md\n- CHANGELOG.md\n\nDann: Erstelle eine TODO-Liste (max 10 Punkte) oder frage den User nach Aufgaben. Erst DANACH Änderungen.",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Vor Tool-Nutzung:\n1) Doku gelesen?\n2) TODOs extrahiert?\n3) TODOs in .claude/state/todo.md schreiben\n4) READY_FOR_CHANGES setzen.",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/10-gate-require-docs-and-todos.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/90-gate-finalize-changelog-stage-commit.sh",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}

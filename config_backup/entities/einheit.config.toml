@@ -1,0 +1,85 @@
+[entity]
+name = "einheit"
+table_name = "einheiten"
+label = "labels.entity.einheit"
+label_plural = "labels.entity.einheiten"
+icon = "DoorOpen"
+primary_key = "id"
+
+[entity.fields.id]
+type = "uuid"
+auto_generate = true
+visible = false
+
+[entity.fields.objekt_id]
+type = "uuid"
+required = true
+reference = "objekt"
+label = "labels.einheit.objekt"
+placeholder = "Objekt wählen"
+
+[entity.fields.bezeichnung]
+type = "string"
+required = true
+max_length = 50
+label = "labels.einheit.bezeichnung"
+placeholder = "z.B. EG links, Halle A"
+
+[entity.fields.typ]
+type = "enum"
+required = true
+options = ["wohnung", "gewerbe", "stellplatz", "keller", "sonstig"]
+default = "wohnung"
+label = "labels.einheit.typ"
+placeholder = "wohnung"
+
+[entity.fields.flaeche]
+type = "decimal"
+required = true
+min = 1
+precision = 2
+suffix = "m²"
+label = "labels.einheit.flaeche"
+placeholder = "75.0"
+
+[entity.fields.anzahl_raeume]
+type = "decimal"
+min = 1
+precision = 1
+label = "labels.einheit.anzahl_raeume"
+visible_if = { field = "typ", in = ["wohnung"] }
+placeholder = "3.5"
+
+[entity.fields.etage]
+type = "string"
+max_length = 20
+label = "labels.einheit.etage"
+placeholder = "z.B. EG, 1. OG, DG"
+
+[entity.fields.ausstattung]
+type = "multiselect"
+options = ["balkon", "terrasse", "keller", "stellplatz", "einbaukueche", "aufzug", "gaeste_wc"]
+label = "labels.einheit.ausstattung"
+placeholder = "balkon, keller"
+
+[entity.fields.status]
+type = "enum"
+required = true
+options = ["vermietet", "leer", "eigennutzung", "renovierung"]
+default = "leer"
+label = "labels.einheit.status"
+placeholder = "leer"
+
+[entity.fields.notiz]
+type = "text"
+label = "labels.common.notiz"
+placeholder = "Besondere Merkmale, Schlüsselübergabe"
+
+[entity.relations]
+objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
+vertraege = { type = "one_to_many", target = "vertrag", foreign_key = "einheit_id" }
+zaehler = { type = "one_to_many", target = "zaehler", foreign_key = "einheit_id" }
+
+[entity.computed]
+aktueller_vertrag = { formula = "first(vertraege where ende is null or ende > now())" }
+aktueller_mieter = { formula = "aktueller_vertrag.mieter" }

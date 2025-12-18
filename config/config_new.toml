@@ -123441,7 +123441,7 @@ formel = "100% für zugeordnete Einheit"
 beispiel = "Reparatur in Wohnung A = 100% Wohnung A"
 
 [entities]
-[entities.erinnerung]
+[entities.erinnerung.entity]
 name = "erinnerung"
 table_name = "erinnerungen"
 label = "labels.entity.erinnerung"
@@ -123449,49 +123449,49 @@ label_plural = "labels.entity.erinnerungen"
 icon = "Bell"
 primary_key = "id"
 
-[entities.erinnerung.fields.id]
+[entities.erinnerung.entity.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.erinnerung.fields.typ]
+[entities.erinnerung.entity.fields.typ]
 type = "enum"
 required = true
 options = ["mieterhoehung", "vertragsende", "zaehlerablesung", "rueckstand", "nk_abrechnung", "kaution_rueckzahlung", "sonstig"]
 label = "labels.erinnerung.typ"
 
-[entities.erinnerung.fields.bezug_typ]
+[entities.erinnerung.entity.fields.bezug_typ]
 type = "enum"
 options = ["vertrag", "objekt", "mieter", "einheit"]
 label = "labels.erinnerung.bezug_typ"
 
-[entities.erinnerung.fields.bezug_id]
+[entities.erinnerung.entity.fields.bezug_id]
 type = "uuid"
 label = "labels.erinnerung.bezug_id"
 
-[entities.erinnerung.fields.faellig_am]
+[entities.erinnerung.entity.fields.faellig_am]
 type = "date"
 required = true
 label = "labels.erinnerung.faellig_am"
 
-[entities.erinnerung.fields.titel]
+[entities.erinnerung.entity.fields.titel]
 type = "string"
 required = true
 max_length = 200
 label = "labels.erinnerung.titel"
 
-[entities.erinnerung.fields.beschreibung]
+[entities.erinnerung.entity.fields.beschreibung]
 type = "text"
 label = "labels.erinnerung.beschreibung"
 
-[entities.erinnerung.fields.status]
+[entities.erinnerung.entity.fields.status]
 type = "enum"
 required = true
 options = ["offen", "erledigt", "zurueckgestellt"]
 default = "offen"
 label = "labels.erinnerung.status"
 
-[entities.erinnerung.fields.erstellt_am]
+[entities.erinnerung.entity.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 label = "labels.common.erstellt_am"
@@ -124195,41 +124195,7 @@ save_label = "labels.actions.speichern"
 cancel_label = "labels.actions.abbrechen"
 
 [tables]
-[tables.abrechnungen]
-entity = "nebenkostenabrechnung"
 
-[[table.columns]]
-field = "objekt.bezeichnung"
-label = "labels.nk.objekt"
-sortable = true
-width = "20%"
-
-[[table.columns]]
-field = "jahr"
-label = "labels.nk.jahr"
-sortable = true
-width = "12%"
-
-[[table.columns]]
-field = "zeitraum_von"
-label = "labels.nk.zeitraum"
-width = "18%"
-template = "{zeitraum_von|date} – {zeitraum_bis|date}"
-
-[[table.columns]]
-field = "status"
-label = "labels.nk.status"
-width = "15%"
-display = "badge"
-
-[[table.columns]]
-field = "gesamtkosten"
-label = "labels.nk.gesamtkosten"
-width = "15%"
-format = "currency"
-
-[tables.abrechnungen.row_actions]
-details = { icon = "Search", dialog = "dialogs/nk_abrechnung_detail" }
 
 [views]
 [views.dashboard]

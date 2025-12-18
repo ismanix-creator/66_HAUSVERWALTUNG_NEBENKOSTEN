@@ -1,0 +1,84 @@
+[view]
+id = "nebenkosten"
+title = "labels.views.nebenkosten"
+route = "/nebenkosten"
+layout = "tabbed"
+
+  [[view.tabs]]
+  id = "rechnungen"
+  label = "labels.tabs.rechnungen"
+  route = "/nebenkosten/rechnungen"
+  table = "tables/rechnungen.table"
+  default_sort = { field = "rechnungsdatum", direction = "desc" }
+
+    [[view.tabs.filters]]
+    field = "objekt_id"
+    type = "select"
+    label = "labels.filter.objekt"
+    options_from = "objekt"
+
+    [[view.tabs.filters]]
+    field = "kostenart_id"
+    type = "select"
+    label = "labels.filter.kostenart"
+    options_from = "kostenart"
+
+    [[view.tabs.filters]]
+    field = "computed.jahr"
+    type = "year_picker"
+    label = "labels.filter.jahr"
+
+    [[view.tabs.filters]]
+    field = "computed.ist_bezahlt"
+    type = "boolean_toggle"
+    label = "labels.filter.bezahlt"
+
+  [view.tabs.actions]
+  create = { label = "labels.actions.rechnung_erfassen", dialog = "forms/rechnung.form" }
+
+  [view.tabs.summary]
+  show = true
+  fields = ["betrag"]
+  aggregate = "sum"
+  group_by = "kostenart.bezeichnung"
+
+  [[view.tabs]]
+  id = "abrechnungen"
+  label = "labels.tabs.abrechnungen"
+  route = "/nebenkosten/abrechnungen"
+  table = "tables/abrechnungen.table"
+
+    [[view.tabs.filters]]
+    field = "objekt_id"
+    type = "select"
+    options_from = "objekt"
+
+    [[view.tabs.filters]]
+    field = "jahr"
+    type = "year_picker"
+
+    [[view.tabs.filters]]
+    field = "status"
+    type = "select"
+
+  [view.tabs.actions]
+  create = { label = "labels.actions.abrechnung_erstellen", dialog = "dialogs/nk_abrechnung_wizard" }
+
+  [[view.tabs]]
+  id = "zaehler"
+  label = "labels.tabs.zaehler"
+  route = "/nebenkosten/zaehler"
+  table = "tables/zaehler.table"
+
+    [[view.tabs.filters]]
+    field = "objekt_id"
+    type = "select"
+    options_from = "objekt"
+
+    [[view.tabs.filters]]
+    field = "typ"
+    type = "select"
+
+  [view.tabs.actions]
+  create = { label = "labels.actions.zaehler_anlegen", dialog = "forms/zaehler.form" }
+  ablesung = { label = "labels.actions.ablesung_erfassen", dialog = "forms/zaehlerstand.form" }

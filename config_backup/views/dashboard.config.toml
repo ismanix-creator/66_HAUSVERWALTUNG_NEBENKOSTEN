@@ -1,0 +1,78 @@
+[view]
+id = "dashboard"
+title = "labels.views.dashboard"
+route = "/dashboard"
+layout = "dashboard"
+
+[[view.widgets]]
+id = "monatsuebersicht"
+type = "stats_card"
+title = "labels.dashboard.monatsübersicht"
+position = { row = 1, col = 1, width = 2 }
+
+  [[view.widgets.stats]]
+  label = "labels.dashboard.soll_gesamt"
+  value = { query = "sum(sollstellung where monat = current_month).sollbetrag" }
+  format = "currency"
+
+  [[view.widgets.stats]]
+  label = "labels.dashboard.ist_gesamt"
+  value = { query = "sum(sollstellung where monat = current_month).istbetrag" }
+  format = "currency"
+
+  [[view.widgets.stats]]
+  label = "labels.dashboard.offen"
+  value = { query = "sum(sollstellung where monat = current_month and status != 'bezahlt').differenz" }
+  format = "currency"
+  color_rule = { negative = "red", zero = "green" }
+
+[[view.widgets]]
+id = "offene_posten"
+type = "table_widget"
+title = "labels.dashboard.offene_posten"
+position = { row = 1, col = 3, width = 2 }
+table = "tables/sollstellungen_offen.table"
+max_rows = 5
+show_more_link = "/finanzen/sollstellung?filter=offen"
+
+[[view.widgets]]
+id = "erinnerungen"
+type = "list_widget"
+title = "labels.dashboard.erinnerungen"
+position = { row = 2, col = 1, width = 2 }
+query = "erinnerung where status = 'offen' order by faellig_am limit 10"
+item_template = { title = "titel", subtitle = "faellig_am", icon_from = "typ" }
+empty_message = "labels.dashboard.keine_erinnerungen"
+
+[[view.widgets]]
+id = "leerstand"
+type = "stats_card"
+title = "labels.dashboard.leerstand"
+position = { row = 2, col = 3, width = 1 }
+
+  [[view.widgets.stats]]
+  label = "labels.dashboard.einheiten_leer"
+  value = { query = "count(einheit where status = 'leer')" }
+  total = { query = "count(einheit)" }
+  format = "fraction"
+
+[[view.widgets]]
+id = "quick_actions"
+type = "action_buttons"
+title = "labels.dashboard.schnellzugriff"
+position = { row = 2, col = 4, width = 1 }
+
+  [[view.widgets.actions]]
+  label = "labels.actions.zahlung_erfassen"
+  icon = "Plus"
+  dialog = "forms/zahlung.form"
+
+  [[view.widgets.actions]]
+  label = "labels.actions.rechnung_erfassen"
+  icon = "Receipt"
+  dialog = "forms/rechnung.form"
+
+  [[view.widgets.actions]]
+  label = "labels.actions.zaehler_ablesen"
+  icon = "Gauge"
+  dialog = "forms/zaehlerstand.form"

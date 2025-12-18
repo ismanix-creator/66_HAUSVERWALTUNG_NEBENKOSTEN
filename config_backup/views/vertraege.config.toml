@@ -1,0 +1,66 @@
+[view]
+id = "vertraege"
+title = "labels.views.vertraege"
+route = "/vertraege"
+layout = "list_detail"
+
+[view.list]
+table = "tables/vertraege.table"
+search_fields = ["mieter.nachname", "einheit.bezeichnung", "vertragsnummer"]
+default_sort = { field = "beginn", direction = "desc" }
+
+  [[view.list.filters]]
+  field = "computed.ist_aktiv"
+  type = "boolean_toggle"
+  label = "labels.filter.nur_aktive"
+  default = true
+
+  [[view.list.filters]]
+  field = "typ"
+  type = "select"
+  label = "labels.filter.typ"
+
+[view.list.actions]
+create = { label = "labels.actions.vertrag_anlegen", dialog = "forms/vertrag.form" }
+
+[view.detail]
+route = "/vertraege/:id"
+title_field = "vertragsnummer"
+
+  [[view.detail.header_info]]
+  fields = ["mieter.computed.display_name", "einheit.bezeichnung", "computed.gesamtmiete"]
+
+  [[view.detail.tabs]]
+  id = "konditionen"
+  label = "labels.tabs.konditionen"
+  type = "form_readonly"
+  form = "forms/vertrag.form"
+  edit_action = { dialog = "forms/vertrag.form" }
+
+  [[view.detail.tabs]]
+  id = "kaution"
+  label = "labels.tabs.kaution"
+  type = "form_editable"
+  form = "forms/kaution.form"
+  data_path = "kaution"
+
+  [[view.detail.tabs]]
+  id = "zahlungen"
+  label = "labels.tabs.zahlungen"
+  type = "table"
+  table = "tables/zahlungen.table"
+  filter = { vertrag_id = ":id" }
+
+  [[view.detail.tabs]]
+  id = "sollstellung"
+  label = "labels.tabs.sollstellung"
+  type = "table"
+  table = "tables/sollstellungen.table"
+  filter = { vertrag_id = ":id" }
+
+  [[view.detail.tabs]]
+  id = "dokumente"
+  label = "labels.tabs.dokumente"
+  type = "table"
+  table = "tables/dokumente.table"
+  filter = { vertrag_id = ":id" }

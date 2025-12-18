@@ -1,0 +1,87 @@
+[entity]
+name = "rechnung"
+table_name = "rechnungen"
+label = "labels.entity.rechnung"
+label_plural = "labels.entity.rechnungen"
+icon = "Receipt"
+primary_key = "id"
+
+[entity.fields.id]
+type = "uuid"
+auto_generate = true
+visible = false
+
+[entity.fields.objekt_id]
+type = "uuid"
+required = true
+reference = "objekt"
+label = "labels.rechnung.objekt"
+
+[entity.fields.kostenart_id]
+type = "uuid"
+required = true
+reference = "kostenart"
+label = "labels.rechnung.kostenart"
+
+[entity.fields.einheit_id]
+type = "uuid"
+reference = "einheit"
+label = "labels.rechnung.einheit"
+description = "Nur bei Direktzuordnung"
+visible_if = { field = "kostenart.umlageschluessel", equals = "direkt" }
+
+[entity.fields.rechnungsnummer]
+type = "string"
+max_length = 50
+label = "labels.rechnung.rechnungsnummer"
+
+[entity.fields.rechnungsdatum]
+type = "date"
+required = true
+label = "labels.rechnung.rechnungsdatum"
+
+[entity.fields.faelligkeitsdatum]
+type = "date"
+label = "labels.rechnung.faelligkeitsdatum"
+
+[entity.fields.betrag]
+type = "currency"
+required = true
+min = 0
+label = "labels.rechnung.betrag"
+
+[entity.fields.zeitraum_von]
+type = "date"
+label = "labels.rechnung.zeitraum_von"
+
+[entity.fields.zeitraum_bis]
+type = "date"
+label = "labels.rechnung.zeitraum_bis"
+
+[entity.fields.bezahlt_am]
+type = "date"
+label = "labels.rechnung.bezahlt_am"
+
+[entity.fields.dokument_id]
+type = "uuid"
+reference = "dokument"
+label = "labels.rechnung.dokument"
+
+[entity.fields.notiz]
+type = "text"
+label = "labels.common.notiz"
+
+[entity.fields.erstellt_am]
+type = "datetime"
+auto_generate = true
+visible_in_form = false
+
+[entity.relations]
+objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
+kostenart = { type = "many_to_one", target = "kostenart", foreign_key = "kostenart_id" }
+einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
+dokument = { type = "many_to_one", target = "dokument", foreign_key = "dokument_id" }
+
+[entity.computed]
+ist_bezahlt = { formula = "bezahlt_am is not null" }
+jahr = { formula = "year(rechnungsdatum)" }

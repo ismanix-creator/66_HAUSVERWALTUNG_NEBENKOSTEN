@@ -1,0 +1,38 @@
+## DEPRECATED: Diese Datei wird nicht mehr für den Betrieb genutzt. Quelle ist `config/config.toml`.
+## Nur zur historischen Referenz behalten; bitte Änderungen ausschließlich in `config/config.toml` vornehmen.
+
+[app]
+name = "Mietverwaltung"
+version = "1.0.0"
+description = "Private Mietobjekt-Verwaltung"
+locale = "de-DE"
+currency = "EUR"
+timezone = "Europe/Berlin"
+
+[app.owner]
+# Wird in Einstellungen gepflegt, hier Defaults
+name = "Akki Scholze"
+address = ""
+tax_number = ""
+
+[app.features]
+dokumente_upload = true
+pdf_generation = true
+zaehler_management = true
+mahnwesen_hinweis = true          # Hinweis bei Rückstand, keine Automatik
+mieterhoehung_reminder = true
+
+[app.storage]
+dokumente_pfad = "./dokumente"
+backup_pfad = "./backups"
+max_upload_size_mb = 25
+
+[app.database]
+type = "postgresql"               # später, erstmal localStorage
+# connection details in .env
+
+[app.defaults]
+kuendigungsfrist_monate = 3
+kaution_monate = 3
+nk_abrechnungsfrist_monate = 12   # 12 Monate nach Abrechnungszeitraum
+mieterhoehung_sperrfrist_monate = 15

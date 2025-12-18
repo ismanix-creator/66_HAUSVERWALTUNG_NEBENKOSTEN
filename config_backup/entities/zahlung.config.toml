@@ -1,0 +1,63 @@
+[entity]
+name = "zahlung"
+table_name = "zahlungen"
+label = "labels.entity.zahlung"
+label_plural = "labels.entity.zahlungen"
+icon = "ArrowDownCircle"
+primary_key = "id"
+
+[entity.fields.id]
+type = "uuid"
+auto_generate = true
+visible = false
+
+[entity.fields.vertrag_id]
+type = "uuid"
+required = true
+reference = "vertrag"
+label = "labels.zahlung.vertrag"
+
+[entity.fields.datum]
+type = "date"
+required = true
+label = "labels.zahlung.datum"
+
+[entity.fields.betrag]
+type = "currency"
+required = true
+label = "labels.zahlung.betrag"
+
+[entity.fields.verwendungszweck]
+type = "string"
+max_length = 200
+label = "labels.zahlung.verwendungszweck"
+
+[entity.fields.typ]
+type = "enum"
+required = true
+options = ["miete", "nachzahlung", "kaution", "sonstig"]
+default = "miete"
+label = "labels.zahlung.typ"
+
+[entity.fields.monat_fuer]
+type = "string"
+pattern = "^[0-9]{4}-[0-9]{2}$"
+label = "labels.zahlung.monat_fuer"
+placeholder = "YYYY-MM"
+visible_if = { field = "typ", equals = "miete" }
+
+[entity.fields.notiz]
+type = "text"
+label = "labels.common.notiz"
+
+[entity.fields.erstellt_am]
+type = "datetime"
+auto_generate = true
+visible_in_form = false
+
+[entity.relations]
+vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id" }
+
+[entity.computed]
+mieter = { formula = "vertrag.mieter" }
+einheit = { formula = "vertrag.einheit" }

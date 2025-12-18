@@ -1,0 +1,40 @@
+# =============================================================================
+# KATALOG: Zahlungsarten
+# =============================================================================
+# Arten von Zahlungsmethoden
+# @lastModified: 2025-12-17
+# =============================================================================
+
+[catalog]
+name = "zahlungsarten"
+description = "Zahlungsmethoden"
+
+[[catalog.items]]
+value = "ueberweisung"
+label = "labels.enums.zahlungsart.ueberweisung"
+icon = "Banknote"
+sortierung = 10
+
+[[catalog.items]]
+value = "lastschrift"
+label = "labels.enums.zahlungsart.lastschrift"
+icon = "CreditCard"
+sortierung = 20
+
+[[catalog.items]]
+value = "bar"
+label = "labels.enums.zahlungsart.bar"
+icon = "Wallet"
+sortierung = 30
+
+[[catalog.items]]
+value = "scheck"
+label = "labels.enums.zahlungsart.scheck"
+icon = "FileCheck"
+sortierung = 40
+
+[[catalog.items]]
+value = "paypal"
+label = "labels.enums.zahlungsart.paypal"
+icon = "Globe"
+sortierung = 50
