@@ -8,6 +8,14 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-18
 
+### [20:45] - Fix/Config + Frontend - MieterPage Rendering & TOML Table Columns
+- **KRITISCHER CONFIG-FIX:** 70 falsch verschachtelte TOML Array-Tabellen korrigiert.
+  - War: `[[table.columns]]` (top-level, unbezogene Struktur)
+  - Ist: `[[tables.{name}.table.columns]]` (korrekt verschachtelt)
+  - Betroffen: Alle 11 Table-Konfigurationen (mieter, einheiten, objekte, etc.)
+- **MieterPage Loading-Condition:** Nicht mehr auf entityConfig/formConfig warten → Seite rendert auch wenn Formulare fehlschlagen.
+- **Resultat:** DataTable zeigt jetzt "Keine Einträge" statt blauem Bildschirm, wenn DB leer ist.
+
 ### [18:02] - Fix/Frontend - TypeScript & ESLint Fehler behoben
 - **React Hook Error:** useEntityList in DetailTableTab vor conditional check verschoben (Zeile 251).
 - **Type Errors:** mieter/contractIds/primaryUnitId korrekt als Record<string, unknown> getypet.

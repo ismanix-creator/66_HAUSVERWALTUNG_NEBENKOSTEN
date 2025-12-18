@@ -869,3 +869,20 @@
   "notes": "✅ npm run typecheck: GRÜN (keine Fehler). ✅ npm run lint: 3 Minor Warnungen (NebenkostenPage Hook Dependencies). Behoben: React Hook Error (DetailTableTab), Type Errors (Record<string,unknown>), Unused Variables, Console Statements unter DEBUG flag. Alle Kritischen Fehler erledigt."
 }
 ```
+
+## 2025-12-18T20:45:00Z – MieterPage Rendering + TOML Config Fix
+```json
+{
+  "agent": "Claude Code PM",
+  "ziel": "MieterPage zeigt nur blauen Bildschirm: isLoading-Block und Table Columns Config fixen",
+  "geändert": [
+    "src/client/pages/MieterPage.tsx",
+    "src/client/pages/MieterDetailPage.tsx",
+    "config/config.toml"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Restart Server und UI testen, oder weitere Entity-Views implementieren",
+  "notes": "🎯 KRITISCHE FIX: 70 falsch verschachtelte TOML-Spalten korrigiert. Waren: [[table.columns]], sollten sein: [[tables.{name}.table.columns]]. MieterPage isLoading-Bedingung gelockert: wartet nicht mehr auf entityConfig/formConfig. Seite zeigt jetzt DataTable mit leerer Nachricht statt blauer Bildschirm."
+}
+```
