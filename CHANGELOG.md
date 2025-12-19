@@ -8,6 +8,19 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-19
 
+### [2025-12-19 23:10] - Fix/KRITISCH - MieterPage Detail-Tabs TOML-Struktur repariert
+- **Problem:** MieterPage Detail-View zeigte keine Tabs bei Auswahl einer Zeile (stammdaten, vertrag, zahlungen, dokumente, kaution)
+- **Root Cause:** TOML Array-Tabellen falsch eingehängt: `[[view.detail.tabs]]` statt `[[views.mieter.detail.tabs]]`
+  - Tabs wurden unter nicht-existierendem `[view]` Objekt erstellt, nicht unter `[views.mieter.detail]`
+  - MieterDetailPage konnte keine Tabs laden → Seite zeigte nur "Laden..."
+  - Betraf auch: ObjekteDetailPage, VertraegeDetailPage
+- **Lösung:** Automatischer Python-Fix - alle `[[view.detail.tabs]]` → `[[views.{entity}.detail.tabs]]`
+- **Resultat:**
+  - TOML.parse verifiziert: 5 Tabs für mieter.detail ✅
+  - Mieter-Auswahl navigiert zu /mieter/:id und zeigt Details mit allen Tabs
+  - Auch Objekte und Verträge Detail-Views funktionieren jetzt
+- **Status:** ✅ KRITISCH REPARIERT, ✅ Verifiziert
+
 ### [2025-12-19 22:17] - Fix/Frontend - Mieter Aktionen: nur Icons ohne Text
 - **Problem:** Row-Actions zeigten immer Text (Label) auch wenn `label = ""` in Config definiert war
 - **Root Cause:** `const label = actionConfig.label || actionId` - leerer String wurde ignoriert, Fallback zu actionId
