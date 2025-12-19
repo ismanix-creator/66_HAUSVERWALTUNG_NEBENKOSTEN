@@ -173,8 +173,8 @@ export function NebenkostenPage() {
     <div className="space-y-6">
       <div className="flex flex-col gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Nebenkosten</h1>
-          <p className="text-gray-500">Rechnungen erfassen und Abrechnungen vorbereiten</p>
+          <h1 className="text-2xl font-bold text-gray-400">Nebenkosten</h1>
+          <p className="text-gray-600">Rechnungen erfassen und Abrechnungen vorbereiten</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {TABS.map(tab => (

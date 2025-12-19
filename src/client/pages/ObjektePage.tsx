@@ -110,8 +110,8 @@ export function ObjektePage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Objekte</h1>
-          <p className="text-gray-500">Verwaltung Ihrer Immobilien</p>
+          <h1 className="text-2xl font-bold text-gray-400">Objekte</h1>
+          <p className="text-gray-600">Verwaltung Ihrer Immobilien</p>
         </div>
         <button
           onClick={() => {

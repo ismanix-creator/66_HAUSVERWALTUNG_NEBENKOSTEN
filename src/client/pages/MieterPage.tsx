@@ -145,8 +145,8 @@ export function MieterPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Mieter</h1>
-          <p className="text-gray-500">Verzeichnis Ihrer aktuellen und ehemaligen Mieter.</p>
+          <h1 className="text-2xl font-bold text-gray-400">Mieter</h1>
+          <p className="text-gray-600">Verzeichnis Ihrer aktuellen und ehemaligen Mieter.</p>
         </div>
         <button
           onClick={() => {

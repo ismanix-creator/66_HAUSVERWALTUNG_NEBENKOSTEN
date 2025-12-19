@@ -122,8 +122,8 @@ export function VertraegePage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Verträge</h1>
-          <p className="text-gray-500">Übersicht und Pflege aller Mietverträge.</p>
+          <h1 className="text-2xl font-bold text-gray-400">Verträge</h1>
+          <p className="text-gray-600">Übersicht und Pflege aller Mietverträge.</p>
         </div>
         <button
           onClick={() => {

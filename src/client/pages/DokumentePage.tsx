@@ -101,8 +101,8 @@ export function DokumentePage() {
       <div className="flex flex-col gap-1">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Dokumente</h1>
-            <p className="text-sm text-gray-500">
+            <h1 className="text-2xl font-bold text-gray-400">Dokumente</h1>
+            <p className="text-sm text-gray-600">
               {totalDocuments} Dokumente, zuletzt aktualisiert am{' '}
               {listData?.data?.[0]?.hochgeladen_am
                 ? new Date(listData.data[0].hochgeladen_am as string).toLocaleDateString('de-DE')

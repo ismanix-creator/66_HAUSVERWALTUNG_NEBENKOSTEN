@@ -106,8 +106,8 @@ export function EinheitenPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Einheiten</h1>
-          <p className="text-gray-500">Alle Wohnungen, Gewerbeeinheiten und Stellplätze.</p>
+          <h1 className="text-2xl font-bold text-gray-400">Einheiten</h1>
+          <p className="text-gray-600">Alle Wohnungen, Gewerbeeinheiten und Stellplätze.</p>
         </div>
         <button
           onClick={() => {
