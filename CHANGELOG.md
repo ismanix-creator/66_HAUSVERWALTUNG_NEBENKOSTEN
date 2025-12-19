@@ -8,7 +8,7 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-19
 
-### [2025-12-19 22:16] - Fix/Frontend - Mieter Aktionen: nur Icons ohne Text
+### [2025-12-19 22:17] - Fix/Frontend - Mieter Aktionen: nur Icons ohne Text
 - **Problem:** Row-Actions zeigten immer Text (Label) auch wenn `label = ""` in Config definiert war
 - **Root Cause:** `const label = actionConfig.label || actionId` - leerer String wurde ignoriert, Fallback zu actionId
 - **Lösung:** `label !== undefined ? actionConfig.label : actionId` - respektiert explizit definierten leeren String
