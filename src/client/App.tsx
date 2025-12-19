@@ -32,6 +32,7 @@ export default function App() {
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/objekte" element={<ObjektePage />} />
+        <Route path="/objekte/:id" element={<ObjektePage />} />
         <Route path="/einheiten" element={<EinheitenPage />} />
         <Route path="/mieter" element={<MieterPage />} />
         <Route path="/mieter/:id" element={<MieterDetailPage />} />

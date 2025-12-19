@@ -2937,84 +2937,148 @@ delete = { icon = "Trash2", confirm = true }
 # VIEWS - View-Definitionen
 # =============================================================================
 
+# =============================================================================
+# VIEWS - Seiten-Definitionen (100% Config-Driven)
+# =============================================================================
+
 [views.dashboard]
 id = "dashboard"
 title = "labels.views.dashboard"
 route = "/dashboard"
-layout = "dashboard"
+layout = "grid"
+grid_cols = { sm = 1, md = 2, lg = 3 }
+gap = "gap-6"
+padding = "p-6"
+background = "bg-transparent"
 
-[[view.widgets]]
-id = "monatsuebersicht"
-type = "stats_card"
-title = "labels.dashboard.monatsübersicht"
-position = { row = 1, col = 1, width = 2 }
+# ============ STATS CARDS (Übersichtskarten) ============
 
-  [[view.widgets.stats]]
-  label = "dashboard.soll_gesamt"
-  value = { query = "sum(sollstellung where monat = current_month).sollbetrag" }
-  format = "currency"
+[[views.dashboard.stats_cards]]
+id = "objekte"
+title = "dashboard.objekte"
+field = "objekte"
+icon = "Building2"
+color = "blue"
+sortable = true
+order = 10
 
-  [[view.widgets.stats]]
-  label = "dashboard.ist_gesamt"
-  value = { query = "sum(sollstellung where monat = current_month).istbetrag" }
-  format = "currency"
+[[views.dashboard.stats_cards]]
+id = "mieter"
+title = "dashboard.mieter"
+field = "mieter"
+icon = "Users"
+color = "green"
+sortable = true
+order = 20
 
-  [[view.widgets.stats]]
-  label = "dashboard.offen"
-  value = { query = "sum(sollstellung where monat = current_month and status != 'bezahlt').differenz" }
-  format = "currency"
-  color_rule = { negative = "red", zero = "green" }
+[[views.dashboard.stats_cards]]
+id = "vertraege"
+title = "dashboard.vertraege"
+field = "vertraege"
+icon = "FileText"
+color = "purple"
+sortable = true
+order = 30
 
-[[view.widgets]]
-id = "offene_posten"
-type = "table_widget"
-title = "labels.dashboard.offene_posten"
-position = { row = 1, col = 3, width = 2 }
-table = "tables/sollstellungen_offen.table"
-max_rows = 5
-show_more_link = "/finanzen/sollstellung?filter=offen"
+[[views.dashboard.stats_cards]]
+id = "offene_rechnungen"
+title = "dashboard.offene_rechnungen"
+field = "offeneRechnungen"
+icon = "Wallet"
+color = "orange"
+sortable = true
+order = 40
 
-[[view.widgets]]
+[[views.dashboard.stats_cards]]
+id = "dokumente"
+title = "dashboard.dokumente"
+field = "dokumente"
+icon = "FileArchive"
+color = "blue"
+sortable = true
+order = 50
+
+[[views.dashboard.stats_cards]]
 id = "erinnerungen"
-type = "list_widget"
-title = "labels.dashboard.erinnerungen"
-position = { row = 2, col = 1, width = 2 }
-query = "erinnerung where status = 'offen' order by faellig_am limit 10"
-item_template = { title = "titel", subtitle = "faellig_am", icon_from = "typ" }
-empty_message = "labels.dashboard.keine_erinnerungen"
+title = "dashboard.erinnerungen"
+field = "offeneErinnerungen"
+icon = "FileCheck"
+color = "green"
+sortable = true
+order = 60
 
-[[view.widgets]]
-id = "leerstand"
-type = "stats_card"
-title = "labels.dashboard.leerstand"
-position = { row = 2, col = 3, width = 1 }
+# ============ CARDS (Textblöcke) ============
 
-  [[view.widgets.stats]]
-  label = "dashboard.einheiten_leer"
-  value = { query = "count(einheit where status = 'leer')" }
-  total = { query = "count(einheit)" }
-  format = "fraction"
-
-[[view.widgets]]
-id = "quick_actions"
+[[views.dashboard.cards]]
+id = "schnellzugriff"
+title = "dashboard.schnellzugriff"
+subtitle = "dashboard.schnellzugriff_desc"
 type = "action_buttons"
-title = "labels.dashboard.schnellzugriff"
-position = { row = 2, col = 4, width = 1 }
+grid_span = { col = 2, row = 1 }
+layout = "flex"
+flex_wrap = true
+gap = "gap-2"
+padding = "p-6"
+background = "bg-slate-900"
+border = "border border-slate-800"
+rounded = "rounded-lg"
+shadow = "shadow-lg"
 
-  [[view.widgets.actions]]
-  label = "actions.zahlung_erfassen"
-  icon = "Plus"
-  dialog = "forms/zahlung.form"
+  [[views.dashboard.cards.actions]]
+  label = "dashboard.btn_dokumente"
+  route = "/dokumente"
+  icon = "FileText"
+  style = "secondary"
+  order = 10
 
-  [[view.widgets.actions]]
-  label = "actions.rechnung_erfassen"
+  [[views.dashboard.cards.actions]]
+  label = "dashboard.btn_rechnungen"
+  route = "/nebenkosten"
   icon = "Receipt"
-  dialog = "forms/rechnung.form"
+  style = "secondary"
+  order = 20
 
-  [[view.widgets.actions]]
-  label = "actions.zaehler_ablesen"
-  icon = "Gauge"
-  dialog = "forms/zaehlerstand.form"
+  [[views.dashboard.cards.actions]]
+  label = "dashboard.btn_abrechnungen"
+  route = "/nebenkosten"
+  icon = "BarChart3"
+  style = "secondary"
+  order = 30
+
+  [[views.dashboard.cards.actions]]
+  label = "dashboard.btn_steuerberater_export"
+  api_endpoint = "/api/export/steuerberater"
+  icon = "Download"
+  style = "success"
+  download = true
+  order = 40
+
+[[views.dashboard.cards]]
+id = "status"
+title = "dashboard.status"
+type = "status_summary"
+grid_span = { col = 1, row = 1 }
+padding = "p-6"
+background = "bg-slate-900"
+border = "border border-slate-800"
+rounded = "rounded-lg"
+shadow = "shadow-lg"
+
+# ============ STYLING ============
+
+[views.dashboard.styling]
+card_bg = "bg-slate-900"
+card_border = "border border-slate-800"
+card_rounded = "rounded-lg"
+card_shadow = "shadow-lg shadow-black/30"
+card_padding = "p-6"
+
+stats_card_border = "border border-slate-800"
+stats_card_rounded = "rounded-lg"
+stats_card_padding = "p-6"
+stats_card_shadow = "shadow-lg shadow-black/30"
+
+color_schemes = { blue = "bg-blue-900/40 text-blue-100 border-blue-800", green = "bg-emerald-900/40 text-emerald-100 border-emerald-800", purple = "bg-purple-900/40 text-purple-100 border-purple-800", orange = "bg-amber-900/40 text-amber-100 border-amber-800" }
 
 [views.dokumente]
 id = "dokumente"

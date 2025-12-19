@@ -77,6 +77,15 @@ apiRoutes.get('/config/view/:name', async (req, res, next) => {
   }
 })
 
+apiRoutes.get('/config/dashboard', async (_req, res, next) => {
+  try {
+    const dashboardConfig = await configService.getSection('views.dashboard')
+    res.json(dashboardConfig)
+  } catch (error) {
+    next(error)
+  }
+})
+
 apiRoutes.get('/config/widths', async (_req, res, next) => {
   try {
     const widths = await configService.getWidths()

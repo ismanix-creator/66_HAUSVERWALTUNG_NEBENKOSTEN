@@ -77,6 +77,13 @@ class ApiService {
     return this.fetch<T>(`/catalog/${catalogName}`)
   }
 
+  /**
+   * Lädt Dashboard-Konfiguration (Stats Cards, Cards, Actions, Styling)
+   */
+  async getDashboardConfig(): Promise<Record<string, unknown>> {
+    return this.fetch<Record<string, unknown>>('/config/dashboard')
+  }
+
   async getDashboardSummary<T>(): Promise<T> {
     return this.fetch<T>('/dashboard/summary')
   }

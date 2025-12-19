@@ -76,6 +76,17 @@ export function useViewConfig(viewName: string) {
   })
 }
 
+/**
+ * Hook für Dashboard-Konfiguration (Stats Cards, Cards, Actions, Styling)
+ */
+export function useDashboardConfig() {
+  return useQuery({
+    queryKey: ['config', 'dashboard'],
+    queryFn: () => apiService.getDashboardConfig(),
+    staleTime: Infinity,
+  })
+}
+
 export function useDashboardSummary() {
   return useQuery({
     queryKey: ['dashboard', 'summary'],

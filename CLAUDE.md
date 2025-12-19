@@ -165,6 +165,7 @@ GET    /api/config/widths           # Width-Referenzen (w40-w300 + actions)
 GET    /api/config/buttons          # Button-Konfiguration (Styling + universelle Typen)
 GET    /api/config/table            # Table-Styling (Zebrastreifen, Zeilenhöhen, etc.)
 GET    /api/config/table/spacing    # Table-Spacing-Konfiguration
+GET    /api/config/dashboard        # Dashboard-Konfiguration (Stats Cards, Cards, Actions, Styling)
 GET    /health                      # Health-Check
 ```
 
