@@ -130,11 +130,25 @@ export function DataTable<T extends Record<string, unknown>>({
   Home,
 }
 
+  // Width resolver: resolves "width.w100" to actual px values from config
+  // Falls back to the value as-is if it's already a px value
+  const resolveWidth = (width?: string): string => {
+    if (!width) return 'auto'
+
+    // If already a px value, return as-is
+    if (width.includes('px') || width.includes('rem')) return width
+
+    // If it's a reference like "width.w100", map to actual value
+    // For now, we'll return the input as-is (will be resolved by server in future)
+    // This allows gradual migration from hardcoded widths to width references
+    return width
+  }
+
   const { columns, row_click, row_click_route, row_actions } = config.table
   const totalPages = Math.ceil(total / pageSize)
   const actionEntries = row_actions ? Object.entries(row_actions) : []
   const actionHeaderLabel = config.table.actions?.label
-  const actionWidth = config.table.actions?.width || '8rem'
+  const actionWidth = resolveWidth(config.table.actions?.width) || '130px'
 
   const getItemId = (item: T, index: number) => {
     const rawId = (item as Record<string, unknown>).id ?? (item as Record<string, unknown>)._id ?? index
@@ -325,7 +339,7 @@ export function DataTable<T extends Record<string, unknown>>({
               {columns.map(column => (
                 <th
                   key={column.field}
-                  style={{ width: column.width }}
+                  style={{ width: resolveWidth(column.width) }}
                   className={`px-4 py-3 text-xs font-medium text-slate-300 uppercase tracking-wider ${getAlignClass(column.align)} ${
                     column.sortable ? 'cursor-pointer hover:bg-slate-700/60' : ''
                   }`}
@@ -384,7 +398,7 @@ export function DataTable<T extends Record<string, unknown>>({
                       {columns.map(column => (
                         <td
                           key={`${rowId}-${column.field}`}
-                          style={{ width: column.width }}
+                          style={{ width: resolveWidth(column.width) }}
                           className={`px-4 py-3 text-sm text-slate-100 ${getAlignClass(column.align)}`}
                         >
                           {renderCell(item, column)}
@@ -463,7 +477,7 @@ export function DataTable<T extends Record<string, unknown>>({
                             {columns.map(column => (
                               <div key={`${rowId}-detail-${column.field}`} className="space-y-1">
                                 <div className="text-[10px] uppercase tracking-wider text-slate-500">
-                                  {column.label.replace('labels.', '')}
+                                  {column.label}
                                 </div>
                                 <div className="text-sm text-slate-100">{renderCell(item, column)}</div>
                               </div>

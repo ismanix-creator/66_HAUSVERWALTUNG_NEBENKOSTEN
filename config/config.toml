@@ -58,6 +58,29 @@ max_upload_size_mb = 25
 allowed_file_types = ["pdf", "jpg", "jpeg", "png", "doc", "docx", "xls", "xlsx"]
 
 # =============================================================================
+# WIDTHS - Standard Spaltenbreiten für Tabellen
+# =============================================================================
+[widths]
+# Kurze Spalten (ID, Nummer, Status, etc.)
+w50 = "50px"
+w80 = "80px"
+w100 = "100px"
+w120 = "120px"
+
+# Mittlere Spalten (Namen, Beschreibungen, etc.)
+w150 = "150px"
+w180 = "180px"
+w200 = "200px"
+
+# Lange Spalten (Adressen, Notizen, etc.)
+w250 = "250px"
+w300 = "300px"
+w400 = "400px"
+
+# Spezial-Spalten
+actions = "130px"
+
+# =============================================================================
 # SERVER - Server-Konfiguration
 # =============================================================================
 [server]
