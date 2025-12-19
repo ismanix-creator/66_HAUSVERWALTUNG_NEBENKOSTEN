@@ -2,7 +2,7 @@
  * Generischer Entity-Service: CRUD-Operationen basierend auf Config
  * 100% Config-Driven - keine hardcodierten Entity-Details
  *
- * @lastModified 2025-12-16
+ * @lastModified 2025-12-19
  */
 
 import { v4 as uuidv4 } from 'uuid'
