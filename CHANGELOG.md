@@ -8,14 +8,14 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-19
 
-### [2025-12-19 22:12] - Fix/Frontend - Mieter Aktionen: nur Icons ohne Text
+### [2025-12-19 22:16] - Fix/Frontend - Mieter Aktionen: nur Icons ohne Text
 - **Problem:** Row-Actions zeigten immer Text (Label) auch wenn `label = ""` in Config definiert war
 - **Root Cause:** `const label = actionConfig.label || actionId` - leerer String wurde ignoriert, Fallback zu actionId
 - **Lösung:** `label !== undefined ? actionConfig.label : actionId` - respektiert explizit definierten leeren String
 - **Resultat:** Mieter-Tabelle zeigt jetzt nur Icon-Buttons ohne Text
 - **Status:** ✅ TypeScript, 1 neuer Commit
 
-### [2025-12-19 21:50] - Fix/Frontend + Backend - IBAN-Validierung komplette Behebung
+### [2025-12-19 21:55] - Fix/Frontend + Backend - IBAN-Validierung komplette Behebung
 - **Problem 1 (Frontend):** `formData` wurde direkt mutiert statt kopiert, Validierungsschleife sah angepasste Werte nicht
   - **Lösung:** `processedFormData` Kopie erstellen, IBAN auf "" setzen wenn "DE" oder leer, gegen Kopie validieren
 - **Problem 2 (Backend):** Leere Strings (value === '') wurden nicht skipped, Backend validierte IBAN-Pattern trotzdem
