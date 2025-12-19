@@ -61,7 +61,7 @@ if npm run build:server >>"$LOG" 2>&1; then
   echo "Backend build successful" | tee -a "$LOG"
 
   echo "Starting backend on port 3002..." | tee -a "$LOG"
-  nohup env HOST="$BACKEND_HOST" PORT="$BACKEND_PORT" NODE_OPTIONS="--experimental-loader=./loaders/resolve-js-extension.mjs" node dist/server/server/index.js >>"$LOG" 2>&1 &
+  nohup env HOST="$BACKEND_HOST" PORT="$BACKEND_PORT" node dist/server/server/index.js >>"$LOG" 2>&1 &
   backend_pid=$!
   disown
   sleep 2
@@ -76,10 +76,10 @@ else
 fi
 
 echo "Starting frontend on port 5174..." | tee -a "$LOG"
-nohup env BACKEND_PORT="$BACKEND_PORT" npm run dev:client -- --port "$FRONTEND_PORT" >>"$LOG" 2>&1 &
+nohup npm run dev:client -- --port "$FRONTEND_PORT" >>"$LOG" 2>&1 &
 frontend_pid=$!
 disown
-sleep 2
+sleep 3
 
 if kill -0 "$frontend_pid" 2>/dev/null; then
   echo "Frontend started (PID $frontend_pid)" | tee -a "$LOG"
