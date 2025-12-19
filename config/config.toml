@@ -13,9 +13,9 @@
 # META - Konfigurationsmetadaten
 # =============================================================================
 [meta]
-version = "1.0.0"
+version = "0.2.0"
 schema_version = "2"
-last_modified = "2025-12-18"
+last_modified = "2025-12-19"
 environment = "development"
 config_format = "toml"
 
@@ -24,7 +24,6 @@ config_format = "toml"
 # =============================================================================
 [app]
 name = "Mietverwaltung"
-version = "1.0.0"
 description = "Private Mietobjekt-Verwaltung"
 locale = "de-DE"
 currency = "EUR"
@@ -58,27 +57,24 @@ max_upload_size_mb = 25
 allowed_file_types = ["pdf", "jpg", "jpeg", "png", "doc", "docx", "xls", "xlsx"]
 
 # =============================================================================
-# WIDTHS - Standard Spaltenbreiten für Tabellen
+# WIDTHS - Standard Spaltenbreiten für Tabellen (20px Schritte)
 # =============================================================================
 [widths]
-# Kurze Spalten (ID, Nummer, Status, etc.)
-w50 = "50px"
+w40 = "40px"
+w60 = "60px"
 w80 = "80px"
 w100 = "100px"
 w120 = "120px"
-
-# Mittlere Spalten (Namen, Beschreibungen, etc.)
-w150 = "150px"
+w140 = "140px"
+w160 = "160px"
 w180 = "180px"
 w200 = "200px"
-
-# Lange Spalten (Adressen, Notizen, etc.)
-w250 = "250px"
+w220 = "220px"
+w240 = "240px"
+w260 = "260px"
+w280 = "280px"
 w300 = "300px"
-w400 = "400px"
-
-# Spezial-Spalten
-actions = "130px"
+actions = "120px"
 
 # =============================================================================
 # SERVER - Server-Konfiguration
@@ -2045,13 +2041,13 @@ entity = "nebenkostenabrechnung"
 field = "objekt.bezeichnung"
 label = "nk.objekt"
 sortable = true
-width = "width.w250"
+width = "width.w260"
 
 [[tables.abrechnungen.table.columns]]
 field = "jahr"
 label = "nk.jahr"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 
 [[tables.abrechnungen.table.columns]]
 field = "zeitraum_von"
@@ -2125,7 +2121,7 @@ width = "width.w100"
 field = "hochgeladen_am"
 label = "dokument.hochgeladen"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "datetime"
 
 [tables.dokument.table.actions]
@@ -2198,7 +2194,7 @@ width = "width.w300"
 field = "vertrag.einheit.bezeichnung"
 label = "kaution.einheit"
 sortable = true
-width = "width.w250"
+width = "width.w260"
 
 [[tables.kautionen.table.columns]]
 field = "betrag"
@@ -2244,14 +2240,14 @@ field = "computed.display_name"
 label = "mieter.name"
 sortable = true
 sort_field = "nachname"
-width = "width.w250"
+width = "width.w260"
 template = "{vorname} {nachname}"
 
 [[tables.mieter.table.columns]]
 field = "mobil"
 fallback_fields = ["telefon"]
 label = "mieter.telefon"
-width = "width.w150"
+width = "width.w160"
 
 [[tables.mieter.table.columns]]
 field = "email"
@@ -2363,13 +2359,13 @@ width = "width.w180"
 [[tables.rechnungen.table.columns]]
 field = "rechnungsnummer"
 label = "rechnung.nummer"
-width = "width.w150"
+width = "width.w160"
 
 [[tables.rechnungen.table.columns]]
 field = "betrag"
 label = "rechnung.betrag"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "currency"
 
 [[tables.rechnungen.table.columns]]
@@ -2389,7 +2385,7 @@ icons = { true = "Check", false = "X" }
 [[tables.rechnungen.table.columns]]
 field = "dokument_id"
 label = ""
-width = "width.w50"
+width = "width.w60"
 display = "icon_link"
 icon = "FileText"
 visible_if = { field = "dokument_id", is_set = true }
@@ -2411,7 +2407,7 @@ entity = "sollstellung"
 field = "monat"
 label = "sollstellung.monat"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "month"
 
 [[tables.sollstellungen.table.columns]]
@@ -2429,21 +2425,21 @@ width = "width.w200"
 field = "sollbetrag"
 label = "sollstellung.soll"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "currency"
 
 [[tables.sollstellungen.table.columns]]
 field = "istbetrag"
 label = "sollstellung.ist"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "currency"
 
 [[tables.sollstellungen.table.columns]]
 field = "computed.differenz"
 label = "sollstellung.differenz"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "currency"
 color_rule = { negative = "red", positive = "green", zero = "inherit" }
 
@@ -2451,7 +2447,7 @@ color_rule = { negative = "red", positive = "green", zero = "inherit" }
 field = "status"
 label = "sollstellung.status"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 display = "badge"
 badge_colors = { offen = "red", teilweise = "yellow", bezahlt = "green", ueberzahlt = "blue" }
 
@@ -2477,7 +2473,7 @@ width = "width.w120"
 field = "mieter.computed.display_name"
 label = "vertrag.mieter"
 sortable = true
-width = "width.w250"
+width = "width.w260"
 
 [[tables.vertraege.table.columns]]
 field = "einheit.bezeichnung"
@@ -2504,7 +2500,7 @@ empty_text = "unbefristet"
 field = "computed.gesamtmiete"
 label = "vertrag.gesamtmiete"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "currency"
 
 [[tables.vertraege.table.columns]]
@@ -2529,7 +2525,7 @@ entity = "zaehler"
 field = "objekt.bezeichnung"
 label = "zaehler.objekt"
 sortable = true
-width = "width.w250"
+width = "width.w260"
 
 [[tables.zaehler.table.columns]]
 field = "einheit.bezeichnung"
@@ -2541,7 +2537,7 @@ empty_text = "Hauptzähler"
 field = "typ"
 label = "zaehler.typ"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 display = "badge"
 
 [[tables.zaehler.table.columns]]
@@ -2584,14 +2580,14 @@ entity = "zahlung"
 field = "datum"
 label = "zahlung.datum"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "date"
 
 [[tables.zahlungen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "zahlung.mieter"
 sortable = true
-width = "width.w250"
+width = "width.w260"
 
 [[tables.zahlungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
@@ -2602,14 +2598,14 @@ width = "width.w180"
 field = "betrag"
 label = "zahlung.betrag"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 format = "currency"
 
 [[tables.zahlungen.table.columns]]
 field = "typ"
 label = "zahlung.typ"
 sortable = true
-width = "width.w150"
+width = "width.w160"
 display = "badge"
 
 [[tables.zahlungen.table.columns]]
