@@ -154,7 +154,7 @@ export function MieterPage() {
             setShowForm(true)
             setFormError('')
           }}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700"
+          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary-600 rounded-lg hover:text-primary-700 transition-colors"
         >
           <Plus className="h-4 w-4" />
           Neuer Mieter
