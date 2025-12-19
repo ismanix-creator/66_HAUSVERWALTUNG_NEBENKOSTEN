@@ -262,6 +262,10 @@ show_render_count = false
 log_api_calls = false
 mock_delay_ms = 0
 
+# =============================================================================
+# ENTITIES - Entity-Definitionen (14 Datenmodelle)
+# =============================================================================
+
 [entities.dokument]
 name = "dokument"
 table_name = "dokumente"
@@ -1337,6 +1341,10 @@ vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id"
 mieter = { formula = "vertrag.mieter" }
 einheit = { formula = "vertrag.einheit" }
 
+# =============================================================================
+# FORMS - Formular-Definitionen
+# =============================================================================
+
 [forms.dokument.form]
 entity = "dokument"
 title_create = "labels.form.dokument_hochladen"
@@ -2034,6 +2042,10 @@ label = "labels.form.section.zahlung"
   width = "full"
   rows = 2
 
+# =============================================================================
+# TABLES - Tabellen-Definitionen
+# =============================================================================
+
 [tables.abrechnungen.table]
 entity = "nebenkostenabrechnung"
 
@@ -2628,6 +2640,10 @@ width = "width.actions"
 [tables.zahlungen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/zahlung.form" }
 delete = { icon = "Trash2", confirm = true }
+
+# =============================================================================
+# VIEWS - View-Definitionen
+# =============================================================================
 
 [views.dashboard]
 id = "dashboard"
