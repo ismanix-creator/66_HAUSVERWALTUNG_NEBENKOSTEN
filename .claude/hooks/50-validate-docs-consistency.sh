@@ -89,11 +89,37 @@ check_config_structure() {
   [[ "$has_table" == "1" ]] && success "[table] Sektion vorhanden"
 }
 
+# 5. Check button types completeness
+check_button_types() {
+  local button_types=("add" "edit" "save" "cancel" "delete" "confirm" "close" "back" "export" "import" "search")
+  local missing=()
+
+  for btn_type in "${button_types[@]}"; do
+    if ! grep -q "\[buttons\.$btn_type\]" "$CONFIG_FILE"; then
+      missing+=("$btn_type")
+    fi
+  done
+
+  if [[ ${#missing[@]} -gt 0 ]]; then
+    error "Button-Typen fehlen in config.toml: ${missing[*]}"
+  else
+    success "Alle Standard-Button-Typen definiert"
+  fi
+
+  # Check form actions use button references
+  if grep -q 'submit = "buttons\.' "$CONFIG_FILE"; then
+    success "Form-Actions verwenden Button-Referenzen"
+  else
+    warning "Form-Actions verwenden noch alte Label-Struktur"
+  fi
+}
+
 # Run validations
 check_port_consistency
 check_version_consistency
 check_api_endpoints
 check_config_structure
+check_button_types
 
 # Summary
 echo ""

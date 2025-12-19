@@ -152,14 +152,19 @@ graph TB
 ## API-Endpunkte
 
 ```
-GET    /api/{entity}          # Liste
-GET    /api/{entity}/:id      # Einzeln
-POST   /api/{entity}          # Erstellen
-PUT    /api/{entity}/:id      # Aktualisieren
-DELETE /api/{entity}/:id      # Löschen
+GET    /api/{entity}                # Liste
+GET    /api/{entity}/:id            # Einzeln
+POST   /api/{entity}                # Erstellen
+PUT    /api/{entity}/:id            # Aktualisieren
+DELETE /api/{entity}/:id            # Löschen
 
-GET    /api/config/widths        # Width-Referenzen (w40-w300 + actions)
-GET    /health                   # Health-Check
+GET    /api/config/app              # App-Konfiguration
+GET    /api/config/navigation       # Navigation-Menü
+GET    /api/config/entity/:name     # Entity-Schema
+GET    /api/config/widths           # Width-Referenzen (w40-w300 + actions)
+GET    /api/config/buttons          # Button-Konfiguration (Styling + universelle Typen)
+GET    /api/config/table/spacing    # Table-Spacing-Konfiguration
+GET    /health                      # Health-Check
 ```
 
 ## Wichtige Befehle

@@ -77,10 +77,13 @@ w300 = "300px"
 actions = "120px"
 
 # =============================================================================
-# BUTTONS - Button-Styling Konfiguration
+# BUTTONS - Button-Styling Konfiguration & Universelle Button-Typen
 # =============================================================================
 [buttons]
-# Primary Button Style (Standard Add/Create Buttons)
+
+# ============ STYLING (TailwindCSS Classes) ============
+
+# Primary Button Style (Standard Add/Create/Submit Buttons)
 primary_text_color = "text-primary-600"
 primary_hover_color = "text-primary-700"
 primary_border = "none"
@@ -90,7 +93,7 @@ primary_font_weight = "font-medium"
 primary_rounded = "rounded-lg"
 primary_transition = "transition-colors"
 
-# Secondary Button Style
+# Secondary Button Style (Default/Cancel/Close Buttons)
 secondary_text_color = "text-gray-700"
 secondary_hover_color = "text-gray-900"
 secondary_border = "border border-gray-300"
@@ -98,10 +101,213 @@ secondary_padding = "px-4 py-2"
 secondary_font_size = "text-sm"
 secondary_font_weight = "font-medium"
 secondary_rounded = "rounded-lg"
+secondary_transition = "transition-colors"
 
-# Disabled State
+# Danger Button Style (Delete/Remove Buttons)
+danger_text_color = "text-red-600"
+danger_hover_color = "text-red-700"
+danger_border = "none"
+danger_padding = "px-4 py-2"
+danger_font_size = "text-sm"
+danger_font_weight = "font-medium"
+danger_rounded = "rounded-lg"
+danger_transition = "transition-colors"
+
+# Success Button Style (Confirm/Done Buttons)
+success_text_color = "text-green-600"
+success_hover_color = "text-green-700"
+success_border = "none"
+success_padding = "px-4 py-2"
+success_font_size = "text-sm"
+success_font_weight = "font-medium"
+success_rounded = "rounded-lg"
+success_transition = "transition-colors"
+
+# Disabled State (alle Button-Typen)
 disabled_opacity = "disabled:opacity-50"
 disabled_cursor = "disabled:cursor-not-allowed"
+
+# ============ UNIVERSELLE BUTTON-TYPEN (Labels + Icons) ============
+
+# Add/Create Button (häufig in Listen-Views)
+[buttons.add]
+label = "buttons.hinzufuegen"
+icon = "Plus"
+style = "primary"
+
+# Edit Button (für Inline-Edit oder Modal)
+[buttons.edit]
+label = "buttons.bearbeiten"
+icon = "Pencil"
+style = "primary"
+
+# Save/Submit Button (Form-Submission)
+[buttons.save]
+label = "buttons.speichern"
+icon = "Check"
+style = "primary"
+
+# Cancel/Abort Button (Form-Abbruch)
+[buttons.cancel]
+label = "buttons.abbrechen"
+icon = "X"
+style = "secondary"
+
+# Delete/Remove Button (Lösch-Bestätigung)
+[buttons.delete]
+label = "buttons.loeschen"
+icon = "Trash2"
+style = "danger"
+
+# Confirm Button (Allgemeine Bestätigung)
+[buttons.confirm]
+label = "buttons.bestaetigen"
+icon = "Check"
+style = "success"
+
+# Close Button (Modal/Dialog schließen)
+[buttons.close]
+label = "buttons.schliessen"
+icon = "X"
+style = "secondary"
+
+# Back Button (Zurück navigieren)
+[buttons.back]
+label = "buttons.zurueck"
+icon = "ChevronLeft"
+style = "secondary"
+
+# Reset/Clear Button (Form zurücksetzen)
+[buttons.reset]
+label = "buttons.zuruecksetzen"
+icon = "RotateCcw"
+style = "secondary"
+
+# Export Button (Daten exportieren)
+[buttons.export]
+label = "buttons.exportieren"
+icon = "Download"
+style = "primary"
+
+# Import Button (Daten importieren)
+[buttons.import]
+label = "buttons.importieren"
+icon = "Upload"
+style = "primary"
+
+# Print Button (Seite/Bericht drucken)
+[buttons.print]
+label = "buttons.drucken"
+icon = "Printer"
+style = "primary"
+
+# Search/Filter Button (Suche/Filter anwenden)
+[buttons.search]
+label = "buttons.suchen"
+icon = "Search"
+style = "primary"
+
+# Help Button (Hilfe/Info anzeigen)
+[buttons.help]
+label = "buttons.hilfe"
+icon = "HelpCircle"
+style = "secondary"
+
+# Settings Button (Einstellungen öffnen)
+[buttons.settings]
+label = "buttons.einstellungen"
+icon = "Settings"
+style = "secondary"
+
+# Refresh/Reload Button (Daten neu laden)
+[buttons.refresh]
+label = "buttons.aktualisieren"
+icon = "RefreshCw"
+style = "secondary"
+
+# Next Button (Weiterleitung zum nächsten Schritt)
+[buttons.next]
+label = "buttons.weiter"
+icon = "ChevronRight"
+style = "primary"
+
+# Previous Button (Zurück zum vorherigen Schritt)
+[buttons.previous]
+label = "buttons.zurueck"
+icon = "ChevronLeft"
+style = "secondary"
+
+# Duplicate/Copy Button (Eintrag duplizieren)
+[buttons.duplicate]
+label = "buttons.duplizieren"
+icon = "Copy"
+style = "primary"
+
+# Archive Button (Eintrag archivieren)
+[buttons.archive]
+label = "buttons.archivieren"
+icon = "Archive"
+style = "secondary"
+
+# Restore Button (Eintrag wiederherstellen)
+[buttons.restore]
+label = "buttons.wiederherstellen"
+icon = "RotateCcw"
+style = "primary"
+
+# Send Button (Nachricht/Email versenden)
+[buttons.send]
+label = "buttons.versenden"
+icon = "Send"
+style = "primary"
+
+# Download Button (Datei herunterladen)
+[buttons.download]
+label = "buttons.herunterladen"
+icon = "Download"
+style = "primary"
+
+# Upload Button (Datei hochladen)
+[buttons.upload]
+label = "buttons.hochladen"
+icon = "Upload"
+style = "primary"
+
+# View Details Button (Details anschauen)
+[buttons.view]
+label = "buttons.ansehen"
+icon = "Eye"
+style = "primary"
+
+# Approve Button (Genehmigung erteilen)
+[buttons.approve]
+label = "buttons.genehmigen"
+icon = "Check"
+style = "success"
+
+# Reject Button (Ablehnen)
+[buttons.reject]
+label = "buttons.ablehnen"
+icon = "X"
+style = "danger"
+
+# Move Button (Verschieben)
+[buttons.move]
+label = "buttons.verschieben"
+icon = "Move"
+style = "primary"
+
+# Sort Button (Sortierung ändern)
+[buttons.sort]
+label = "buttons.sortieren"
+icon = "ArrowUpDown"
+style = "secondary"
+
+# Filter Button (Filter anwenden)
+[buttons.filter]
+label = "buttons.filtern"
+icon = "Filter"
+style = "primary"
 
 # =============================================================================
 # TABLE - Tabellen-Styling & Spacing
@@ -1541,8 +1747,8 @@ label = "labels.form.section.notes"
   rows = 3
 
 [forms.einheit.form.actions]
-submit = { label = "buttons.save" }
-cancel = { label = "buttons.cancel" }
+submit = "buttons.save"
+cancel = "buttons.cancel"
 
 [forms.kaution.form]
 entity = "kaution"
@@ -1770,8 +1976,8 @@ label = "labels.form.section.details"
   rows = 3
 
 [forms.objekt.form.actions]
-submit = { label = "actions.speichern" }
-cancel = { label = "actions.abbrechen" }
+submit = "buttons.save"
+cancel = "buttons.cancel"
 
 [forms.rechnung.form]
 entity = "rechnung"
