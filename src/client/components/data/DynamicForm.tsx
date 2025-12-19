@@ -463,16 +463,7 @@ export function DynamicForm({
         </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-800 bg-slate-900/60">
-            <button
-              type="submit"
-              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-500 disabled:opacity-50"
-              disabled={isLoading}
-            >
-              {isLoading
-                ? 'Speichern...'
-                : formConfig.form.actions?.submit?.label?.replace('labels.', '') || 'Speichern'}
-            </button>
+          <div className="flex items-center justify-between px-6 py-4 border-t border-slate-800 bg-slate-900/60">
             <button
               type="button"
               onClick={onCancel}
@@ -481,6 +472,15 @@ export function DynamicForm({
               tabIndex={-1}
             >
               {formConfig.form.actions?.cancel?.label?.replace('labels.', '') || 'Abbrechen'}
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-500 disabled:opacity-50"
+              disabled={isLoading}
+            >
+              {isLoading
+                ? 'Speichern...'
+                : formConfig.form.actions?.submit?.label?.replace('labels.', '') || 'Speichern'}
             </button>
           </div>
         </form>
