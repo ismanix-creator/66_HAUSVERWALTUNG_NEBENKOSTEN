@@ -147,3 +147,14 @@ export function useTableSpacingConfig() {
     staleTime: Infinity,
   })
 }
+
+/**
+ * Hook für Design-Konfiguration (Typography, Farben, etc.)
+ */
+export function useDesignConfig() {
+  return useQuery({
+    queryKey: ['config', 'design'],
+    queryFn: () => apiService.getDesignConfig(),
+    staleTime: Infinity,
+  })
+}

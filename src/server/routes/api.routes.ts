@@ -122,6 +122,15 @@ apiRoutes.get('/config/table/spacing', async (_req, res, next) => {
   }
 })
 
+apiRoutes.get('/config/design', async (_req, res, next) => {
+  try {
+    const design = await configService.getSection('design')
+    res.json(design)
+  } catch (error) {
+    next(error)
+  }
+})
+
 apiRoutes.get('/dashboard/summary', async (_req, res, next) => {
   try {
     const summary = await dashboardService.getSummary()

@@ -145,6 +145,13 @@ class ApiService {
     return this.fetch<Record<string, string>>('/config/table/spacing')
   }
 
+  /**
+   * Lädt Design-Konfiguration (Typography, Farben, etc.)
+   */
+  async getDesignConfig(): Promise<Record<string, unknown>> {
+    return this.fetch<Record<string, unknown>>('/config/design')
+  }
+
   // ==================== ENTITY CRUD ====================
 
   /**

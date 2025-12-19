@@ -8,7 +8,7 @@
 import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 import type { EntityConfig } from '@shared/types/config'
-import { useCatalog } from '../../hooks/useConfig'
+import { useCatalog, useDesignConfig } from '../../hooks/useConfig'
 
 type BankCatalogItem = {
   value?: string
@@ -129,6 +129,7 @@ export function DynamicForm({
   const { data: bankCatalog } = useCatalog<BankCatalogConfig>(
     isMieterForm ? 'bankleitzahlen' : ''
   )
+  const { data: designConfig } = useDesignConfig()
   const ibanValue = typeof formData['iban'] === 'string' ? (formData['iban'] as string) : ''
 
   // Initialize form data
@@ -273,6 +274,12 @@ export function DynamicForm({
       fieldError ? 'border-red-500' : 'border-slate-300'
     }`
 
+    // Monospace font for number inputs (from design.typography.numbers_font_class)
+    const isNumberField = fieldConfig.type === 'integer' || fieldConfig.type === 'decimal' || fieldConfig.type === 'currency'
+    const designTypography = designConfig?.['typography'] as Record<string, string> | undefined
+    const numberFontClass = designTypography?.['numbers_font_class'] || 'font-mono'
+    const numberFieldClasses = isNumberField ? `${baseClasses} ${numberFontClass}` : baseClasses
+
     const widthClasses: Record<string, string> = {
       full: 'col-span-2',
       half: 'col-span-1',
@@ -349,7 +356,7 @@ export function DynamicForm({
             max={fieldConfig.max}
             step={fieldConfig.type === 'integer' ? 1 : 0.01}
             onKeyDown={handleEnterAsTab}
-            className={baseClasses}
+            className={numberFieldClasses}
             disabled={fieldConfig.readonly}
           />
         )}

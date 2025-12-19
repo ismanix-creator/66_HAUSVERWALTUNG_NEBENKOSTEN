@@ -310,6 +310,27 @@ icon = "Filter"
 style = "primary"
 
 # =============================================================================
+# DESIGN - Schriftarten, Farben & Styling-Definitionen
+# =============================================================================
+[design]
+
+[design.typography]
+# Schriftart für Zahlenfelder (integer, decimal, currency)
+numbers_font_family = "font-mono"
+numbers_font_class = "font-mono"
+
+# Schriftart für Text-Felder
+text_font_family = "font-sans"
+text_font_class = "font-sans"
+
+# Schriftart für Tabellen-Header
+table_header_font = "font-semibold"
+
+# Schriftart für Tabellen-Daten
+table_data_font = "font-sans"
+table_data_numbers_font = "font-mono"
+
+# =============================================================================
 # TABLE - Tabellen-Styling, Zebrastreifen & Spacing
 # =============================================================================
 [table]
