@@ -198,9 +198,19 @@ export function DynamicForm({
   // Validate form
   const validate = (): boolean => {
     const newErrors: Record<string, string> = {}
+    const processedFormData = { ...formData }
+
+    // Pre-process IBAN: if only "DE", treat as empty
+    const ibanRaw = formData['iban']
+    if (typeof ibanRaw === 'string') {
+      const ibanValue = normalizeIbanInput(ibanRaw)
+      if (ibanValue === 'DE' || ibanValue === '') {
+        processedFormData['iban'] = ''
+      }
+    }
 
     for (const [fieldName, fieldConfig] of Object.entries(entityConfig.fields)) {
-      const value = formData[fieldName]
+      const value = processedFormData[fieldName]
 
       // Skip auto-generated fields
       if (fieldConfig.auto_generate) continue
@@ -208,22 +218,6 @@ export function DynamicForm({
       // Required check
       if (fieldConfig.required && (value === undefined || value === null || value === '')) {
         newErrors[fieldName] = 'Dieses Feld ist erforderlich'
-        continue
-      }
-
-      // Special handling for IBAN: treat "DE" only as empty
-      if (fieldName === 'iban' && typeof value === 'string') {
-        const ibanValue = normalizeIbanInput(value as string)
-        // If IBAN is just "DE" (2 chars), treat as empty/not filled
-        if (ibanValue === 'DE' || ibanValue === '') {
-          // Clear the IBAN field value to empty for submission
-          formData[fieldName] = ''
-          continue
-        }
-        // If IBAN has more than 2 chars, validate it
-        if (fieldConfig.pattern && !new RegExp(fieldConfig.pattern).test(ibanValue)) {
-          newErrors[fieldName] = 'Ungültiges Format'
-        }
         continue
       }
 
@@ -259,6 +253,8 @@ export function DynamicForm({
       }
     }
 
+    // Update formData with processed values (especially IBAN set to empty)
+    setFormData(processedFormData)
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
