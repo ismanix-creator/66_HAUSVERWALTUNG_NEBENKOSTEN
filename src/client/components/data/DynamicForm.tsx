@@ -463,7 +463,7 @@ export function DynamicForm({
         </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between px-6 py-4 border-t border-slate-800 bg-slate-900/60">
+          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-800 bg-slate-900/60">
             <button
               type="button"
               onClick={onCancel}
