@@ -111,13 +111,6 @@ class ApiService {
   }
 
   /**
-   * Lädt Labels-Konfiguration (für UI-Texte)
-   */
-  async getLabelsConfig<T>(): Promise<T> {
-    return this.fetch<T>('/config/labels')
-  }
-
-  /**
    * Lädt Widths-Konfiguration (für Spaltenbreiten)
    */
   async getWidthsConfig(): Promise<Record<string, string>> {

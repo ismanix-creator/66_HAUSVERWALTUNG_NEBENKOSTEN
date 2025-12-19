@@ -34,7 +34,6 @@ import {
   MasterConfigSchema,
   EntityConfigSchema,
   type MasterConfig,
-  type LabelsRoot,
   type CatalogsRoot,
   type EntityConfig,
   type FeatureFlags,
@@ -105,7 +104,6 @@ const EnvSchema = z.object({
 // =============================================================================
 interface LoadedConfig {
   master: MasterConfig
-  labels: LabelsRoot
   catalogs: CatalogsRoot
   entities: Record<string, EntityConfig>
   views: Record<string, unknown>
@@ -243,27 +241,6 @@ class ConfigLoaderService {
   }
 
   /**
-   * Extrahiert Labels aus der konsolidierten config.toml
-   * Labels sind nun direkt in config.toml unter top-level Sektionen (z.B. [app], [nav], etc.)
-   */
-  private extractLabelsFromMaster(master: Record<string, unknown>): LabelsRoot {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result: any = {}
-
-    // Labels sind in top-level Sektionen organisiert, die wir extrahieren müssen
-    // Die wichtigsten Label-Sektionen sind:
-    const labelSections = ['app', 'nav', 'buttons', 'forms', 'validation', 'tables', 'entity', 'common', 'errors', 'status', 'actions', 'fields']
-
-    for (const section of labelSections) {
-      if (section in master) {
-        result[section] = master[section]
-      }
-    }
-
-    return result as LabelsRoot
-  }
-
-  /**
    * Validiert relevante ENV-Variablen gegen ein Schema
    */
   private validateEnv(env: NodeJS.ProcessEnv): Record<string, unknown> {
@@ -322,7 +299,6 @@ class ConfigLoaderService {
     const master = MasterConfigSchema.parse(withEnv)
 
     // 4. Root-Level Sektionen direkt aus master extrahieren
-    const labels = this.extractLabelsFromMaster(withEnv)
     const views = master.views || {}
     const forms = master.forms || {}
     const tables = master.tables || {}
@@ -367,7 +343,6 @@ class ConfigLoaderService {
 
     return {
       master,
-      labels,
       catalogs,
       entities,
       views,
@@ -458,34 +433,6 @@ class ConfigLoaderService {
    */
   async getNavigation(): Promise<MasterConfig['navigation']> {
     return (await this.getMaster()).navigation
-  }
-
-  /**
-   * Labels (i18n)
-   */
-  async getLabels(): Promise<LabelsRoot> {
-    return (await this.getConfig()).labels
-  }
-
-  /**
-   * Einzelnes Label abrufen
-   * @param labelPath z.B. "nav.dashboard" oder "buttons.save"
-   */
-  async getLabel(labelPath: string): Promise<string> {
-    const labels = await this.getLabels()
-    const parts = labelPath.split('.')
-
-    let current: unknown = labels
-    for (const part of parts) {
-      if (current && typeof current === 'object' && part in current) {
-        current = (current as Record<string, unknown>)[part]
-      } else {
-        console.warn(`[ConfigLoader] Label nicht gefunden: ${labelPath}`)
-        return labelPath
-      }
-    }
-
-    return typeof current === 'string' ? current : labelPath
   }
 
   /**

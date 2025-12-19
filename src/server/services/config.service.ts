@@ -55,10 +55,6 @@ class ConfigService {
     return await configLoader.getWidths()
   }
 
-  async getLabels() {
-    return await configLoader.getLabels()
-  }
-
   clearCache() {
     void configLoader.reload()
   }

@@ -94,17 +94,6 @@ export function useCatalog<T = unknown>(catalogName: string) {
 }
 
 /**
- * Hook für Labels-Konfiguration (UI-Texte)
- */
-export function useLabelsConfig<T = unknown>() {
-  return useQuery({
-    queryKey: ['config', 'labels'],
-    queryFn: () => apiService.getLabelsConfig<T>(),
-    staleTime: Infinity,
-  })
-}
-
-/**
  * Hook für Widths-Konfiguration (Spaltenbreiten)
  */
 export function useWidthsConfig() {
