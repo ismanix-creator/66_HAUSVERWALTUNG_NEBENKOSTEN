@@ -3077,8 +3077,6 @@ title_field = "vertragsnummer"
 # =============================================================================
 # IMPORTS - Externe Konfigurationsdateien (Kataloge, Labels, Validierung, Design)
 # =============================================================================
-[imports]
-catalogs = ["config/catalogs/*.catalog.toml"]
-labels = ["config/labels/*.labels.toml"]
-validation = ["config/validation/rules.config.toml"]
-design = ["config/themes/design-system.config.toml"]
+# [imports] SECTION REMOVED - All configurations are now consolidated in this file
+# Only catalogs remain as separate files in config/catalogs/
+# =============================================================================

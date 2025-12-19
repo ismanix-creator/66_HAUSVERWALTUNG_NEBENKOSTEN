@@ -242,23 +242,24 @@ class ConfigLoaderService {
   }
 
   /**
-   * Lädt Labels-Datei aus config/labels/de.labels.toml
+   * Extrahiert Labels aus der konsolidierten config.toml
+   * Labels sind nun direkt in config.toml unter top-level Sektionen (z.B. [app], [nav], etc.)
    */
-  private async loadLabelsFromFile(): Promise<LabelsRoot> {
-    const labelsFile = path.join(CONFIG_DIR, 'labels', 'de.labels.toml')
+  private extractLabelsFromMaster(master: Record<string, unknown>): LabelsRoot {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result: any = {}
 
-    try {
-      const content = await fs.readFile(labelsFile, 'utf-8')
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const parsed = TOML.parse(content) as any
-      return parsed
-    } catch (error) {
-      console.warn(`[ConfigLoader] Fehler beim Laden von Labels-Datei:`, error)
+    // Labels sind in top-level Sektionen organisiert, die wir extrahieren müssen
+    // Die wichtigsten Label-Sektionen sind:
+    const labelSections = ['app', 'nav', 'buttons', 'forms', 'validation', 'tables', 'entity', 'common', 'errors', 'status', 'actions', 'fields']
+
+    for (const section of labelSections) {
+      if (section in master) {
+        result[section] = master[section]
+      }
     }
 
-    return result
+    return result as LabelsRoot
   }
 
   /**
@@ -320,7 +321,7 @@ class ConfigLoaderService {
     const master = MasterConfigSchema.parse(withEnv)
 
     // 4. Root-Level Sektionen direkt aus master extrahieren
-    const labels = await this.loadLabelsFromFile()
+    const labels = this.extractLabelsFromMaster(withEnv)
     const views = master.views || {}
     const forms = master.forms || {}
     const tables = master.tables || {}
