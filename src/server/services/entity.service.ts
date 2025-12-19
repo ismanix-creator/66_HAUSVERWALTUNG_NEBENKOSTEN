@@ -244,12 +244,15 @@ class EntityService {
         errors.push(`Feld '${fieldName}' ist erforderlich`)
       }
 
+      // Skip validation if empty and not required
+      if (value === undefined || value === null || value === '') {
+        continue
+      }
+
       // Wenn Wert vorhanden, Typ-Validierung
-      if (value !== undefined && value !== null) {
-        const typeError = this.validateFieldType(fieldName, value, fieldConfig)
-        if (typeError) {
-          errors.push(typeError)
-        }
+      const typeError = this.validateFieldType(fieldName, value, fieldConfig)
+      if (typeError) {
+        errors.push(typeError)
       }
     }
 
