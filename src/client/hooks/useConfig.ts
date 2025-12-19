@@ -116,6 +116,17 @@ export function useButtonConfig() {
 }
 
 /**
+ * Hook für globale Table-Styling Konfiguration (Zebrastreifen, Zeilenhöhen, etc.)
+ */
+export function useTableStyleConfig() {
+  return useQuery({
+    queryKey: ['config', 'table', 'style'],
+    queryFn: () => apiService.getTableStyleConfig(),
+    staleTime: Infinity,
+  })
+}
+
+/**
  * Hook für Table-Spacing Konfiguration
  */
 export function useTableSpacingConfig() {

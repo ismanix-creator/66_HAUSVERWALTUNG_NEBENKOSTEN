@@ -163,6 +163,7 @@ GET    /api/config/navigation       # Navigation-Menü
 GET    /api/config/entity/:name     # Entity-Schema
 GET    /api/config/widths           # Width-Referenzen (w40-w300 + actions)
 GET    /api/config/buttons          # Button-Konfiguration (Styling + universelle Typen)
+GET    /api/config/table            # Table-Styling (Zebrastreifen, Zeilenhöhen, etc.)
 GET    /api/config/table/spacing    # Table-Spacing-Konfiguration
 GET    /health                      # Health-Check
 ```

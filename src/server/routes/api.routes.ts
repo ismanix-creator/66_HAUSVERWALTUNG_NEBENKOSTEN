@@ -95,6 +95,15 @@ apiRoutes.get('/config/buttons', async (_req, res, next) => {
   }
 })
 
+apiRoutes.get('/config/table', async (_req, res, next) => {
+  try {
+    const tableConfig = await configService.getSection('table')
+    res.json(tableConfig)
+  } catch (error) {
+    next(error)
+  }
+})
+
 apiRoutes.get('/config/table/spacing', async (_req, res, next) => {
   try {
     const spacing = await configService.getSection('table.spacing')

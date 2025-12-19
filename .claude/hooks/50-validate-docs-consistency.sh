@@ -114,12 +114,42 @@ check_button_types() {
   fi
 }
 
+# 6. Check table configuration completeness
+check_table_config() {
+  local has_table=$(grep -q "\[table\]" "$CONFIG_FILE" && echo "1" || echo "0")
+  [[ "$has_table" == "0" ]] && return 0
+
+  # Check required row styling properties
+  local required_props=("row_padding" "row_height" "header_padding" "header_height" "stripe_enabled" "stripe_odd_bg" "stripe_even_bg")
+  local missing_props=()
+
+  for prop in "${required_props[@]}"; do
+    if ! grep -q "^$prop = " "$CONFIG_FILE"; then
+      missing_props+=("$prop")
+    fi
+  done
+
+  if [[ ${#missing_props[@]} -gt 0 ]]; then
+    error "Table-Eigenschaften fehlen: ${missing_props[*]}"
+  else
+    success "Alle Tabellen-Eigenschaften definiert (row_height, stripe_enabled, etc.)"
+  fi
+
+  # Check for spacing subsection
+  if grep -q "\[table\.spacing\]" "$CONFIG_FILE"; then
+    success "[table.spacing] Subsection konfiguriert"
+  else
+    warning "[table.spacing] Subsection nicht gefunden"
+  fi
+}
+
 # Run validations
 check_port_consistency
 check_version_consistency
 check_api_endpoints
 check_config_structure
 check_button_types
+check_table_config
 
 # Summary
 echo ""

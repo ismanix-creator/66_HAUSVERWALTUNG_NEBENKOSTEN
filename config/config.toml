@@ -310,24 +310,63 @@ icon = "Filter"
 style = "primary"
 
 # =============================================================================
-# TABLE - Tabellen-Styling & Spacing
+# TABLE - Tabellen-Styling, Zebrastreifen & Spacing
 # =============================================================================
 [table]
-# Row Styling
-row_hover_bg = "hover:bg-gray-50"
-row_padding = "py-3"
-row_border = "border-b border-gray-200"
 
-# Column Spacing (erste/letzte Spalte)
+# ============ ROW STYLING ============
+
+# Standard Row Styling
+row_padding = "px-4 py-3"       # Padding in Datenzellen
+row_border = "border-b border-gray-200"
+row_height = "48px"             # Feste Zeilenhöhe für konsistentes Layout
+
+# Row Hover State
+row_hover_bg = "hover:bg-gray-50"
+row_hover_transition = "transition-colors duration-150"
+
+# Header Row (unterschiedlich von Datenzellen)
+header_padding = "px-4 py-3"
+header_height = "44px"
+header_bg = "bg-gray-100"
+header_font_weight = "font-semibold"
+header_text_color = "text-gray-700"
+header_border = "border-b border-gray-300"
+
+# ============ ZEBRASTREIFEN (Alternate Row Colors) ============
+
+# Striped/Zebra Pattern - Visuelle Lesbarkeit verbessern
+stripe_enabled = true
+stripe_odd_bg = "bg-white"               # Ungerade Zeilen: Weiß
+stripe_even_bg = "bg-gray-50"            # Gerade Zeilen: Hellgrau
+stripe_transition = "transition-colors"
+
+# Striped mit Hover-Override
+stripe_hover_odd_bg = "hover:bg-blue-50"
+stripe_hover_even_bg = "hover:bg-blue-50"
+
+# ============ COLUMN SPACING ============
+
 [table.spacing]
 first_column_left = "50px"      # Linker Außenabstand erste Spalte
 last_column_right = "50px"      # Rechter Außenabstand letzte Spalte
 column_gap = "8px"              # Abstand zwischen Spalten
-header_padding = "py-3 px-4"    # Padding in Header-Zeilen
+column_padding = "px-2"         # Padding in einzelnen Spalten
 
-# Striped Pattern (optional)
-stripe_color = "bg-gray-50"
-stripe_alternate = true
+# ============ TABLE CONTAINER ============
+
+[table.container]
+border = "border border-gray-200"
+rounded = "rounded-lg"
+overflow = "overflow-hidden"
+shadow = "shadow-sm"
+background = "bg-white"
+
+# ============ SCROLL & OVERFLOW ============
+
+[table.scroll]
+overflow_x = "overflow-x-auto"
+scroll_smooth = "scroll-smooth"
 
 # =============================================================================
 # SERVER - Server-Konfiguration

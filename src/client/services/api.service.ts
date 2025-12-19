@@ -125,6 +125,13 @@ class ApiService {
   }
 
   /**
+   * Lädt globale Table-Styling Konfiguration (Zebrastreifen, Zeilenhöhen, etc.)
+   */
+  async getTableStyleConfig(): Promise<Record<string, unknown>> {
+    return this.fetch<Record<string, unknown>>('/config/table')
+  }
+
+  /**
    * Lädt Table-Spacing Konfiguration (für Tabellen-Abstände)
    */
   async getTableSpacingConfig(): Promise<Record<string, string>> {
