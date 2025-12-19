@@ -2,10 +2,46 @@
 
 Alle Agentenbeschreibungen wurden aus den Einzeldateien zusammengeführt. Guardrails gelten projektweit: Schreiben nur im Repo-Root, `config/config.toml` ist Single Source of Truth, keine Annahmen ohne Bauplan/Config, MCP-Aufrufe mit `{"approval-policy":"never","sandbox":"workspace-write"}`.
 
+## ⏰ KRITISCH: Systemzeit-Verifikation für CHANGELOG & Commits
+
+**REGEL (verbindlich für alle Agenten):**
+
+Vor JEDER Änderung an `CHANGELOG.md` oder Erstellung von Commits MUSS die Systemzeit geprüft werden:
+
+```bash
+date '+%Y-%m-%d %H:%M:%S UTC'
+# Beispiel Output: 2025-12-19 22:17:38 UTC
+```
+
+**CHANGELOG Format (mit verifizierten Zeitstempeln):**
+```
+### [2025-12-19 22:17] - Fix/Feature - Beschreibung
+```
+
+**Commit-Message Format (mit verifizierten Systemzeit-Angabe):**
+```
+fix: Beschreibung
+
+Systemzeit verifiziert: 2025-12-19 22:17 UTC (per 'date' Befehl)
+
+Details...
+
+🤖 Generated with [Claude Code]...
+```
+
+**Wichtig:**
+- ❌ NICHT: Geschätzte, angenommene oder ungeprüfte Zeiten
+- ❌ NICHT: "Latest" oder "Current" ohne Zeitstempel
+- ✅ JA: `date` Befehl prüfen BEVOR CHANGELOG/Commit erstellt wird
+- ✅ JA: In Commit-Message dokumentieren "Systemzeit verifiziert: [Zeit] (per 'date' Befehl)"
+- ✅ JA: Alte Einträge ohne bekannte Zeit als `[YYYY-MM-DD XX:XX]` markieren
+
+Siehe auch: `.claude/CLAUDE.md` → "Systemzeit-Verifikation", `.claude/hooks/35-verify-system-time.sh`
+
 ## System-Prompts & Pflichtlektüre
 
 - Detaillierte System-/Rollenprompts liegen unter `.github/agents/*.agent.md`. Nutze sie als ausführungsnahe Referenz; dieses Dokument bleibt der vollständige Katalog.
-- Pflichtlektüre vor Schreiboperationen: `.claude/` (system/planning/review/validation), `.codex/`, `.ai/`, `CLAUDE.md`, `CODEX.md`, `AGENTS.md`, `PM_STATUS.md` (letzter JSON-Block), `BLUEPRINT_PROMPT_DE.md`, `wireframe.md`, `todo.md`, `config/config.toml`, `CHANGELOG.md`.
+- Pflichtlektüre vor Schreiboperationen: `.claude/` (system/planning/review/validation/CLAUDE.md mit Systemzeit-Regeln), `.codex/`, `.ai/`, `AGENTS.md` (mit ⏰ Systemzeit-Verifikation Sektion), `PM_STATUS.md` (letzter JSON-Block), `BLUEPRINT_PROMPT_DE.md`, `wireframe.md`, `todo.md`, `config/config.toml`, `CHANGELOG.md`.
 - Konfigurationsänderungen starten in `config/config.toml` und müssen in AGENTS/BAUPLAN/BLUEPRINT/CHANGELOG gespiegelt werden.
 - Redundante Regel-Textblöcke vermeiden: verweise in Zweifelsfällen auf `.ai/rules.md`, `.ai/conventions.md` oder `.ai/architecture.md` statt Regeln zu duplizieren.
 - PM_STATUS ist das Steuerlog: Jeder Agent hängt nach Abschluss einen JSON-Block an; der Projektmanager wertet ausschließlich den letzten Block aus.

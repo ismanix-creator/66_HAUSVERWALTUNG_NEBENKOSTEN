@@ -28,6 +28,37 @@
 - Kleine Commits mit deutschen Commit-Messages
 - TypeScript-Check vor jedem Commit
 
+### Systemzeit-Verifikation (KRITISCH für CHANGELOG & Commits)
+
+**REGEL:** Systemzeit IMMER prüfen, BEVOR CHANGELOG aktualisiert oder Commits erstellt werden!
+
+```bash
+# Systemzeit prüfen (vor CHANGELOG-Änderungen)
+date '+%Y-%m-%d %H:%M:%S'
+
+# Output: 2025-12-19 22:17:38
+```
+
+**CHANGELOG Format:**
+- `[YYYY-MM-DD HH:MM]` - Verifizierte Systemzeit (geprüft per `date` Befehl)
+- `[YYYY-MM-DD XX:XX]` - Zeit unbekannt/ungeprüft (nur für alte Einträge)
+
+**Commit-Message Format:**
+```
+fix: Beschreibung der Änderung
+
+Systemzeit verifiziert: 2025-12-19 22:17 UTC (per 'date' Befehl)
+
+Details...
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+**Wichtig:**
+- Keine Annahmen oder Schätzungen von Systemzeit
+- Systemzeit MUSS durch `date` Befehl verifiziert sein
+- In CHANGELOG und Commit-Messages explizit dokumentieren, dass Zeit geprüft wurde
+
 ## Projektspezifische Einstellungen
 
 ### Ports (fest zugewiesen)

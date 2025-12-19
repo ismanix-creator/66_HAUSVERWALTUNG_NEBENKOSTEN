@@ -35,8 +35,16 @@ VERBOTEN:
 ### Workflow
 
 - Config-First: Prüfe immer zuerst ob TOML-Änderung ausreicht
+- **Systemzeit vor CHANGELOG-Update prüfen:** `date '+%Y-%m-%d %H:%M:%S UTC'`
+- **Commits enthalten verifizierte Systemzeit:** "Systemzeit verifiziert: [Zeit] UTC (per 'date' Befehl)"
 - Kleine Commits mit deutschen Commit-Messages
 - TypeScript-Check vor jedem Commit
+
+**Systemzeit-Regel (KRITISCH):**
+- ❌ NICHT: Geschätzte oder angenommene Zeiten
+- ✅ JA: `date` Befehl prüfen BEVOR Code/CHANGELOG geändert wird
+- ✅ JA: In Commit-Message und CHANGELOG Systemzeit dokumentieren
+- Siehe: `.claude/CLAUDE.md` "Systemzeit-Verifikation", `AGENTS.md` "⏰ KRITISCH"
 
 ### Kommunikation
 
