@@ -4163,7 +4163,7 @@ title_field = "computed.display_name"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.mieter.detail.tabs]]
   id = "stammdaten"
   label = "tabs.stammdaten"
   type = "form_readonly"
@@ -4172,7 +4172,7 @@ title_field = "computed.display_name"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.mieter.detail.tabs]]
   id = "vertrag"
   label = "tabs.vertrag"
   type = "table"
@@ -4181,7 +4181,7 @@ title_field = "computed.display_name"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.mieter.detail.tabs]]
   id = "zahlungen"
   label = "tabs.zahlungen"
   type = "table"
@@ -4191,7 +4191,7 @@ title_field = "computed.display_name"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.mieter.detail.tabs]]
   id = "dokumente"
   label = "tabs.dokumente"
   type = "table"
@@ -4201,7 +4201,7 @@ title_field = "computed.display_name"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.mieter.detail.tabs]]
   id = "kaution"
   label = "tabs.kaution"
   type = "form_readonly"
@@ -4371,7 +4371,7 @@ title_field = "bezeichnung"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.objekte.detail.tabs]]
   id = "stammdaten"
   label = "tabs.stammdaten"
   type = "form_readonly"
@@ -4380,7 +4380,7 @@ title_field = "bezeichnung"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.objekte.detail.tabs]]
   id = "einheiten"
   label = "tabs.einheiten"
   type = "table"
@@ -4390,7 +4390,7 @@ title_field = "bezeichnung"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.objekte.detail.tabs]]
   id = "zaehler"
   label = "tabs.zaehler"
   type = "table"
@@ -4401,7 +4401,7 @@ title_field = "bezeichnung"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.objekte.detail.tabs]]
   id = "rechnungen"
   label = "tabs.rechnungen"
   type = "table"
@@ -4411,7 +4411,7 @@ title_field = "bezeichnung"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.objekte.detail.tabs]]
   id = "dokumente"
   label = "tabs.dokumente"
   type = "table"
@@ -4467,7 +4467,7 @@ title_field = "vertragsnummer"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.vertraege.detail.tabs]]
   id = "konditionen"
   label = "tabs.konditionen"
   type = "form_readonly"
@@ -4476,7 +4476,7 @@ title_field = "vertragsnummer"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.vertraege.detail.tabs]]
   id = "kaution"
   label = "tabs.kaution"
   type = "form_editable"
@@ -4485,7 +4485,7 @@ title_field = "vertragsnummer"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.vertraege.detail.tabs]]
   id = "zahlungen"
   label = "tabs.zahlungen"
   type = "table"
@@ -4494,7 +4494,7 @@ title_field = "vertragsnummer"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.vertraege.detail.tabs]]
   id = "sollstellung"
   label = "tabs.sollstellung"
   type = "table"
@@ -4503,7 +4503,7 @@ title_field = "vertragsnummer"
 
 
 # View.Detail.Tabs
-  [[view.detail.tabs]]
+  [[views.vertraege.detail.tabs]]
   id = "dokumente"
   label = "tabs.dokumente"
   type = "table"
