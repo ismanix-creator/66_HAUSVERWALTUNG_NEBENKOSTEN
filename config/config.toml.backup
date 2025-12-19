@@ -243,7 +243,7 @@ show_render_count = false
 log_api_calls = false
 mock_delay_ms = 0
 
-[entities.dokument]
+[entities.dokument.config]
 name = "dokument"
 table_name = "dokumente"
 label = "labels.entity.dokument"
@@ -251,89 +251,89 @@ label_plural = "labels.entity.dokumente"
 icon = "File"
 primary_key = "id"
 
-[entities.dokument.fields.id]
+[entities.dokument.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.dokument.fields.objekt_id]
+[entities.dokument.config.fields.objekt_id]
 type = "uuid"
 reference = "objekt"
 label = "labels.dokument.objekt"
 
-[entities.dokument.fields.einheit_id]
+[entities.dokument.config.fields.einheit_id]
 type = "uuid"
 reference = "einheit"
 label = "labels.dokument.einheit"
 
-[entities.dokument.fields.mieter_id]
+[entities.dokument.config.fields.mieter_id]
 type = "uuid"
 reference = "mieter"
 label = "labels.dokument.mieter"
 
-[entities.dokument.fields.vertrag_id]
+[entities.dokument.config.fields.vertrag_id]
 type = "uuid"
 reference = "vertrag"
 label = "labels.dokument.vertrag"
 
-[entities.dokument.fields.typ]
+[entities.dokument.config.fields.typ]
 type = "enum"
 required = true
 options = ["rechnung", "vertrag", "ausweis", "korrespondenz", "foto", "sonstig"]
 default = "sonstig"
 label = "labels.dokument.typ"
 
-[entities.dokument.fields.bezeichnung]
+[entities.dokument.config.fields.bezeichnung]
 type = "string"
 required = true
 max_length = 200
 label = "labels.dokument.bezeichnung"
 
-[entities.dokument.fields.dateiname]
+[entities.dokument.config.fields.dateiname]
 type = "string"
 required = true
 max_length = 255
 label = "labels.dokument.dateiname"
 
-[entities.dokument.fields.dateipfad]
+[entities.dokument.config.fields.dateipfad]
 type = "string"
 required = true
 label = "labels.dokument.dateipfad"
 
-[entities.dokument.fields.dateigroesse]
+[entities.dokument.config.fields.dateigroesse]
 type = "integer"
 label = "labels.dokument.dateigroesse"
 
-[entities.dokument.fields.mime_type]
+[entities.dokument.config.fields.mime_type]
 type = "string"
 max_length = 100
 label = "labels.dokument.mime_type"
 
-[entities.dokument.fields.datum]
+[entities.dokument.config.fields.datum]
 type = "date"
 label = "labels.dokument.datum"
 description = "Dokumentdatum (z.B. Rechnungsdatum)"
 
-[entities.dokument.fields.jahr]
+[entities.dokument.config.fields.jahr]
 type = "integer"
 label = "labels.dokument.jahr"
 description = "Für Steuerberater-Sortierung"
 
-[entities.dokument.fields.hochgeladen_am]
+[entities.dokument.config.fields.hochgeladen_am]
 type = "datetime"
 auto_generate = true
 label = "labels.dokument.hochgeladen_am"
 
-[entities.dokument.relations]
+[entities.dokument.config.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
 mieter = { type = "many_to_one", target = "mieter", foreign_key = "mieter_id" }
 vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id" }
 
-[entities.dokument.validation]
+[entities.dokument.config.validation]
 mindestens_eine_zuordnung = { rule = "objekt_id is not null or mieter_id is not null or vertrag_id is not null", message = "labels.validation.dokument_zuordnung" }
 
-[entities.einheit]
+[entities.einheit.config]
 name = "einheit"
 table_name = "einheiten"
 label = "labels.entity.einheit"
@@ -341,26 +341,26 @@ label_plural = "labels.entity.einheiten"
 icon = "DoorOpen"
 primary_key = "id"
 
-[entities.einheit.fields.id]
+[entities.einheit.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.einheit.fields.objekt_id]
+[entities.einheit.config.fields.objekt_id]
 type = "uuid"
 required = true
 reference = "objekt"
 label = "labels.einheit.objekt"
 placeholder = "Objekt wählen"
 
-[entities.einheit.fields.bezeichnung]
+[entities.einheit.config.fields.bezeichnung]
 type = "string"
 required = true
 max_length = 50
 label = "labels.einheit.bezeichnung"
 placeholder = "z.B. EG links, Halle A"
 
-[entities.einheit.fields.typ]
+[entities.einheit.config.fields.typ]
 type = "enum"
 required = true
 options = ["wohnung", "gewerbe", "stellplatz", "keller", "sonstig"]
@@ -368,7 +368,7 @@ default = "wohnung"
 label = "labels.einheit.typ"
 placeholder = "wohnung"
 
-[entities.einheit.fields.flaeche]
+[entities.einheit.config.fields.flaeche]
 type = "decimal"
 required = true
 min = 1
@@ -377,7 +377,7 @@ suffix = "m²"
 label = "labels.einheit.flaeche"
 placeholder = "75.0"
 
-[entities.einheit.fields.anzahl_raeume]
+[entities.einheit.config.fields.anzahl_raeume]
 type = "decimal"
 min = 1
 precision = 1
@@ -385,19 +385,19 @@ label = "labels.einheit.anzahl_raeume"
 visible_if = { field = "typ", in = ["wohnung"] }
 placeholder = "3.5"
 
-[entities.einheit.fields.etage]
+[entities.einheit.config.fields.etage]
 type = "string"
 max_length = 20
 label = "labels.einheit.etage"
 placeholder = "z.B. EG, 1. OG, DG"
 
-[entities.einheit.fields.ausstattung]
+[entities.einheit.config.fields.ausstattung]
 type = "multiselect"
 options = ["balkon", "terrasse", "keller", "stellplatz", "einbaukueche", "aufzug", "gaeste_wc"]
 label = "labels.einheit.ausstattung"
 placeholder = "balkon, keller"
 
-[entities.einheit.fields.status]
+[entities.einheit.config.fields.status]
 type = "enum"
 required = true
 options = ["vermietet", "leer", "eigennutzung", "renovierung"]
@@ -405,21 +405,21 @@ default = "leer"
 label = "labels.einheit.status"
 placeholder = "leer"
 
-[entities.einheit.fields.notiz]
+[entities.einheit.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 placeholder = "Besondere Merkmale, Schlüsselübergabe"
 
-[entities.einheit.relations]
+[entities.einheit.config.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 vertraege = { type = "one_to_many", target = "vertrag", foreign_key = "einheit_id" }
 zaehler = { type = "one_to_many", target = "zaehler", foreign_key = "einheit_id" }
 
-[entities.einheit.computed]
+[entities.einheit.config.computed]
 aktueller_vertrag = { formula = "first(vertraege where ende is null or ende > now())" }
 aktueller_mieter = { formula = "aktueller_vertrag.mieter" }
 
-[entities.erinnerung]
+[entities.erinnerung.config]
 name = "erinnerung"
 table_name = "erinnerungen"
 label = "labels.entity.erinnerung"
@@ -427,54 +427,54 @@ label_plural = "labels.entity.erinnerungen"
 icon = "Bell"
 primary_key = "id"
 
-[entities.erinnerung.fields.id]
+[entities.erinnerung.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.erinnerung.fields.typ]
+[entities.erinnerung.config.fields.typ]
 type = "enum"
 required = true
 options = ["mieterhoehung", "vertragsende", "zaehlerablesung", "rueckstand", "nk_abrechnung", "kaution_rueckzahlung", "sonstig"]
 label = "labels.erinnerung.typ"
 
-[entities.erinnerung.fields.bezug_typ]
+[entities.erinnerung.config.fields.bezug_typ]
 type = "enum"
 options = ["vertrag", "objekt", "mieter", "einheit"]
 label = "labels.erinnerung.bezug_typ"
 
-[entities.erinnerung.fields.bezug_id]
+[entities.erinnerung.config.fields.bezug_id]
 type = "uuid"
 label = "labels.erinnerung.bezug_id"
 
-[entities.erinnerung.fields.faellig_am]
+[entities.erinnerung.config.fields.faellig_am]
 type = "date"
 required = true
 label = "labels.erinnerung.faellig_am"
 
-[entities.erinnerung.fields.titel]
+[entities.erinnerung.config.fields.titel]
 type = "string"
 required = true
 max_length = 200
 label = "labels.erinnerung.titel"
 
-[entities.erinnerung.fields.beschreibung]
+[entities.erinnerung.config.fields.beschreibung]
 type = "text"
 label = "labels.erinnerung.beschreibung"
 
-[entities.erinnerung.fields.status]
+[entities.erinnerung.config.fields.status]
 type = "enum"
 required = true
 options = ["offen", "erledigt", "zurueckgestellt"]
 default = "offen"
 label = "labels.erinnerung.status"
 
-[entities.erinnerung.fields.erstellt_am]
+[entities.erinnerung.config.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 label = "labels.common.erstellt_am"
 
-[entities.kaution]
+[entities.kaution.config]
 name = "kaution"
 table_name = "kautionen"
 label = "labels.entity.kaution"
@@ -482,42 +482,42 @@ label_plural = "labels.entity.kautionen"
 icon = "Shield"
 primary_key = "id"
 
-[entities.kaution.fields.id]
+[entities.kaution.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.kaution.fields.vertrag_id]
+[entities.kaution.config.fields.vertrag_id]
 type = "uuid"
 required = true
 unique = true
 reference = "vertrag"
 label = "labels.kaution.vertrag"
 
-[entities.kaution.fields.betrag]
+[entities.kaution.config.fields.betrag]
 type = "currency"
 required = true
 min = 0
 label = "labels.kaution.betrag"
 
-[entities.kaution.fields.eingangsdatum]
+[entities.kaution.config.fields.eingangsdatum]
 type = "date"
 required = true
 label = "labels.kaution.eingangsdatum"
 
-[entities.kaution.fields.anlageform]
+[entities.kaution.config.fields.anlageform]
 type = "enum"
 required = true
 options = ["sparbuch", "konto", "buergschaft", "bar"]
 default = "konto"
 label = "labels.kaution.anlageform"
 
-[entities.kaution.fields.anlage_details]
+[entities.kaution.config.fields.anlage_details]
 type = "text"
 label = "labels.kaution.anlage_details"
 placeholder = "Bank, Kontonummer, etc."
 
-[entities.kaution.fields.zinssatz]
+[entities.kaution.config.fields.zinssatz]
 type = "decimal"
 min = 0
 max = 10
@@ -525,37 +525,37 @@ precision = 2
 suffix = "%"
 label = "labels.kaution.zinssatz"
 
-[entities.kaution.fields.status]
+[entities.kaution.config.fields.status]
 type = "enum"
 required = true
 options = ["angelegt", "teilrueckzahlung", "zurueckgezahlt"]
 default = "angelegt"
 label = "labels.kaution.status"
 
-[entities.kaution.fields.rueckzahlungsdatum]
+[entities.kaution.config.fields.rueckzahlungsdatum]
 type = "date"
 label = "labels.kaution.rueckzahlungsdatum"
 visible_if = { field = "status", in = ["teilrueckzahlung", "zurueckgezahlt"] }
 
-[entities.kaution.fields.rueckzahlungsbetrag]
+[entities.kaution.config.fields.rueckzahlungsbetrag]
 type = "currency"
 min = 0
 label = "labels.kaution.rueckzahlungsbetrag"
 visible_if = { field = "status", in = ["teilrueckzahlung", "zurueckgezahlt"] }
 
-[entities.kaution.fields.einbehalt_grund]
+[entities.kaution.config.fields.einbehalt_grund]
 type = "text"
 label = "labels.kaution.einbehalt_grund"
 visible_if = { field = "status", equals = "teilrueckzahlung" }
 
-[entities.kaution.fields.notiz]
+[entities.kaution.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 
-[entities.kaution.relations]
+[entities.kaution.config.relations]
 vertrag = { type = "one_to_one", target = "vertrag", foreign_key = "vertrag_id" }
 
-[entities.kostenart]
+[entities.kostenart.config]
 name = "kostenart"
 table_name = "kostenarten"
 label = "labels.entity.kostenart"
@@ -563,25 +563,25 @@ label_plural = "labels.entity.kostenarten"
 icon = "Tag"
 primary_key = "id"
 
-[entities.kostenart.fields.id]
+[entities.kostenart.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.kostenart.fields.bezeichnung]
+[entities.kostenart.config.fields.bezeichnung]
 type = "string"
 required = true
 max_length = 100
 label = "labels.kostenart.bezeichnung"
 
-[entities.kostenart.fields.kategorie]
+[entities.kostenart.config.fields.kategorie]
 type = "enum"
 required = true
 options = ["umlagefaehig", "nicht_umlagefaehig"]
 default = "umlagefaehig"
 label = "labels.kostenart.kategorie"
 
-[entities.kostenart.fields.umlageschluessel]
+[entities.kostenart.config.fields.umlageschluessel]
 type = "enum"
 required = true
 options = ["flaeche", "personen", "einheiten", "verbrauch", "direkt"]
@@ -589,25 +589,25 @@ default = "flaeche"
 label = "labels.kostenart.umlageschluessel"
 description = "direkt = 1:1 Zuordnung zu Einheit"
 
-[entities.kostenart.fields.nur_gewerbe]
+[entities.kostenart.config.fields.nur_gewerbe]
 type = "boolean"
 default = false
 label = "labels.kostenart.nur_gewerbe"
 
-[entities.kostenart.fields.sortierung]
+[entities.kostenart.config.fields.sortierung]
 type = "integer"
 default = 100
 label = "labels.kostenart.sortierung"
 
-[entities.kostenart.fields.aktiv]
+[entities.kostenart.config.fields.aktiv]
 type = "boolean"
 default = true
 label = "labels.kostenart.aktiv"
 
-[entities.kostenart.relations]
+[entities.kostenart.config.relations]
 rechnungen = { type = "one_to_many", target = "rechnung", foreign_key = "kostenart_id" }
 
-[entities.mieter]
+[entities.mieter.config]
 name = "mieter"
 table_name = "mieter"
 label = "labels.entity.mieter"
@@ -615,25 +615,25 @@ label_plural = "labels.entity.mieter_plural"
 icon = "User"
 primary_key = "id"
 
-[entities.mieter.fields.id]
+[entities.mieter.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.mieter.fields.anrede]
+[entities.mieter.config.fields.anrede]
 type = "enum"
 options = ["herr", "frau", "firma", "divers"]
 label = "labels.mieter.anrede"
 placeholder = "herr"
 
-[entities.mieter.fields.vorname]
+[entities.mieter.config.fields.vorname]
 type = "string"
 max_length = 50
 label = "labels.mieter.vorname"
 required_if = { field = "anrede", not_in = ["firma"] }
 placeholder = "Max"
 
-[entities.mieter.fields.nachname]
+[entities.mieter.config.fields.nachname]
 type = "string"
 required = true
 max_length = 50
@@ -641,37 +641,37 @@ label = "labels.mieter.nachname"
 description = "Bei Firma: Firmenname"
 placeholder = "Mustermann"
 
-[entities.mieter.fields.firma_zusatz]
+[entities.mieter.config.fields.firma_zusatz]
 type = "string"
 max_length = 100
 label = "labels.mieter.firma_zusatz"
 visible_if = { field = "anrede", equals = "firma" }
 placeholder = "Muster GmbH"
 
-[entities.mieter.fields.geburtsdatum]
+[entities.mieter.config.fields.geburtsdatum]
 type = "date"
 label = "labels.mieter.geburtsdatum"
 visible_if = { field = "anrede", not_in = ["firma"] }
 
-[entities.mieter.fields.telefon]
+[entities.mieter.config.fields.telefon]
 type = "string"
 max_length = 30
 label = "labels.mieter.telefon"
 placeholder = "+49 170 1234567"
 
-[entities.mieter.fields.email]
+[entities.mieter.config.fields.email]
 type = "email"
 max_length = 100
 label = "labels.mieter.email"
 placeholder = "max@example.com"
 
-[entities.mieter.fields.adresse_vorher]
+[entities.mieter.config.fields.adresse_vorher]
 type = "text"
 label = "labels.mieter.adresse_vorher"
 description = "Vorherige Anschrift"
 placeholder = "Musterstraße 1, 12345 Berlin"
 
-[entities.mieter.fields.iban]
+[entities.mieter.config.fields.iban]
 type = "string"
 max_length = 34
 pattern = "^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$"
@@ -679,19 +679,19 @@ label = "labels.mieter.iban"
 default = "DE"
 placeholder = "DE12 3456 7890 1234 5678 90"
 
-[entities.mieter.fields.bic]
+[entities.mieter.config.fields.bic]
 type = "string"
 max_length = 11
 label = "labels.mieter.bic"
 placeholder = "COBADEFFXXX"
 
-[entities.mieter.fields.bankname]
+[entities.mieter.config.fields.bankname]
 type = "string"
 max_length = 100
 label = "labels.mieter.bankname"
 placeholder = "Commerzbank Köln"
 
-[entities.mieter.fields.status]
+[entities.mieter.config.fields.status]
 type = "enum"
 required = true
 options = ["aktiv", "gekuendigt", "ehemalig"]
@@ -699,28 +699,28 @@ default = "aktiv"
 label = "labels.mieter.status"
 placeholder = "aktiv"
 
-[entities.mieter.fields.notiz]
+[entities.mieter.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 placeholder = "Hinweise zur Kommunikation"
 
-[entities.mieter.fields.erstellt_am]
+[entities.mieter.config.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 label = "labels.common.erstellt_am"
 
-[entities.mieter.relations]
+[entities.mieter.config.relations]
 vertraege = { type = "one_to_many", target = "vertrag", foreign_key = "mieter_id" }
 dokumente = { type = "one_to_many", target = "dokument", foreign_key = "mieter_id" }
 zahlungen = { type = "one_to_many", target = "zahlung", foreign_key = "mieter_id", through = "vertrag" }
 
-[entities.mieter.computed]
+[entities.mieter.config.computed]
 display_name = { formula = "concat(vorname, ' ', nachname)" }
 aktiver_vertrag = { formula = "first(vertraege where ende is null or ende > now())" }
 aktuelle_einheit = { formula = "aktiver_vertrag.einheit" }
 
-[entities.nebenkostenabrechnung]
+[entities.nebenkostenabrechnung.config]
 name = "nebenkostenabrechnung"
 table_name = "nebenkostenabrechnungen"
 label = "labels.entity.nebenkostenabrechnung"
@@ -728,58 +728,58 @@ label_plural = "labels.entity.nebenkostenabrechnungen"
 icon = "FileSpreadsheet"
 primary_key = "id"
 
-[entities.nebenkostenabrechnung.fields.id]
+[entities.nebenkostenabrechnung.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.nebenkostenabrechnung.fields.objekt_id]
+[entities.nebenkostenabrechnung.config.fields.objekt_id]
 type = "uuid"
 required = true
 reference = "objekt"
 label = "labels.nk.objekt"
 
-[entities.nebenkostenabrechnung.fields.jahr]
+[entities.nebenkostenabrechnung.config.fields.jahr]
 type = "integer"
 required = true
 min = 2000
 max = 2100
 label = "labels.nk.jahr"
 
-[entities.nebenkostenabrechnung.fields.zeitraum_von]
+[entities.nebenkostenabrechnung.config.fields.zeitraum_von]
 type = "date"
 required = true
 label = "labels.nk.zeitraum_von"
 
-[entities.nebenkostenabrechnung.fields.zeitraum_bis]
+[entities.nebenkostenabrechnung.config.fields.zeitraum_bis]
 type = "date"
 required = true
 label = "labels.nk.zeitraum_bis"
 
-[entities.nebenkostenabrechnung.fields.status]
+[entities.nebenkostenabrechnung.config.fields.status]
 type = "enum"
 required = true
 options = ["entwurf", "erstellt", "versendet"]
 default = "entwurf"
 label = "labels.nk.status"
 
-[entities.nebenkostenabrechnung.fields.erstellt_am]
+[entities.nebenkostenabrechnung.config.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 label = "labels.common.erstellt_am"
 
-[entities.nebenkostenabrechnung.fields.notiz]
+[entities.nebenkostenabrechnung.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 
-[entities.nebenkostenabrechnung.relations]
+[entities.nebenkostenabrechnung.config.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 positionen = { type = "one_to_many", target = "nebenkostenabrechnung_position", foreign_key = "abrechnung_id" }
 
-[entities.nebenkostenabrechnung.computed]
+[entities.nebenkostenabrechnung.config.computed]
 gesamtkosten = { formula = "sum(positionen.gesamtkosten)" }
 
-[entities.objekt]
+[entities.objekt.config]
 name = "objekt"
 table_name = "objekte"
 label = "labels.entity.objekt"
@@ -787,78 +787,78 @@ label_plural = "labels.entity.objekte"
 icon = "Building2"
 primary_key = "id"
 
-[entities.objekt.fields.id]
+[entities.objekt.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.objekt.fields.bezeichnung]
+[entities.objekt.config.fields.bezeichnung]
 type = "string"
 required = true
 max_length = 100
 label = "labels.objekt.bezeichnung"
 placeholder = "z.B. Haus Musterstraße 12"
 
-[entities.objekt.fields.adresse]
+[entities.objekt.config.fields.adresse]
 type = "string"
 required = true
 max_length = 200
 label = "labels.objekt.adresse"
 
-[entities.objekt.fields.plz]
+[entities.objekt.config.fields.plz]
 type = "string"
 required = true
 pattern = "^[0-9]{5}$"
 label = "labels.objekt.plz"
 
-[entities.objekt.fields.ort]
+[entities.objekt.config.fields.ort]
 type = "string"
 required = true
 max_length = 100
 label = "labels.objekt.ort"
 
-[entities.objekt.fields.baujahr]
+[entities.objekt.config.fields.baujahr]
 type = "integer"
 min = 1800
 max = 2100
 label = "labels.objekt.baujahr"
 
-[entities.objekt.fields.typ]
+[entities.objekt.config.fields.typ]
 type = "enum"
 required = true
 options = ["wohnraum", "gewerbe", "gemischt"]
 default = "wohnraum"
 label = "labels.objekt.typ"
 
-[entities.objekt.fields.ist_multi_einheit]
+[entities.objekt.config.fields.ist_multi_einheit]
 type = "boolean"
 default = false
 label = "labels.objekt.ist_multi_einheit"
 description = "Mehrere Einheiten mit separaten Zählern"
 
-[entities.objekt.fields.notiz]
+[entities.objekt.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 
-[entities.objekt.fields.erstellt_am]
+[entities.objekt.config.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 label = "labels.common.erstellt_am"
 
-[entities.objekt.relations]
+[entities.objekt.config.relations]
 einheiten = { type = "one_to_many", target = "einheit", foreign_key = "objekt_id" }
 zaehler = { type = "one_to_many", target = "zaehler", foreign_key = "objekt_id" }
 rechnungen = { type = "one_to_many", target = "rechnung", foreign_key = "objekt_id" }
 dokumente = { type = "one_to_many", target = "dokument", foreign_key = "objekt_id" }
 
-[entities.objekt.computed]
+[entities.objekt.config.computed]
 anzahl_einheiten = { formula = "count(einheiten)" }
 anzahl_vermietet = { formula = "count(einheiten where status = 'vermietet')" }
 leerstand = { formula = "anzahl_einheiten - anzahl_vermietet" }
 gesamt_flaeche = { formula = "sum(einheiten.flaeche)" }
 
-[entities.rechnung]
+[entities.rechnung.config]
 name = "rechnung"
 table_name = "rechnungen"
 label = "labels.entity.rechnung"
@@ -866,87 +866,87 @@ label_plural = "labels.entity.rechnungen"
 icon = "Receipt"
 primary_key = "id"
 
-[entities.rechnung.fields.id]
+[entities.rechnung.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.rechnung.fields.objekt_id]
+[entities.rechnung.config.fields.objekt_id]
 type = "uuid"
 required = true
 reference = "objekt"
 label = "labels.rechnung.objekt"
 
-[entities.rechnung.fields.kostenart_id]
+[entities.rechnung.config.fields.kostenart_id]
 type = "uuid"
 required = true
 reference = "kostenart"
 label = "labels.rechnung.kostenart"
 
-[entities.rechnung.fields.einheit_id]
+[entities.rechnung.config.fields.einheit_id]
 type = "uuid"
 reference = "einheit"
 label = "labels.rechnung.einheit"
 description = "Nur bei Direktzuordnung"
 visible_if = { field = "kostenart.umlageschluessel", equals = "direkt" }
 
-[entities.rechnung.fields.rechnungsnummer]
+[entities.rechnung.config.fields.rechnungsnummer]
 type = "string"
 max_length = 50
 label = "labels.rechnung.rechnungsnummer"
 
-[entities.rechnung.fields.rechnungsdatum]
+[entities.rechnung.config.fields.rechnungsdatum]
 type = "date"
 required = true
 label = "labels.rechnung.rechnungsdatum"
 
-[entities.rechnung.fields.faelligkeitsdatum]
+[entities.rechnung.config.fields.faelligkeitsdatum]
 type = "date"
 label = "labels.rechnung.faelligkeitsdatum"
 
-[entities.rechnung.fields.betrag]
+[entities.rechnung.config.fields.betrag]
 type = "currency"
 required = true
 min = 0
 label = "labels.rechnung.betrag"
 
-[entities.rechnung.fields.zeitraum_von]
+[entities.rechnung.config.fields.zeitraum_von]
 type = "date"
 label = "labels.rechnung.zeitraum_von"
 
-[entities.rechnung.fields.zeitraum_bis]
+[entities.rechnung.config.fields.zeitraum_bis]
 type = "date"
 label = "labels.rechnung.zeitraum_bis"
 
-[entities.rechnung.fields.bezahlt_am]
+[entities.rechnung.config.fields.bezahlt_am]
 type = "date"
 label = "labels.rechnung.bezahlt_am"
 
-[entities.rechnung.fields.dokument_id]
+[entities.rechnung.config.fields.dokument_id]
 type = "uuid"
 reference = "dokument"
 label = "labels.rechnung.dokument"
 
-[entities.rechnung.fields.notiz]
+[entities.rechnung.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 
-[entities.rechnung.fields.erstellt_am]
+[entities.rechnung.config.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 
-[entities.rechnung.relations]
+[entities.rechnung.config.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 kostenart = { type = "many_to_one", target = "kostenart", foreign_key = "kostenart_id" }
 einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
 dokument = { type = "many_to_one", target = "dokument", foreign_key = "dokument_id" }
 
-[entities.rechnung.computed]
+[entities.rechnung.config.computed]
 ist_bezahlt = { formula = "bezahlt_am is not null" }
 jahr = { formula = "year(rechnungsdatum)" }
 
-[entities.sollstellung]
+[entities.sollstellung.config]
 name = "sollstellung"
 table_name = "sollstellungen"
 label = "labels.entity.sollstellung"
@@ -954,47 +954,47 @@ label_plural = "labels.entity.sollstellungen"
 icon = "ListChecks"
 primary_key = "id"
 
-[entities.sollstellung.fields.id]
+[entities.sollstellung.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.sollstellung.fields.vertrag_id]
+[entities.sollstellung.config.fields.vertrag_id]
 type = "uuid"
 required = true
 reference = "vertrag"
 label = "labels.sollstellung.vertrag"
 
-[entities.sollstellung.fields.monat]
+[entities.sollstellung.config.fields.monat]
 type = "string"
 required = true
 pattern = "^[0-9]{4}-[0-9]{2}$"
 label = "labels.sollstellung.monat"
 
-[entities.sollstellung.fields.sollbetrag]
+[entities.sollstellung.config.fields.sollbetrag]
 type = "currency"
 required = true
 label = "labels.sollstellung.sollbetrag"
 
-[entities.sollstellung.fields.istbetrag]
+[entities.sollstellung.config.fields.istbetrag]
 type = "currency"
 default = 0
 label = "labels.sollstellung.istbetrag"
 
-[entities.sollstellung.fields.status]
+[entities.sollstellung.config.fields.status]
 type = "enum"
 options = ["offen", "teilweise", "bezahlt", "ueberzahlt"]
 default = "offen"
 label = "labels.sollstellung.status"
 
-[entities.sollstellung.relations]
+[entities.sollstellung.config.relations]
 vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id" }
 
-[entities.sollstellung.computed]
+[entities.sollstellung.config.computed]
 differenz = { formula = "istbetrag - sollbetrag" }
 mieter = { formula = "vertrag.mieter" }
 
-[entities.vertrag]
+[entities.vertrag.config]
 name = "vertrag"
 table_name = "vertraege"
 label = "labels.entity.vertrag"
@@ -1002,46 +1002,46 @@ label_plural = "labels.entity.vertraege"
 icon = "FileSignature"
 primary_key = "id"
 
-[entities.vertrag.fields.id]
+[entities.vertrag.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.vertrag.fields.einheit_id]
+[entities.vertrag.config.fields.einheit_id]
 type = "uuid"
 required = true
 reference = "einheit"
 label = "labels.vertrag.einheit"
 
-[entities.vertrag.fields.mieter_id]
+[entities.vertrag.config.fields.mieter_id]
 type = "uuid"
 required = true
 reference = "mieter"
 label = "labels.vertrag.mieter"
 
-[entities.vertrag.fields.vertragsnummer]
+[entities.vertrag.config.fields.vertragsnummer]
 type = "string"
 max_length = 30
 label = "labels.vertrag.vertragsnummer"
 
-[entities.vertrag.fields.typ]
+[entities.vertrag.config.fields.typ]
 type = "enum"
 required = true
 options = ["wohnraum", "gewerbe"]
 label = "labels.vertrag.typ"
 auto_from = "einheit.objekt.typ"
 
-[entities.vertrag.fields.beginn]
+[entities.vertrag.config.fields.beginn]
 type = "date"
 required = true
 label = "labels.vertrag.beginn"
 
-[entities.vertrag.fields.ende]
+[entities.vertrag.config.fields.ende]
 type = "date"
 label = "labels.vertrag.ende"
 description = "Leer = unbefristet"
 
-[entities.vertrag.fields.kuendigungsfrist]
+[entities.vertrag.config.fields.kuendigungsfrist]
 type = "integer"
 default = 3
 min = 1
@@ -1049,11 +1049,11 @@ max = 12
 suffix = "Monate"
 label = "labels.vertrag.kuendigungsfrist"
 
-[entities.vertrag.fields.kuendigung_zum]
+[entities.vertrag.config.fields.kuendigung_zum]
 type = "date"
 label = "labels.vertrag.kuendigung_zum"
 
-[entities.vertrag.fields.gekuendigt_von]
+[entities.vertrag.config.fields.gekuendigt_von]
 type = "enum"
 options = ["mieter", "vermieter"]
 label = "labels.vertrag.gekuendigt_von"
@@ -1061,26 +1061,26 @@ visible_if = { field = "kuendigung_zum", is_set = true }
 
 # === Mietkonditionen ===
 
-[entities.vertrag.fields.kaltmiete]
+[entities.vertrag.config.fields.kaltmiete]
 type = "currency"
 required = true
 min = 0
 label = "labels.vertrag.kaltmiete"
 
-[entities.vertrag.fields.nebenkosten_vorauszahlung]
+[entities.vertrag.config.fields.nebenkosten_vorauszahlung]
 type = "currency"
 required = true
 min = 0
 default = 0
 label = "labels.vertrag.nebenkosten_vorauszahlung"
 
-[entities.vertrag.fields.heizkosten_vorauszahlung]
+[entities.vertrag.config.fields.heizkosten_vorauszahlung]
 type = "currency"
 min = 0
 default = 0
 label = "labels.vertrag.heizkosten_vorauszahlung"
 
-[entities.vertrag.fields.sonstige_vorauszahlung]
+[entities.vertrag.config.fields.sonstige_vorauszahlung]
 type = "currency"
 min = 0
 default = 0
@@ -1089,56 +1089,56 @@ description = "z.B. Stellplatz, Garage"
 
 # === Mieterhöhung ===
 
-[entities.vertrag.fields.mietanpassung_typ]
+[entities.vertrag.config.fields.mietanpassung_typ]
 type = "enum"
 options = ["keine", "mietspiegel", "staffel", "index"]
 default = "mietspiegel"
 label = "labels.vertrag.mietanpassung_typ"
 visible_if = { field = "typ", equals = "wohnraum" }
 
-[entities.vertrag.fields.staffelmiete]
+[entities.vertrag.config.fields.staffelmiete]
 type = "json"
 label = "labels.vertrag.staffelmiete"
 description = "Array: [{ab: date, kaltmiete: number}]"
 visible_if = { field = "mietanpassung_typ", equals = "staffel" }
 
-[entities.vertrag.fields.indexmiete]
+[entities.vertrag.config.fields.indexmiete]
 type = "json"
 label = "labels.vertrag.indexmiete"
 description = "{basisjahr, basisindex, schwelle_prozent}"
 visible_if = { field = "mietanpassung_typ", equals = "index" }
 
-[entities.vertrag.fields.letzte_mieterhoehung]
+[entities.vertrag.config.fields.letzte_mieterhoehung]
 type = "date"
 label = "labels.vertrag.letzte_mieterhoehung"
 
-[entities.vertrag.fields.notiz]
+[entities.vertrag.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 
-[entities.vertrag.fields.erstellt_am]
+[entities.vertrag.config.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 
-[entities.vertrag.relations]
+[entities.vertrag.config.relations]
 einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
 mieter = { type = "many_to_one", target = "mieter", foreign_key = "mieter_id" }
 kaution = { type = "one_to_one", target = "kaution", foreign_key = "vertrag_id" }
 zahlungen = { type = "one_to_many", target = "zahlung", foreign_key = "vertrag_id" }
 sollstellungen = { type = "one_to_many", target = "sollstellung", foreign_key = "vertrag_id" }
 
-[entities.vertrag.computed]
+[entities.vertrag.config.computed]
 gesamtmiete = { formula = "kaltmiete + nebenkosten_vorauszahlung + heizkosten_vorauszahlung + sonstige_vorauszahlung" }
 ist_aktiv = { formula = "(ende is null or ende > now()) and kuendigung_zum is null" }
 ist_gekuendigt = { formula = "kuendigung_zum is not null" }
 naechste_mieterhoehung_moeglich = { formula = "add_months(letzte_mieterhoehung, 15)" }
 
-[entities.vertrag.validation]
+[entities.vertrag.config.validation]
 ende_nach_beginn = { rule = "ende is null or ende > beginn", message = "labels.validation.ende_nach_beginn" }
 kuendigung_logik = { rule = "kuendigung_zum is null or gekuendigt_von is not null", message = "labels.validation.kuendigung_von_fehlt" }
 
-[entities.zaehler]
+[entities.zaehler.config]
 name = "zaehler"
 table_name = "zaehler"
 label = "labels.entity.zaehler"
@@ -1146,61 +1146,61 @@ label_plural = "labels.entity.zaehler_plural"
 icon = "Gauge"
 primary_key = "id"
 
-[entities.zaehler.fields.id]
+[entities.zaehler.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.zaehler.fields.objekt_id]
+[entities.zaehler.config.fields.objekt_id]
 type = "uuid"
 required = true
 reference = "objekt"
 label = "labels.zaehler.objekt"
 
-[entities.zaehler.fields.einheit_id]
+[entities.zaehler.config.fields.einheit_id]
 type = "uuid"
 reference = "einheit"
 label = "labels.zaehler.einheit"
 description = "Leer = Hauptzähler"
 
-[entities.zaehler.fields.typ]
+[entities.zaehler.config.fields.typ]
 type = "enum"
 required = true
 options = ["strom", "gas", "wasser", "heizung", "warmwasser"]
 label = "labels.zaehler.typ"
 
-[entities.zaehler.fields.zaehlernummer]
+[entities.zaehler.config.fields.zaehlernummer]
 type = "string"
 required = true
 max_length = 50
 label = "labels.zaehler.zaehlernummer"
 
-[entities.zaehler.fields.ist_hauptzaehler]
+[entities.zaehler.config.fields.ist_hauptzaehler]
 type = "boolean"
 default = false
 label = "labels.zaehler.ist_hauptzaehler"
 
-[entities.zaehler.fields.messeinheit]
+[entities.zaehler.config.fields.messeinheit]
 type = "enum"
 required = true
 options = ["kWh", "m3"]
 label = "labels.zaehler.messeinheit"
 auto_from_typ = { strom = "kWh", gas = "m3", wasser = "m3", heizung = "kWh", warmwasser = "m3" }
 
-[entities.zaehler.fields.notiz]
+[entities.zaehler.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 
-[entities.zaehler.relations]
+[entities.zaehler.config.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
 staende = { type = "one_to_many", target = "zaehlerstand", foreign_key = "zaehler_id" }
 
-[entities.zaehler.computed]
+[entities.zaehler.config.computed]
 letzter_stand = { formula = "last(staende order by datum)" }
 bezeichnung_display = { formula = "concat(typ, ' - ', zaehlernummer, ist_hauptzaehler ? ' (Haupt)' : '')" }
 
-[entities.zaehlerstand]
+[entities.zaehlerstand.config]
 name = "zaehlerstand"
 table_name = "zaehlerstaende"
 label = "labels.entity.zaehlerstand"
@@ -1208,53 +1208,53 @@ label_plural = "labels.entity.zaehlerstaende"
 icon = "Activity"
 primary_key = "id"
 
-[entities.zaehlerstand.fields.id]
+[entities.zaehlerstand.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.zaehlerstand.fields.zaehler_id]
+[entities.zaehlerstand.config.fields.zaehler_id]
 type = "uuid"
 required = true
 reference = "zaehler"
 label = "labels.zaehlerstand.zaehler"
 visible_in_form = false
 
-[entities.zaehlerstand.fields.datum]
+[entities.zaehlerstand.config.fields.datum]
 type = "date"
 required = true
 label = "labels.zaehlerstand.datum"
 
-[entities.zaehlerstand.fields.stand]
+[entities.zaehlerstand.config.fields.stand]
 type = "decimal"
 required = true
 min = 0
 precision = 2
 label = "labels.zaehlerstand.stand"
 
-[entities.zaehlerstand.fields.ableseart]
+[entities.zaehlerstand.config.fields.ableseart]
 type = "enum"
 required = true
 options = ["selbst", "versorger", "schaetzung"]
 default = "selbst"
 label = "labels.zaehlerstand.ableseart"
 
-[entities.zaehlerstand.fields.foto]
+[entities.zaehlerstand.config.fields.foto]
 type = "file"
 accept = ["image/jpeg", "image/png"]
 label = "labels.zaehlerstand.foto"
 
-[entities.zaehlerstand.fields.notiz]
+[entities.zaehlerstand.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 
-[entities.zaehlerstand.relations]
+[entities.zaehlerstand.config.relations]
 zaehler = { type = "many_to_one", target = "zaehler", foreign_key = "zaehler_id" }
 
-[entities.zaehlerstand.computed]
+[entities.zaehlerstand.config.computed]
 verbrauch = { formula = "stand - previous(stand)" }
 
-[entities.zahlung]
+[entities.zahlung.config]
 name = "zahlung"
 table_name = "zahlungen"
 label = "labels.entity.zahlung"
@@ -1262,59 +1262,59 @@ label_plural = "labels.entity.zahlungen"
 icon = "ArrowDownCircle"
 primary_key = "id"
 
-[entities.zahlung.fields.id]
+[entities.zahlung.config.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
-[entities.zahlung.fields.vertrag_id]
+[entities.zahlung.config.fields.vertrag_id]
 type = "uuid"
 required = true
 reference = "vertrag"
 label = "labels.zahlung.vertrag"
 
-[entities.zahlung.fields.datum]
+[entities.zahlung.config.fields.datum]
 type = "date"
 required = true
 label = "labels.zahlung.datum"
 
-[entities.zahlung.fields.betrag]
+[entities.zahlung.config.fields.betrag]
 type = "currency"
 required = true
 label = "labels.zahlung.betrag"
 
-[entities.zahlung.fields.verwendungszweck]
+[entities.zahlung.config.fields.verwendungszweck]
 type = "string"
 max_length = 200
 label = "labels.zahlung.verwendungszweck"
 
-[entities.zahlung.fields.typ]
+[entities.zahlung.config.fields.typ]
 type = "enum"
 required = true
 options = ["miete", "nachzahlung", "kaution", "sonstig"]
 default = "miete"
 label = "labels.zahlung.typ"
 
-[entities.zahlung.fields.monat_fuer]
+[entities.zahlung.config.fields.monat_fuer]
 type = "string"
 pattern = "^[0-9]{4}-[0-9]{2}$"
 label = "labels.zahlung.monat_fuer"
 placeholder = "YYYY-MM"
 visible_if = { field = "typ", equals = "miete" }
 
-[entities.zahlung.fields.notiz]
+[entities.zahlung.config.fields.notiz]
 type = "text"
 label = "labels.common.notiz"
 
-[entities.zahlung.fields.erstellt_am]
+[entities.zahlung.config.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 
-[entities.zahlung.relations]
+[entities.zahlung.config.relations]
 vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id" }
 
-[entities.zahlung.computed]
+[entities.zahlung.config.computed]
 mieter = { formula = "vertrag.mieter" }
 einheit = { formula = "vertrag.einheit" }
 
@@ -2018,31 +2018,31 @@ label = "labels.form.section.zahlung"
 [tables.abrechnungen.table]
 entity = "nebenkostenabrechnung"
 
-[[tables.abrechnungen.table.columns]]
+[[table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.nk.objekt"
 sortable = true
 width = "20%"
 
-[[tables.abrechnungen.table.columns]]
+[[table.columns]]
 field = "jahr"
 label = "labels.nk.jahr"
 sortable = true
 width = "12%"
 
-[[tables.abrechnungen.table.columns]]
+[[table.columns]]
 field = "zeitraum_von"
 label = "labels.nk.zeitraum"
 width = "18%"
 template = "{zeitraum_von|date} – {zeitraum_bis|date}"
 
-[[tables.abrechnungen.table.columns]]
+[[table.columns]]
 field = "status"
 label = "labels.nk.status"
 width = "15%"
 display = "badge"
 
-[[tables.abrechnungen.table.columns]]
+[[table.columns]]
 field = "gesamtkosten"
 label = "labels.nk.gesamtkosten"
 width = "15%"
@@ -2055,46 +2055,46 @@ details = { icon = "Search", dialog = "dialogs/nk_abrechnung_detail" }
 entity = "dokument"
 selectable = true
 
-[[tables.dokumente.table.columns]]
+[[table.columns]]
 field = "bezeichnung"
 label = "labels.dokument.bezeichnung"
 sortable = true
 width = "25%"
 
-[[tables.dokumente.table.columns]]
+[[table.columns]]
 field = "typ"
 label = "labels.dokument.typ"
 sortable = true
 width = "10%"
 display = "badge"
 
-[[tables.dokumente.table.columns]]
+[[table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.dokument.objekt"
 sortable = true
 width = "15%"
 empty_text = "—"
 
-[[tables.dokumente.table.columns]]
+[[table.columns]]
 field = "mieter.computed.display_name"
 label = "labels.dokument.mieter"
 width = "15%"
 empty_text = "—"
 
-[[tables.dokumente.table.columns]]
+[[table.columns]]
 field = "datum"
 label = "labels.dokument.datum"
 sortable = true
 width = "10%"
 format = "date"
 
-[[tables.dokumente.table.columns]]
+[[table.columns]]
 field = "jahr"
 label = "labels.dokument.jahr"
 sortable = true
 width = "8%"
 
-[[tables.dokumente.table.columns]]
+[[table.columns]]
 field = "hochgeladen_am"
 label = "labels.dokument.hochgeladen"
 sortable = true
@@ -2111,20 +2111,20 @@ delete = { icon = "Trash2", confirm = true }
 entity = "einheit"
 row_click = "expand"
 
-[[tables.einheiten.table.columns]]
+[[table.columns]]
 field = "bezeichnung"
 label = "labels.einheit.bezeichnung"
 sortable = true
 width = "25%"
 
-[[tables.einheiten.table.columns]]
+[[table.columns]]
 field = "typ"
 label = "labels.einheit.typ"
 sortable = true
 width = "15%"
 display = "badge"
 
-[[tables.einheiten.table.columns]]
+[[table.columns]]
 field = "flaeche"
 label = "labels.einheit.flaeche"
 sortable = true
@@ -2132,13 +2132,13 @@ width = "10%"
 format = "number"
 suffix = " m²"
 
-[[tables.einheiten.table.columns]]
+[[table.columns]]
 field = "computed.aktueller_mieter.computed.display_name"
 label = "labels.einheit.mieter"
 width = "25%"
 empty_text = "—"
 
-[[tables.einheiten.table.columns]]
+[[table.columns]]
 field = "status"
 label = "labels.einheit.status"
 sortable = true
@@ -2153,39 +2153,39 @@ vertrag = { icon = "FileSignature", dialog = "forms/vertrag.form", visible_if = 
 [tables.kautionen.table]
 entity = "kaution"
 
-[[tables.kautionen.table.columns]]
+[[table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "labels.kaution.mieter"
 sortable = true
 width = "25%"
 
-[[tables.kautionen.table.columns]]
+[[table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.kaution.einheit"
 sortable = true
 width = "20%"
 
-[[tables.kautionen.table.columns]]
+[[table.columns]]
 field = "betrag"
 label = "labels.kaution.betrag"
 sortable = true
 width = "15%"
 format = "currency"
 
-[[tables.kautionen.table.columns]]
+[[table.columns]]
 field = "eingangsdatum"
 label = "labels.kaution.eingangsdatum"
 sortable = true
 width = "15%"
 format = "date"
 
-[[tables.kautionen.table.columns]]
+[[table.columns]]
 field = "status"
 label = "labels.kaution.status"
 width = "15%"
 display = "badge"
 
-[[tables.kautionen.table.columns]]
+[[table.columns]]
 field = "rueckzahlungsdatum"
 label = "labels.kaution.rueckzahlungsdatum"
 width = "10%"
@@ -2200,7 +2200,7 @@ entity = "mieter"
 row_click = "navigate"
 row_click_route = "/mieter/:id"
 
-[[tables.mieter.table.columns]]
+[[table.columns]]
 field = "computed.display_name"
 label = "labels.mieter.name"
 sortable = true
@@ -2208,24 +2208,24 @@ sort_field = "nachname"
 width = "25%"
 template = "{vorname} {nachname}"
 
-[[tables.mieter.table.columns]]
+[[table.columns]]
 field = "mobil"
 fallback_fields = ["telefon"]
 label = "labels.mieter.telefon"
 width = "15%"
 
-[[tables.mieter.table.columns]]
+[[table.columns]]
 field = "email"
 label = "labels.mieter.email"
 width = "20%"
 
-[[tables.mieter.table.columns]]
+[[table.columns]]
 field = "computed.aktuelle_einheit.bezeichnung"
 label = "labels.mieter.einheit"
 width = "20%"
 empty_text = "—"
 
-[[tables.mieter.table.columns]]
+[[table.columns]]
 field = "status"
 label = "labels.mieter.status"
 sortable = true
@@ -2234,7 +2234,7 @@ display = "badge"
 badge_colors = { aktiv = "green", gekuendigt = "yellow", ehemalig = "gray" }
 
 [tables.mieter.table.actions]
-label = "labels.actions"
+label = "labels.table.actions"
 width = "8rem"
 
 [tables.mieter.table.row_actions]
@@ -2247,20 +2247,20 @@ entity = "objekt"
 row_click = "navigate"
 row_click_route = "/objekte/:id"
 
-[[tables.objekte.table.columns]]
+[[table.columns]]
 field = "bezeichnung"
 label = "labels.objekt.bezeichnung"
 sortable = true
 width = "25%"
 
-[[tables.objekte.table.columns]]
+[[table.columns]]
 field = "adresse"
 label = "labels.objekt.adresse"
 sortable = true
 width = "30%"
 template = "{adresse}, {plz} {ort}"
 
-[[tables.objekte.table.columns]]
+[[table.columns]]
 field = "typ"
 label = "labels.objekt.typ"
 sortable = true
@@ -2268,14 +2268,14 @@ width = "10%"
 display = "badge"
 badge_colors = { wohnraum = "blue", gewerbe = "orange", gemischt = "purple" }
 
-[[tables.objekte.table.columns]]
+[[table.columns]]
 field = "computed.anzahl_einheiten"
 label = "labels.objekt.einheiten"
 sortable = true
 width = "10%"
 align = "center"
 
-[[tables.objekte.table.columns]]
+[[table.columns]]
 field = "computed.leerstand"
 label = "labels.objekt.leerstand"
 sortable = true
@@ -2283,7 +2283,7 @@ width = "10%"
 align = "center"
 highlight_if = { condition = "> 0", color = "yellow" }
 
-[[tables.objekte.table.columns]]
+[[table.columns]]
 field = "computed.gesamt_flaeche"
 label = "labels.objekt.flaeche"
 sortable = true
@@ -2298,44 +2298,44 @@ delete = { icon = "Trash2", confirm = true, confirm_message = "labels.confirm.ob
 [tables.rechnungen.table]
 entity = "rechnung"
 
-[[tables.rechnungen.table.columns]]
+[[table.columns]]
 field = "rechnungsdatum"
 label = "labels.rechnung.datum"
 sortable = true
 width = "10%"
 format = "date"
 
-[[tables.rechnungen.table.columns]]
+[[table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.rechnung.objekt"
 sortable = true
 width = "18%"
 
-[[tables.rechnungen.table.columns]]
+[[table.columns]]
 field = "kostenart.bezeichnung"
 label = "labels.rechnung.kostenart"
 sortable = true
 width = "15%"
 
-[[tables.rechnungen.table.columns]]
+[[table.columns]]
 field = "rechnungsnummer"
 label = "labels.rechnung.nummer"
 width = "12%"
 
-[[tables.rechnungen.table.columns]]
+[[table.columns]]
 field = "betrag"
 label = "labels.rechnung.betrag"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[tables.rechnungen.table.columns]]
+[[table.columns]]
 field = "zeitraum_von"
 label = "labels.rechnung.zeitraum"
 width = "15%"
 template = "{zeitraum_von|date} - {zeitraum_bis|date}"
 
-[[tables.rechnungen.table.columns]]
+[[table.columns]]
 field = "computed.ist_bezahlt"
 label = "labels.rechnung.bezahlt"
 sortable = true
@@ -2343,7 +2343,7 @@ width = "8%"
 display = "boolean_icon"
 icons = { true = "Check", false = "X" }
 
-[[tables.rechnungen.table.columns]]
+[[table.columns]]
 field = "dokument_id"
 label = ""
 width = "5%"
@@ -2360,39 +2360,39 @@ dokument = { icon = "Upload", dialog = "forms/dokument.form", defaults = { objek
 [tables.sollstellungen.table]
 entity = "sollstellung"
 
-[[tables.sollstellungen.table.columns]]
+[[table.columns]]
 field = "monat"
 label = "labels.sollstellung.monat"
 sortable = true
 width = "12%"
 format = "month"
 
-[[tables.sollstellungen.table.columns]]
+[[table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "labels.sollstellung.mieter"
 sortable = true
 width = "22%"
 
-[[tables.sollstellungen.table.columns]]
+[[table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.sollstellung.einheit"
 width = "18%"
 
-[[tables.sollstellungen.table.columns]]
+[[table.columns]]
 field = "sollbetrag"
 label = "labels.sollstellung.soll"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[tables.sollstellungen.table.columns]]
+[[table.columns]]
 field = "istbetrag"
 label = "labels.sollstellung.ist"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[tables.sollstellungen.table.columns]]
+[[table.columns]]
 field = "computed.differenz"
 label = "labels.sollstellung.differenz"
 sortable = true
@@ -2400,7 +2400,7 @@ width = "12%"
 format = "currency"
 color_rule = { negative = "red", positive = "green", zero = "inherit" }
 
-[[tables.sollstellungen.table.columns]]
+[[table.columns]]
 field = "status"
 label = "labels.sollstellung.status"
 sortable = true
@@ -2416,32 +2416,32 @@ entity = "vertrag"
 row_click = "navigate"
 row_click_route = "/vertraege/:id"
 
-[[tables.vertraege.table.columns]]
+[[table.columns]]
 field = "vertragsnummer"
 label = "labels.vertrag.vertragsnummer"
 sortable = true
 width = "10%"
 
-[[tables.vertraege.table.columns]]
+[[table.columns]]
 field = "mieter.computed.display_name"
 label = "labels.vertrag.mieter"
 sortable = true
 width = "20%"
 
-[[tables.vertraege.table.columns]]
+[[table.columns]]
 field = "einheit.bezeichnung"
 label = "labels.vertrag.einheit"
 sortable = true
 width = "15%"
 
-[[tables.vertraege.table.columns]]
+[[table.columns]]
 field = "beginn"
 label = "labels.vertrag.beginn"
 sortable = true
 width = "10%"
 format = "date"
 
-[[tables.vertraege.table.columns]]
+[[table.columns]]
 field = "ende"
 label = "labels.vertrag.ende"
 sortable = true
@@ -2449,14 +2449,14 @@ width = "10%"
 format = "date"
 empty_text = "unbefristet"
 
-[[tables.vertraege.table.columns]]
+[[table.columns]]
 field = "computed.gesamtmiete"
 label = "labels.vertrag.gesamtmiete"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[tables.vertraege.table.columns]]
+[[table.columns]]
 field = "computed.ist_aktiv"
 label = "labels.vertrag.status"
 width = "10%"
@@ -2470,43 +2470,43 @@ kuendigen = { icon = "XCircle", dialog = "dialogs/kuendigung", visible_if = { fi
 [tables.zaehler.table]
 entity = "zaehler"
 
-[[tables.zaehler.table.columns]]
+[[table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.zaehler.objekt"
 sortable = true
 width = "20%"
 
-[[tables.zaehler.table.columns]]
+[[table.columns]]
 field = "einheit.bezeichnung"
 label = "labels.zaehler.einheit"
 width = "15%"
 empty_text = "Hauptzähler"
 
-[[tables.zaehler.table.columns]]
+[[table.columns]]
 field = "typ"
 label = "labels.zaehler.typ"
 sortable = true
 width = "12%"
 display = "badge"
 
-[[tables.zaehler.table.columns]]
+[[table.columns]]
 field = "zaehlernummer"
 label = "labels.zaehler.nummer"
 width = "15%"
 
-[[tables.zaehler.table.columns]]
+[[table.columns]]
 field = "ist_hauptzaehler"
 label = "labels.zaehler.haupt"
 width = "8%"
 display = "boolean_icon"
 
-[[tables.zaehler.table.columns]]
+[[table.columns]]
 field = "computed.letzter_stand.stand"
 label = "labels.zaehler.letzter_stand"
 width = "15%"
 template = "{value} {messeinheit}"
 
-[[tables.zaehler.table.columns]]
+[[table.columns]]
 field = "computed.letzter_stand.datum"
 label = "labels.zaehler.abgelesen_am"
 sortable = true
@@ -2521,46 +2521,46 @@ historie = { icon = "History", dialog = "dialogs/zaehler_historie" }
 [tables.zahlungen.table]
 entity = "zahlung"
 
-[[tables.zahlungen.table.columns]]
+[[table.columns]]
 field = "datum"
 label = "labels.zahlung.datum"
 sortable = true
 width = "12%"
 format = "date"
 
-[[tables.zahlungen.table.columns]]
+[[table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "labels.zahlung.mieter"
 sortable = true
 width = "20%"
 
-[[tables.zahlungen.table.columns]]
+[[table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.zahlung.einheit"
 width = "15%"
 
-[[tables.zahlungen.table.columns]]
+[[table.columns]]
 field = "betrag"
 label = "labels.zahlung.betrag"
 sortable = true
 width = "12%"
 format = "currency"
 
-[[tables.zahlungen.table.columns]]
+[[table.columns]]
 field = "typ"
 label = "labels.zahlung.typ"
 sortable = true
 width = "12%"
 display = "badge"
 
-[[tables.zahlungen.table.columns]]
+[[table.columns]]
 field = "monat_fuer"
 label = "labels.zahlung.monat_fuer"
 sortable = true
 width = "10%"
 format = "month"
 
-[[tables.zahlungen.table.columns]]
+[[table.columns]]
 field = "verwendungszweck"
 label = "labels.zahlung.verwendungszweck"
 width = "19%"
@@ -2570,7 +2570,7 @@ truncate = 30
 edit = { icon = "Pencil", dialog = "forms/zahlung.form" }
 delete = { icon = "Trash2", confirm = true }
 
-[views.dashboard]
+[views.dashboard.config]
 id = "dashboard"
 title = "labels.views.dashboard"
 route = "/dashboard"
@@ -2649,13 +2649,13 @@ position = { row = 2, col = 4, width = 1 }
   icon = "Gauge"
   dialog = "forms/zaehlerstand.form"
 
-[views.dokumente]
+[views.dokumente.config]
 id = "dokumente"
 title = "labels.views.dokumente"
 route = "/dokumente"
 layout = "single"
 
-[views.dokumente.content]
+[views.dokumente.config.content]
 table = "tables/dokumente.table"
 default_sort = { field = "hochgeladen_am", direction = "desc" }
 
@@ -2675,14 +2675,14 @@ default_sort = { field = "hochgeladen_am", direction = "desc" }
   type = "year_picker"
   label = "labels.filter.jahr"
 
-[views.dokumente.content.actions]
+[views.dokumente.config.content.actions]
 upload = { label = "labels.actions.dokument_hochladen", dialog = "forms/dokument.form" }
 
-[views.dokumente.content.bulk_actions]
+[views.dokumente.config.content.bulk_actions]
 export = { label = "labels.actions.steuerberater_export", dialog = "dialogs/steuerberater_export" }
 delete = { label = "labels.actions.loeschen", confirm = true }
 
-[views.einstellungen]
+[views.einstellungen.config]
 id = "einstellungen"
 title = "labels.views.einstellungen"
 route = "/einstellungen"
@@ -2730,7 +2730,7 @@ layout = "settings"
     handler = "system.restoreBackup"
     confirm = true
 
-[views.finanzen]
+[views.finanzen.config]
 id = "finanzen"
 title = "labels.views.finanzen"
 route = "/finanzen"
@@ -2791,13 +2791,13 @@ layout = "tabbed"
   aggregate = "sum"
   group_by = "status"
 
-[views.mieter]
+[views.mieter.config]
 id = "mieter"
 title = "labels.views.mieter"
 route = "/mieter"
 layout = "list_detail"
 
-[views.mieter.list]
+[views.mieter.config.list]
 table = "tables/mieter.table"
 search_fields = ["vorname", "nachname", "email"]
 default_sort = { field = "nachname", direction = "asc" }
@@ -2808,10 +2808,10 @@ default_sort = { field = "nachname", direction = "asc" }
   label = "labels.filter.status"
   default = "aktiv"
 
-[views.mieter.list.actions]
+[views.mieter.config.list.actions]
 create = { label = "labels.actions.mieter_anlegen", dialog = "forms/mieter.form" }
 
-[views.mieter.detail]
+[views.mieter.config.detail]
 route = "/mieter/:id"
 title_field = "computed.display_name"
 
@@ -2853,7 +2853,7 @@ title_field = "computed.display_name"
   data_path = "aktiver_vertrag.kaution"
   empty_message = "labels.kaution.keine_kaution"
 
-[views.nebenkosten]
+[views.nebenkosten.config]
 id = "nebenkosten"
 title = "labels.views.nebenkosten"
 route = "/nebenkosten"
@@ -2938,13 +2938,13 @@ layout = "tabbed"
   create = { label = "labels.actions.zaehler_anlegen", dialog = "forms/zaehler.form" }
   ablesung = { label = "labels.actions.ablesung_erfassen", dialog = "forms/zaehlerstand.form" }
 
-[views.objekte]
+[views.objekte.config]
 id = "objekte"
 title = "labels.views.objekte"
 route = "/objekte"
 layout = "list_detail"
 
-[views.objekte.list]
+[views.objekte.config.list]
 table = "tables/objekte.table"
 search_fields = ["bezeichnung", "adresse", "ort"]
 default_sort = { field = "bezeichnung", direction = "asc" }
@@ -2960,10 +2960,10 @@ default_sort = { field = "bezeichnung", direction = "asc" }
   label = "labels.filter.mit_leerstand"
   condition = "> 0"
 
-[views.objekte.list.actions]
+[views.objekte.config.list.actions]
 create = { label = "labels.actions.objekt_anlegen", dialog = "forms/objekt.form" }
 
-[views.objekte.detail]
+[views.objekte.config.detail]
 route = "/objekte/:id"
 title_field = "bezeichnung"
 
@@ -3007,13 +3007,13 @@ title_field = "bezeichnung"
   filter = { objekt_id = ":id" }
   actions = { upload = { label = "labels.actions.dokument_hochladen", dialog = "forms/dokument.form", defaults = { objekt_id = ":id" } } }
 
-[views.vertraege]
+[views.vertraege.config]
 id = "vertraege"
 title = "labels.views.vertraege"
 route = "/vertraege"
 layout = "list_detail"
 
-[views.vertraege.list]
+[views.vertraege.config.list]
 table = "tables/vertraege.table"
 search_fields = ["mieter.nachname", "einheit.bezeichnung", "vertragsnummer"]
 default_sort = { field = "beginn", direction = "desc" }
@@ -3029,10 +3029,10 @@ default_sort = { field = "beginn", direction = "desc" }
   type = "select"
   label = "labels.filter.typ"
 
-[views.vertraege.list.actions]
+[views.vertraege.config.list.actions]
 create = { label = "labels.actions.vertrag_anlegen", dialog = "forms/vertrag.form" }
 
-[views.vertraege.detail]
+[views.vertraege.config.detail]
 route = "/vertraege/:id"
 title_field = "vertragsnummer"
 

@@ -37,7 +37,7 @@ display = "badge"
 badge_colors = { aktiv = "green", gekuendigt = "yellow", ehemalig = "gray" }
 
 [table.actions]
-label = "labels.table.actions"
+label = "labels.actions"
 width = "8rem"
 
 [table.row_actions]

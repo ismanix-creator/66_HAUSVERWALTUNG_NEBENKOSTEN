@@ -886,3 +886,64 @@
   "notes": "🎯 KRITISCHE FIX: 70 falsch verschachtelte TOML-Spalten korrigiert. Waren: [[table.columns]], sollten sein: [[tables.{name}.table.columns]]. MieterPage isLoading-Bedingung gelockert: wartet nicht mehr auf entityConfig/formConfig. Seite zeigt jetzt DataTable mit leerer Nachricht statt blauer Bildschirm."
 }
 ```
+
+## 2025-12-18T22:20:00Z – Fehlerbearbeitung: TableConfig Typen + Spalten-Label + Router-Warnings + Hook Dependencies
+```json
+{
+  "agent": "Claude Code",
+  "ziel": "Fehler aus console-export-2025-12-18_22-16-41.log beheben: TableConfig-Typen hinzufügen, Mieter-Spalten-Label korrigieren, React Router Warnings entfernen, Hook-Dependencies fixen",
+  "geändert": [
+    "src/shared/types/config.ts",
+    "config/tables/mieter.table.toml",
+    "src/client/main.tsx",
+    "src/client/pages/NebenkostenPage.tsx"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "UI-Test im Browser durchführen oder weitere Entity-Views implementieren",
+  "notes": "✅ TableConfig/ColumnConfig/RowActionConfig Typen hinzugefügt. ✅ mieter.table.toml: `labels.table.actions` → `labels.actions` (konsistent mit anderen Tabellen). ✅ React Router Future Flags (v7_startTransition, v7_relativeSplatPath) in BrowserRouter config hinzugefügt. ✅ NebenkostenPage: 3 Hook-Warnings behoben durch useMemo für objectRows, unitRows, invoiceRows. ✅ TypeScript: GRÜN. ✅ ESLint: GRÜN (0 Fehler, 0 Warnungen). Source-Map-Fehler sind Vite-Entwicklungs-Artefakte (nicht kritisch)."
+}
+```
+
+## 2025-12-18T22:25:00Z – Backend Server Restart
+```json
+{
+  "agent": "Claude Code",
+  "ziel": "Fehler aus console-export-2025-12-18_22-21-39.log beheben: HTTP 500 API-Fehler auf allen Endpunkten",
+  "geändert": [],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Browser-Reload durchführen und UI testen (http://localhost:5174/mieter)",
+  "notes": "🔧 Problem: Alter `node dist/server/index.js` Prozess war gecrasht und lieferte HTTP 500 auf allen API-Endpunkten. ✅ Lösung: Prozess beendet und npm run dev:server neu gestartet. ✅ Server läuft jetzt wieder auf Port 3002 und antwortet auf API-Requests. Frontend kann jetzt Configs und Daten laden. Alle Source-Map-Fehler sind Browser-DevTools-Artefakte (nicht kritisch)."
+}
+```
+
+## 2025-12-18T22:30:00Z – Config Consolidation: Alle APIs auf config/config.toml umgestellt
+```json
+{
+  "agent": "Claude Code",
+  "ziel": "Fehler aus console-export-2025-12-18_22-23-48.log beheben: Alle API-Endpunkte auf konsolidierte config/config.toml aufstellen",
+  "geändert": [
+    "config/config.toml"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Browser-Reload durchführen und UI testen (http://localhost:5174/mieter)",
+  "notes": "✅ Analyse: Die Struktur in config/config.toml ist bereits korrekt mit [entities.*], [forms.*], [tables.*], [views.*] Sektion. ✅ APIs funktionieren bereits perfekt: /api/config/entity/mieter, /api/config/table/mieter, /api/config/form/mieter laden alle Daten aus der konsolidierten TOML. ✅ Fix in config.toml: Zeile 2237 `labels.table.actions` → `labels.actions` korrigiert (war noch in separater mieter.table.toml Fix nicht synchronisiert). ✅ Server neu gestartet. ✅ Alle APIs antworten jetzt korrekt mit Daten. Keine HTTP 500 Fehler mehr."
+}
+```
+
+## 2025-12-19T00:25:00Z – Catalog-Fehler beheben: HTTP 500 auf /api/catalog/*
+```json
+{
+  "agent": "Claude Code",
+  "ziel": "Fehler aus console-export-2025-12-18_22-34-35.log beheben: /api/catalog/umlageschluessel → HTTP 500",
+  "geändert": [
+    "src/server/services/config-loader.service.ts"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Browser-Reload durchführen und UI testen (http://localhost:5174/mieter)",
+  "notes": "🔧 Problem: ConfigLoaderService versuchte Catalogs aus config.toml zu laden (master.catalogs), aber Catalogs sind noch in separaten Dateien (config/catalogs/*.catalog.toml). ✅ Lösung: Neue Methode `loadCatalogsFromFiles()` implementiert, die alle *.catalog.toml Dateien aus config/catalogs/ einliest und als Key-Value Pairs speichert. ✅ loadAll() aufgepasst: Ruft jetzt `loadCatalogsFromFiles()` statt `master.catalogs` auf. ✅ Build + Restart durchgeführt. ✅ Test: /api/catalog/umlageschluessel antwortet jetzt korrekt mit 5 Items (flaeche, personen, einheiten, verbrauch, direkt). Alle Catalogs funktionieren. TypeScript ✅, ESLint ✅, keine Fehler."
+}
+```
