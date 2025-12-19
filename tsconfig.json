@@ -4,7 +4,7 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -17,12 +17,12 @@
     "useDefineForClassFields": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./",
+    "rootDir": "./src",
     "paths": {
-      "@/*": ["src/*"],
-      "@shared/*": ["src/shared/*"],
-      "@server/*": ["src/server/*"],
-      "@client/*": ["src/client/*"]
+      "@/*": ["./src/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@server/*": ["./src/server/*"],
+      "@client/*": ["./src/client/*"]
     }
   },
   "include": ["src"],
