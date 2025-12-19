@@ -235,4 +235,4 @@ Nach **jeder Dateiänderung** diesen Workflow befolgen:
 
 ---
 
-**Zuletzt aktualisiert: 2025-12-19 03:44 CET (v0.2.0)
+**Zuletzt aktualisiert: 2025-12-19 03:48 CET (v0.2.0)
