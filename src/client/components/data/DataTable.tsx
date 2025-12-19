@@ -422,7 +422,8 @@ export function DataTable<T extends Record<string, unknown>>({
                             if (!shouldShowAction(item, actionConfig)) return null
 
                             const Icon = iconLookup[actionConfig.icon] || Pencil
-                            const label = actionConfig.label || actionId
+                            // Use actionConfig.label if defined (even if empty string), otherwise use actionId
+                            const label = actionConfig.label !== undefined ? actionConfig.label : actionId
                             const isConfirmActive =
                               confirmAction?.itemId === rowId && confirmAction?.actionId === actionId
 
