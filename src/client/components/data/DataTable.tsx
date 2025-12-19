@@ -5,7 +5,7 @@
  * @lastModified 2025-12-16
  */
 
-import { Fragment, useState, useMemo } from 'react'
+import { Fragment, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   ChevronUp,
@@ -27,7 +27,8 @@ import {
   CheckCircle,
   type LucideIcon,
 } from 'lucide-react'
-import { useLabelsConfig } from '../../hooks/useConfig'
+// Labels sind jetzt im Format entity.field (z.B. mieter.name, mieter.aktionen)
+// Diese werden direkt als Text angezeigt, keine Auflösung nötig
 
 export interface TableColumn {
   field: string
@@ -112,7 +113,6 @@ export function DataTable<T extends Record<string, unknown>>({
   const navigate = useNavigate()
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   const [confirmAction, setConfirmAction] = useState<{ itemId: string; actionId: string } | null>(null)
-  const { data: labelsData } = useLabelsConfig<Record<string, unknown>>()
 
   const iconLookup: Record<string, LucideIcon> = {
     Pencil,
@@ -286,35 +286,6 @@ export function DataTable<T extends Record<string, unknown>>({
     return evaluateVisibility(item, action.visible_if)
   }
 
-  // Memoized label resolution function
-  const formatLabel = useMemo(() => {
-    return (label?: string, fallback?: string) => {
-      if (label === '') return ''
-      if (!label) return fallback || ''
-
-      // If label starts with "labels.", resolve from labels config
-      if (label.startsWith('labels.')) {
-        if (!labelsData) return fallback || label
-
-        // Navigate through nested structure: "labels.tables.actions" → labelsData.tables.actions
-        const path = label.slice(7).split('.') // Remove "labels." prefix and split by dots
-        let current: unknown = labelsData
-
-        for (const segment of path) {
-          if (current && typeof current === 'object') {
-            current = (current as Record<string, unknown>)[segment]
-          } else {
-            return fallback || label
-          }
-        }
-
-        return typeof current === 'string' ? current : (fallback || label)
-      }
-
-      return label
-    }
-  }, [labelsData])
-
   const handleRowAction = (item: T, actionId: string, actionConfig: RowActionConfig) => {
     setConfirmAction(null)
 
@@ -361,7 +332,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   onClick={() => column.sortable && handleSort(column.field)}
                 >
                   <div className="flex items-center justify-center gap-1">
-                    <span>{formatLabel(column.label)}</span>
+                    <span>{column.label}</span>
                     {column.sortable &&
                       sortField === column.field &&
                       (sortDir === 'ASC' ? (
@@ -378,7 +349,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   style={{ width: actionWidth }}
                 >
                   <div className="flex items-center justify-center gap-1">
-                    <span>{formatLabel(actionHeaderLabel, 'Aktionen')}</span>
+                    <span>{actionHeaderLabel || 'Aktionen'}</span>
                   </div>
                 </th>
               )}
@@ -429,7 +400,7 @@ export function DataTable<T extends Record<string, unknown>>({
                             if (!shouldShowAction(item, actionConfig)) return null
 
                             const Icon = iconLookup[actionConfig.icon] || Pencil
-                            const label = formatLabel(actionConfig.label, actionId)
+                            const label = actionConfig.label || actionId
                             const isConfirmActive =
                               confirmAction?.itemId === rowId && confirmAction?.actionId === actionId
 
@@ -439,7 +410,7 @@ export function DataTable<T extends Record<string, unknown>>({
                                   key={`${rowId}-${actionId}-confirm`}
                                   className="flex items-center gap-2 text-xs text-red-300"
                                 >
-                                  <span>{formatLabel(actionConfig.confirm_message, label)}</span>
+                                  <span>{actionConfig.confirm_message || label}</span>
                                   <button
                                     onClick={e => {
                                       e.stopPropagation()
