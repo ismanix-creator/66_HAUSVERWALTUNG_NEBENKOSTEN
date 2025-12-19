@@ -8,6 +8,17 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ## 2025-12-19
 
+### [Latest] - Fix/Frontend - IBAN-Validierung behandelt "DE only" als leeres Feld
+- **Problem:** Mieter konnte nicht ohne IBAN erstellt werden - "falsches format" Fehler beim Speichern, wenn nur "DE" (default) vorhanden war
+- **Root Cause:** `formData` wurde direkt mutiert statt kopiert, weshalb die Validierungsschleife die angepassten Werte nicht sah
+- **Lösung:**
+  - `processedFormData` als Kopie von `formData` erstellt (vor Validierung)
+  - IBAN auf "" gesetzt wenn "DE" oder leer (vor Validierungsloop)
+  - Validierungsschleife läuft gegen `processedFormData` (nicht Original)
+  - `setFormData(processedFormData)` aktualisiert React-State mit verarbeiteten Werten
+- **Resultat:** Mieter kann jetzt ohne IBAN erstellt werden (Feld wird leer behandelt, keine Validierungsfehler)
+- **Status:** ✅ TypeScript, ✅ Test-Logic, 1 neuer Commit
+
 ### [Current] - Refactor/Config - Width-Referenzsystem, Label-Cleanup & Version-Update
 - **Width-Referenzsystem:** 79 hardcodierte px-Breiten durch Referenzen ersetzt (w40-w300 in 20px-Schritten + actions=120px).
   - Mapping intelligente durchgeführt: w50→w60, w150→w160, w250→w260, w400→w300

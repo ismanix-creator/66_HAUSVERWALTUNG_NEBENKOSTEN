@@ -2,7 +2,7 @@
  * DynamicForm: Generische Formular-Komponente
  * Rendert Felder aus form.toml + entity.toml Config
  *
- * @lastModified 2025-12-16
+ * @lastModified 2025-12-19
  */
 
 import { useState, useEffect } from 'react'
