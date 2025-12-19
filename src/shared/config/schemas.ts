@@ -15,7 +15,7 @@ import { z } from 'zod'
 // META SCHEMA
 // =============================================================================
 export const MetaSchema = z.object({
-  version: z.string().default('1.0.0'),
+  version: z.string().default('2.0.0'),
   schema_version: z.string().default('1'),
   last_modified: z.string().optional(),
   environment: z.enum(['development', 'staging', 'production']).default('development'),
