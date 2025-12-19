@@ -189,7 +189,7 @@ npm run lint          # ESLint ausführen
 **Phase 0 abgeschlossen:**
 - Projektstruktur angelegt
 - Build-Config (TypeScript, Vite, ESLint, Prettier, Tailwind)
-- TOML-Konfigurationen (37 Dateien)
+- Master-Config konsolidiert (config/config.toml, catalogs bleiben extern)
 - Express-Server mit Config-API
 - React-Grundgerüst mit Layout-Komponenten
 - AI-Dokumentationsstruktur (.ai/, .codex/, .claude/)
@@ -197,12 +197,16 @@ npm run lint          # ESLint ausführen
 **Phase 1 abgeschlossen:**
 - Schema-Generator: TOML → SQL CREATE TABLE (14 Tabellen)
 - Generischer Entity-Service mit CRUD-Operationen
-- REST API: /api/:entity Routen (GET, POST, PUT, DELETE)
+- REST API: /api/:entity + /api/config/widths Routen (GET, POST, PUT, DELETE)
 - Validierung gegen Entity-Config
+- Width-Referenzsystem implementiert (20px Schritte: w40-w300 + actions)
 
-**Nächste Phase:** Phase 2 - Frontend-Grundgerüst + generische Komponenten
+**Aktuelle Phase:** Phase 2 - Frontend-Komponenten + Config-Konsistenz
+- DataTable generische Komponente mit Width-Auflösung
+- Config-gesteuertes Label-System (entity.field Format)
+- Standalone Labels/Actions entfernt (nur in Tables)
 
-**Zuletzt aktualisiert:** 2025-12-16 02:00 CET
+**Zuletzt aktualisiert:** 2025-12-19 (v0.2.0)
 
 ---
 

@@ -6,6 +6,21 @@ Format: `[YYYY-MM-DD HH:MM] - Kategorie - Beschreibung`
 
 ---
 
+## 2025-12-19
+
+### [Current] - Refactor/Config - Width-Referenzsystem, Label-Cleanup & Version-Update
+- **Width-Referenzsystem:** 79 hardcodierte px-Breiten durch Referenzen ersetzt (w40-w300 in 20px-Schritten + actions=120px).
+  - Mapping intelligente durchgeführt: w50→w60, w150→w160, w250→w260, w400→w300
+  - `useWidthsConfig()` Hook + `/api/config/widths` Endpunkt hinzugefügt
+  - DataTable nutzt `resolveWidth()` für zentrale Breiten-Verwaltung
+- **Standalone Labels/Actions entfernt:** `getLabels()`, `/api/config/labels` Endpunkt, `useLabelsConfig` Hook gelöscht.
+  - Labels/Actions existieren nur noch als Teil von Table-Definitionen (`[tables.xxx.table.actions]`)
+  - Vereinfacht Architektur und erzwingt Kontext-Konsistenz
+- **Version korrigiert:** 1.0.0 → 0.2.0 (reflektiert Phase 2, nicht Produktionsreife)
+- **Duplicate config-Entry:** `version` aus `[app]` entfernt (gehört nur in `[meta]`)
+- **Konsistente Block-Header:** Entities, Forms, Tables, Views haben jetzt explizite Block-Header für bessere Lesbarkeit
+- **Status:** ✅ TypeScript, ✅ Build, ✅ 3 neue Commits
+
 ## 2025-12-18
 
 ### [20:45] - Fix/Config + Frontend - MieterPage Rendering & TOML Table Columns
