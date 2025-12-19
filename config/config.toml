@@ -2022,30 +2022,30 @@ entity = "nebenkostenabrechnung"
 field = "objekt.bezeichnung"
 label = "labels.nk.objekt"
 sortable = true
-width = "20%"
+width = "240px"
 
 [[tables.abrechnungen.table.columns]]
 field = "jahr"
 label = "labels.nk.jahr"
 sortable = true
-width = "12%"
+width = "150px"
 
 [[tables.abrechnungen.table.columns]]
 field = "zeitraum_von"
 label = "labels.nk.zeitraum"
-width = "18%"
+width = "220px"
 template = "{zeitraum_von|date} – {zeitraum_bis|date}"
 
 [[tables.abrechnungen.table.columns]]
 field = "status"
 label = "labels.nk.status"
-width = "15%"
+width = "180px"
 display = "badge"
 
 [[tables.abrechnungen.table.columns]]
 field = "gesamtkosten"
 label = "labels.nk.gesamtkosten"
-width = "15%"
+width = "180px"
 format = "currency"
 
 [tables.abrechnungen.table.row_actions]
@@ -2059,46 +2059,46 @@ selectable = true
 field = "bezeichnung"
 label = "labels.dokument.bezeichnung"
 sortable = true
-width = "25%"
+width = "300px"
 
 [[tables.dokumente.table.columns]]
 field = "typ"
 label = "labels.dokument.typ"
 sortable = true
-width = "10%"
+width = "120px"
 display = "badge"
 
 [[tables.dokumente.table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.dokument.objekt"
 sortable = true
-width = "15%"
+width = "180px"
 empty_text = "—"
 
 [[tables.dokumente.table.columns]]
 field = "mieter.computed.display_name"
 label = "labels.dokument.mieter"
-width = "15%"
+width = "180px"
 empty_text = "—"
 
 [[tables.dokumente.table.columns]]
 field = "datum"
 label = "labels.dokument.datum"
 sortable = true
-width = "10%"
+width = "120px"
 format = "date"
 
 [[tables.dokumente.table.columns]]
 field = "jahr"
 label = "labels.dokument.jahr"
 sortable = true
-width = "8%"
+width = "100px"
 
 [[tables.dokumente.table.columns]]
 field = "hochgeladen_am"
 label = "labels.dokument.hochgeladen"
 sortable = true
-width = "12%"
+width = "150px"
 format = "datetime"
 
 [tables.dokumente.table.row_actions]
@@ -2115,34 +2115,34 @@ row_click = "expand"
 field = "bezeichnung"
 label = "labels.einheit.bezeichnung"
 sortable = true
-width = "25%"
+width = "300px"
 
 [[tables.einheiten.table.columns]]
 field = "typ"
 label = "labels.einheit.typ"
 sortable = true
-width = "15%"
+width = "180px"
 display = "badge"
 
 [[tables.einheiten.table.columns]]
 field = "flaeche"
 label = "labels.einheit.flaeche"
 sortable = true
-width = "10%"
+width = "120px"
 format = "number"
 suffix = " m²"
 
 [[tables.einheiten.table.columns]]
 field = "computed.aktueller_mieter.computed.display_name"
 label = "labels.einheit.mieter"
-width = "25%"
+width = "300px"
 empty_text = "—"
 
 [[tables.einheiten.table.columns]]
 field = "status"
 label = "labels.einheit.status"
 sortable = true
-width = "15%"
+width = "180px"
 display = "badge"
 badge_colors = { vermietet = "green", leer = "red", eigennutzung = "blue", renovierung = "yellow" }
 
@@ -2157,38 +2157,38 @@ entity = "kaution"
 field = "vertrag.mieter.computed.display_name"
 label = "labels.kaution.mieter"
 sortable = true
-width = "25%"
+width = "300px"
 
 [[tables.kautionen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.kaution.einheit"
 sortable = true
-width = "20%"
+width = "240px"
 
 [[tables.kautionen.table.columns]]
 field = "betrag"
 label = "labels.kaution.betrag"
 sortable = true
-width = "15%"
+width = "180px"
 format = "currency"
 
 [[tables.kautionen.table.columns]]
 field = "eingangsdatum"
 label = "labels.kaution.eingangsdatum"
 sortable = true
-width = "15%"
+width = "180px"
 format = "date"
 
 [[tables.kautionen.table.columns]]
 field = "status"
 label = "labels.kaution.status"
-width = "15%"
+width = "180px"
 display = "badge"
 
 [[tables.kautionen.table.columns]]
 field = "rueckzahlungsdatum"
 label = "labels.kaution.rueckzahlungsdatum"
-width = "10%"
+width = "120px"
 format = "date"
 
 [tables.kautionen.table.row_actions]
@@ -2205,37 +2205,37 @@ field = "computed.display_name"
 label = "labels.mieter.name"
 sortable = true
 sort_field = "nachname"
-width = "25%"
+width = "250px"
 template = "{vorname} {nachname}"
 
 [[tables.mieter.table.columns]]
 field = "mobil"
 fallback_fields = ["telefon"]
 label = "labels.mieter.telefon"
-width = "15%"
+width = "150px"
 
 [[tables.mieter.table.columns]]
 field = "email"
 label = "labels.mieter.email"
-width = "20%"
+width = "200px"
 
 [[tables.mieter.table.columns]]
 field = "computed.aktuelle_einheit.bezeichnung"
 label = "labels.mieter.einheit"
-width = "20%"
+width = "200px"
 empty_text = "—"
 
 [[tables.mieter.table.columns]]
 field = "status"
 label = "labels.mieter.status"
 sortable = true
-width = "10%"
+width = "100px"
 display = "badge"
 badge_colors = { aktiv = "green", gekuendigt = "yellow", ehemalig = "gray" }
 
 [tables.mieter.table.actions]
 label = "labels.actions"
-width = "8rem"
+width = "130px"
 
 [tables.mieter.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/mieter.form", label = "" }
@@ -2251,20 +2251,20 @@ row_click_route = "/objekte/:id"
 field = "bezeichnung"
 label = "labels.objekt.bezeichnung"
 sortable = true
-width = "25%"
+width = "300px"
 
 [[tables.objekte.table.columns]]
 field = "adresse"
 label = "labels.objekt.adresse"
 sortable = true
-width = "30%"
+width = "360px"
 template = "{adresse}, {plz} {ort}"
 
 [[tables.objekte.table.columns]]
 field = "typ"
 label = "labels.objekt.typ"
 sortable = true
-width = "10%"
+width = "120px"
 display = "badge"
 badge_colors = { wohnraum = "blue", gewerbe = "orange", gemischt = "purple" }
 
@@ -2272,14 +2272,14 @@ badge_colors = { wohnraum = "blue", gewerbe = "orange", gemischt = "purple" }
 field = "computed.anzahl_einheiten"
 label = "labels.objekt.einheiten"
 sortable = true
-width = "10%"
+width = "120px"
 align = "center"
 
 [[tables.objekte.table.columns]]
 field = "computed.leerstand"
 label = "labels.objekt.leerstand"
 sortable = true
-width = "10%"
+width = "120px"
 align = "center"
 highlight_if = { condition = "> 0", color = "yellow" }
 
@@ -2287,7 +2287,7 @@ highlight_if = { condition = "> 0", color = "yellow" }
 field = "computed.gesamt_flaeche"
 label = "labels.objekt.flaeche"
 sortable = true
-width = "15%"
+width = "180px"
 format = "number"
 suffix = " m²"
 
@@ -2302,51 +2302,51 @@ entity = "rechnung"
 field = "rechnungsdatum"
 label = "labels.rechnung.datum"
 sortable = true
-width = "10%"
+width = "120px"
 format = "date"
 
 [[tables.rechnungen.table.columns]]
 field = "objekt.bezeichnung"
 label = "labels.rechnung.objekt"
 sortable = true
-width = "18%"
+width = "220px"
 
 [[tables.rechnungen.table.columns]]
 field = "kostenart.bezeichnung"
 label = "labels.rechnung.kostenart"
 sortable = true
-width = "15%"
+width = "180px"
 
 [[tables.rechnungen.table.columns]]
 field = "rechnungsnummer"
 label = "labels.rechnung.nummer"
-width = "12%"
+width = "150px"
 
 [[tables.rechnungen.table.columns]]
 field = "betrag"
 label = "labels.rechnung.betrag"
 sortable = true
-width = "12%"
+width = "150px"
 format = "currency"
 
 [[tables.rechnungen.table.columns]]
 field = "zeitraum_von"
 label = "labels.rechnung.zeitraum"
-width = "15%"
+width = "180px"
 template = "{zeitraum_von|date} - {zeitraum_bis|date}"
 
 [[tables.rechnungen.table.columns]]
 field = "computed.ist_bezahlt"
 label = "labels.rechnung.bezahlt"
 sortable = true
-width = "8%"
+width = "100px"
 display = "boolean_icon"
 icons = { true = "Check", false = "X" }
 
 [[tables.rechnungen.table.columns]]
 field = "dokument_id"
 label = ""
-width = "5%"
+width = "60px"
 display = "icon_link"
 icon = "FileText"
 visible_if = { field = "dokument_id", is_set = true }
@@ -2364,7 +2364,7 @@ entity = "sollstellung"
 field = "monat"
 label = "labels.sollstellung.monat"
 sortable = true
-width = "12%"
+width = "150px"
 format = "month"
 
 [[tables.sollstellungen.table.columns]]
@@ -2376,27 +2376,27 @@ width = "22%"
 [[tables.sollstellungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.sollstellung.einheit"
-width = "18%"
+width = "220px"
 
 [[tables.sollstellungen.table.columns]]
 field = "sollbetrag"
 label = "labels.sollstellung.soll"
 sortable = true
-width = "12%"
+width = "150px"
 format = "currency"
 
 [[tables.sollstellungen.table.columns]]
 field = "istbetrag"
 label = "labels.sollstellung.ist"
 sortable = true
-width = "12%"
+width = "150px"
 format = "currency"
 
 [[tables.sollstellungen.table.columns]]
 field = "computed.differenz"
 label = "labels.sollstellung.differenz"
 sortable = true
-width = "12%"
+width = "150px"
 format = "currency"
 color_rule = { negative = "red", positive = "green", zero = "inherit" }
 
@@ -2404,7 +2404,7 @@ color_rule = { negative = "red", positive = "green", zero = "inherit" }
 field = "status"
 label = "labels.sollstellung.status"
 sortable = true
-width = "12%"
+width = "150px"
 display = "badge"
 badge_colors = { offen = "red", teilweise = "yellow", bezahlt = "green", ueberzahlt = "blue" }
 
@@ -2420,32 +2420,32 @@ row_click_route = "/vertraege/:id"
 field = "vertragsnummer"
 label = "labels.vertrag.vertragsnummer"
 sortable = true
-width = "10%"
+width = "120px"
 
 [[tables.vertraege.table.columns]]
 field = "mieter.computed.display_name"
 label = "labels.vertrag.mieter"
 sortable = true
-width = "20%"
+width = "240px"
 
 [[tables.vertraege.table.columns]]
 field = "einheit.bezeichnung"
 label = "labels.vertrag.einheit"
 sortable = true
-width = "15%"
+width = "180px"
 
 [[tables.vertraege.table.columns]]
 field = "beginn"
 label = "labels.vertrag.beginn"
 sortable = true
-width = "10%"
+width = "120px"
 format = "date"
 
 [[tables.vertraege.table.columns]]
 field = "ende"
 label = "labels.vertrag.ende"
 sortable = true
-width = "10%"
+width = "120px"
 format = "date"
 empty_text = "unbefristet"
 
@@ -2453,13 +2453,13 @@ empty_text = "unbefristet"
 field = "computed.gesamtmiete"
 label = "labels.vertrag.gesamtmiete"
 sortable = true
-width = "12%"
+width = "150px"
 format = "currency"
 
 [[tables.vertraege.table.columns]]
 field = "computed.ist_aktiv"
 label = "labels.vertrag.status"
-width = "10%"
+width = "120px"
 display = "status_indicator"
 status_map = { true = { label = "aktiv", color = "green" }, false = { label = "beendet", color = "gray" } }
 
@@ -2474,43 +2474,43 @@ entity = "zaehler"
 field = "objekt.bezeichnung"
 label = "labels.zaehler.objekt"
 sortable = true
-width = "20%"
+width = "240px"
 
 [[tables.zaehler.table.columns]]
 field = "einheit.bezeichnung"
 label = "labels.zaehler.einheit"
-width = "15%"
+width = "180px"
 empty_text = "Hauptzähler"
 
 [[tables.zaehler.table.columns]]
 field = "typ"
 label = "labels.zaehler.typ"
 sortable = true
-width = "12%"
+width = "150px"
 display = "badge"
 
 [[tables.zaehler.table.columns]]
 field = "zaehlernummer"
 label = "labels.zaehler.nummer"
-width = "15%"
+width = "180px"
 
 [[tables.zaehler.table.columns]]
 field = "ist_hauptzaehler"
 label = "labels.zaehler.haupt"
-width = "8%"
+width = "100px"
 display = "boolean_icon"
 
 [[tables.zaehler.table.columns]]
 field = "computed.letzter_stand.stand"
 label = "labels.zaehler.letzter_stand"
-width = "15%"
+width = "180px"
 template = "{value} {messeinheit}"
 
 [[tables.zaehler.table.columns]]
 field = "computed.letzter_stand.datum"
 label = "labels.zaehler.abgelesen_am"
 sortable = true
-width = "15%"
+width = "180px"
 format = "date"
 
 [tables.zaehler.table.row_actions]
@@ -2525,39 +2525,39 @@ entity = "zahlung"
 field = "datum"
 label = "labels.zahlung.datum"
 sortable = true
-width = "12%"
+width = "150px"
 format = "date"
 
 [[tables.zahlungen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "labels.zahlung.mieter"
 sortable = true
-width = "20%"
+width = "240px"
 
 [[tables.zahlungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "labels.zahlung.einheit"
-width = "15%"
+width = "180px"
 
 [[tables.zahlungen.table.columns]]
 field = "betrag"
 label = "labels.zahlung.betrag"
 sortable = true
-width = "12%"
+width = "150px"
 format = "currency"
 
 [[tables.zahlungen.table.columns]]
 field = "typ"
 label = "labels.zahlung.typ"
 sortable = true
-width = "12%"
+width = "150px"
 display = "badge"
 
 [[tables.zahlungen.table.columns]]
 field = "monat_fuer"
 label = "labels.zahlung.monat_fuer"
 sortable = true
-width = "10%"
+width = "120px"
 format = "month"
 
 [[tables.zahlungen.table.columns]]

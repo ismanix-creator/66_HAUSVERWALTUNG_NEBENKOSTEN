@@ -333,18 +333,29 @@ export function DataTable<T extends Record<string, unknown>>({
 
   const totalColumns = columns.length + (actionEntries.length > 0 ? 1 : 0)
 
+  const getAlignClass = (align?: 'left' | 'center' | 'right') => {
+    switch (align) {
+      case 'left':
+        return 'text-left'
+      case 'right':
+        return 'text-right'
+      default:
+        return 'text-center'
+    }
+  }
+
   return (
     <div className="overflow-hidden rounded-lg border border-slate-800 bg-slate-900 shadow-lg shadow-black/30">
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-slate-800">
+        <table className="w-full divide-y divide-slate-800" style={{ tableLayout: 'fixed' }}>
           <thead className="bg-slate-800/80">
             <tr>
               {columns.map(column => (
                 <th
                   key={column.field}
                   style={{ width: column.width }}
-                  className={`px-4 py-3 text-${column.align || 'center'} text-xs font-medium text-slate-300 uppercase tracking-wider ${
+                  className={`px-4 py-3 text-xs font-medium text-slate-300 uppercase tracking-wider ${getAlignClass(column.align)} ${
                     column.sortable ? 'cursor-pointer hover:bg-slate-700/60' : ''
                   }`}
                   onClick={() => column.sortable && handleSort(column.field)}
@@ -403,7 +414,7 @@ export function DataTable<T extends Record<string, unknown>>({
                         <td
                           key={`${rowId}-${column.field}`}
                           style={{ width: column.width }}
-                          className={`px-4 py-3 text-sm text-slate-100 text-${column.align || 'center'}`}
+                          className={`px-4 py-3 text-sm text-slate-100 ${getAlignClass(column.align)}`}
                         >
                           {renderCell(item, column)}
                         </td>
