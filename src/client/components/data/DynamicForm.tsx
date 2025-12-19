@@ -282,9 +282,9 @@ export function DynamicForm({
 
     return (
       <div key={formField.field} className={widthClasses[formField.width]}>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-slate-300 mb-1">
           {label}
-          {fieldConfig.required && <span className="text-red-500 ml-1">*</span>}
+          {fieldConfig.required && <span className="text-red-400 ml-1">*</span>}
         </label>
 
         {/* Text input */}
@@ -366,7 +366,7 @@ export function DynamicForm({
               disabled={fieldConfig.readonly}
             />
             {fieldConfig.description && (
-              <span className="ml-2 text-sm text-gray-500">{fieldConfig.description}</span>
+              <span className="ml-2 text-sm text-slate-400">{fieldConfig.description}</span>
             )}
           </div>
         )}
@@ -414,7 +414,7 @@ export function DynamicForm({
         )}
 
         {/* Error message */}
-        {fieldError && <p className="mt-1 text-sm text-red-500">{fieldError}</p>}
+        {fieldError && <p className="mt-1 text-sm text-red-400">{fieldError}</p>}
       </div>
     )
   }
@@ -429,14 +429,14 @@ export function DynamicForm({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800">
           <h2 className="text-lg font-semibold text-white">{title}</h2>
-          <button onClick={onCancel} className="p-1 text-gray-400 hover:text-gray-600">
+          <button onClick={onCancel} className="p-1 text-slate-400 hover:text-slate-200 transition-colors">
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="overflow-y-auto max-h-[calc(90vh-140px)]">
-        <div className="p-6 space-y-6 text-slate-900">
+        <div className="p-6 space-y-6 text-slate-100">
           {error && (
             <div className="p-4 text-sm text-red-700 bg-red-50 rounded-lg border border-red-200">
               {error}
@@ -445,7 +445,7 @@ export function DynamicForm({
 
           {formConfig.form.sections.map(section => (
             <div key={section.id}>
-              <h3 className="text-sm font-medium uppercase tracking-wider text-slate-500 mb-4">
+              <h3 className="text-sm font-medium uppercase tracking-wider text-slate-400 mb-4">
                 {section.label.replace('labels.', '')}
               </h3>
               <div className="grid grid-cols-2 gap-4">

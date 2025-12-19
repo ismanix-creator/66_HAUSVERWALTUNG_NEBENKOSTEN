@@ -4,7 +4,6 @@ import { useAppConfig } from '../../hooks/useConfig'
 export function StatusBar() {
   const { data: appConfig } = useAppConfig()
   const ownerName = appConfig?.app?.owner?.name?.trim()
-  const version = appConfig?.app?.version || '0.0.0'
   const brandingLabel = ownerName
     ? `entwickelt von ${ownerName}`
     : `entwickelt von ${appConfig?.app?.name || 'Mietverwaltung'}`
@@ -25,7 +24,6 @@ export function StatusBar() {
           <Wifi className="h-3 w-3 text-emerald-400" />
           Server aktiv
         </span>
-        <span>v{version}</span>
       </div>
     </footer>
   )

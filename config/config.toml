@@ -1642,82 +1642,82 @@ entity = "dokument"
 title_create = "labels.form.dokument_hochladen"
 title_edit = "labels.form.dokument_bearbeiten"
 
-[[form.sections]]
+[[forms.dokument.form.sections]]
 id = "zuordnung"
 label = "labels.form.section.zuordnung"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "objekt_id"
   width = "half"
   allow_clear = true
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "einheit_id"
   width = "half"
   allow_clear = true
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "mieter_id"
   width = "half"
   allow_clear = true
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "vertrag_id"
   width = "half"
   allow_clear = true
 
-[[form.sections]]
+[[forms.dokument.form.sections]]
 id = "detail"
 label = "labels.form.section.details"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "typ"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "bezeichnung"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "datum"
   width = "third"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "jahr"
   width = "third"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "hochgeladen_am"
   width = "third"
   readonly = true
 
-[[form.sections]]
+[[forms.dokument.form.sections]]
 id = "datei"
 label = "labels.form.section.datei"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "dateiname"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "dateipfad"
   width = "half"
   readonly = true
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "dateigroesse"
   width = "half"
   readonly = true
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "mime_type"
   width = "half"
   readonly = true
 
-[[form.sections]]
+[[forms.dokument.form.sections]]
 id = "notiz"
 
-  [[form.sections.fields]]
+  [[forms.dokument.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -1731,56 +1731,56 @@ entity = "einheit"
 title_create = "labels.actions.add"
 title_edit = "labels.actions.edit"
 
-[[form.sections]]
+[[forms.einheit.form.sections]]
 id = "basis"
 label = "labels.form.section.basic"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "objekt_id"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "bezeichnung"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "typ"
   width = "half"
 
-[[form.sections]]
+[[forms.einheit.form.sections]]
 id = "details"
 label = "labels.form.section.details"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "flaeche"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "anzahl_raeume"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "etage"
   placeholder = "2. OG"
   width = "half"
 
-[[form.sections]]
+[[forms.einheit.form.sections]]
 id = "ausstattung"
 label = "labels.form.section.settings"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "ausstattung"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "status"
   width = "half"
 
-[[form.sections]]
+[[forms.einheit.form.sections]]
 id = "notizen"
 label = "labels.form.section.notes"
 
-  [[form.sections.fields]]
+  [[forms.einheit.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -1794,52 +1794,52 @@ entity = "kaution"
 title_create = "labels.form.kaution_anlegen"
 title_edit = "labels.form.kaution_bearbeiten"
 
-[[form.sections]]
+[[forms.kaution.form.sections]]
 id = "daten"
 label = "labels.form.section.allgemein"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "vertrag_id"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "betrag"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "eingangsdatum"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "anlageform"
   width = "full"
 
-[[form.sections]]
+[[forms.kaution.form.sections]]
 id = "details"
 label = "labels.form.section.kaution"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "anlage_details"
   width = "full"
   rows = 2
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "zinssatz"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "status"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "rueckzahlungsdatum"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "rueckzahlungsbetrag"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.kaution.form.sections.fields]]
   field = "einbehalt_grund"
   width = "full"
   rows = 2
@@ -1849,75 +1849,75 @@ entity = "mieter"
 title_create = "labels.actions.add"
 title_edit = "labels.actions.edit"
 
-[[form.sections]]
+[[forms.mieter.form.sections]]
 id = "basis"
 label = "labels.form.section.basic"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "anrede"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "vorname"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "nachname"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "firma_zusatz"
   width = "full"
 
-[[form.sections]]
+[[forms.mieter.form.sections]]
 id = "kontakt"
 label = "labels.form.section.contact"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "email"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "telefon"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "mobil"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "status"
   width = "half"
 
-[[form.sections]]
+[[forms.mieter.form.sections]]
 id = "adressen"
 label = "labels.form.section.addresses"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "adresse_vorher"
   width = "full"
 
-[[form.sections]]
+[[forms.mieter.form.sections]]
 id = "banking"
 label = "labels.form.section.financial"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "iban"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "bic"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "bankname"
   width = "half"
 
-[[form.sections]]
+[[forms.mieter.form.sections]]
 id = "notizen"
 label = "labels.form.section.notes"
 
-  [[form.sections.fields]]
+  [[forms.mieter.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -1931,35 +1931,35 @@ entity = "nebenkostenabrechnung"
 title_create = "labels.form.nk_abrechnung_erstellen"
 title_edit = "labels.form.nk_abrechnung_bearbeiten"
 
-[[form.sections]]
+[[forms.nebenkostenabrechnung.form.sections]]
 id = "basis"
 label = "labels.form.section.nk_abrechnung"
 
-  [[form.sections.fields]]
+  [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "objekt_id"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "jahr"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "zeitraum_von"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "zeitraum_bis"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "status"
   width = "half"
 
-[[form.sections]]
+[[forms.nebenkostenabrechnung.form.sections]]
 id = "notiz"
 label = "labels.form.section.notizen"
 
-  [[form.sections.fields]]
+  [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -1969,47 +1969,47 @@ entity = "objekt"
 title_create = "labels.form.objekt_anlegen"
 title_edit = "labels.form.objekt_bearbeiten"
 
-[[form.sections]]
+[[forms.objekt.form.sections]]
 id = "basis"
 label = "labels.form.section.basis"
 
-  [[form.sections.fields]]
+  [[forms.objekt.form.sections.fields]]
   field = "bezeichnung"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.objekt.form.sections.fields]]
   field = "typ"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.objekt.form.sections.fields]]
   field = "ist_multi_einheit"
   width = "half"
 
-[[form.sections]]
+[[forms.objekt.form.sections]]
 id = "adresse"
 label = "labels.form.section.adresse"
 
-  [[form.sections.fields]]
+  [[forms.objekt.form.sections.fields]]
   field = "adresse"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.objekt.form.sections.fields]]
   field = "plz"
   width = "third"
 
-  [[form.sections.fields]]
+  [[forms.objekt.form.sections.fields]]
   field = "ort"
   width = "two_thirds"
 
-[[form.sections]]
+[[forms.objekt.form.sections]]
 id = "details"
 label = "labels.form.section.details"
 
-  [[form.sections.fields]]
+  [[forms.objekt.form.sections.fields]]
   field = "baujahr"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.objekt.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -2023,55 +2023,55 @@ entity = "rechnung"
 title_create = "labels.form.rechnung_erfassen"
 title_edit = "labels.form.rechnung_bearbeiten"
 
-[[form.sections]]
+[[forms.rechnung.form.sections]]
 id = "metadata"
 label = "labels.form.section.rechnung"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "objekt_id"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "kostenart_id"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "einheit_id"
   width = "full"
 
-[[form.sections]]
+[[forms.rechnung.form.sections]]
 id = "zeiträume"
 label = "labels.form.section.zeitraum"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "rechnungsnummer"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "rechnungsdatum"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "faelligkeitsdatum"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "zeitraum_von"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "zeitraum_bis"
   width = "half"
 
-[[form.sections]]
+[[forms.rechnung.form.sections]]
 id = "betrag"
 label = "labels.form.section.betrag"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "betrag"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.rechnung.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -2081,27 +2081,27 @@ entity = "sollstellung"
 title_create = "labels.form.sollstellung_anlegen"
 title_edit = "labels.form.sollstellung_bearbeiten"
 
-[[form.sections]]
+[[forms.sollstellung.form.sections]]
 id = "zeitraum"
 label = "labels.form.section.sollstellung"
 
-  [[form.sections.fields]]
+  [[forms.sollstellung.form.sections.fields]]
   field = "vertrag_id"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.sollstellung.form.sections.fields]]
   field = "monat"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.sollstellung.form.sections.fields]]
   field = "sollbetrag"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.sollstellung.form.sections.fields]]
   field = "istbetrag"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.sollstellung.form.sections.fields]]
   field = "status"
   width = "half"
 
@@ -2110,62 +2110,62 @@ entity = "vertrag"
 title_create = "labels.form.vertrag_anlegen"
 title_edit = "labels.form.vertrag_bearbeiten"
 
-[[form.sections]]
+[[forms.vertrag.form.sections]]
 id = "zuordnung"
 label = "labels.form.section.zuordnung"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "einheit_id"
   width = "half"
   filter = { status = "leer" }
   include_current = true
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "mieter_id"
   width = "half"
   allow_create = true
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "vertragsnummer"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "typ"
   width = "half"
 
-[[form.sections]]
+[[forms.vertrag.form.sections]]
 id = "laufzeit"
 label = "labels.form.section.laufzeit"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "beginn"
   width = "third"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "ende"
   width = "third"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "kuendigungsfrist"
   width = "third"
 
-[[form.sections]]
+[[forms.vertrag.form.sections]]
 id = "miete"
 label = "labels.form.section.miete"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "kaltmiete"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "nebenkosten_vorauszahlung"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "heizkosten_vorauszahlung"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "sonstige_vorauszahlung"
   width = "half"
 
@@ -2175,33 +2175,33 @@ label = "labels.form.section.miete"
   format = "currency"
   highlight = true
 
-[[form.sections]]
+[[forms.vertrag.form.sections]]
 id = "anpassung"
 label = "labels.form.section.mietanpassung"
 collapsible = true
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "mietanpassung_typ"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "letzte_mieterhoehung"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "staffelmiete"
   width = "full"
   component = "StaffelmieteEditor"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "indexmiete"
   width = "full"
   component = "IndexmieteEditor"
 
-[[form.sections]]
+[[forms.vertrag.form.sections]]
 id = "sonstiges"
 
-  [[form.sections.fields]]
+  [[forms.vertrag.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -2218,44 +2218,44 @@ entity = "zaehler"
 title_create = "labels.form.zaehler_anlegen"
 title_edit = "labels.form.zaehler_bearbeiten"
 
-[[form.sections]]
+[[forms.zaehler.form.sections]]
 id = "zuordnung"
 label = "labels.form.section.zaehler_zuordnung"
 
-  [[form.sections.fields]]
+  [[forms.zaehler.form.sections.fields]]
   field = "objekt_id"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.zaehler.form.sections.fields]]
   field = "einheit_id"
   width = "full"
   description = "Nur für Unterzähler"
 
-[[form.sections]]
+[[forms.zaehler.form.sections]]
 id = "details"
 label = "labels.form.section.zaehler_details"
 
-  [[form.sections.fields]]
+  [[forms.zaehler.form.sections.fields]]
   field = "typ"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zaehler.form.sections.fields]]
   field = "messeinheit"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zaehler.form.sections.fields]]
   field = "zaehlernummer"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zaehler.form.sections.fields]]
   field = "ist_hauptzaehler"
   width = "half"
 
-[[form.sections]]
+[[forms.zaehler.form.sections]]
 id = "zusatz"
 label = "labels.form.section.zaehler_zusatz"
 
-  [[form.sections.fields]]
+  [[forms.zaehler.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -2265,32 +2265,32 @@ entity = "zaehlerstand"
 title_create = "labels.form.zaehlerstand_erfassen"
 title_edit = "labels.form.zaehlerstand_bearbeiten"
 
-[[form.sections]]
+[[forms.zaehlerstand.form.sections]]
 id = "basis"
 label = "labels.form.section.zaehlerstand"
 
-  [[form.sections.fields]]
+  [[forms.zaehlerstand.form.sections.fields]]
   field = "zaehler_id"
   width = "full"
   hidden = true
 
-  [[form.sections.fields]]
+  [[forms.zaehlerstand.form.sections.fields]]
   field = "datum"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zaehlerstand.form.sections.fields]]
   field = "stand"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zaehlerstand.form.sections.fields]]
   field = "ableseart"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zaehlerstand.form.sections.fields]]
   field = "foto"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zaehlerstand.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
@@ -2300,36 +2300,36 @@ entity = "zahlung"
 title_create = "labels.form.zahlung_erfassen"
 title_edit = "labels.form.zahlung_bearbeiten"
 
-[[form.sections]]
+[[forms.zahlung.form.sections]]
 id = "basis"
 label = "labels.form.section.zahlung"
 
-  [[form.sections.fields]]
+  [[forms.zahlung.form.sections.fields]]
   field = "vertrag_id"
   width = "full"
 
-  [[form.sections.fields]]
+  [[forms.zahlung.form.sections.fields]]
   field = "datum"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zahlung.form.sections.fields]]
   field = "betrag"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zahlung.form.sections.fields]]
   field = "typ"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zahlung.form.sections.fields]]
   field = "monat_fuer"
   width = "half"
 
-  [[form.sections.fields]]
+  [[forms.zahlung.form.sections.fields]]
   field = "verwendungszweck"
   width = "full"
   rows = 2
 
-  [[form.sections.fields]]
+  [[forms.zahlung.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 2
