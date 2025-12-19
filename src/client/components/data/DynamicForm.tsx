@@ -211,13 +211,28 @@ export function DynamicForm({
         continue
       }
 
+      // Special handling for IBAN: treat "DE" only as empty
+      if (fieldName === 'iban' && typeof value === 'string') {
+        const ibanValue = normalizeIbanInput(value as string)
+        // If IBAN is just "DE" (2 chars), treat as empty/not filled
+        if (ibanValue === 'DE' || ibanValue === '') {
+          // Clear the IBAN field value to empty for submission
+          formData[fieldName] = ''
+          continue
+        }
+        // If IBAN has more than 2 chars, validate it
+        if (fieldConfig.pattern && !new RegExp(fieldConfig.pattern).test(ibanValue)) {
+          newErrors[fieldName] = 'Ungültiges Format'
+        }
+        continue
+      }
+
       // Skip further validation if empty and not required
       if (value === undefined || value === null || value === '') continue
 
       // Pattern validation
       if (fieldConfig.pattern && typeof value === 'string') {
-        const candidate =
-          fieldName === 'iban' ? normalizeIbanInput(value as string) : (value as string)
+        const candidate = value as string
         if (!new RegExp(fieldConfig.pattern).test(candidate)) {
           newErrors[fieldName] = 'Ungültiges Format'
         }
