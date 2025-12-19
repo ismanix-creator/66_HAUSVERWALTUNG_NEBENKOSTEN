@@ -103,14 +103,16 @@ graph TB
 │   └── planning.md        # Planungs-Guidelines
 │
 ├── config/                 # TOML-Konfigurationen
-│   ├── app.config.toml    # App-Einstellungen
-│   ├── entities/          # Entity-Definitionen
-│   ├── views/             # View-Konfigurationen
-│   ├── forms/             # Formular-Definitionen
-│   ├── tables/            # Tabellen-Definitionen
-│   ├── catalogs/          # Wertelisten
-│   ├── navigation/        # Menü-Struktur
-│   └── labels/            # UI-Texte (i18n)
+│   ├── config.toml        # Master-Konfiguration (SINGLE SOURCE OF TRUTH)
+│   │   ├── [meta]         # Version, last_modified
+│   │   ├── [app]          # App-Einstellungen
+│   │   ├── [widths]       # Column width constants (w40-w300, actions=120px)
+│   │   ├── [entities]     # 14 Entity-Definitionen
+│   │   ├── [forms]        # Formular-Konfigurationen
+│   │   ├── [tables]       # Tabellen + Spalten + Actions
+│   │   ├── [views]        # View-Konfigurationen
+│   │   └── [navigation]   # Menü-Struktur (Sidebar)
+│   └── catalogs/          # Wertelisten (extern)
 │
 ├── src/
 │   ├── client/            # React Frontend
@@ -150,8 +152,8 @@ POST   /api/{entity}          # Erstellen
 PUT    /api/{entity}/:id      # Aktualisieren
 DELETE /api/{entity}/:id      # Löschen
 
-GET    /api/config/{typ}/{name}  # Config laden
-GET    /health                    # Health-Check
+GET    /api/config/widths        # Width-Referenzen (w40-w300 + actions)
+GET    /health                   # Health-Check
 ```
 
 ## Wichtige Befehle
@@ -189,7 +191,7 @@ npm run lint          # ESLint ausführen
 **Phase 0 abgeschlossen:**
 - Projektstruktur angelegt
 - Build-Config (TypeScript, Vite, ESLint, Prettier, Tailwind)
-- Master-Config konsolidiert (config/config.toml, catalogs bleiben extern)
+- Master-Config konsolidiert (config/config.toml, catalogs extern)
 - Express-Server mit Config-API
 - React-Grundgerüst mit Layout-Komponenten
 - AI-Dokumentationsstruktur (.ai/, .codex/, .claude/)
@@ -197,16 +199,19 @@ npm run lint          # ESLint ausführen
 **Phase 1 abgeschlossen:**
 - Schema-Generator: TOML → SQL CREATE TABLE (14 Tabellen)
 - Generischer Entity-Service mit CRUD-Operationen
-- REST API: /api/:entity + /api/config/widths Routen (GET, POST, PUT, DELETE)
+- REST API: /api/:entity Routen (GET, POST, PUT, DELETE)
 - Validierung gegen Entity-Config
-- Width-Referenzsystem implementiert (20px Schritte: w40-w300 + actions)
+- `/api/config/widths` Endpunkt für Width-Referenzen
 
-**Aktuelle Phase:** Phase 2 - Frontend-Komponenten + Config-Konsistenz
-- DataTable generische Komponente mit Width-Auflösung
-- Config-gesteuertes Label-System (entity.field Format)
-- Standalone Labels/Actions entfernt (nur in Tables)
+**Phase 2 (aktuell) - Frontend-Komponenten + Config-Konsistenz:**
+- Width-Referenzsystem: 79 hardcodierte px → Referenzen (w40-w300 in 20px Schritten + actions=120px)
+- DataTable Komponente mit Width-Auflösung via `resolveWidth()`
+- Labels/Actions nur in Table-Definitionen (Standalone entfernt)
+- Config-Struktur: Einheitliche Block-Header für bessere Lesbarkeit
+- Hook-basierte Dokumentationspflege (Version + Timestamp Auto-Update)
+- TypeScript + ESLint Fehler bereinigt
 
-**Zuletzt aktualisiert: 2025-12-19 03:39 CET (v0.2.0)
+**Zuletzt aktualisiert: 2025-12-19 03:44 CET (v0.2.0)
 
 ---
 

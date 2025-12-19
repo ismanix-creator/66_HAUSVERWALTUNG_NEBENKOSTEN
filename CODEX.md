@@ -77,8 +77,8 @@ graph TB
 ### 1. Kein Hardcoding
 
 ```typescript
-// RICHTIG
-const label = config.labels.entity.mieter
+// RICHTIG - aus TOML Tables geladen
+const label = tableConfig.table.columns[0].label
 
 // FALSCH
 const label = "Mieter"  // Hardcoded!
@@ -97,9 +97,9 @@ function getEntity(id: any): any { ... }
 ### 3. Config-First
 
 Bei Entity-Änderungen:
-1. `config/entities/{name}.config.toml` ändern
-2. `config/forms/{name}.form.toml` bei Bedarf
-3. `config/tables/{name}.table.toml` bei Bedarf
+1. `config/config.toml` [entities] oder [tables] Abschnitt ändern
+2. Keine separaten Dateien – Master-Config ist SINGLE SOURCE OF TRUTH
+3. Validierung erfolgt automatisch gegen Entity-Definitionen
 4. **Code bleibt unverändert**
 
 ## Verzeichnisstruktur
@@ -230,9 +230,9 @@ Nach **jeder Dateiänderung** diesen Workflow befolgen:
 - [ ] TypeScript fehlerfrei (`npm run typecheck`)
 - [ ] ESLint fehlerfrei (`npm run lint`)
 - [ ] Keine hardcodierten Werte eingeführt
-- [ ] Alle neuen Felder in TOML-Config definiert
-- [ ] Labels in `de.labels.toml` hinzugefügt
+- [ ] Alle neuen Felder in `config/config.toml` [entities] oder [tables] definiert
+- [ ] Labels in Table-Definitionen (`[tables.xxx.table.columns]`) gepflegt
 
 ---
 
-**Zuletzt aktualisiert: 2025-12-19 03:39 CET (v0.2.0)
+**Zuletzt aktualisiert: 2025-12-19 03:44 CET (v0.2.0)
