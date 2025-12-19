@@ -117,6 +117,20 @@ class ApiService {
     return this.fetch<Record<string, string>>('/config/widths')
   }
 
+  /**
+   * Lädt Button-Konfiguration (für Button-Styling)
+   */
+  async getButtonConfig(): Promise<Record<string, string>> {
+    return this.fetch<Record<string, string>>('/config/buttons')
+  }
+
+  /**
+   * Lädt Table-Spacing Konfiguration (für Tabellen-Abstände)
+   */
+  async getTableSpacingConfig(): Promise<Record<string, string>> {
+    return this.fetch<Record<string, string>>('/config/table/spacing')
+  }
+
   // ==================== ENTITY CRUD ====================
 
   /**

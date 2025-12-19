@@ -103,3 +103,25 @@ export function useWidthsConfig() {
     staleTime: Infinity,
   })
 }
+
+/**
+ * Hook für Button-Konfiguration (Styling)
+ */
+export function useButtonConfig() {
+  return useQuery({
+    queryKey: ['config', 'buttons'],
+    queryFn: () => apiService.getButtonConfig(),
+    staleTime: Infinity,
+  })
+}
+
+/**
+ * Hook für Table-Spacing Konfiguration
+ */
+export function useTableSpacingConfig() {
+  return useQuery({
+    queryKey: ['config', 'table', 'spacing'],
+    queryFn: () => apiService.getTableSpacingConfig(),
+    staleTime: Infinity,
+  })
+}

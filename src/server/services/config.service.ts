@@ -55,6 +55,10 @@ class ConfigService {
     return await configLoader.getWidths()
   }
 
+  async getSection(sectionPath: string) {
+    return await configLoader.getSection(sectionPath)
+  }
+
   clearCache() {
     void configLoader.reload()
   }

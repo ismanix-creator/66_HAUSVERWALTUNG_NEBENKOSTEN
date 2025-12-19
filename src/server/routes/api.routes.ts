@@ -86,6 +86,24 @@ apiRoutes.get('/config/widths', async (_req, res, next) => {
   }
 })
 
+apiRoutes.get('/config/buttons', async (_req, res, next) => {
+  try {
+    const buttons = await configService.getSection('buttons')
+    res.json(buttons)
+  } catch (error) {
+    next(error)
+  }
+})
+
+apiRoutes.get('/config/table/spacing', async (_req, res, next) => {
+  try {
+    const spacing = await configService.getSection('table.spacing')
+    res.json(spacing)
+  } catch (error) {
+    next(error)
+  }
+})
+
 apiRoutes.get('/dashboard/summary', async (_req, res, next) => {
   try {
     const summary = await dashboardService.getSummary()

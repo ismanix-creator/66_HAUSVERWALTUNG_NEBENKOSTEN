@@ -513,6 +513,25 @@ class ConfigLoaderService {
   }
 
   /**
+   * Generische Sektion aus Config laden (z.B. buttons, table.spacing)
+   */
+  async getSection(sectionPath: string): Promise<Record<string, unknown>> {
+    const config = await this.getConfig()
+    const parts = sectionPath.split('.')
+    let current: unknown = config
+
+    for (const part of parts) {
+      if (current && typeof current === 'object' && part in (current as Record<string, unknown>)) {
+        current = (current as Record<string, unknown>)[part]
+      } else {
+        return {}
+      }
+    }
+
+    return typeof current === 'object' && current !== null ? (current as Record<string, unknown>) : {}
+  }
+
+  /**
    * Design System
    */
   async getDesign(): Promise<DesignRoot> {
