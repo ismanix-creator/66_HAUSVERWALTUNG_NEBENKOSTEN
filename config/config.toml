@@ -32,6 +32,7 @@ date_format = "DD.MM.YYYY"
 time_format = "HH:mm"
 datetime_format = "DD.MM.YYYY HH:mm"
 
+
 [app.owner]
 name = "Akki Scholze"
 address = ""
@@ -41,6 +42,7 @@ phone = ""
 iban = ""
 bic = ""
 
+
 [app.defaults]
 kuendigungsfrist_monate = 3
 kaution_monate = 3
@@ -48,6 +50,7 @@ nk_abrechnungsfrist_monate = 12
 mieterhoehung_sperrfrist_monate = 15
 mahnfrist_tage = 14
 zahlungsziel_tage = 14
+
 
 [app.storage]
 dokumente_pfad = "./data/dokumente"
@@ -81,229 +84,181 @@ actions = "120px"
 # =============================================================================
 [buttons]
 
-# ============ STYLING (TailwindCSS Classes) ============
-
-# Primary Button Style (Standard Add/Create/Submit Buttons)
-primary_text_color = "text-primary-600"
-primary_hover_color = "text-primary-700"
-primary_border = "none"
-primary_padding = "px-4 py-2"
-primary_font_size = "text-sm"
-primary_font_weight = "font-medium"
-primary_rounded = "rounded-lg"
-primary_transition = "transition-colors"
-
-# Secondary Button Style (Default/Cancel/Close Buttons)
-secondary_text_color = "text-gray-700"
-secondary_hover_color = "text-gray-900"
-secondary_border = "border border-gray-300"
-secondary_padding = "px-4 py-2"
-secondary_font_size = "text-sm"
-secondary_font_weight = "font-medium"
-secondary_rounded = "rounded-lg"
-secondary_transition = "transition-colors"
-
-# Danger Button Style (Delete/Remove Buttons)
-danger_text_color = "text-red-600"
-danger_hover_color = "text-red-700"
-danger_border = "none"
-danger_padding = "px-4 py-2"
-danger_font_size = "text-sm"
-danger_font_weight = "font-medium"
-danger_rounded = "rounded-lg"
-danger_transition = "transition-colors"
-
-# Success Button Style (Confirm/Done Buttons)
-success_text_color = "text-green-600"
-success_hover_color = "text-green-700"
-success_border = "none"
-success_padding = "px-4 py-2"
-success_font_size = "text-sm"
-success_font_weight = "font-medium"
-success_rounded = "rounded-lg"
-success_transition = "transition-colors"
-
-# Disabled State (alle Button-Typen)
-disabled_opacity = "disabled:opacity-50"
-disabled_cursor = "disabled:cursor-not-allowed"
-
-# ============ UNIVERSELLE BUTTON-TYPEN (Labels + Icons) ============
-
-# Add/Create Button (häufig in Listen-Views)
+# Add Button (Plus Icon)
 [buttons.add]
 label = "buttons.hinzufuegen"
 icon = "Plus"
 style = "primary"
 
-# Edit Button (für Inline-Edit oder Modal)
+# Edit Button (Pencil Icon)
 [buttons.edit]
 label = "buttons.bearbeiten"
 icon = "Pencil"
 style = "primary"
 
-# Save/Submit Button (Form-Submission)
+# Save Button (Check Icon)
 [buttons.save]
 label = "buttons.speichern"
 icon = "Check"
 style = "primary"
 
-# Cancel/Abort Button (Form-Abbruch)
+# Cancel Button (X Icon)
 [buttons.cancel]
 label = "buttons.abbrechen"
 icon = "X"
 style = "secondary"
 
-# Delete/Remove Button (Lösch-Bestätigung)
+# Delete Button (Trash2 Icon)
 [buttons.delete]
 label = "buttons.loeschen"
 icon = "Trash2"
 style = "danger"
 
-# Confirm Button (Allgemeine Bestätigung)
+# Confirm Button (Check Icon)
 [buttons.confirm]
 label = "buttons.bestaetigen"
 icon = "Check"
 style = "success"
 
-# Close Button (Modal/Dialog schließen)
+# Close Button (X Icon)
 [buttons.close]
 label = "buttons.schliessen"
 icon = "X"
 style = "secondary"
 
-# Back Button (Zurück navigieren)
+# Back Button (ChevronLeft Icon)
 [buttons.back]
 label = "buttons.zurueck"
 icon = "ChevronLeft"
 style = "secondary"
 
-# Reset/Clear Button (Form zurücksetzen)
+# Reset Button (RotateCcw Icon)
 [buttons.reset]
 label = "buttons.zuruecksetzen"
 icon = "RotateCcw"
 style = "secondary"
 
-# Export Button (Daten exportieren)
+# Export Button (Download Icon)
 [buttons.export]
 label = "buttons.exportieren"
 icon = "Download"
 style = "primary"
 
-# Import Button (Daten importieren)
+# Import Button (Upload Icon)
 [buttons.import]
 label = "buttons.importieren"
 icon = "Upload"
 style = "primary"
 
-# Print Button (Seite/Bericht drucken)
+# Print Button (Printer Icon)
 [buttons.print]
 label = "buttons.drucken"
 icon = "Printer"
 style = "primary"
 
-# Search/Filter Button (Suche/Filter anwenden)
+# Search Button (Search Icon)
 [buttons.search]
 label = "buttons.suchen"
 icon = "Search"
 style = "primary"
 
-# Help Button (Hilfe/Info anzeigen)
+# Help Button (HelpCircle Icon)
 [buttons.help]
 label = "buttons.hilfe"
 icon = "HelpCircle"
 style = "secondary"
 
-# Settings Button (Einstellungen öffnen)
+# Settings Button (Settings Icon)
 [buttons.settings]
 label = "buttons.einstellungen"
 icon = "Settings"
 style = "secondary"
 
-# Refresh/Reload Button (Daten neu laden)
+# Refresh Button (RefreshCw Icon)
 [buttons.refresh]
 label = "buttons.aktualisieren"
 icon = "RefreshCw"
 style = "secondary"
 
-# Next Button (Weiterleitung zum nächsten Schritt)
+# Next Button (ChevronRight Icon)
 [buttons.next]
 label = "buttons.weiter"
 icon = "ChevronRight"
 style = "primary"
 
-# Previous Button (Zurück zum vorherigen Schritt)
+# Previous Button (ChevronLeft Icon)
 [buttons.previous]
 label = "buttons.zurueck"
 icon = "ChevronLeft"
 style = "secondary"
 
-# Duplicate/Copy Button (Eintrag duplizieren)
+# Duplicate Button (Copy Icon)
 [buttons.duplicate]
 label = "buttons.duplizieren"
 icon = "Copy"
 style = "primary"
 
-# Archive Button (Eintrag archivieren)
+# Archive Button (Archive Icon)
 [buttons.archive]
 label = "buttons.archivieren"
 icon = "Archive"
 style = "secondary"
 
-# Restore Button (Eintrag wiederherstellen)
+# Restore Button (RotateCcw Icon)
 [buttons.restore]
 label = "buttons.wiederherstellen"
 icon = "RotateCcw"
 style = "primary"
 
-# Send Button (Nachricht/Email versenden)
+# Send Button (Send Icon)
 [buttons.send]
 label = "buttons.versenden"
 icon = "Send"
 style = "primary"
 
-# Download Button (Datei herunterladen)
+# Download Button (Download Icon)
 [buttons.download]
 label = "buttons.herunterladen"
 icon = "Download"
 style = "primary"
 
-# Upload Button (Datei hochladen)
+# Upload Button (Upload Icon)
 [buttons.upload]
 label = "buttons.hochladen"
 icon = "Upload"
 style = "primary"
 
-# View Details Button (Details anschauen)
+# View Button (Eye Icon)
 [buttons.view]
 label = "buttons.ansehen"
 icon = "Eye"
 style = "primary"
 
-# Approve Button (Genehmigung erteilen)
+# Approve Button (Check Icon)
 [buttons.approve]
 label = "buttons.genehmigen"
 icon = "Check"
 style = "success"
 
-# Reject Button (Ablehnen)
+# Reject Button (X Icon)
 [buttons.reject]
 label = "buttons.ablehnen"
 icon = "X"
 style = "danger"
 
-# Move Button (Verschieben)
+# Move Button (Move Icon)
 [buttons.move]
 label = "buttons.verschieben"
 icon = "Move"
 style = "primary"
 
-# Sort Button (Sortierung ändern)
+# Sort Button (ArrowUpDown Icon)
 [buttons.sort]
 label = "buttons.sortieren"
 icon = "ArrowUpDown"
 style = "secondary"
 
-# Filter Button (Filter anwenden)
+# Filter Button (Filter Icon)
 [buttons.filter]
 label = "buttons.filtern"
 icon = "Filter"
@@ -313,6 +268,7 @@ style = "primary"
 # DESIGN - Schriftarten, Farben & Styling-Definitionen
 # =============================================================================
 [design]
+
 
 [design.typography]
 # Schriftart für Zahlenfelder (integer, decimal, currency)
@@ -335,46 +291,11 @@ table_data_numbers_font = "font-mono"
 # =============================================================================
 [table]
 
-# ============ ROW STYLING ============
-
-# Standard Row Styling
-row_padding = "px-4 py-3"       # Padding in Datenzellen
-row_border = "border-b border-gray-200"
-row_height = "48px"             # Feste Zeilenhöhe für konsistentes Layout
-
-# Row Hover State
-row_hover_bg = "hover:bg-gray-50"
-row_hover_transition = "transition-colors duration-150"
-
-# Header Row (unterschiedlich von Datenzellen)
-header_padding = "px-4 py-3"
-header_height = "44px"
-header_bg = "bg-gray-100"
-header_font_weight = "font-semibold"
-header_text_color = "text-gray-700"
-header_border = "border-b border-gray-300"
-
-# ============ ZEBRASTREIFEN (Alternate Row Colors) ============
-
-# Striped/Zebra Pattern - Visuelle Lesbarkeit verbessern
-stripe_enabled = true
-stripe_odd_bg = "bg-white"               # Ungerade Zeilen: Weiß
-stripe_even_bg = "bg-gray-50"            # Gerade Zeilen: Hellgrau
-stripe_transition = "transition-colors"
-
-# Striped mit Hover-Override
-stripe_hover_odd_bg = "hover:bg-blue-50"
-stripe_hover_even_bg = "hover:bg-blue-50"
-
-# ============ COLUMN SPACING ============
-
 [table.spacing]
 first_column_left = "50px"      # Linker Außenabstand erste Spalte
 last_column_right = "50px"      # Rechter Außenabstand letzte Spalte
 column_gap = "8px"              # Abstand zwischen Spalten
 column_padding = "px-2"         # Padding in einzelnen Spalten
-
-# ============ TABLE CONTAINER ============
 
 [table.container]
 border = "border border-gray-200"
@@ -382,8 +303,6 @@ rounded = "rounded-lg"
 overflow = "overflow-hidden"
 shadow = "shadow-sm"
 background = "bg-white"
-
-# ============ SCROLL & OVERFLOW ============
 
 [table.scroll]
 overflow_x = "overflow-x-auto"
@@ -399,10 +318,12 @@ cors_origin = "http://localhost:5174"
 request_timeout_ms = 30000
 max_request_size = "50mb"
 
+
 [server.api]
 base_path = "/api"
 enable_swagger = false
 enable_graphql = false
+
 
 [server.static]
 directory = "./public"
@@ -420,9 +341,11 @@ foreign_keys = true
 auto_vacuum = "incremental"
 busy_timeout_ms = 5000
 
+
 [database.migrations]
 auto_run = true
 directory = "./scripts/migrations"
+
 
 [database.backup]
 enabled = true
@@ -439,6 +362,8 @@ position = "left"
 collapsible = true
 default_collapsed = false
 
+
+# Navigation.Items
 [[navigation.items]]
 id = "dashboard"
 label = "Dashboard"
@@ -446,6 +371,8 @@ route = "/dashboard"
 icon = "LayoutDashboard"
 order = 10
 
+
+# Navigation.Items
 [[navigation.items]]
 id = "objekte"
 label = "Objekte/Einheiten"
@@ -453,6 +380,8 @@ route = "/objekte"
 icon = "Building2"
 order = 20
 
+
+# Navigation.Items
 [[navigation.items]]
 id = "mieter"
 label = "Mieter"
@@ -460,6 +389,8 @@ route = "/mieter"
 icon = "Users"
 order = 30
 
+
+# Navigation.Items
 [[navigation.items]]
 id = "vertraege"
 label = "Vertraege"
@@ -467,6 +398,8 @@ route = "/vertraege"
 icon = "FileText"
 order = 40
 
+
+# Navigation.Items
 [[navigation.items]]
 id = "finanzen"
 label = "Finanzen"
@@ -474,6 +407,8 @@ route = "/finanzen"
 icon = "BarChart3"
 order = 50
 
+
+# Navigation.Items
 [[navigation.items]]
 id = "nebenkosten"
 label = "Nebenkosten"
@@ -579,6 +514,7 @@ mock_delay_ms = 0
 # ENTITIES - Entity-Definitionen (14 Datenmodelle)
 # =============================================================================
 
+# Dokument Entity - Dokumentenverwaltung
 [entities.dokument]
 name = "dokument"
 table_name = "dokumente"
@@ -587,31 +523,43 @@ label_plural = "labels.entity.dokumente"
 icon = "File"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.dokument.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# objekt_id (UUID)
 [entities.dokument.fields.objekt_id]
 type = "uuid"
 reference = "objekt"
 label = "dokument.objekt"
 
+
+# einheit_id (UUID)
 [entities.dokument.fields.einheit_id]
 type = "uuid"
 reference = "einheit"
 label = "dokument.einheit"
 
+
+# mieter_id (UUID)
 [entities.dokument.fields.mieter_id]
 type = "uuid"
 reference = "mieter"
 label = "dokument.mieter"
 
+
+# vertrag_id (UUID)
 [entities.dokument.fields.vertrag_id]
 type = "uuid"
 reference = "vertrag"
 label = "dokument.vertrag"
 
+
+# typ (Auswahl, erforderlich)
 [entities.dokument.fields.typ]
 type = "enum"
 required = true
@@ -619,56 +567,78 @@ options = ["rechnung", "vertrag", "ausweis", "korrespondenz", "foto", "sonstig"]
 default = "sonstig"
 label = "dokument.typ"
 
+
+# bezeichnung (Text, erforderlich)
 [entities.dokument.fields.bezeichnung]
 type = "string"
 required = true
 max_length = 200
 label = "dokument.bezeichnung"
 
+
+# dateiname (Text, erforderlich)
 [entities.dokument.fields.dateiname]
 type = "string"
 required = true
 max_length = 255
 label = "dokument.dateiname"
 
+
+# dateipfad (Text, erforderlich)
 [entities.dokument.fields.dateipfad]
 type = "string"
 required = true
 label = "dokument.dateipfad"
 
+
+# dateigroesse (Ganzzahl)
 [entities.dokument.fields.dateigroesse]
 type = "integer"
 label = "dokument.dateigroesse"
 
+
+# mime_type (Text)
 [entities.dokument.fields.mime_type]
 type = "string"
 max_length = 100
 label = "dokument.mime_type"
 
+
+# datum (Datum)
 [entities.dokument.fields.datum]
 type = "date"
 label = "dokument.datum"
 description = "Dokumentdatum (z.B. Rechnungsdatum)"
 
+
+# jahr (Ganzzahl)
 [entities.dokument.fields.jahr]
 type = "integer"
 label = "dokument.jahr"
 description = "Für Steuerberater-Sortierung"
 
+
+# hochgeladen_am (Datum & Zeit, auto-generiert)
 [entities.dokument.fields.hochgeladen_am]
 type = "datetime"
 auto_generate = true
 label = "dokument.hochgeladen_am"
 
+
+# Dokument Relations
 [entities.dokument.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
 mieter = { type = "many_to_one", target = "mieter", foreign_key = "mieter_id" }
 vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id" }
 
+
+# Dokument Entity - Dokumentenverwaltung
 [entities.dokument.validation]
 mindestens_eine_zuordnung = { rule = "objekt_id is not null or mieter_id is not null or vertrag_id is not null", message = "labels.validation.dokument_zuordnung" }
 
+
+# Einheit Entity - Mieteinheiten
 [entities.einheit]
 name = "einheit"
 table_name = "einheiten"
@@ -677,11 +647,15 @@ label_plural = "labels.entity.einheiten"
 icon = "DoorOpen"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.einheit.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# objekt_id (UUID, erforderlich)
 [entities.einheit.fields.objekt_id]
 type = "uuid"
 required = true
@@ -689,6 +663,8 @@ reference = "objekt"
 label = "einheit.objekt"
 placeholder = "Objekt wählen"
 
+
+# bezeichnung (Text, erforderlich)
 [entities.einheit.fields.bezeichnung]
 type = "string"
 required = true
@@ -696,6 +672,8 @@ max_length = 50
 label = "einheit.bezeichnung"
 placeholder = "z.B. EG links, Halle A"
 
+
+# typ (Auswahl, erforderlich)
 [entities.einheit.fields.typ]
 type = "enum"
 required = true
@@ -704,6 +682,8 @@ default = "wohnung"
 label = "einheit.typ"
 placeholder = "wohnung"
 
+
+# flaeche (Dezimalzahl, erforderlich)
 [entities.einheit.fields.flaeche]
 type = "decimal"
 required = true
@@ -713,6 +693,8 @@ suffix = "m²"
 label = "einheit.flaeche"
 placeholder = "75.0"
 
+
+# anzahl_raeume (Dezimalzahl)
 [entities.einheit.fields.anzahl_raeume]
 type = "decimal"
 min = 1
@@ -721,18 +703,24 @@ label = "einheit.anzahl_raeume"
 visible_if = { field = "typ", in = ["wohnung"] }
 placeholder = "3.5"
 
+
+# etage (Text)
 [entities.einheit.fields.etage]
 type = "string"
 max_length = 20
 label = "einheit.etage"
 placeholder = "z.B. EG, 1. OG, DG"
 
+
+# ausstattung (multiselect)
 [entities.einheit.fields.ausstattung]
 type = "multiselect"
 options = ["balkon", "terrasse", "keller", "stellplatz", "einbaukueche", "aufzug", "gaeste_wc"]
 label = "einheit.ausstattung"
 placeholder = "balkon, keller"
 
+
+# status (Auswahl, erforderlich)
 [entities.einheit.fields.status]
 type = "enum"
 required = true
@@ -741,20 +729,28 @@ default = "leer"
 label = "einheit.status"
 placeholder = "leer"
 
+
+# notiz (Mehrzeiliger Text)
 [entities.einheit.fields.notiz]
 type = "text"
 label = "common.notiz"
 placeholder = "Besondere Merkmale, Schlüsselübergabe"
 
+
+# Einheit Entity - Mieteinheiten
 [entities.einheit.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 vertraege = { type = "one_to_many", target = "vertrag", foreign_key = "einheit_id" }
 zaehler = { type = "one_to_many", target = "zaehler", foreign_key = "einheit_id" }
 
+
+# Einheit Entity - Mieteinheiten
 [entities.einheit.computed]
 aktueller_vertrag = { formula = "first(vertraege where ende is null or ende > now())" }
 aktueller_mieter = { formula = "aktueller_vertrag.mieter" }
 
+
+# Entity: Erinnerung - Datenmodell
 [entities.erinnerung]
 name = "erinnerung"
 table_name = "erinnerungen"
@@ -763,41 +759,57 @@ label_plural = "labels.entity.erinnerungen"
 icon = "Bell"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.erinnerung.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# typ (Auswahl, erforderlich)
 [entities.erinnerung.fields.typ]
 type = "enum"
 required = true
 options = ["mieterhoehung", "vertragsende", "zaehlerablesung", "rueckstand", "nk_abrechnung", "kaution_rueckzahlung", "sonstig"]
 label = "erinnerung.typ"
 
+
+# bezug_typ (Auswahl)
 [entities.erinnerung.fields.bezug_typ]
 type = "enum"
 options = ["vertrag", "objekt", "mieter", "einheit"]
 label = "erinnerung.bezug_typ"
 
+
+# bezug_id (UUID)
 [entities.erinnerung.fields.bezug_id]
 type = "uuid"
 label = "erinnerung.bezug_id"
 
+
+# faellig_am (Datum, erforderlich)
 [entities.erinnerung.fields.faellig_am]
 type = "date"
 required = true
 label = "erinnerung.faellig_am"
 
+
+# titel (Text, erforderlich)
 [entities.erinnerung.fields.titel]
 type = "string"
 required = true
 max_length = 200
 label = "erinnerung.titel"
 
+
+# beschreibung (Mehrzeiliger Text)
 [entities.erinnerung.fields.beschreibung]
 type = "text"
 label = "erinnerung.beschreibung"
 
+
+# status (Auswahl, erforderlich)
 [entities.erinnerung.fields.status]
 type = "enum"
 required = true
@@ -805,11 +817,15 @@ options = ["offen", "erledigt", "zurueckgestellt"]
 default = "offen"
 label = "erinnerung.status"
 
+
+# erstellt_am (Datum & Zeit, auto-generiert)
 [entities.erinnerung.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 label = "common.erstellt_am"
 
+
+# Kaution Entity - Kautionsverwaltung
 [entities.kaution]
 name = "kaution"
 table_name = "kautionen"
@@ -818,11 +834,15 @@ label_plural = "labels.entity.kautionen"
 icon = "Shield"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.kaution.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# vertrag_id (UUID, erforderlich)
 [entities.kaution.fields.vertrag_id]
 type = "uuid"
 required = true
@@ -830,17 +850,23 @@ unique = true
 reference = "vertrag"
 label = "kaution.vertrag"
 
+
+# betrag (Währung €, erforderlich)
 [entities.kaution.fields.betrag]
 type = "currency"
 required = true
 min = 0
 label = "kaution.betrag"
 
+
+# eingangsdatum (Datum, erforderlich)
 [entities.kaution.fields.eingangsdatum]
 type = "date"
 required = true
 label = "kaution.eingangsdatum"
 
+
+# anlageform (Auswahl, erforderlich)
 [entities.kaution.fields.anlageform]
 type = "enum"
 required = true
@@ -848,11 +874,15 @@ options = ["sparbuch", "konto", "buergschaft", "bar"]
 default = "konto"
 label = "kaution.anlageform"
 
+
+# anlage_details (Mehrzeiliger Text)
 [entities.kaution.fields.anlage_details]
 type = "text"
 label = "kaution.anlage_details"
 placeholder = "Bank, Kontonummer, etc."
 
+
+# zinssatz (Dezimalzahl)
 [entities.kaution.fields.zinssatz]
 type = "decimal"
 min = 0
@@ -861,6 +891,8 @@ precision = 2
 suffix = "%"
 label = "kaution.zinssatz"
 
+
+# status (Auswahl, erforderlich)
 [entities.kaution.fields.status]
 type = "enum"
 required = true
@@ -868,29 +900,41 @@ options = ["angelegt", "teilrueckzahlung", "zurueckgezahlt"]
 default = "angelegt"
 label = "kaution.status"
 
+
+# rueckzahlungsdatum (Datum)
 [entities.kaution.fields.rueckzahlungsdatum]
 type = "date"
 label = "kaution.rueckzahlungsdatum"
 visible_if = { field = "status", in = ["teilrueckzahlung", "zurueckgezahlt"] }
 
+
+# rueckzahlungsbetrag (Währung €)
 [entities.kaution.fields.rueckzahlungsbetrag]
 type = "currency"
 min = 0
 label = "kaution.rueckzahlungsbetrag"
 visible_if = { field = "status", in = ["teilrueckzahlung", "zurueckgezahlt"] }
 
+
+# einbehalt_grund (Mehrzeiliger Text)
 [entities.kaution.fields.einbehalt_grund]
 type = "text"
 label = "kaution.einbehalt_grund"
 visible_if = { field = "status", equals = "teilrueckzahlung" }
 
+
+# notiz (Mehrzeiliger Text)
 [entities.kaution.fields.notiz]
 type = "text"
 label = "common.notiz"
 
+
+# Kaution Entity - Kautionsverwaltung
 [entities.kaution.relations]
 vertrag = { type = "one_to_one", target = "vertrag", foreign_key = "vertrag_id" }
 
+
+# Entity: Kostenart - Datenmodell
 [entities.kostenart]
 name = "kostenart"
 table_name = "kostenarten"
@@ -899,17 +943,23 @@ label_plural = "labels.entity.kostenarten"
 icon = "Tag"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.kostenart.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# bezeichnung (Text, erforderlich)
 [entities.kostenart.fields.bezeichnung]
 type = "string"
 required = true
 max_length = 100
 label = "kostenart.bezeichnung"
 
+
+# kategorie (Auswahl, erforderlich)
 [entities.kostenart.fields.kategorie]
 type = "enum"
 required = true
@@ -917,6 +967,8 @@ options = ["umlagefaehig", "nicht_umlagefaehig"]
 default = "umlagefaehig"
 label = "kostenart.kategorie"
 
+
+# umlageschluessel (Auswahl, erforderlich)
 [entities.kostenart.fields.umlageschluessel]
 type = "enum"
 required = true
@@ -925,24 +977,34 @@ default = "flaeche"
 label = "kostenart.umlageschluessel"
 description = "direkt = 1:1 Zuordnung zu Einheit"
 
+
+# nur_gewerbe (Ja/Nein)
 [entities.kostenart.fields.nur_gewerbe]
 type = "boolean"
 default = false
 label = "kostenart.nur_gewerbe"
 
+
+# sortierung (Ganzzahl)
 [entities.kostenart.fields.sortierung]
 type = "integer"
 default = 100
 label = "kostenart.sortierung"
 
+
+# aktiv (Ja/Nein)
 [entities.kostenart.fields.aktiv]
 type = "boolean"
 default = true
 label = "kostenart.aktiv"
 
+
+# Entities.Kostenart.Relations
 [entities.kostenart.relations]
 rechnungen = { type = "one_to_many", target = "rechnung", foreign_key = "kostenart_id" }
 
+
+# Mieter Entity - Mieterstammdaten
 [entities.mieter]
 name = "mieter"
 table_name = "mieter"
@@ -951,17 +1013,23 @@ label_plural = "labels.entity.mieter_plural"
 icon = "User"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.mieter.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# anrede (Auswahl)
 [entities.mieter.fields.anrede]
 type = "enum"
 options = ["herr", "frau", "firma", "divers"]
 label = "mieter.anrede"
 placeholder = "herr"
 
+
+# vorname (Text)
 [entities.mieter.fields.vorname]
 type = "string"
 max_length = 50
@@ -969,6 +1037,8 @@ label = "mieter.vorname"
 required_if = { field = "anrede", not_in = ["firma"] }
 placeholder = "Max"
 
+
+# nachname (Text, erforderlich)
 [entities.mieter.fields.nachname]
 type = "string"
 required = true
@@ -977,6 +1047,8 @@ label = "mieter.nachname"
 description = "Bei Firma: Firmenname"
 placeholder = "Mustermann"
 
+
+# firma_zusatz (Text)
 [entities.mieter.fields.firma_zusatz]
 type = "string"
 max_length = 100
@@ -984,29 +1056,39 @@ label = "mieter.firma_zusatz"
 visible_if = { field = "anrede", equals = "firma" }
 placeholder = "Muster GmbH"
 
+
+# geburtsdatum (Datum)
 [entities.mieter.fields.geburtsdatum]
 type = "date"
 label = "mieter.geburtsdatum"
 visible_if = { field = "anrede", not_in = ["firma"] }
 
+
+# telefon (Text)
 [entities.mieter.fields.telefon]
 type = "string"
 max_length = 30
 label = "mieter.telefon"
 placeholder = "+49 170 1234567"
 
+
+# email (E-Mail)
 [entities.mieter.fields.email]
 type = "email"
 max_length = 100
 label = "mieter.email"
 placeholder = "max@example.com"
 
+
+# adresse_vorher (Mehrzeiliger Text)
 [entities.mieter.fields.adresse_vorher]
 type = "text"
 label = "mieter.adresse_vorher"
 description = "Vorherige Anschrift"
 placeholder = "Musterstraße 1, 12345 Berlin"
 
+
+# iban (Text)
 [entities.mieter.fields.iban]
 type = "string"
 max_length = 34
@@ -1015,18 +1097,24 @@ label = "mieter.iban"
 default = "DE"
 placeholder = "DE12 3456 7890 1234 5678 90"
 
+
+# bic (Text)
 [entities.mieter.fields.bic]
 type = "string"
 max_length = 11
 label = "mieter.bic"
 placeholder = "COBADEFFXXX"
 
+
+# bankname (Text)
 [entities.mieter.fields.bankname]
 type = "string"
 max_length = 100
 label = "mieter.bankname"
 placeholder = "Commerzbank Köln"
 
+
+# status (Auswahl, erforderlich)
 [entities.mieter.fields.status]
 type = "enum"
 required = true
@@ -1035,27 +1123,37 @@ default = "aktiv"
 label = "mieter.status"
 placeholder = "aktiv"
 
+
+# notiz (Mehrzeiliger Text)
 [entities.mieter.fields.notiz]
 type = "text"
 label = "common.notiz"
 placeholder = "Hinweise zur Kommunikation"
 
+
+# erstellt_am (Datum & Zeit, auto-generiert)
 [entities.mieter.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 label = "common.erstellt_am"
 
+
+# Mieter Entity - Mieterstammdaten
 [entities.mieter.relations]
 vertraege = { type = "one_to_many", target = "vertrag", foreign_key = "mieter_id" }
 dokumente = { type = "one_to_many", target = "dokument", foreign_key = "mieter_id" }
 zahlungen = { type = "one_to_many", target = "zahlung", foreign_key = "mieter_id", through = "vertrag" }
 
+
+# Mieter Entity - Mieterstammdaten
 [entities.mieter.computed]
 display_name = { formula = "concat(vorname, ' ', nachname)" }
 aktiver_vertrag = { formula = "first(vertraege where ende is null or ende > now())" }
 aktuelle_einheit = { formula = "aktiver_vertrag.einheit" }
 
+
+# Entity: Nebenkostenabrechnung - Datenmodell
 [entities.nebenkostenabrechnung]
 name = "nebenkostenabrechnung"
 table_name = "nebenkostenabrechnungen"
@@ -1064,17 +1162,23 @@ label_plural = "labels.entity.nebenkostenabrechnungen"
 icon = "FileSpreadsheet"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.nebenkostenabrechnung.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# objekt_id (UUID, erforderlich)
 [entities.nebenkostenabrechnung.fields.objekt_id]
 type = "uuid"
 required = true
 reference = "objekt"
 label = "nk.objekt"
 
+
+# jahr (Ganzzahl, erforderlich)
 [entities.nebenkostenabrechnung.fields.jahr]
 type = "integer"
 required = true
@@ -1082,16 +1186,22 @@ min = 2000
 max = 2100
 label = "nk.jahr"
 
+
+# zeitraum_von (Datum, erforderlich)
 [entities.nebenkostenabrechnung.fields.zeitraum_von]
 type = "date"
 required = true
 label = "nk.zeitraum_von"
 
+
+# zeitraum_bis (Datum, erforderlich)
 [entities.nebenkostenabrechnung.fields.zeitraum_bis]
 type = "date"
 required = true
 label = "nk.zeitraum_bis"
 
+
+# status (Auswahl, erforderlich)
 [entities.nebenkostenabrechnung.fields.status]
 type = "enum"
 required = true
@@ -1099,22 +1209,32 @@ options = ["entwurf", "erstellt", "versendet"]
 default = "entwurf"
 label = "nk.status"
 
+
+# erstellt_am (Datum & Zeit, auto-generiert)
 [entities.nebenkostenabrechnung.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 label = "common.erstellt_am"
 
+
+# notiz (Mehrzeiliger Text)
 [entities.nebenkostenabrechnung.fields.notiz]
 type = "text"
 label = "common.notiz"
 
+
+# Entities.Nebenkostenabrechnung.Relations
 [entities.nebenkostenabrechnung.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 positionen = { type = "one_to_many", target = "nebenkostenabrechnung_position", foreign_key = "abrechnung_id" }
 
+
+# Entities.Nebenkostenabrechnung.Computed
 [entities.nebenkostenabrechnung.computed]
 gesamtkosten = { formula = "sum(positionen.gesamtkosten)" }
 
+
+# Objekt Entity - Immobilien
 [entities.objekt]
 name = "objekt"
 table_name = "objekte"
@@ -1123,11 +1243,15 @@ label_plural = "labels.entity.objekte"
 icon = "Building2"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.objekt.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# bezeichnung (Text, erforderlich)
 [entities.objekt.fields.bezeichnung]
 type = "string"
 required = true
@@ -1135,30 +1259,40 @@ max_length = 100
 label = "objekt.bezeichnung"
 placeholder = "z.B. Haus Musterstraße 12"
 
+
+# adresse (Text, erforderlich)
 [entities.objekt.fields.adresse]
 type = "string"
 required = true
 max_length = 200
 label = "objekt.adresse"
 
+
+# plz (Text, erforderlich)
 [entities.objekt.fields.plz]
 type = "string"
 required = true
 pattern = "^[0-9]{5}$"
 label = "objekt.plz"
 
+
+# ort (Text, erforderlich)
 [entities.objekt.fields.ort]
 type = "string"
 required = true
 max_length = 100
 label = "objekt.ort"
 
+
+# baujahr (Ganzzahl)
 [entities.objekt.fields.baujahr]
 type = "integer"
 min = 1800
 max = 2100
 label = "objekt.baujahr"
 
+
+# typ (Auswahl, erforderlich)
 [entities.objekt.fields.typ]
 type = "enum"
 required = true
@@ -1166,34 +1300,46 @@ options = ["wohnraum", "gewerbe", "gemischt"]
 default = "wohnraum"
 label = "objekt.typ"
 
+
+# ist_multi_einheit (Ja/Nein)
 [entities.objekt.fields.ist_multi_einheit]
 type = "boolean"
 default = false
 label = "objekt.ist_multi_einheit"
 description = "Mehrere Einheiten mit separaten Zählern"
 
+
+# notiz (Mehrzeiliger Text)
 [entities.objekt.fields.notiz]
 type = "text"
 label = "common.notiz"
 
+
+# erstellt_am (Datum & Zeit, auto-generiert)
 [entities.objekt.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 label = "common.erstellt_am"
 
+
+# Objekt Entity - Immobilien
 [entities.objekt.relations]
 einheiten = { type = "one_to_many", target = "einheit", foreign_key = "objekt_id" }
 zaehler = { type = "one_to_many", target = "zaehler", foreign_key = "objekt_id" }
 rechnungen = { type = "one_to_many", target = "rechnung", foreign_key = "objekt_id" }
 dokumente = { type = "one_to_many", target = "dokument", foreign_key = "objekt_id" }
 
+
+# Objekt Entity - Immobilien
 [entities.objekt.computed]
 anzahl_einheiten = { formula = "count(einheiten)" }
 anzahl_vermietet = { formula = "count(einheiten where status = 'vermietet')" }
 leerstand = { formula = "anzahl_einheiten - anzahl_vermietet" }
 gesamt_flaeche = { formula = "sum(einheiten.flaeche)" }
 
+
+# Rechnung Entity - Rechnungen
 [entities.rechnung]
 name = "rechnung"
 table_name = "rechnungen"
@@ -1202,23 +1348,31 @@ label_plural = "labels.entity.rechnungen"
 icon = "Receipt"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.rechnung.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# objekt_id (UUID, erforderlich)
 [entities.rechnung.fields.objekt_id]
 type = "uuid"
 required = true
 reference = "objekt"
 label = "rechnung.objekt"
 
+
+# kostenart_id (UUID, erforderlich)
 [entities.rechnung.fields.kostenart_id]
 type = "uuid"
 required = true
 reference = "kostenart"
 label = "rechnung.kostenart"
 
+
+# einheit_id (UUID)
 [entities.rechnung.fields.einheit_id]
 type = "uuid"
 reference = "einheit"
@@ -1226,62 +1380,88 @@ label = "rechnung.einheit"
 description = "Nur bei Direktzuordnung"
 visible_if = { field = "kostenart.umlageschluessel", equals = "direkt" }
 
+
+# rechnungsnummer (Text)
 [entities.rechnung.fields.rechnungsnummer]
 type = "string"
 max_length = 50
 label = "rechnung.rechnungsnummer"
 
+
+# rechnungsdatum (Datum, erforderlich)
 [entities.rechnung.fields.rechnungsdatum]
 type = "date"
 required = true
 label = "rechnung.rechnungsdatum"
 
+
+# faelligkeitsdatum (Datum)
 [entities.rechnung.fields.faelligkeitsdatum]
 type = "date"
 label = "rechnung.faelligkeitsdatum"
 
+
+# betrag (Währung €, erforderlich)
 [entities.rechnung.fields.betrag]
 type = "currency"
 required = true
 min = 0
 label = "rechnung.betrag"
 
+
+# zeitraum_von (Datum)
 [entities.rechnung.fields.zeitraum_von]
 type = "date"
 label = "rechnung.zeitraum_von"
 
+
+# zeitraum_bis (Datum)
 [entities.rechnung.fields.zeitraum_bis]
 type = "date"
 label = "rechnung.zeitraum_bis"
 
+
+# bezahlt_am (Datum)
 [entities.rechnung.fields.bezahlt_am]
 type = "date"
 label = "rechnung.bezahlt_am"
 
+
+# dokument_id (UUID)
 [entities.rechnung.fields.dokument_id]
 type = "uuid"
 reference = "dokument"
 label = "rechnung.dokument"
 
+
+# notiz (Mehrzeiliger Text)
 [entities.rechnung.fields.notiz]
 type = "text"
 label = "common.notiz"
 
+
+# erstellt_am (Datum & Zeit, auto-generiert)
 [entities.rechnung.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 
+
+# Rechnung Entity - Rechnungen
 [entities.rechnung.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 kostenart = { type = "many_to_one", target = "kostenart", foreign_key = "kostenart_id" }
 einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
 dokument = { type = "many_to_one", target = "dokument", foreign_key = "dokument_id" }
 
+
+# Rechnung Entity - Rechnungen
 [entities.rechnung.computed]
 ist_bezahlt = { formula = "bezahlt_am is not null" }
 jahr = { formula = "year(rechnungsdatum)" }
 
+
+# Sollstellung Entity - Offene Posten
 [entities.sollstellung]
 name = "sollstellung"
 table_name = "sollstellungen"
@@ -1290,46 +1470,64 @@ label_plural = "labels.entity.sollstellungen"
 icon = "ListChecks"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.sollstellung.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# vertrag_id (UUID, erforderlich)
 [entities.sollstellung.fields.vertrag_id]
 type = "uuid"
 required = true
 reference = "vertrag"
 label = "sollstellung.vertrag"
 
+
+# monat (Text, erforderlich)
 [entities.sollstellung.fields.monat]
 type = "string"
 required = true
 pattern = "^[0-9]{4}-[0-9]{2}$"
 label = "sollstellung.monat"
 
+
+# sollbetrag (Währung €, erforderlich)
 [entities.sollstellung.fields.sollbetrag]
 type = "currency"
 required = true
 label = "sollstellung.sollbetrag"
 
+
+# istbetrag (Währung €)
 [entities.sollstellung.fields.istbetrag]
 type = "currency"
 default = 0
 label = "sollstellung.istbetrag"
 
+
+# status (Auswahl)
 [entities.sollstellung.fields.status]
 type = "enum"
 options = ["offen", "teilweise", "bezahlt", "ueberzahlt"]
 default = "offen"
 label = "sollstellung.status"
 
+
+# Sollstellung Entity - Offene Posten
 [entities.sollstellung.relations]
 vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id" }
 
+
+# Sollstellung Entity - Offene Posten
 [entities.sollstellung.computed]
 differenz = { formula = "istbetrag - sollbetrag" }
 mieter = { formula = "vertrag.mieter" }
 
+
+# Vertrag Entity - Mietverträge
 [entities.vertrag]
 name = "vertrag"
 table_name = "vertraege"
@@ -1338,28 +1536,38 @@ label_plural = "labels.entity.vertraege"
 icon = "FileSignature"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.vertrag.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# einheit_id (UUID, erforderlich)
 [entities.vertrag.fields.einheit_id]
 type = "uuid"
 required = true
 reference = "einheit"
 label = "vertrag.einheit"
 
+
+# mieter_id (UUID, erforderlich)
 [entities.vertrag.fields.mieter_id]
 type = "uuid"
 required = true
 reference = "mieter"
 label = "vertrag.mieter"
 
+
+# vertragsnummer (Text)
 [entities.vertrag.fields.vertragsnummer]
 type = "string"
 max_length = 30
 label = "vertrag.vertragsnummer"
 
+
+# typ (Auswahl, erforderlich)
 [entities.vertrag.fields.typ]
 type = "enum"
 required = true
@@ -1367,16 +1575,22 @@ options = ["wohnraum", "gewerbe"]
 label = "vertrag.typ"
 auto_from = "einheit.objekt.typ"
 
+
+# beginn (Datum, erforderlich)
 [entities.vertrag.fields.beginn]
 type = "date"
 required = true
 label = "vertrag.beginn"
 
+
+# ende (Datum)
 [entities.vertrag.fields.ende]
 type = "date"
 label = "vertrag.ende"
 description = "Leer = unbefristet"
 
+
+# kuendigungsfrist (Ganzzahl)
 [entities.vertrag.fields.kuendigungsfrist]
 type = "integer"
 default = 3
@@ -1385,10 +1599,14 @@ max = 12
 suffix = "Monate"
 label = "vertrag.kuendigungsfrist"
 
+
+# kuendigung_zum (Datum)
 [entities.vertrag.fields.kuendigung_zum]
 type = "date"
 label = "vertrag.kuendigung_zum"
 
+
+# gekuendigt_von (Auswahl)
 [entities.vertrag.fields.gekuendigt_von]
 type = "enum"
 options = ["mieter", "vermieter"]
@@ -1397,12 +1615,15 @@ visible_if = { field = "kuendigung_zum", is_set = true }
 
 # === Mietkonditionen ===
 
+# kaltmiete (Währung €, erforderlich)
 [entities.vertrag.fields.kaltmiete]
 type = "currency"
 required = true
 min = 0
 label = "vertrag.kaltmiete"
 
+
+# nebenkosten_vorauszahlung (Währung €, erforderlich)
 [entities.vertrag.fields.nebenkosten_vorauszahlung]
 type = "currency"
 required = true
@@ -1410,12 +1631,16 @@ min = 0
 default = 0
 label = "vertrag.nebenkosten_vorauszahlung"
 
+
+# heizkosten_vorauszahlung (Währung €)
 [entities.vertrag.fields.heizkosten_vorauszahlung]
 type = "currency"
 min = 0
 default = 0
 label = "vertrag.heizkosten_vorauszahlung"
 
+
+# sonstige_vorauszahlung (Währung €)
 [entities.vertrag.fields.sonstige_vorauszahlung]
 type = "currency"
 min = 0
@@ -1425,6 +1650,7 @@ description = "z.B. Stellplatz, Garage"
 
 # === Mieterhöhung ===
 
+# mietanpassung_typ (Auswahl)
 [entities.vertrag.fields.mietanpassung_typ]
 type = "enum"
 options = ["keine", "mietspiegel", "staffel", "index"]
@@ -1432,31 +1658,43 @@ default = "mietspiegel"
 label = "vertrag.mietanpassung_typ"
 visible_if = { field = "typ", equals = "wohnraum" }
 
+
+# staffelmiete (json)
 [entities.vertrag.fields.staffelmiete]
 type = "json"
 label = "vertrag.staffelmiete"
 description = "Array: [{ab: date, kaltmiete: number}]"
 visible_if = { field = "mietanpassung_typ", equals = "staffel" }
 
+
+# indexmiete (json)
 [entities.vertrag.fields.indexmiete]
 type = "json"
 label = "vertrag.indexmiete"
 description = "{basisjahr, basisindex, schwelle_prozent}"
 visible_if = { field = "mietanpassung_typ", equals = "index" }
 
+
+# letzte_mieterhoehung (Datum)
 [entities.vertrag.fields.letzte_mieterhoehung]
 type = "date"
 label = "vertrag.letzte_mieterhoehung"
 
+
+# notiz (Mehrzeiliger Text)
 [entities.vertrag.fields.notiz]
 type = "text"
 label = "common.notiz"
 
+
+# erstellt_am (Datum & Zeit, auto-generiert)
 [entities.vertrag.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 
+
+# Vertrag Entity - Mietverträge
 [entities.vertrag.relations]
 einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
 mieter = { type = "many_to_one", target = "mieter", foreign_key = "mieter_id" }
@@ -1464,16 +1702,22 @@ kaution = { type = "one_to_one", target = "kaution", foreign_key = "vertrag_id" 
 zahlungen = { type = "one_to_many", target = "zahlung", foreign_key = "vertrag_id" }
 sollstellungen = { type = "one_to_many", target = "sollstellung", foreign_key = "vertrag_id" }
 
+
+# Vertrag Entity - Mietverträge
 [entities.vertrag.computed]
 gesamtmiete = { formula = "kaltmiete + nebenkosten_vorauszahlung + heizkosten_vorauszahlung + sonstige_vorauszahlung" }
 ist_aktiv = { formula = "(ende is null or ende > now()) and kuendigung_zum is null" }
 ist_gekuendigt = { formula = "kuendigung_zum is not null" }
 naechste_mieterhoehung_moeglich = { formula = "add_months(letzte_mieterhoehung, 15)" }
 
+
+# Vertrag Entity - Mietverträge
 [entities.vertrag.validation]
 ende_nach_beginn = { rule = "ende is null or ende > beginn", message = "labels.validation.ende_nach_beginn" }
 kuendigung_logik = { rule = "kuendigung_zum is null or gekuendigt_von is not null", message = "labels.validation.kuendigung_von_fehlt" }
 
+
+# Zähler Entity - Zählerdefinitionen
 [entities.zaehler]
 name = "zaehler"
 table_name = "zaehler"
@@ -1482,40 +1726,54 @@ label_plural = "labels.entity.zaehler_plural"
 icon = "Gauge"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.zaehler.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# objekt_id (UUID, erforderlich)
 [entities.zaehler.fields.objekt_id]
 type = "uuid"
 required = true
 reference = "objekt"
 label = "zaehler.objekt"
 
+
+# einheit_id (UUID)
 [entities.zaehler.fields.einheit_id]
 type = "uuid"
 reference = "einheit"
 label = "zaehler.einheit"
 description = "Leer = Hauptzähler"
 
+
+# typ (Auswahl, erforderlich)
 [entities.zaehler.fields.typ]
 type = "enum"
 required = true
 options = ["strom", "gas", "wasser", "heizung", "warmwasser"]
 label = "zaehler.typ"
 
+
+# zaehlernummer (Text, erforderlich)
 [entities.zaehler.fields.zaehlernummer]
 type = "string"
 required = true
 max_length = 50
 label = "zaehler.zaehlernummer"
 
+
+# ist_hauptzaehler (Ja/Nein)
 [entities.zaehler.fields.ist_hauptzaehler]
 type = "boolean"
 default = false
 label = "zaehler.ist_hauptzaehler"
 
+
+# messeinheit (Auswahl, erforderlich)
 [entities.zaehler.fields.messeinheit]
 type = "enum"
 required = true
@@ -1523,19 +1781,27 @@ options = ["kWh", "m3"]
 label = "zaehler.messeinheit"
 auto_from_typ = { strom = "kWh", gas = "m3", wasser = "m3", heizung = "kWh", warmwasser = "m3" }
 
+
+# notiz (Mehrzeiliger Text)
 [entities.zaehler.fields.notiz]
 type = "text"
 label = "common.notiz"
 
+
+# Zähler Entity - Zählerdefinitionen
 [entities.zaehler.relations]
 objekt = { type = "many_to_one", target = "objekt", foreign_key = "objekt_id" }
 einheit = { type = "many_to_one", target = "einheit", foreign_key = "einheit_id" }
 staende = { type = "one_to_many", target = "zaehlerstand", foreign_key = "zaehler_id" }
 
+
+# Zähler Entity - Zählerdefinitionen
 [entities.zaehler.computed]
 letzter_stand = { formula = "last(staende order by datum)" }
 bezeichnung_display = { formula = "concat(typ, ' - ', zaehlernummer, ist_hauptzaehler ? ' (Haupt)' : '')" }
 
+
+# Zählerstand Entity - Zählerstände
 [entities.zaehlerstand]
 name = "zaehlerstand"
 table_name = "zaehlerstaende"
@@ -1544,11 +1810,15 @@ label_plural = "labels.entity.zaehlerstaende"
 icon = "Activity"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.zaehlerstand.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# zaehler_id (UUID, erforderlich)
 [entities.zaehlerstand.fields.zaehler_id]
 type = "uuid"
 required = true
@@ -1556,11 +1826,15 @@ reference = "zaehler"
 label = "zaehlerstand.zaehler"
 visible_in_form = false
 
+
+# datum (Datum, erforderlich)
 [entities.zaehlerstand.fields.datum]
 type = "date"
 required = true
 label = "zaehlerstand.datum"
 
+
+# stand (Dezimalzahl, erforderlich)
 [entities.zaehlerstand.fields.stand]
 type = "decimal"
 required = true
@@ -1568,6 +1842,8 @@ min = 0
 precision = 2
 label = "zaehlerstand.stand"
 
+
+# ableseart (Auswahl, erforderlich)
 [entities.zaehlerstand.fields.ableseart]
 type = "enum"
 required = true
@@ -1575,21 +1851,31 @@ options = ["selbst", "versorger", "schaetzung"]
 default = "selbst"
 label = "zaehlerstand.ableseart"
 
+
+# foto (Datei)
 [entities.zaehlerstand.fields.foto]
 type = "file"
 accept = ["image/jpeg", "image/png"]
 label = "zaehlerstand.foto"
 
+
+# notiz (Mehrzeiliger Text)
 [entities.zaehlerstand.fields.notiz]
 type = "text"
 label = "common.notiz"
 
+
+# Zählerstand Entity - Zählerstände
 [entities.zaehlerstand.relations]
 zaehler = { type = "many_to_one", target = "zaehler", foreign_key = "zaehler_id" }
 
+
+# Zählerstand Entity - Zählerstände
 [entities.zaehlerstand.computed]
 verbrauch = { formula = "stand - previous(stand)" }
 
+
+# Zahlung Entity - Zahlungseingänge
 [entities.zahlung]
 name = "zahlung"
 table_name = "zahlungen"
@@ -1598,32 +1884,44 @@ label_plural = "labels.entity.zahlungen"
 icon = "ArrowDownCircle"
 primary_key = "id"
 
+
+# id (UUID, auto-generiert)
 [entities.zahlung.fields.id]
 type = "uuid"
 auto_generate = true
 visible = false
 
+
+# vertrag_id (UUID, erforderlich)
 [entities.zahlung.fields.vertrag_id]
 type = "uuid"
 required = true
 reference = "vertrag"
 label = "zahlung.vertrag"
 
+
+# datum (Datum, erforderlich)
 [entities.zahlung.fields.datum]
 type = "date"
 required = true
 label = "zahlung.datum"
 
+
+# betrag (Währung €, erforderlich)
 [entities.zahlung.fields.betrag]
 type = "currency"
 required = true
 label = "zahlung.betrag"
 
+
+# verwendungszweck (Text)
 [entities.zahlung.fields.verwendungszweck]
 type = "string"
 max_length = 200
 label = "zahlung.verwendungszweck"
 
+
+# typ (Auswahl, erforderlich)
 [entities.zahlung.fields.typ]
 type = "enum"
 required = true
@@ -1631,6 +1929,8 @@ options = ["miete", "nachzahlung", "kaution", "sonstig"]
 default = "miete"
 label = "zahlung.typ"
 
+
+# monat_fuer (Text)
 [entities.zahlung.fields.monat_fuer]
 type = "string"
 pattern = "^[0-9]{4}-[0-9]{2}$"
@@ -1638,18 +1938,26 @@ label = "zahlung.monat_fuer"
 placeholder = "YYYY-MM"
 visible_if = { field = "typ", equals = "miete" }
 
+
+# notiz (Mehrzeiliger Text)
 [entities.zahlung.fields.notiz]
 type = "text"
 label = "common.notiz"
 
+
+# erstellt_am (Datum & Zeit, auto-generiert)
 [entities.zahlung.fields.erstellt_am]
 type = "datetime"
 auto_generate = true
 visible_in_form = false
 
+
+# Zahlung Entity - Zahlungseingänge
 [entities.zahlung.relations]
 vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id" }
 
+
+# Zahlung Entity - Zahlungseingänge
 [entities.zahlung.computed]
 mieter = { formula = "vertrag.mieter" }
 einheit = { formula = "vertrag.einheit" }
@@ -1658,574 +1966,838 @@ einheit = { formula = "vertrag.einheit" }
 # FORMS - Formular-Definitionen
 # =============================================================================
 
+# Dokument Form
 [forms.dokument.form]
 entity = "dokument"
 title_create = "labels.form.dokument_hochladen"
 title_edit = "labels.form.dokument_bearbeiten"
 
+
+# Dokument Form - Formular für Dokumente
 [[forms.dokument.form.sections]]
 id = "zuordnung"
 label = "labels.form.section.zuordnung"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "objekt_id"
   width = "half"
   allow_clear = true
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "einheit_id"
   width = "half"
   allow_clear = true
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "mieter_id"
   width = "half"
   allow_clear = true
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "vertrag_id"
   width = "half"
   allow_clear = true
 
+
+# Dokument Form - Formular für Dokumente
 [[forms.dokument.form.sections]]
 id = "detail"
 label = "labels.form.section.details"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "typ"
   width = "half"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "bezeichnung"
   width = "half"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "datum"
   width = "third"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "jahr"
   width = "third"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "hochgeladen_am"
   width = "third"
   readonly = true
 
+
+# Dokument Form - Formular für Dokumente
 [[forms.dokument.form.sections]]
 id = "datei"
 label = "labels.form.section.datei"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "dateiname"
   width = "half"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "dateipfad"
   width = "half"
   readonly = true
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "dateigroesse"
   width = "half"
   readonly = true
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "mime_type"
   width = "half"
   readonly = true
 
+
+# Dokument Form - Formular für Dokumente
 [[forms.dokument.form.sections]]
 id = "notiz"
 
+
+# Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
 
+
 [forms.dokument.form.actions]
 save_label = "actions.speichern"
 cancel_label = "actions.abbrechen"
 
+
+# Einheit Form
 [forms.einheit.form]
 entity = "einheit"
 title_create = "labels.actions.add"
 title_edit = "labels.actions.edit"
 
+
+# Einheit Form - Formular für Einheiten
 [[forms.einheit.form.sections]]
 id = "basis"
 label = "labels.form.section.basic"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "objekt_id"
   width = "full"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "bezeichnung"
   width = "half"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "typ"
   width = "half"
 
+
+# Einheit Form - Formular für Einheiten
 [[forms.einheit.form.sections]]
 id = "details"
 label = "labels.form.section.details"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "flaeche"
   width = "half"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "anzahl_raeume"
   width = "half"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "etage"
   placeholder = "2. OG"
   width = "half"
 
+
+# Einheit Form - Formular für Einheiten
 [[forms.einheit.form.sections]]
 id = "ausstattung"
 label = "labels.form.section.settings"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "ausstattung"
   width = "full"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "status"
   width = "half"
 
+
+# Einheit Form - Formular für Einheiten
 [[forms.einheit.form.sections]]
 id = "notizen"
 label = "labels.form.section.notes"
 
+
+# Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
+
 
 [forms.einheit.form.actions]
 submit = "buttons.save"
 cancel = "buttons.cancel"
 
+
+# Kaution Form
 [forms.kaution.form]
 entity = "kaution"
 title_create = "labels.form.kaution_anlegen"
 title_edit = "labels.form.kaution_bearbeiten"
 
+
+# Kaution Form - Formular für Kautionen
 [[forms.kaution.form.sections]]
 id = "daten"
 label = "labels.form.section.allgemein"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "vertrag_id"
   width = "full"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "betrag"
   width = "half"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "eingangsdatum"
   width = "half"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "anlageform"
   width = "full"
 
+
+# Kaution Form - Formular für Kautionen
 [[forms.kaution.form.sections]]
 id = "details"
 label = "labels.form.section.kaution"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "anlage_details"
   width = "full"
   rows = 2
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "zinssatz"
   width = "half"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "status"
   width = "half"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "rueckzahlungsdatum"
   width = "half"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "rueckzahlungsbetrag"
   width = "half"
 
+
+# Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
   field = "einbehalt_grund"
   width = "full"
   rows = 2
 
+
+# Mieter Form
 [forms.mieter.form]
 entity = "mieter"
 title_create = "labels.actions.add"
 title_edit = "labels.actions.edit"
 
+
+# Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "basis"
 label = "labels.form.section.basic"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "anrede"
   width = "half"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "vorname"
   width = "half"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "nachname"
   width = "full"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "firma_zusatz"
   width = "full"
 
+
+# Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "kontakt"
 label = "labels.form.section.contact"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "email"
   width = "full"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "telefon"
   width = "half"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "mobil"
   width = "half"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "status"
   width = "half"
 
+
+# Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "adressen"
 label = "labels.form.section.addresses"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "adresse_vorher"
   width = "full"
 
+
+# Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "banking"
 label = "labels.form.section.financial"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "iban"
   width = "full"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "bic"
   width = "half"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "bankname"
   width = "half"
 
+
+# Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "notizen"
 label = "labels.form.section.notes"
 
+
+# Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
+
 
 [forms.mieter.form.actions]
 submit = { label = "buttons.save" }
 cancel = { label = "buttons.cancel" }
 
+
+# Nebenkostenabrechnung Form
 [forms.nebenkostenabrechnung.form]
 entity = "nebenkostenabrechnung"
 title_create = "labels.form.nk_abrechnung_erstellen"
 title_edit = "labels.form.nk_abrechnung_bearbeiten"
 
+
+# Nebenkosten-Abrechnung Form
 [[forms.nebenkostenabrechnung.form.sections]]
 id = "basis"
 label = "labels.form.section.nk_abrechnung"
 
+
+# Nebenkosten-Abrechnung Form
   [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "objekt_id"
   width = "full"
 
+
+# Nebenkosten-Abrechnung Form
   [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "jahr"
   width = "half"
 
+
+# Nebenkosten-Abrechnung Form
   [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "zeitraum_von"
   width = "half"
 
+
+# Nebenkosten-Abrechnung Form
   [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "zeitraum_bis"
   width = "half"
 
+
+# Nebenkosten-Abrechnung Form
   [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "status"
   width = "half"
 
+
+# Nebenkosten-Abrechnung Form
 [[forms.nebenkostenabrechnung.form.sections]]
 id = "notiz"
 label = "labels.form.section.notizen"
 
+
+# Nebenkosten-Abrechnung Form
   [[forms.nebenkostenabrechnung.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
 
+
+# Objekt Form
 [forms.objekt.form]
 entity = "objekt"
 title_create = "labels.form.objekt_anlegen"
 title_edit = "labels.form.objekt_bearbeiten"
 
+
+# Objekt Form - Formular für Objekte
 [[forms.objekt.form.sections]]
 id = "basis"
 label = "labels.form.section.basis"
 
+
+# Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
   field = "bezeichnung"
   width = "full"
 
+
+# Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
   field = "typ"
   width = "half"
 
+
+# Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
   field = "ist_multi_einheit"
   width = "half"
 
+
+# Objekt Form - Formular für Objekte
 [[forms.objekt.form.sections]]
 id = "adresse"
 label = "labels.form.section.adresse"
 
+
+# Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
   field = "adresse"
   width = "full"
 
+
+# Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
   field = "plz"
   width = "third"
 
+
+# Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
   field = "ort"
   width = "two_thirds"
 
+
+# Objekt Form - Formular für Objekte
 [[forms.objekt.form.sections]]
 id = "details"
 label = "labels.form.section.details"
 
+
+# Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
   field = "baujahr"
   width = "half"
 
+
+# Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
+
 
 [forms.objekt.form.actions]
 submit = "buttons.save"
 cancel = "buttons.cancel"
 
+
+# Rechnung Form
 [forms.rechnung.form]
 entity = "rechnung"
 title_create = "labels.form.rechnung_erfassen"
 title_edit = "labels.form.rechnung_bearbeiten"
 
+
+# Rechnung Form - Formular für Rechnungen
 [[forms.rechnung.form.sections]]
 id = "metadata"
 label = "labels.form.section.rechnung"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "objekt_id"
   width = "full"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "kostenart_id"
   width = "full"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "einheit_id"
   width = "full"
 
+
+# Rechnung Form - Formular für Rechnungen
 [[forms.rechnung.form.sections]]
 id = "zeiträume"
 label = "labels.form.section.zeitraum"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "rechnungsnummer"
   width = "half"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "rechnungsdatum"
   width = "half"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "faelligkeitsdatum"
   width = "half"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "zeitraum_von"
   width = "half"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "zeitraum_bis"
   width = "half"
 
+
+# Rechnung Form - Formular für Rechnungen
 [[forms.rechnung.form.sections]]
 id = "betrag"
 label = "labels.form.section.betrag"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "betrag"
   width = "half"
 
+
+# Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
 
+
+# Sollstellung Form
 [forms.sollstellung.form]
 entity = "sollstellung"
 title_create = "labels.form.sollstellung_anlegen"
 title_edit = "labels.form.sollstellung_bearbeiten"
 
+
+# Sollstellung Form - Formular für Sollstellungen
 [[forms.sollstellung.form.sections]]
 id = "zeitraum"
 label = "labels.form.section.sollstellung"
 
+
+# Sollstellung Form - Formular für Sollstellungen
   [[forms.sollstellung.form.sections.fields]]
   field = "vertrag_id"
   width = "full"
 
+
+# Sollstellung Form - Formular für Sollstellungen
   [[forms.sollstellung.form.sections.fields]]
   field = "monat"
   width = "half"
 
+
+# Sollstellung Form - Formular für Sollstellungen
   [[forms.sollstellung.form.sections.fields]]
   field = "sollbetrag"
   width = "half"
 
+
+# Sollstellung Form - Formular für Sollstellungen
   [[forms.sollstellung.form.sections.fields]]
   field = "istbetrag"
   width = "half"
 
+
+# Sollstellung Form - Formular für Sollstellungen
   [[forms.sollstellung.form.sections.fields]]
   field = "status"
   width = "half"
 
+
+# Vertrag Form
 [forms.vertrag.form]
 entity = "vertrag"
 title_create = "labels.form.vertrag_anlegen"
 title_edit = "labels.form.vertrag_bearbeiten"
 
+
+# Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "zuordnung"
 label = "labels.form.section.zuordnung"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "einheit_id"
   width = "half"
   filter = { status = "leer" }
   include_current = true
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "mieter_id"
   width = "half"
   allow_create = true
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "vertragsnummer"
   width = "half"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "typ"
   width = "half"
 
+
+# Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "laufzeit"
 label = "labels.form.section.laufzeit"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "beginn"
   width = "third"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "ende"
   width = "third"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "kuendigungsfrist"
   width = "third"
 
+
+# Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "miete"
 label = "labels.form.section.miete"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "kaltmiete"
   width = "half"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "nebenkosten_vorauszahlung"
   width = "half"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "heizkosten_vorauszahlung"
   width = "half"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "sonstige_vorauszahlung"
   width = "half"
 
+
+# Form.Sections.Computed Display
   [form.sections.computed_display]
   field = "computed.gesamtmiete"
   label = "vertrag.gesamtmiete"
   format = "currency"
   highlight = true
 
+
+# Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "anpassung"
 label = "labels.form.section.mietanpassung"
 collapsible = true
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "mietanpassung_typ"
   width = "half"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "letzte_mieterhoehung"
   width = "half"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "staffelmiete"
   width = "full"
   component = "StaffelmieteEditor"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "indexmiete"
   width = "full"
   component = "IndexmieteEditor"
 
+
+# Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "sonstiges"
 
+
+# Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
+
 
 [forms.vertrag.form.on_save]
 actions = [
@@ -2234,122 +2806,178 @@ actions = [
   { action = "generate_sollstellungen", from = "beginn" }
 ]
 
+
+# Zaehler Form
 [forms.zaehler.form]
 entity = "zaehler"
 title_create = "labels.form.zaehler_anlegen"
 title_edit = "labels.form.zaehler_bearbeiten"
 
+
+# Zähler Form - Formular für Zähler
 [[forms.zaehler.form.sections]]
 id = "zuordnung"
 label = "labels.form.section.zaehler_zuordnung"
 
+
+# Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
   field = "objekt_id"
   width = "full"
 
+
+# Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
   field = "einheit_id"
   width = "full"
   description = "Nur für Unterzähler"
 
+
+# Zähler Form - Formular für Zähler
 [[forms.zaehler.form.sections]]
 id = "details"
 label = "labels.form.section.zaehler_details"
 
+
+# Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
   field = "typ"
   width = "half"
 
+
+# Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
   field = "messeinheit"
   width = "half"
 
+
+# Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
   field = "zaehlernummer"
   width = "half"
 
+
+# Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
   field = "ist_hauptzaehler"
   width = "half"
 
+
+# Zähler Form - Formular für Zähler
 [[forms.zaehler.form.sections]]
 id = "zusatz"
 label = "labels.form.section.zaehler_zusatz"
 
+
+# Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
 
+
+# Zaehlerstand Form
 [forms.zaehlerstand.form]
 entity = "zaehlerstand"
 title_create = "labels.form.zaehlerstand_erfassen"
 title_edit = "labels.form.zaehlerstand_bearbeiten"
 
+
+# Zählerstand Form - Formular für Zählerstände
 [[forms.zaehlerstand.form.sections]]
 id = "basis"
 label = "labels.form.section.zaehlerstand"
 
+
+# Zählerstand Form - Formular für Zählerstände
   [[forms.zaehlerstand.form.sections.fields]]
   field = "zaehler_id"
   width = "full"
   hidden = true
 
+
+# Zählerstand Form - Formular für Zählerstände
   [[forms.zaehlerstand.form.sections.fields]]
   field = "datum"
   width = "half"
 
+
+# Zählerstand Form - Formular für Zählerstände
   [[forms.zaehlerstand.form.sections.fields]]
   field = "stand"
   width = "half"
 
+
+# Zählerstand Form - Formular für Zählerstände
   [[forms.zaehlerstand.form.sections.fields]]
   field = "ableseart"
   width = "half"
 
+
+# Zählerstand Form - Formular für Zählerstände
   [[forms.zaehlerstand.form.sections.fields]]
   field = "foto"
   width = "half"
 
+
+# Zählerstand Form - Formular für Zählerstände
   [[forms.zaehlerstand.form.sections.fields]]
   field = "notiz"
   width = "full"
   rows = 3
 
+
+# Zahlung Form
 [forms.zahlung.form]
 entity = "zahlung"
 title_create = "labels.form.zahlung_erfassen"
 title_edit = "labels.form.zahlung_bearbeiten"
 
+
+# Zahlung Form - Formular für Zahlungen
 [[forms.zahlung.form.sections]]
 id = "basis"
 label = "labels.form.section.zahlung"
 
+
+# Zahlung Form - Formular für Zahlungen
   [[forms.zahlung.form.sections.fields]]
   field = "vertrag_id"
   width = "full"
 
+
+# Zahlung Form - Formular für Zahlungen
   [[forms.zahlung.form.sections.fields]]
   field = "datum"
   width = "half"
 
+
+# Zahlung Form - Formular für Zahlungen
   [[forms.zahlung.form.sections.fields]]
   field = "betrag"
   width = "half"
 
+
+# Zahlung Form - Formular für Zahlungen
   [[forms.zahlung.form.sections.fields]]
   field = "typ"
   width = "half"
 
+
+# Zahlung Form - Formular für Zahlungen
   [[forms.zahlung.form.sections.fields]]
   field = "monat_fuer"
   width = "half"
 
+
+# Zahlung Form - Formular für Zahlungen
   [[forms.zahlung.form.sections.fields]]
   field = "verwendungszweck"
   width = "full"
   rows = 2
 
+
+# Zahlung Form - Formular für Zahlungen
   [[forms.zahlung.form.sections.fields]]
   field = "notiz"
   width = "full"
@@ -2359,56 +2987,75 @@ label = "labels.form.section.zahlung"
 # TABLES - Tabellen-Definitionen
 # =============================================================================
 
+# Abrechnungen Table
 [tables.abrechnungen.table]
 entity = "nebenkostenabrechnung"
 
+
+# Table: Abrechnungen - Tabellenkonfiguration
 [[tables.abrechnungen.table.columns]]
 field = "objekt.bezeichnung"
 label = "nk.objekt"
 sortable = true
 width = "width.w260"
 
+
+# Table: Abrechnungen - Tabellenkonfiguration
 [[tables.abrechnungen.table.columns]]
 field = "jahr"
 label = "nk.jahr"
 sortable = true
 width = "width.w160"
 
+
+# Table: Abrechnungen - Tabellenkonfiguration
 [[tables.abrechnungen.table.columns]]
 field = "zeitraum_von"
 label = "nk.zeitraum"
 width = "width.w200"
 template = "{zeitraum_von|date} – {zeitraum_bis|date}"
 
+
+# Table: Abrechnungen - Tabellenkonfiguration
 [[tables.abrechnungen.table.columns]]
 field = "status"
 label = "nk.status"
 width = "width.w180"
 display = "badge"
 
+
+# Table: Abrechnungen - Tabellenkonfiguration
 [[tables.abrechnungen.table.columns]]
 field = "gesamtkosten"
 label = "nk.gesamtkosten"
 width = "width.w180"
 format = "currency"
 
+
 [tables.abrechnungen.table.actions]
 label = "abrechnungen.aktionen"
 width = "width.actions"
 
+
 [tables.abrechnungen.table.row_actions]
 details = { icon = "Search", dialog = "dialogs/nk_abrechnung_detail" }
 
+
+# Dokumente Table
 [tables.dokumente.table]
 entity = "dokument"
 selectable = true
 
+
+# Dokument Table - Tabellenkonfiguration
 [[tables.dokumente.table.columns]]
 field = "bezeichnung"
 label = "dokument.bezeichnung"
 sortable = true
 width = "width.w300"
 
+
+# Dokument Table - Tabellenkonfiguration
 [[tables.dokumente.table.columns]]
 field = "typ"
 label = "dokument.typ"
@@ -2416,6 +3063,8 @@ sortable = true
 width = "width.w120"
 display = "badge"
 
+
+# Dokument Table - Tabellenkonfiguration
 [[tables.dokumente.table.columns]]
 field = "objekt.bezeichnung"
 label = "dokument.objekt"
@@ -2423,12 +3072,16 @@ sortable = true
 width = "width.w180"
 empty_text = "—"
 
+
+# Dokument Table - Tabellenkonfiguration
 [[tables.dokumente.table.columns]]
 field = "mieter.computed.display_name"
 label = "dokument.mieter"
 width = "width.w180"
 empty_text = "—"
 
+
+# Dokument Table - Tabellenkonfiguration
 [[tables.dokumente.table.columns]]
 field = "datum"
 label = "dokument.datum"
@@ -2436,12 +3089,16 @@ sortable = true
 width = "width.w120"
 format = "date"
 
+
+# Dokument Table - Tabellenkonfiguration
 [[tables.dokumente.table.columns]]
 field = "jahr"
 label = "dokument.jahr"
 sortable = true
 width = "width.w100"
 
+
+# Dokument Table - Tabellenkonfiguration
 [[tables.dokumente.table.columns]]
 field = "hochgeladen_am"
 label = "dokument.hochgeladen"
@@ -2449,9 +3106,11 @@ sortable = true
 width = "width.w160"
 format = "datetime"
 
+
 [tables.dokument.table.actions]
 label = "dokument.aktionen"
 width = "width.actions"
+
 
 [tables.dokumente.table.row_actions]
 preview = { icon = "Eye", handler = "dokument.preview" }
@@ -2459,16 +3118,22 @@ download = { icon = "Download", handler = "dokument.download" }
 edit = { icon = "Pencil", dialog = "forms/dokument.form" }
 delete = { icon = "Trash2", confirm = true }
 
+
+# Einheiten Table
 [tables.einheiten.table]
 entity = "einheit"
 row_click = "expand"
 
+
+# Einheit Table - Tabellenkonfiguration
 [[tables.einheiten.table.columns]]
 field = "bezeichnung"
 label = "einheit.bezeichnung"
 sortable = true
 width = "width.w300"
 
+
+# Einheit Table - Tabellenkonfiguration
 [[tables.einheiten.table.columns]]
 field = "typ"
 label = "einheit.typ"
@@ -2476,6 +3141,8 @@ sortable = true
 width = "width.w180"
 display = "badge"
 
+
+# Einheit Table - Tabellenkonfiguration
 [[tables.einheiten.table.columns]]
 field = "flaeche"
 label = "einheit.flaeche"
@@ -2484,12 +3151,16 @@ width = "width.w120"
 format = "number"
 suffix = " m²"
 
+
+# Einheit Table - Tabellenkonfiguration
 [[tables.einheiten.table.columns]]
 field = "computed.aktueller_mieter.computed.display_name"
 label = "einheit.mieter"
 width = "width.w300"
 empty_text = "—"
 
+
+# Einheit Table - Tabellenkonfiguration
 [[tables.einheiten.table.columns]]
 field = "status"
 label = "einheit.status"
@@ -2498,29 +3169,39 @@ width = "width.w180"
 display = "badge"
 badge_colors = { vermietet = "green", leer = "red", eigennutzung = "blue", renovierung = "yellow" }
 
+
 [tables.einheit.table.actions]
 label = "einheit.aktionen"
 width = "width.actions"
+
 
 [tables.einheiten.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/einheit.form" }
 vertrag = { icon = "FileSignature", dialog = "forms/vertrag.form", visible_if = { field = "status", equals = "leer" }, label = "actions.vertrag_anlegen" }
 
+
+# Kautionen Table
 [tables.kautionen.table]
 entity = "kaution"
 
+
+# Kaution Table - Tabellenkonfiguration
 [[tables.kautionen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "kaution.mieter"
 sortable = true
 width = "width.w300"
 
+
+# Kaution Table - Tabellenkonfiguration
 [[tables.kautionen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "kaution.einheit"
 sortable = true
 width = "width.w260"
 
+
+# Kaution Table - Tabellenkonfiguration
 [[tables.kautionen.table.columns]]
 field = "betrag"
 label = "kaution.betrag"
@@ -2528,6 +3209,8 @@ sortable = true
 width = "width.w180"
 format = "currency"
 
+
+# Kaution Table - Tabellenkonfiguration
 [[tables.kautionen.table.columns]]
 field = "eingangsdatum"
 label = "kaution.eingangsdatum"
@@ -2535,31 +3218,41 @@ sortable = true
 width = "width.w180"
 format = "date"
 
+
+# Kaution Table - Tabellenkonfiguration
 [[tables.kautionen.table.columns]]
 field = "status"
 label = "kaution.status"
 width = "width.w180"
 display = "badge"
 
+
+# Kaution Table - Tabellenkonfiguration
 [[tables.kautionen.table.columns]]
 field = "rueckzahlungsdatum"
 label = "kaution.rueckzahlungsdatum"
 width = "width.w120"
 format = "date"
 
+
 [tables.kautionen.table.actions]
 label = "kautionen.aktionen"
 width = "width.actions"
+
 
 [tables.kautionen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/kaution.form" }
 delete = { icon = "Trash2", confirm = true }
 
+
+# Mieter Table
 [tables.mieter.table]
 entity = "mieter"
 row_click = "navigate"
 row_click_route = "/mieter/:id"
 
+
+# Mieter Table - Tabellenkonfiguration
 [[tables.mieter.table.columns]]
 field = "computed.display_name"
 label = "mieter.name"
@@ -2568,23 +3261,31 @@ sort_field = "nachname"
 width = "width.w260"
 template = "{vorname} {nachname}"
 
+
+# Mieter Table - Tabellenkonfiguration
 [[tables.mieter.table.columns]]
 field = "mobil"
 fallback_fields = ["telefon"]
 label = "mieter.telefon"
 width = "width.w160"
 
+
+# Mieter Table - Tabellenkonfiguration
 [[tables.mieter.table.columns]]
 field = "email"
 label = "mieter.email"
 width = "width.w200"
 
+
+# Mieter Table - Tabellenkonfiguration
 [[tables.mieter.table.columns]]
 field = "computed.aktuelle_einheit.bezeichnung"
 label = "mieter.einheit"
 width = "width.w200"
 empty_text = "—"
 
+
+# Mieter Table - Tabellenkonfiguration
 [[tables.mieter.table.columns]]
 field = "status"
 label = "mieter.status"
@@ -2593,26 +3294,34 @@ width = "width.w100"
 display = "badge"
 badge_colors = { aktiv = "green", gekuendigt = "yellow", ehemalig = "gray" }
 
+
 [tables.mieter.table.actions]
 label = "mieter.aktionen"
 width = "width.actions"
+
 
 [tables.mieter.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/mieter.form", label = "" }
 vertrag = { icon = "FileSignature", label = "", handler = "navigate_vertrag" }
 einheit = { icon = "Home", label = "", handler = "navigate_einheit" }
 
+
+# Objekte Table
 [tables.objekte.table]
 entity = "objekt"
 row_click = "navigate"
 row_click_route = "/objekte/:id"
 
+
+# Objekt Table - Tabellenkonfiguration
 [[tables.objekte.table.columns]]
 field = "bezeichnung"
 label = "objekt.bezeichnung"
 sortable = true
 width = "width.w300"
 
+
+# Objekt Table - Tabellenkonfiguration
 [[tables.objekte.table.columns]]
 field = "adresse"
 label = "objekt.adresse"
@@ -2620,6 +3329,8 @@ sortable = true
 width = "width.w300"
 template = "{adresse}, {plz} {ort}"
 
+
+# Objekt Table - Tabellenkonfiguration
 [[tables.objekte.table.columns]]
 field = "typ"
 label = "objekt.typ"
@@ -2628,6 +3339,8 @@ width = "width.w120"
 display = "badge"
 badge_colors = { wohnraum = "blue", gewerbe = "orange", gemischt = "purple" }
 
+
+# Objekt Table - Tabellenkonfiguration
 [[tables.objekte.table.columns]]
 field = "computed.anzahl_einheiten"
 label = "objekt.einheiten"
@@ -2635,6 +3348,8 @@ sortable = true
 width = "width.w120"
 align = "center"
 
+
+# Objekt Table - Tabellenkonfiguration
 [[tables.objekte.table.columns]]
 field = "computed.leerstand"
 label = "objekt.leerstand"
@@ -2643,6 +3358,8 @@ width = "width.w120"
 align = "center"
 highlight_if = { condition = "> 0", color = "yellow" }
 
+
+# Objekt Table - Tabellenkonfiguration
 [[tables.objekte.table.columns]]
 field = "computed.gesamt_flaeche"
 label = "objekt.flaeche"
@@ -2651,17 +3368,23 @@ width = "width.w180"
 format = "number"
 suffix = " m²"
 
+
 [tables.objekte.table.actions]
 label = "objekte.aktionen"
 width = "width.actions"
+
 
 [tables.objekte.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/objekt.form" }
 delete = { icon = "Trash2", confirm = true, confirm_message = "labels.confirm.objekt_loeschen" }
 
+
+# Rechnungen Table
 [tables.rechnungen.table]
 entity = "rechnung"
 
+
+# Rechnung Table - Tabellenkonfiguration
 [[tables.rechnungen.table.columns]]
 field = "rechnungsdatum"
 label = "rechnung.datum"
@@ -2669,23 +3392,31 @@ sortable = true
 width = "width.w120"
 format = "date"
 
+
+# Rechnung Table - Tabellenkonfiguration
 [[tables.rechnungen.table.columns]]
 field = "objekt.bezeichnung"
 label = "rechnung.objekt"
 sortable = true
 width = "width.w200"
 
+
+# Rechnung Table - Tabellenkonfiguration
 [[tables.rechnungen.table.columns]]
 field = "kostenart.bezeichnung"
 label = "rechnung.kostenart"
 sortable = true
 width = "width.w180"
 
+
+# Rechnung Table - Tabellenkonfiguration
 [[tables.rechnungen.table.columns]]
 field = "rechnungsnummer"
 label = "rechnung.nummer"
 width = "width.w160"
 
+
+# Rechnung Table - Tabellenkonfiguration
 [[tables.rechnungen.table.columns]]
 field = "betrag"
 label = "rechnung.betrag"
@@ -2693,12 +3424,16 @@ sortable = true
 width = "width.w160"
 format = "currency"
 
+
+# Rechnung Table - Tabellenkonfiguration
 [[tables.rechnungen.table.columns]]
 field = "zeitraum_von"
 label = "rechnung.zeitraum"
 width = "width.w180"
 template = "{zeitraum_von|date} - {zeitraum_bis|date}"
 
+
+# Rechnung Table - Tabellenkonfiguration
 [[tables.rechnungen.table.columns]]
 field = "computed.ist_bezahlt"
 label = "rechnung.bezahlt"
@@ -2707,6 +3442,8 @@ width = "width.w100"
 display = "boolean_icon"
 icons = { true = "Check", false = "X" }
 
+
+# Rechnung Table - Tabellenkonfiguration
 [[tables.rechnungen.table.columns]]
 field = "dokument_id"
 label = ""
@@ -2716,18 +3453,24 @@ icon = "FileText"
 visible_if = { field = "dokument_id", is_set = true }
 click = "preview_document"
 
+
 [tables.rechnungen.table.actions]
 label = "rechnungen.aktionen"
 width = "width.actions"
+
 
 [tables.rechnungen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/rechnung.form" }
 bezahlen = { icon = "CheckCircle", handler = "rechnung.markAsPaid", visible_if = { field = "computed.ist_bezahlt", equals = false } }
 dokument = { icon = "Upload", dialog = "forms/dokument.form", defaults = { objekt_id = ":objekt_id" } }
 
+
+# Sollstellungen Table
 [tables.sollstellungen.table]
 entity = "sollstellung"
 
+
+# Sollstellung Table - Tabellenkonfiguration
 [[tables.sollstellungen.table.columns]]
 field = "monat"
 label = "sollstellung.monat"
@@ -2735,17 +3478,23 @@ sortable = true
 width = "width.w160"
 format = "month"
 
+
+# Sollstellung Table - Tabellenkonfiguration
 [[tables.sollstellungen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "sollstellung.mieter"
 sortable = true
 width = "22%"
 
+
+# Sollstellung Table - Tabellenkonfiguration
 [[tables.sollstellungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "sollstellung.einheit"
 width = "width.w200"
 
+
+# Sollstellung Table - Tabellenkonfiguration
 [[tables.sollstellungen.table.columns]]
 field = "sollbetrag"
 label = "sollstellung.soll"
@@ -2753,6 +3502,8 @@ sortable = true
 width = "width.w160"
 format = "currency"
 
+
+# Sollstellung Table - Tabellenkonfiguration
 [[tables.sollstellungen.table.columns]]
 field = "istbetrag"
 label = "sollstellung.ist"
@@ -2760,6 +3511,8 @@ sortable = true
 width = "width.w160"
 format = "currency"
 
+
+# Sollstellung Table - Tabellenkonfiguration
 [[tables.sollstellungen.table.columns]]
 field = "computed.differenz"
 label = "sollstellung.differenz"
@@ -2768,6 +3521,8 @@ width = "width.w160"
 format = "currency"
 color_rule = { negative = "red", positive = "green", zero = "inherit" }
 
+
+# Sollstellung Table - Tabellenkonfiguration
 [[tables.sollstellungen.table.columns]]
 field = "status"
 label = "sollstellung.status"
@@ -2776,36 +3531,48 @@ width = "width.w160"
 display = "badge"
 badge_colors = { offen = "red", teilweise = "yellow", bezahlt = "green", ueberzahlt = "blue" }
 
+
 [tables.sollstellungen.table.actions]
 label = "sollstellungen.aktionen"
 width = "width.actions"
 
+
 [tables.sollstellungen.table.row_actions]
 zahlung = { icon = "Plus", dialog = "forms/zahlung.form", defaults = { vertrag_id = ":vertrag_id", monat_fuer = ":monat" } }
 
+
+# Vertraege Table
 [tables.vertraege.table]
 entity = "vertrag"
 row_click = "navigate"
 row_click_route = "/vertraege/:id"
 
+
+# Table: Vertraege - Tabellenkonfiguration
 [[tables.vertraege.table.columns]]
 field = "vertragsnummer"
 label = "vertrag.vertragsnummer"
 sortable = true
 width = "width.w120"
 
+
+# Table: Vertraege - Tabellenkonfiguration
 [[tables.vertraege.table.columns]]
 field = "mieter.computed.display_name"
 label = "vertrag.mieter"
 sortable = true
 width = "width.w260"
 
+
+# Table: Vertraege - Tabellenkonfiguration
 [[tables.vertraege.table.columns]]
 field = "einheit.bezeichnung"
 label = "vertrag.einheit"
 sortable = true
 width = "width.w180"
 
+
+# Table: Vertraege - Tabellenkonfiguration
 [[tables.vertraege.table.columns]]
 field = "beginn"
 label = "vertrag.beginn"
@@ -2813,6 +3580,8 @@ sortable = true
 width = "width.w120"
 format = "date"
 
+
+# Table: Vertraege - Tabellenkonfiguration
 [[tables.vertraege.table.columns]]
 field = "ende"
 label = "vertrag.ende"
@@ -2821,6 +3590,8 @@ width = "width.w120"
 format = "date"
 empty_text = "unbefristet"
 
+
+# Table: Vertraege - Tabellenkonfiguration
 [[tables.vertraege.table.columns]]
 field = "computed.gesamtmiete"
 label = "vertrag.gesamtmiete"
@@ -2828,6 +3599,8 @@ sortable = true
 width = "width.w160"
 format = "currency"
 
+
+# Table: Vertraege - Tabellenkonfiguration
 [[tables.vertraege.table.columns]]
 field = "computed.ist_aktiv"
 label = "vertrag.status"
@@ -2835,29 +3608,39 @@ width = "width.w120"
 display = "status_indicator"
 status_map = { true = { label = "aktiv", color = "green" }, false = { label = "beendet", color = "gray" } }
 
+
 [tables.vertraege.table.actions]
 label = "vertraege.aktionen"
 width = "width.actions"
+
 
 [tables.vertraege.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/vertrag.form" }
 kuendigen = { icon = "XCircle", dialog = "dialogs/kuendigung", visible_if = { field = "computed.ist_aktiv", equals = true } }
 
+
+# Zaehler Table
 [tables.zaehler.table]
 entity = "zaehler"
 
+
+# Zähler Table - Tabellenkonfiguration
 [[tables.zaehler.table.columns]]
 field = "objekt.bezeichnung"
 label = "zaehler.objekt"
 sortable = true
 width = "width.w260"
 
+
+# Zähler Table - Tabellenkonfiguration
 [[tables.zaehler.table.columns]]
 field = "einheit.bezeichnung"
 label = "zaehler.einheit"
 width = "width.w180"
 empty_text = "Hauptzähler"
 
+
+# Zähler Table - Tabellenkonfiguration
 [[tables.zaehler.table.columns]]
 field = "typ"
 label = "zaehler.typ"
@@ -2865,23 +3648,31 @@ sortable = true
 width = "width.w160"
 display = "badge"
 
+
+# Zähler Table - Tabellenkonfiguration
 [[tables.zaehler.table.columns]]
 field = "zaehlernummer"
 label = "zaehler.nummer"
 width = "width.w180"
 
+
+# Zähler Table - Tabellenkonfiguration
 [[tables.zaehler.table.columns]]
 field = "ist_hauptzaehler"
 label = "zaehler.haupt"
 width = "width.w100"
 display = "boolean_icon"
 
+
+# Zähler Table - Tabellenkonfiguration
 [[tables.zaehler.table.columns]]
 field = "computed.letzter_stand.stand"
 label = "zaehler.letzter_stand"
 width = "width.w180"
 template = "{value} {messeinheit}"
 
+
+# Zähler Table - Tabellenkonfiguration
 [[tables.zaehler.table.columns]]
 field = "computed.letzter_stand.datum"
 label = "zaehler.abgelesen_am"
@@ -2889,18 +3680,24 @@ sortable = true
 width = "width.w180"
 format = "date"
 
+
 [tables.zaehler.table.actions]
 label = "zaehler.aktionen"
 width = "width.actions"
+
 
 [tables.zaehler.table.row_actions]
 ablesung = { icon = "Plus", dialog = "forms/zaehlerstand.form", defaults = { zaehler_id = ":id" } }
 edit = { icon = "Pencil", dialog = "forms/zaehler.form" }
 historie = { icon = "History", dialog = "dialogs/zaehler_historie" }
 
+
+# Zahlungen Table
 [tables.zahlungen.table]
 entity = "zahlung"
 
+
+# Zahlung Table - Tabellenkonfiguration
 [[tables.zahlungen.table.columns]]
 field = "datum"
 label = "zahlung.datum"
@@ -2908,17 +3705,23 @@ sortable = true
 width = "width.w160"
 format = "date"
 
+
+# Zahlung Table - Tabellenkonfiguration
 [[tables.zahlungen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "zahlung.mieter"
 sortable = true
 width = "width.w260"
 
+
+# Zahlung Table - Tabellenkonfiguration
 [[tables.zahlungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "zahlung.einheit"
 width = "width.w180"
 
+
+# Zahlung Table - Tabellenkonfiguration
 [[tables.zahlungen.table.columns]]
 field = "betrag"
 label = "zahlung.betrag"
@@ -2926,6 +3729,8 @@ sortable = true
 width = "width.w160"
 format = "currency"
 
+
+# Zahlung Table - Tabellenkonfiguration
 [[tables.zahlungen.table.columns]]
 field = "typ"
 label = "zahlung.typ"
@@ -2933,6 +3738,8 @@ sortable = true
 width = "width.w160"
 display = "badge"
 
+
+# Zahlung Table - Tabellenkonfiguration
 [[tables.zahlungen.table.columns]]
 field = "monat_fuer"
 label = "zahlung.monat_fuer"
@@ -2940,15 +3747,19 @@ sortable = true
 width = "width.w120"
 format = "month"
 
+
+# Zahlung Table - Tabellenkonfiguration
 [[tables.zahlungen.table.columns]]
 field = "verwendungszweck"
 label = "zahlung.verwendungszweck"
 width = "19%"
 truncate = 30
 
+
 [tables.zahlungen.table.actions]
 label = "zahlungen.aktionen"
 width = "width.actions"
+
 
 [tables.zahlungen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/zahlung.form" }
@@ -2962,6 +3773,7 @@ delete = { icon = "Trash2", confirm = true }
 # VIEWS - Seiten-Definitionen (100% Config-Driven)
 # =============================================================================
 
+# Views.Dashboard
 [views.dashboard]
 id = "dashboard"
 title = "labels.views.dashboard"
@@ -2972,8 +3784,7 @@ gap = "gap-6"
 padding = "p-6"
 background = "bg-transparent"
 
-# ============ STATS CARDS (Übersichtskarten) ============
-
+# Views.Dashboard.Stats Cards
 [[views.dashboard.stats_cards]]
 id = "objekte"
 title = "dashboard.objekte"
@@ -2983,6 +3794,8 @@ color = "blue"
 sortable = true
 order = 10
 
+
+# Views.Dashboard.Stats Cards
 [[views.dashboard.stats_cards]]
 id = "mieter"
 title = "dashboard.mieter"
@@ -2992,6 +3805,8 @@ color = "green"
 sortable = true
 order = 20
 
+
+# Views.Dashboard.Stats Cards
 [[views.dashboard.stats_cards]]
 id = "vertraege"
 title = "dashboard.vertraege"
@@ -3001,6 +3816,8 @@ color = "purple"
 sortable = true
 order = 30
 
+
+# Views.Dashboard.Stats Cards
 [[views.dashboard.stats_cards]]
 id = "offene_rechnungen"
 title = "dashboard.offene_rechnungen"
@@ -3010,6 +3827,8 @@ color = "orange"
 sortable = true
 order = 40
 
+
+# Views.Dashboard.Stats Cards
 [[views.dashboard.stats_cards]]
 id = "dokumente"
 title = "dashboard.dokumente"
@@ -3019,6 +3838,8 @@ color = "blue"
 sortable = true
 order = 50
 
+
+# Views.Dashboard.Stats Cards
 [[views.dashboard.stats_cards]]
 id = "erinnerungen"
 title = "dashboard.erinnerungen"
@@ -3028,8 +3849,7 @@ color = "green"
 sortable = true
 order = 60
 
-# ============ CARDS (Textblöcke) ============
-
+# Views.Dashboard.Cards
 [[views.dashboard.cards]]
 id = "schnellzugriff"
 title = "dashboard.schnellzugriff"
@@ -3045,6 +3865,8 @@ border = "border border-slate-800"
 rounded = "rounded-lg"
 shadow = "shadow-lg"
 
+
+# Views.Dashboard.Cards.Actions
   [[views.dashboard.cards.actions]]
   label = "dashboard.btn_dokumente"
   route = "/dokumente"
@@ -3052,6 +3874,8 @@ shadow = "shadow-lg"
   style = "secondary"
   order = 10
 
+
+# Views.Dashboard.Cards.Actions
   [[views.dashboard.cards.actions]]
   label = "dashboard.btn_rechnungen"
   route = "/nebenkosten"
@@ -3059,6 +3883,8 @@ shadow = "shadow-lg"
   style = "secondary"
   order = 20
 
+
+# Views.Dashboard.Cards.Actions
   [[views.dashboard.cards.actions]]
   label = "dashboard.btn_abrechnungen"
   route = "/nebenkosten"
@@ -3066,6 +3892,8 @@ shadow = "shadow-lg"
   style = "secondary"
   order = 30
 
+
+# Views.Dashboard.Cards.Actions
   [[views.dashboard.cards.actions]]
   label = "dashboard.btn_steuerberater_export"
   api_endpoint = "/api/export/steuerberater"
@@ -3074,6 +3902,8 @@ shadow = "shadow-lg"
   download = true
   order = 40
 
+
+# Views.Dashboard.Cards
 [[views.dashboard.cards]]
 id = "status"
 title = "dashboard.status"
@@ -3085,8 +3915,7 @@ border = "border border-slate-800"
 rounded = "rounded-lg"
 shadow = "shadow-lg"
 
-# ============ STYLING ============
-
+# Views.Dashboard.Styling
 [views.dashboard.styling]
 card_bg = "bg-slate-900"
 card_border = "border border-slate-800"
@@ -3101,45 +3930,63 @@ stats_card_shadow = "shadow-lg shadow-black/30"
 
 color_schemes = { blue = "bg-blue-900/40 text-blue-100 border-blue-800", green = "bg-emerald-900/40 text-emerald-100 border-emerald-800", purple = "bg-purple-900/40 text-purple-100 border-purple-800", orange = "bg-amber-900/40 text-amber-100 border-amber-800" }
 
+
+# Views.Dokumente
 [views.dokumente]
 id = "dokumente"
 title = "labels.views.dokumente"
 route = "/dokumente"
 layout = "single"
 
+
+# Views.Dokumente.Content
 [views.dokumente.content]
 table = "tables/dokumente.table"
 default_sort = { field = "hochgeladen_am", direction = "desc" }
 
+
+# View.Content.Filters
   [[view.content.filters]]
   field = "objekt_id"
   type = "select"
   label = "filter.objekt"
   options_from = "objekt"
 
+
+# View.Content.Filters
   [[view.content.filters]]
   field = "typ"
   type = "select"
   label = "filter.typ"
 
+
+# View.Content.Filters
   [[view.content.filters]]
   field = "jahr"
   type = "year_picker"
   label = "filter.jahr"
 
+
+# Views.Dokumente.Content.Actions
 [views.dokumente.content.actions]
 upload = { label = "actions.dokument_hochladen", dialog = "forms/dokument.form" }
 
+
+# Views.Dokumente.Content.Bulk Actions
 [views.dokumente.content.bulk_actions]
 export = { label = "actions.steuerberater_export", dialog = "dialogs/steuerberater_export" }
 delete = { label = "actions.loeschen", confirm = true }
 
+
+# Views.Einstellungen
 [views.einstellungen]
 id = "einstellungen"
 title = "labels.views.einstellungen"
 route = "/einstellungen"
 layout = "settings"
 
+
+# View.Sections
   [[view.sections]]
   id = "eigentuemer"
   label = "settings.eigentuemer"
@@ -3147,6 +3994,8 @@ layout = "settings"
   form = "forms/eigentuemer.form"
   description = "labels.settings.eigentuemer_desc"
 
+
+# View.Sections
   [[view.sections]]
   id = "kostenarten"
   label = "settings.kostenarten"
@@ -3156,6 +4005,8 @@ layout = "settings"
   form = "forms/kostenart.form"
   description = "labels.settings.kostenarten_desc"
 
+
+# View.Sections
   [[view.sections]]
   id = "umlageschluessel"
   label = "settings.umlageschluessel"
@@ -3164,6 +4015,8 @@ layout = "settings"
   content = "catalogs/umlageschluessel.catalog"
   description = "labels.settings.umlageschluessel_desc"
 
+
+# View.Sections
   [[view.sections]]
   id = "backup"
   label = "settings.backup"
@@ -3171,23 +4024,31 @@ layout = "settings"
   type = "actions"
   description = "labels.settings.backup_desc"
 
+
+# View.Sections.Actions
     [[view.sections.actions]]
     id = "backup_create"
     label = "actions.backup_erstellen"
     handler = "system.createBackup"
 
+
+# View.Sections.Actions
     [[view.sections.actions]]
     id = "backup_restore"
     label = "actions.backup_wiederherstellen"
     handler = "system.restoreBackup"
     confirm = true
 
+
+# Views.Finanzen
 [views.finanzen]
 id = "finanzen"
 title = "labels.views.finanzen"
 route = "/finanzen"
 layout = "tabbed"
 
+
+# View.Tabs
   [[view.tabs]]
   id = "zahlungen"
   label = "tabs.zahlungen"
@@ -3195,78 +4056,110 @@ layout = "tabbed"
   table = "tables/zahlungen.table"
   default_sort = { field = "datum", direction = "desc" }
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "datum"
     type = "date_range"
     label = "filter.zeitraum"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "typ"
     type = "select"
 
+
+# View.Tabs.Actions
   [view.tabs.actions]
   create = { label = "actions.zahlung_erfassen", dialog = "forms/zahlung.form" }
 
+
+# View.Tabs
   [[view.tabs]]
   id = "sollstellung"
   label = "tabs.sollstellung"
   route = "/finanzen/sollstellung"
   table = "tables/sollstellungen.table"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "monat"
     type = "month_picker"
     default = "current"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "status"
     type = "select"
 
+
+# View.Tabs.Summary
   [view.tabs.summary]
   show = true
   fields = ["sollbetrag", "istbetrag", "differenz"]
   aggregate = "sum"
 
+
+# View.Tabs
   [[view.tabs]]
   id = "kautionen"
   label = "tabs.kautionen"
   route = "/finanzen/kautionen"
   table = "tables/kautionen.table"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "status"
     type = "select"
 
+
+# View.Tabs.Summary
   [view.tabs.summary]
   show = true
   fields = ["betrag"]
   aggregate = "sum"
   group_by = "status"
 
+
+# Views.Mieter
 [views.mieter]
 id = "mieter"
 title = "labels.views.mieter"
 route = "/mieter"
 layout = "list_detail"
 
+
+# Views.Mieter.List
 [views.mieter.list]
 table = "tables/mieter.table"
 search_fields = ["vorname", "nachname", "email"]
 default_sort = { field = "nachname", direction = "asc" }
 
+
+# View.List.Filters
   [[view.list.filters]]
   field = "status"
   type = "select"
   label = "filter.status"
   default = "aktiv"
 
+
+# Views.Mieter.List.Actions
 [views.mieter.list.actions]
 create = { label = "actions.mieter_anlegen", dialog = "forms/mieter.form" }
 
+
+# Views.Mieter.Detail
 [views.mieter.detail]
 route = "/mieter/:id"
 title_field = "computed.display_name"
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "stammdaten"
   label = "tabs.stammdaten"
@@ -3274,6 +4167,8 @@ title_field = "computed.display_name"
   form = "forms/mieter.form"
   edit_action = { dialog = "forms/mieter.form" }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "vertrag"
   label = "tabs.vertrag"
@@ -3281,6 +4176,8 @@ title_field = "computed.display_name"
   table = "tables/vertraege.table"
   filter = { mieter_id = ":id" }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "zahlungen"
   label = "tabs.zahlungen"
@@ -3289,6 +4186,8 @@ title_field = "computed.display_name"
   filter = { "vertrag.mieter_id" = ":id" }
   actions = { create = { label = "actions.zahlung_erfassen", dialog = "forms/zahlung.form" } }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "dokumente"
   label = "tabs.dokumente"
@@ -3297,6 +4196,8 @@ title_field = "computed.display_name"
   filter = { mieter_id = ":id" }
   actions = { upload = { label = "actions.dokument_hochladen", dialog = "forms/dokument.form", defaults = { mieter_id = ":id" } } }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "kaution"
   label = "tabs.kaution"
@@ -3305,12 +4206,16 @@ title_field = "computed.display_name"
   data_path = "aktiver_vertrag.kaution"
   empty_message = "labels.kaution.keine_kaution"
 
+
+# Views.Nebenkosten
 [views.nebenkosten]
 id = "nebenkosten"
 title = "labels.views.nebenkosten"
 route = "/nebenkosten"
 layout = "tabbed"
 
+
+# View.Tabs
   [[view.tabs]]
   id = "rechnungen"
   label = "tabs.rechnungen"
@@ -3318,107 +4223,151 @@ layout = "tabbed"
   table = "tables/rechnungen.table"
   default_sort = { field = "rechnungsdatum", direction = "desc" }
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "objekt_id"
     type = "select"
     label = "filter.objekt"
     options_from = "objekt"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "kostenart_id"
     type = "select"
     label = "filter.kostenart"
     options_from = "kostenart"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "computed.jahr"
     type = "year_picker"
     label = "filter.jahr"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "computed.ist_bezahlt"
     type = "boolean_toggle"
     label = "filter.bezahlt"
 
+
+# View.Tabs.Actions
   [view.tabs.actions]
   create = { label = "actions.rechnung_erfassen", dialog = "forms/rechnung.form" }
 
+
+# View.Tabs.Summary
   [view.tabs.summary]
   show = true
   fields = ["betrag"]
   aggregate = "sum"
   group_by = "kostenart.bezeichnung"
 
+
+# View.Tabs
   [[view.tabs]]
   id = "abrechnungen"
   label = "tabs.abrechnungen"
   route = "/nebenkosten/abrechnungen"
   table = "tables/abrechnungen.table"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "objekt_id"
     type = "select"
     options_from = "objekt"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "jahr"
     type = "year_picker"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "status"
     type = "select"
 
+
+# View.Tabs.Actions
   [view.tabs.actions]
   create = { label = "actions.abrechnung_erstellen", dialog = "dialogs/nk_abrechnung_wizard" }
 
+
+# View.Tabs
   [[view.tabs]]
   id = "zaehler"
   label = "tabs.zaehler"
   route = "/nebenkosten/zaehler"
   table = "tables/zaehler.table"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "objekt_id"
     type = "select"
     options_from = "objekt"
 
+
+# View.Tabs.Filters
     [[view.tabs.filters]]
     field = "typ"
     type = "select"
 
+
+# View.Tabs.Actions
   [view.tabs.actions]
   create = { label = "actions.zaehler_anlegen", dialog = "forms/zaehler.form" }
   ablesung = { label = "actions.ablesung_erfassen", dialog = "forms/zaehlerstand.form" }
 
+
+# Views.Objekte
 [views.objekte]
 id = "objekte"
 title = "labels.views.objekte"
 route = "/objekte"
 layout = "list_detail"
 
+
+# Views.Objekte.List
 [views.objekte.list]
 table = "tables/objekte.table"
 search_fields = ["bezeichnung", "adresse", "ort"]
 default_sort = { field = "bezeichnung", direction = "asc" }
 
+
+# View.List.Filters
   [[view.list.filters]]
   field = "typ"
   type = "select"
   label = "filter.typ"
 
+
+# View.List.Filters
   [[view.list.filters]]
   field = "computed.leerstand"
   type = "boolean"
   label = "filter.mit_leerstand"
   condition = "> 0"
 
+
+# Views.Objekte.List.Actions
 [views.objekte.list.actions]
 create = { label = "actions.objekt_anlegen", dialog = "forms/objekt.form" }
 
+
+# Views.Objekte.Detail
 [views.objekte.detail]
 route = "/objekte/:id"
 title_field = "bezeichnung"
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "stammdaten"
   label = "tabs.stammdaten"
@@ -3426,6 +4375,8 @@ title_field = "bezeichnung"
   form = "forms/objekt.form"
   edit_action = { dialog = "forms/objekt.form" }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "einheiten"
   label = "tabs.einheiten"
@@ -3434,6 +4385,8 @@ title_field = "bezeichnung"
   filter = { objekt_id = ":id" }
   actions = { create = { label = "actions.einheit_anlegen", dialog = "forms/einheit.form", defaults = { objekt_id = ":id" } } }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "zaehler"
   label = "tabs.zaehler"
@@ -3443,6 +4396,8 @@ title_field = "bezeichnung"
   visible_if = { field = "ist_multi_einheit", equals = true }
   actions = { create = { label = "actions.zaehler_anlegen", dialog = "forms/zaehler.form", defaults = { objekt_id = ":id" } } }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "rechnungen"
   label = "tabs.rechnungen"
@@ -3451,6 +4406,8 @@ title_field = "bezeichnung"
   filter = { objekt_id = ":id" }
   actions = { create = { label = "actions.rechnung_erfassen", dialog = "forms/rechnung.form", defaults = { objekt_id = ":id" } } }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "dokumente"
   label = "tabs.dokumente"
@@ -3459,38 +4416,54 @@ title_field = "bezeichnung"
   filter = { objekt_id = ":id" }
   actions = { upload = { label = "actions.dokument_hochladen", dialog = "forms/dokument.form", defaults = { objekt_id = ":id" } } }
 
+
+# Views.Vertraege
 [views.vertraege]
 id = "vertraege"
 title = "labels.views.vertraege"
 route = "/vertraege"
 layout = "list_detail"
 
+
+# Views.Vertraege.List
 [views.vertraege.list]
 table = "tables/vertraege.table"
 search_fields = ["mieter.nachname", "einheit.bezeichnung", "vertragsnummer"]
 default_sort = { field = "beginn", direction = "desc" }
 
+
+# View.List.Filters
   [[view.list.filters]]
   field = "computed.ist_aktiv"
   type = "boolean_toggle"
   label = "filter.nur_aktive"
   default = true
 
+
+# View.List.Filters
   [[view.list.filters]]
   field = "typ"
   type = "select"
   label = "filter.typ"
 
+
+# Views.Vertraege.List.Actions
 [views.vertraege.list.actions]
 create = { label = "actions.vertrag_anlegen", dialog = "forms/vertrag.form" }
 
+
+# Views.Vertraege.Detail
 [views.vertraege.detail]
 route = "/vertraege/:id"
 title_field = "vertragsnummer"
 
+
+# View.Detail.Header Info
   [[view.detail.header_info]]
   fields = ["mieter.computed.display_name", "einheit.bezeichnung", "computed.gesamtmiete"]
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "konditionen"
   label = "tabs.konditionen"
@@ -3498,6 +4471,8 @@ title_field = "vertragsnummer"
   form = "forms/vertrag.form"
   edit_action = { dialog = "forms/vertrag.form" }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "kaution"
   label = "tabs.kaution"
@@ -3505,6 +4480,8 @@ title_field = "vertragsnummer"
   form = "forms/kaution.form"
   data_path = "kaution"
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "zahlungen"
   label = "tabs.zahlungen"
@@ -3512,6 +4489,8 @@ title_field = "vertragsnummer"
   table = "tables/zahlungen.table"
   filter = { vertrag_id = ":id" }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "sollstellung"
   label = "tabs.sollstellung"
@@ -3519,6 +4498,8 @@ title_field = "vertragsnummer"
   table = "tables/sollstellungen.table"
   filter = { vertrag_id = ":id" }
 
+
+# View.Detail.Tabs
   [[view.detail.tabs]]
   id = "dokumente"
   label = "tabs.dokumente"
