@@ -103,3 +103,14 @@ export function useLabelsConfig<T = unknown>() {
     staleTime: Infinity,
   })
 }
+
+/**
+ * Hook für Widths-Konfiguration (Spaltenbreiten)
+ */
+export function useWidthsConfig() {
+  return useQuery({
+    queryKey: ['config', 'widths'],
+    queryFn: () => apiService.getWidthsConfig(),
+    staleTime: Infinity,
+  })
+}

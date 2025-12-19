@@ -2045,35 +2045,35 @@ entity = "nebenkostenabrechnung"
 field = "objekt.bezeichnung"
 label = "nk.objekt"
 sortable = true
-width = "240px"
+width = "width.w250"
 
 [[tables.abrechnungen.table.columns]]
 field = "jahr"
 label = "nk.jahr"
 sortable = true
-width = "150px"
+width = "width.w150"
 
 [[tables.abrechnungen.table.columns]]
 field = "zeitraum_von"
 label = "nk.zeitraum"
-width = "220px"
+width = "width.w200"
 template = "{zeitraum_von|date} – {zeitraum_bis|date}"
 
 [[tables.abrechnungen.table.columns]]
 field = "status"
 label = "nk.status"
-width = "180px"
+width = "width.w180"
 display = "badge"
 
 [[tables.abrechnungen.table.columns]]
 field = "gesamtkosten"
 label = "nk.gesamtkosten"
-width = "180px"
+width = "width.w180"
 format = "currency"
 
 [tables.abrechnungen.table.actions]
 label = "abrechnungen.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.abrechnungen.table.row_actions]
 details = { icon = "Search", dialog = "dialogs/nk_abrechnung_detail" }
@@ -2086,51 +2086,51 @@ selectable = true
 field = "bezeichnung"
 label = "dokument.bezeichnung"
 sortable = true
-width = "300px"
+width = "width.w300"
 
 [[tables.dokumente.table.columns]]
 field = "typ"
 label = "dokument.typ"
 sortable = true
-width = "120px"
+width = "width.w120"
 display = "badge"
 
 [[tables.dokumente.table.columns]]
 field = "objekt.bezeichnung"
 label = "dokument.objekt"
 sortable = true
-width = "180px"
+width = "width.w180"
 empty_text = "—"
 
 [[tables.dokumente.table.columns]]
 field = "mieter.computed.display_name"
 label = "dokument.mieter"
-width = "180px"
+width = "width.w180"
 empty_text = "—"
 
 [[tables.dokumente.table.columns]]
 field = "datum"
 label = "dokument.datum"
 sortable = true
-width = "120px"
+width = "width.w120"
 format = "date"
 
 [[tables.dokumente.table.columns]]
 field = "jahr"
 label = "dokument.jahr"
 sortable = true
-width = "100px"
+width = "width.w100"
 
 [[tables.dokumente.table.columns]]
 field = "hochgeladen_am"
 label = "dokument.hochgeladen"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "datetime"
 
 [tables.dokument.table.actions]
 label = "dokument.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.dokumente.table.row_actions]
 preview = { icon = "Eye", handler = "dokument.preview" }
@@ -2146,40 +2146,40 @@ row_click = "expand"
 field = "bezeichnung"
 label = "einheit.bezeichnung"
 sortable = true
-width = "300px"
+width = "width.w300"
 
 [[tables.einheiten.table.columns]]
 field = "typ"
 label = "einheit.typ"
 sortable = true
-width = "180px"
+width = "width.w180"
 display = "badge"
 
 [[tables.einheiten.table.columns]]
 field = "flaeche"
 label = "einheit.flaeche"
 sortable = true
-width = "120px"
+width = "width.w120"
 format = "number"
 suffix = " m²"
 
 [[tables.einheiten.table.columns]]
 field = "computed.aktueller_mieter.computed.display_name"
 label = "einheit.mieter"
-width = "300px"
+width = "width.w300"
 empty_text = "—"
 
 [[tables.einheiten.table.columns]]
 field = "status"
 label = "einheit.status"
 sortable = true
-width = "180px"
+width = "width.w180"
 display = "badge"
 badge_colors = { vermietet = "green", leer = "red", eigennutzung = "blue", renovierung = "yellow" }
 
 [tables.einheit.table.actions]
 label = "einheit.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.einheiten.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/einheit.form" }
@@ -2192,43 +2192,43 @@ entity = "kaution"
 field = "vertrag.mieter.computed.display_name"
 label = "kaution.mieter"
 sortable = true
-width = "300px"
+width = "width.w300"
 
 [[tables.kautionen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "kaution.einheit"
 sortable = true
-width = "240px"
+width = "width.w250"
 
 [[tables.kautionen.table.columns]]
 field = "betrag"
 label = "kaution.betrag"
 sortable = true
-width = "180px"
+width = "width.w180"
 format = "currency"
 
 [[tables.kautionen.table.columns]]
 field = "eingangsdatum"
 label = "kaution.eingangsdatum"
 sortable = true
-width = "180px"
+width = "width.w180"
 format = "date"
 
 [[tables.kautionen.table.columns]]
 field = "status"
 label = "kaution.status"
-width = "180px"
+width = "width.w180"
 display = "badge"
 
 [[tables.kautionen.table.columns]]
 field = "rueckzahlungsdatum"
 label = "kaution.rueckzahlungsdatum"
-width = "120px"
+width = "width.w120"
 format = "date"
 
 [tables.kautionen.table.actions]
 label = "kautionen.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.kautionen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/kaution.form" }
@@ -2244,37 +2244,37 @@ field = "computed.display_name"
 label = "mieter.name"
 sortable = true
 sort_field = "nachname"
-width = "250px"
+width = "width.w250"
 template = "{vorname} {nachname}"
 
 [[tables.mieter.table.columns]]
 field = "mobil"
 fallback_fields = ["telefon"]
 label = "mieter.telefon"
-width = "150px"
+width = "width.w150"
 
 [[tables.mieter.table.columns]]
 field = "email"
 label = "mieter.email"
-width = "200px"
+width = "width.w200"
 
 [[tables.mieter.table.columns]]
 field = "computed.aktuelle_einheit.bezeichnung"
 label = "mieter.einheit"
-width = "200px"
+width = "width.w200"
 empty_text = "—"
 
 [[tables.mieter.table.columns]]
 field = "status"
 label = "mieter.status"
 sortable = true
-width = "100px"
+width = "width.w100"
 display = "badge"
 badge_colors = { aktiv = "green", gekuendigt = "yellow", ehemalig = "gray" }
 
 [tables.mieter.table.actions]
 label = "mieter.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.mieter.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/mieter.form", label = "" }
@@ -2290,20 +2290,20 @@ row_click_route = "/objekte/:id"
 field = "bezeichnung"
 label = "objekt.bezeichnung"
 sortable = true
-width = "300px"
+width = "width.w300"
 
 [[tables.objekte.table.columns]]
 field = "adresse"
 label = "objekt.adresse"
 sortable = true
-width = "360px"
+width = "width.w300"
 template = "{adresse}, {plz} {ort}"
 
 [[tables.objekte.table.columns]]
 field = "typ"
 label = "objekt.typ"
 sortable = true
-width = "120px"
+width = "width.w120"
 display = "badge"
 badge_colors = { wohnraum = "blue", gewerbe = "orange", gemischt = "purple" }
 
@@ -2311,14 +2311,14 @@ badge_colors = { wohnraum = "blue", gewerbe = "orange", gemischt = "purple" }
 field = "computed.anzahl_einheiten"
 label = "objekt.einheiten"
 sortable = true
-width = "120px"
+width = "width.w120"
 align = "center"
 
 [[tables.objekte.table.columns]]
 field = "computed.leerstand"
 label = "objekt.leerstand"
 sortable = true
-width = "120px"
+width = "width.w120"
 align = "center"
 highlight_if = { condition = "> 0", color = "yellow" }
 
@@ -2326,13 +2326,13 @@ highlight_if = { condition = "> 0", color = "yellow" }
 field = "computed.gesamt_flaeche"
 label = "objekt.flaeche"
 sortable = true
-width = "180px"
+width = "width.w180"
 format = "number"
 suffix = " m²"
 
 [tables.objekte.table.actions]
 label = "objekte.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.objekte.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/objekt.form" }
@@ -2345,51 +2345,51 @@ entity = "rechnung"
 field = "rechnungsdatum"
 label = "rechnung.datum"
 sortable = true
-width = "120px"
+width = "width.w120"
 format = "date"
 
 [[tables.rechnungen.table.columns]]
 field = "objekt.bezeichnung"
 label = "rechnung.objekt"
 sortable = true
-width = "220px"
+width = "width.w200"
 
 [[tables.rechnungen.table.columns]]
 field = "kostenart.bezeichnung"
 label = "rechnung.kostenart"
 sortable = true
-width = "180px"
+width = "width.w180"
 
 [[tables.rechnungen.table.columns]]
 field = "rechnungsnummer"
 label = "rechnung.nummer"
-width = "150px"
+width = "width.w150"
 
 [[tables.rechnungen.table.columns]]
 field = "betrag"
 label = "rechnung.betrag"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "currency"
 
 [[tables.rechnungen.table.columns]]
 field = "zeitraum_von"
 label = "rechnung.zeitraum"
-width = "180px"
+width = "width.w180"
 template = "{zeitraum_von|date} - {zeitraum_bis|date}"
 
 [[tables.rechnungen.table.columns]]
 field = "computed.ist_bezahlt"
 label = "rechnung.bezahlt"
 sortable = true
-width = "100px"
+width = "width.w100"
 display = "boolean_icon"
 icons = { true = "Check", false = "X" }
 
 [[tables.rechnungen.table.columns]]
 field = "dokument_id"
 label = ""
-width = "60px"
+width = "width.w50"
 display = "icon_link"
 icon = "FileText"
 visible_if = { field = "dokument_id", is_set = true }
@@ -2397,7 +2397,7 @@ click = "preview_document"
 
 [tables.rechnungen.table.actions]
 label = "rechnungen.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.rechnungen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/rechnung.form" }
@@ -2411,7 +2411,7 @@ entity = "sollstellung"
 field = "monat"
 label = "sollstellung.monat"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "month"
 
 [[tables.sollstellungen.table.columns]]
@@ -2423,27 +2423,27 @@ width = "22%"
 [[tables.sollstellungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "sollstellung.einheit"
-width = "220px"
+width = "width.w200"
 
 [[tables.sollstellungen.table.columns]]
 field = "sollbetrag"
 label = "sollstellung.soll"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "currency"
 
 [[tables.sollstellungen.table.columns]]
 field = "istbetrag"
 label = "sollstellung.ist"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "currency"
 
 [[tables.sollstellungen.table.columns]]
 field = "computed.differenz"
 label = "sollstellung.differenz"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "currency"
 color_rule = { negative = "red", positive = "green", zero = "inherit" }
 
@@ -2451,13 +2451,13 @@ color_rule = { negative = "red", positive = "green", zero = "inherit" }
 field = "status"
 label = "sollstellung.status"
 sortable = true
-width = "150px"
+width = "width.w150"
 display = "badge"
 badge_colors = { offen = "red", teilweise = "yellow", bezahlt = "green", ueberzahlt = "blue" }
 
 [tables.sollstellungen.table.actions]
 label = "sollstellungen.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.sollstellungen.table.row_actions]
 zahlung = { icon = "Plus", dialog = "forms/zahlung.form", defaults = { vertrag_id = ":vertrag_id", monat_fuer = ":monat" } }
@@ -2471,32 +2471,32 @@ row_click_route = "/vertraege/:id"
 field = "vertragsnummer"
 label = "vertrag.vertragsnummer"
 sortable = true
-width = "120px"
+width = "width.w120"
 
 [[tables.vertraege.table.columns]]
 field = "mieter.computed.display_name"
 label = "vertrag.mieter"
 sortable = true
-width = "240px"
+width = "width.w250"
 
 [[tables.vertraege.table.columns]]
 field = "einheit.bezeichnung"
 label = "vertrag.einheit"
 sortable = true
-width = "180px"
+width = "width.w180"
 
 [[tables.vertraege.table.columns]]
 field = "beginn"
 label = "vertrag.beginn"
 sortable = true
-width = "120px"
+width = "width.w120"
 format = "date"
 
 [[tables.vertraege.table.columns]]
 field = "ende"
 label = "vertrag.ende"
 sortable = true
-width = "120px"
+width = "width.w120"
 format = "date"
 empty_text = "unbefristet"
 
@@ -2504,19 +2504,19 @@ empty_text = "unbefristet"
 field = "computed.gesamtmiete"
 label = "vertrag.gesamtmiete"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "currency"
 
 [[tables.vertraege.table.columns]]
 field = "computed.ist_aktiv"
 label = "vertrag.status"
-width = "120px"
+width = "width.w120"
 display = "status_indicator"
 status_map = { true = { label = "aktiv", color = "green" }, false = { label = "beendet", color = "gray" } }
 
 [tables.vertraege.table.actions]
 label = "vertraege.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.vertraege.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/vertrag.form" }
@@ -2529,48 +2529,48 @@ entity = "zaehler"
 field = "objekt.bezeichnung"
 label = "zaehler.objekt"
 sortable = true
-width = "240px"
+width = "width.w250"
 
 [[tables.zaehler.table.columns]]
 field = "einheit.bezeichnung"
 label = "zaehler.einheit"
-width = "180px"
+width = "width.w180"
 empty_text = "Hauptzähler"
 
 [[tables.zaehler.table.columns]]
 field = "typ"
 label = "zaehler.typ"
 sortable = true
-width = "150px"
+width = "width.w150"
 display = "badge"
 
 [[tables.zaehler.table.columns]]
 field = "zaehlernummer"
 label = "zaehler.nummer"
-width = "180px"
+width = "width.w180"
 
 [[tables.zaehler.table.columns]]
 field = "ist_hauptzaehler"
 label = "zaehler.haupt"
-width = "100px"
+width = "width.w100"
 display = "boolean_icon"
 
 [[tables.zaehler.table.columns]]
 field = "computed.letzter_stand.stand"
 label = "zaehler.letzter_stand"
-width = "180px"
+width = "width.w180"
 template = "{value} {messeinheit}"
 
 [[tables.zaehler.table.columns]]
 field = "computed.letzter_stand.datum"
 label = "zaehler.abgelesen_am"
 sortable = true
-width = "180px"
+width = "width.w180"
 format = "date"
 
 [tables.zaehler.table.actions]
 label = "zaehler.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.zaehler.table.row_actions]
 ablesung = { icon = "Plus", dialog = "forms/zaehlerstand.form", defaults = { zaehler_id = ":id" } }
@@ -2584,39 +2584,39 @@ entity = "zahlung"
 field = "datum"
 label = "zahlung.datum"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "date"
 
 [[tables.zahlungen.table.columns]]
 field = "vertrag.mieter.computed.display_name"
 label = "zahlung.mieter"
 sortable = true
-width = "240px"
+width = "width.w250"
 
 [[tables.zahlungen.table.columns]]
 field = "vertrag.einheit.bezeichnung"
 label = "zahlung.einheit"
-width = "180px"
+width = "width.w180"
 
 [[tables.zahlungen.table.columns]]
 field = "betrag"
 label = "zahlung.betrag"
 sortable = true
-width = "150px"
+width = "width.w150"
 format = "currency"
 
 [[tables.zahlungen.table.columns]]
 field = "typ"
 label = "zahlung.typ"
 sortable = true
-width = "150px"
+width = "width.w150"
 display = "badge"
 
 [[tables.zahlungen.table.columns]]
 field = "monat_fuer"
 label = "zahlung.monat_fuer"
 sortable = true
-width = "120px"
+width = "width.w120"
 format = "month"
 
 [[tables.zahlungen.table.columns]]
@@ -2627,7 +2627,7 @@ truncate = 30
 
 [tables.zahlungen.table.actions]
 label = "zahlungen.aktionen"
-width = "130px"
+width = "width.actions"
 
 [tables.zahlungen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/zahlung.form" }

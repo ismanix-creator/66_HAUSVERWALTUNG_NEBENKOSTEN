@@ -51,6 +51,10 @@ class ConfigService {
     return table
   }
 
+  async getWidths() {
+    return await configLoader.getWidths()
+  }
+
   async getLabels() {
     return await configLoader.getLabels()
   }

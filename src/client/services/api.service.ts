@@ -117,6 +117,13 @@ class ApiService {
     return this.fetch<T>('/config/labels')
   }
 
+  /**
+   * Lädt Widths-Konfiguration (für Spaltenbreiten)
+   */
+  async getWidthsConfig(): Promise<Record<string, string>> {
+    return this.fetch<Record<string, string>>('/config/widths')
+  }
+
   // ==================== ENTITY CRUD ====================
 
   /**

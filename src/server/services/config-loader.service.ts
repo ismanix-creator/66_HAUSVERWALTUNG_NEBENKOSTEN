@@ -111,6 +111,7 @@ interface LoadedConfig {
   views: Record<string, unknown>
   forms: Record<string, unknown>
   tables: Record<string, unknown>
+  widths: Record<string, string>
   design: DesignRoot
   features: FeatureFlags
   validation: ValidationRoot
@@ -325,6 +326,7 @@ class ConfigLoaderService {
     const views = master.views || {}
     const forms = master.forms || {}
     const tables = master.tables || {}
+    const widths = (withEnv as Record<string, unknown>).widths as Record<string, string> || {}
     const validation = master.validation || {}
     const design = master.design || {}
     const features = master.features || { features: {} }
@@ -371,6 +373,7 @@ class ConfigLoaderService {
       views,
       forms,
       tables,
+      widths,
       design,
       features,
       validation,
@@ -553,6 +556,13 @@ class ConfigLoaderService {
    */
   async getTable(name: string): Promise<unknown> {
     return (await this.getTables())[name]
+  }
+
+  /**
+   * Standard-Spaltenbreiten für Tabellen
+   */
+  async getWidths(): Promise<Record<string, string>> {
+    return (await this.getConfig()).widths || {}
   }
 
   /**

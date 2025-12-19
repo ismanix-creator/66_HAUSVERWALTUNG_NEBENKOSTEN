@@ -2,11 +2,12 @@
  * DataTable: Generische Tabellen-Komponente
  * Rendert Spalten aus table.toml Config
  *
- * @lastModified 2025-12-16
+ * @lastModified 2025-12-19
  */
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useWidthsConfig } from '../../hooks/useConfig'
 import {
   ChevronUp,
   ChevronDown,
@@ -113,6 +114,7 @@ export function DataTable<T extends Record<string, unknown>>({
   const navigate = useNavigate()
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set())
   const [confirmAction, setConfirmAction] = useState<{ itemId: string; actionId: string } | null>(null)
+  const { data: widthsConfig = {} } = useWidthsConfig()
 
   const iconLookup: Record<string, LucideIcon> = {
     Pencil,
@@ -130,19 +132,25 @@ export function DataTable<T extends Record<string, unknown>>({
   Home,
 }
 
-  // Width resolver: resolves "width.w100" to actual px values from config
+  // Width resolver: resolves "width.w100" and other width references to actual px values
   // Falls back to the value as-is if it's already a px value
-  const resolveWidth = (width?: string): string => {
-    if (!width) return 'auto'
+  const resolveWidth = useMemo(() => {
+    return (width?: string): string => {
+      if (!width) return 'auto'
 
-    // If already a px value, return as-is
-    if (width.includes('px') || width.includes('rem')) return width
+      // If already a px value, return as-is
+      if (width.includes('px') || width.includes('rem')) return width
 
-    // If it's a reference like "width.w100", map to actual value
-    // For now, we'll return the input as-is (will be resolved by server in future)
-    // This allows gradual migration from hardcoded widths to width references
-    return width
-  }
+      // If it's a reference like "width.w100", resolve from config
+      if (width.startsWith('width.')) {
+        const key = width.substring(6) // Remove "width." prefix
+        const resolvedValue = widthsConfig[key]
+        return resolvedValue || width // Fallback to original if not found
+      }
+
+      return width
+    }
+  }, [widthsConfig])
 
   const { columns, row_click, row_click_route, row_actions } = config.table
   const totalPages = Math.ceil(total / pageSize)
