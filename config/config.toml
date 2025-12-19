@@ -109,7 +109,7 @@ default_collapsed = false
 
 [[navigation.items]]
 id = "dashboard"
-label = "nav.dashboard"
+label = "Dashboard"
 route = "/dashboard"
 icon = "LayoutDashboard"
 order = 10
@@ -123,28 +123,28 @@ order = 20
 
 [[navigation.items]]
 id = "mieter"
-label = "nav.mieter"
+label = "Mieter"
 route = "/mieter"
 icon = "Users"
 order = 30
 
 [[navigation.items]]
 id = "vertraege"
-label = "nav.vertraege"
+label = "Vertraege"
 route = "/vertraege"
 icon = "FileText"
 order = 40
 
 [[navigation.items]]
 id = "finanzen"
-label = "nav.finanzen"
+label = "Finanzen"
 route = "/finanzen"
 icon = "BarChart3"
 order = 50
 
 [[navigation.items]]
 id = "nebenkosten"
-label = "nav.nebenkosten"
+label = "Nebenkosten"
 route = "/nebenkosten"
 icon = "Receipt"
 order = 60
@@ -2048,6 +2048,10 @@ label = "nk.gesamtkosten"
 width = "180px"
 format = "currency"
 
+[tables.abrechnungen.table.actions]
+label = "abrechnungen.aktionen"
+width = "130px"
+
 [tables.abrechnungen.table.row_actions]
 details = { icon = "Search", dialog = "dialogs/nk_abrechnung_detail" }
 
@@ -2101,6 +2105,10 @@ sortable = true
 width = "150px"
 format = "datetime"
 
+[tables.dokument.table.actions]
+label = "dokument.aktionen"
+width = "130px"
+
 [tables.dokumente.table.row_actions]
 preview = { icon = "Eye", handler = "dokument.preview" }
 download = { icon = "Download", handler = "dokument.download" }
@@ -2146,6 +2154,10 @@ width = "180px"
 display = "badge"
 badge_colors = { vermietet = "green", leer = "red", eigennutzung = "blue", renovierung = "yellow" }
 
+[tables.einheit.table.actions]
+label = "einheit.aktionen"
+width = "130px"
+
 [tables.einheiten.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/einheit.form" }
 vertrag = { icon = "FileSignature", dialog = "forms/vertrag.form", visible_if = { field = "status", equals = "leer" }, label = "actions.vertrag_anlegen" }
@@ -2190,6 +2202,10 @@ field = "rueckzahlungsdatum"
 label = "kaution.rueckzahlungsdatum"
 width = "120px"
 format = "date"
+
+[tables.kautionen.table.actions]
+label = "kautionen.aktionen"
+width = "130px"
 
 [tables.kautionen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/kaution.form" }
@@ -2291,6 +2307,10 @@ width = "180px"
 format = "number"
 suffix = " m²"
 
+[tables.objekte.table.actions]
+label = "objekte.aktionen"
+width = "130px"
+
 [tables.objekte.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/objekt.form" }
 delete = { icon = "Trash2", confirm = true, confirm_message = "labels.confirm.objekt_loeschen" }
@@ -2352,6 +2372,10 @@ icon = "FileText"
 visible_if = { field = "dokument_id", is_set = true }
 click = "preview_document"
 
+[tables.rechnungen.table.actions]
+label = "rechnungen.aktionen"
+width = "130px"
+
 [tables.rechnungen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/rechnung.form" }
 bezahlen = { icon = "CheckCircle", handler = "rechnung.markAsPaid", visible_if = { field = "computed.ist_bezahlt", equals = false } }
@@ -2408,6 +2432,10 @@ width = "150px"
 display = "badge"
 badge_colors = { offen = "red", teilweise = "yellow", bezahlt = "green", ueberzahlt = "blue" }
 
+[tables.sollstellungen.table.actions]
+label = "sollstellungen.aktionen"
+width = "130px"
+
 [tables.sollstellungen.table.row_actions]
 zahlung = { icon = "Plus", dialog = "forms/zahlung.form", defaults = { vertrag_id = ":vertrag_id", monat_fuer = ":monat" } }
 
@@ -2463,6 +2491,10 @@ width = "120px"
 display = "status_indicator"
 status_map = { true = { label = "aktiv", color = "green" }, false = { label = "beendet", color = "gray" } }
 
+[tables.vertraege.table.actions]
+label = "vertraege.aktionen"
+width = "130px"
+
 [tables.vertraege.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/vertrag.form" }
 kuendigen = { icon = "XCircle", dialog = "dialogs/kuendigung", visible_if = { field = "computed.ist_aktiv", equals = true } }
@@ -2512,6 +2544,10 @@ label = "zaehler.abgelesen_am"
 sortable = true
 width = "180px"
 format = "date"
+
+[tables.zaehler.table.actions]
+label = "zaehler.aktionen"
+width = "130px"
 
 [tables.zaehler.table.row_actions]
 ablesung = { icon = "Plus", dialog = "forms/zaehlerstand.form", defaults = { zaehler_id = ":id" } }
@@ -2565,6 +2601,10 @@ field = "verwendungszweck"
 label = "zahlung.verwendungszweck"
 width = "19%"
 truncate = 30
+
+[tables.zahlungen.table.actions]
+label = "zahlungen.aktionen"
+width = "130px"
 
 [tables.zahlungen.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/zahlung.form" }
