@@ -76,11 +76,17 @@ check_config_structure() {
   local has_widths=$(grep -q "\[widths\]" "$CONFIG_FILE" && echo "1" || echo "0")
   local doc_widths=$(grep -c "widths" "$CLAUDE_FILE" 2>/dev/null || echo "0")
 
+  local has_buttons=$(grep -q "\[buttons\]" "$CONFIG_FILE" && echo "1" || echo "0")
+  local has_table=$(grep -q "\[table\]" "$CONFIG_FILE" && echo "1" || echo "0")
+
   if [[ "$has_widths" == "1" ]] && [[ "$doc_widths" -lt 1 ]]; then
     warning "config.toml [widths] Sektion nicht in CLAUDE.md dokumentiert"
   else
-    [[ "$has_widths" == "1" ]] && success "[widths] Sektion dokumentiert"
+    [[ "$has_widths" == "1" ]] && success "[widths] Sektion vorhanden"
   fi
+
+  [[ "$has_buttons" == "1" ]] && success "[buttons] Sektion vorhanden"
+  [[ "$has_table" == "1" ]] && success "[table] Sektion vorhanden"
 }
 
 # Run validations

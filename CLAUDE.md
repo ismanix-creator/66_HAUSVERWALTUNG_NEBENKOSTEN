@@ -100,18 +100,24 @@ graph TB
 │   ├── CLAUDE.md          # User-spezifische Claude-Docs
 │   ├── system.md          # System-Prompt
 │   ├── review.md          # Review-Checkliste
-│   └── planning.md        # Planungs-Guidelines
+│   ├── planning.md        # Planungs-Guidelines
+│   └── hooks/             # Auto-Update & Validierungs-Hooks
+│       ├── 40-auto-update-docs.sh      # Version + Timestamp Auto-Update
+│       └── 50-validate-docs-consistency.sh  # Konsistenz-Validierung
 │
 ├── config/                 # TOML-Konfigurationen
 │   ├── config.toml        # Master-Konfiguration (SINGLE SOURCE OF TRUTH)
 │   │   ├── [meta]         # Version, last_modified
 │   │   ├── [app]          # App-Einstellungen
 │   │   ├── [widths]       # Column width constants (w40-w300, actions=120px)
+│   │   ├── [buttons]      # Button-Styling (primary, secondary, disabled)
+│   │   ├── [table]        # Tabellen-Styling & Spacing (50px outer margins)
 │   │   ├── [entities]     # 14 Entity-Definitionen
 │   │   ├── [forms]        # Formular-Konfigurationen
 │   │   ├── [tables]       # Tabellen + Spalten + Actions
 │   │   ├── [views]        # View-Konfigurationen
-│   │   └── [navigation]   # Menü-Struktur (Sidebar)
+│   │   ├── [navigation]   # Menü-Struktur (Sidebar)
+│   │   └── [server]       # Server-Config (Port 3002, CORS, etc.)
 │   └── catalogs/          # Wertelisten (extern)
 │
 ├── src/
@@ -211,7 +217,7 @@ npm run lint          # ESLint ausführen
 - Hook-basierte Dokumentationspflege (Version + Timestamp Auto-Update)
 - TypeScript + ESLint Fehler bereinigt
 
-**Zuletzt aktualisiert: 2025-12-19 03:48 CET (v0.2.0)
+**Zuletzt aktualisiert: 2025-12-19 04:08 CET (v0.2.0)
 
 ---
 

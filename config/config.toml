@@ -77,6 +77,53 @@ w300 = "300px"
 actions = "120px"
 
 # =============================================================================
+# BUTTONS - Button-Styling Konfiguration
+# =============================================================================
+[buttons]
+# Primary Button Style (Standard Add/Create Buttons)
+primary_text_color = "text-primary-600"
+primary_hover_color = "text-primary-700"
+primary_border = "none"
+primary_padding = "px-4 py-2"
+primary_font_size = "text-sm"
+primary_font_weight = "font-medium"
+primary_rounded = "rounded-lg"
+primary_transition = "transition-colors"
+
+# Secondary Button Style
+secondary_text_color = "text-gray-700"
+secondary_hover_color = "text-gray-900"
+secondary_border = "border border-gray-300"
+secondary_padding = "px-4 py-2"
+secondary_font_size = "text-sm"
+secondary_font_weight = "font-medium"
+secondary_rounded = "rounded-lg"
+
+# Disabled State
+disabled_opacity = "disabled:opacity-50"
+disabled_cursor = "disabled:cursor-not-allowed"
+
+# =============================================================================
+# TABLE - Tabellen-Styling & Spacing
+# =============================================================================
+[table]
+# Row Styling
+row_hover_bg = "hover:bg-gray-50"
+row_padding = "py-3"
+row_border = "border-b border-gray-200"
+
+# Column Spacing (erste/letzte Spalte)
+[table.spacing]
+first_column_left = "50px"      # Linker Außenabstand erste Spalte
+last_column_right = "50px"      # Rechter Außenabstand letzte Spalte
+column_gap = "8px"              # Abstand zwischen Spalten
+header_padding = "py-3 px-4"    # Padding in Header-Zeilen
+
+# Striped Pattern (optional)
+stripe_color = "bg-gray-50"
+stripe_alternate = true
+
+# =============================================================================
 # SERVER - Server-Konfiguration
 # =============================================================================
 [server]
