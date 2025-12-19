@@ -206,7 +206,7 @@ npm run lint          # ESLint ausführen
 - Config-gesteuertes Label-System (entity.field Format)
 - Standalone Labels/Actions entfernt (nur in Tables)
 
-**Zuletzt aktualisiert:** 2025-12-19 (v0.2.0)
+**Zuletzt aktualisiert: 2025-12-19 03:39 CET (v0.2.0)
 
 ---
 

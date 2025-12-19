@@ -232,3 +232,7 @@ Nach **jeder Dateiänderung** diesen Workflow befolgen:
 - [ ] Keine hardcodierten Werte eingeführt
 - [ ] Alle neuen Felder in TOML-Config definiert
 - [ ] Labels in `de.labels.toml` hinzugefügt
+
+---
+
+**Zuletzt aktualisiert: 2025-12-19 03:39 CET (v0.2.0)
