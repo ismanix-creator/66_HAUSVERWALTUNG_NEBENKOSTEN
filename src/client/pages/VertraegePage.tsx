@@ -102,6 +102,31 @@ export function VertraegePage() {
     }
   }
 
+  const handleRowAction = (item: Vertrag, actionId: string) => {
+    const itemRecord = item as Record<string, unknown>
+
+    if (actionId === 'mieter') {
+      const mieterId =
+        itemRecord['mieter_id'] || (itemRecord['computed'] as Record<string, unknown> | undefined)?.['mieter_id']
+      if (!mieterId) {
+        window.alert('Kein verknüpfter Mieter vorhanden.')
+        return
+      }
+      navigate(`/mieter/${String(mieterId)}`)
+      return
+    }
+
+    if (actionId === 'einheit') {
+      const einheitId = itemRecord['einheit_id'] || (itemRecord['computed'] as Record<string, unknown> | undefined)?.['einheit_id']
+      if (!einheitId) {
+        window.alert('Keine verknüpfte Einheit vorhanden.')
+        return
+      }
+      navigate(`/einheiten/${String(einheitId)}`)
+      return
+    }
+  }
+
   const handleSort = (field: string, dir: 'ASC' | 'DESC') => {
     setSortField(field)
     setSortDir(dir)
@@ -148,6 +173,7 @@ export function VertraegePage() {
         onSort={handleSort}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onRowAction={handleRowAction}
         sortField={sortField}
         sortDir={sortDir}
         isLoading={listLoading}

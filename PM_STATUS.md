@@ -1133,3 +1133,27 @@
   "notes": "Header nutzt jetzt `flex items-center justify-between`, Titel/Description-Klassen und Refresh-Button entsprechen `MieterPage` styling."
 }
 ```
+## $TS – Project-Manager
+```json
+{
+  "agent": "Project-Manager",
+  "ziel": "Convert dotted labels/titles to human labels",
+  "geändert": ["config/config.toml"],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Frontend/Tester – UI prüfen (labels updated)",
+  "notes": "Converted dotted keys to Title-case labels across blocks; backup saved as config/config.toml.*.bak"
+}
+```
+## $TS – Project-Manager
+```json
+{
+  "agent": "Project-Manager",
+  "ziel": "Validate labels and cleanup backup",
+  "geändert": ["config/config.toml"],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Frontend/Tester – UI prüfen (labels updated)",
+  "notes": "All dotted label/title keys converted. Removed backup config/config.toml.*.bak."
+}
+```

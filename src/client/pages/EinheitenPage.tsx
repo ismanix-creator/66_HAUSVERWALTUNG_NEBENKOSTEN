@@ -15,6 +15,7 @@ import {
   useDeleteEntity,
 } from '../hooks/useEntity'
 import { useEntityConfig, useTableConfig, useFormConfig } from '../hooks/useConfig'
+import { useNavigate } from 'react-router-dom'
 import type { Einheit } from '@shared/types/entities'
 
 type EinheitRecord = Einheit & Record<string, unknown>
@@ -83,6 +84,33 @@ export function EinheitenPage() {
     setFormError('')
   }
 
+  const navigate = useNavigate()
+
+  const handleRowAction = (item: EinheitRecord, actionId: string) => {
+    const itemRecord = item as Record<string, unknown>
+
+    if (actionId === 'mieter') {
+      const mieterId =
+        itemRecord['mieter_id'] || (itemRecord['computed'] as Record<string, unknown> | undefined)?.['mieter_id']
+      if (!mieterId) {
+        window.alert('Kein verknüpfter Mieter vorhanden.')
+        return
+      }
+      navigate(`/mieter/${String(mieterId)}`)
+      return
+    }
+
+    if (actionId === 'vertrag') {
+      const vertragId = itemRecord['vertrag_id'] || (itemRecord['computed'] as Record<string, unknown> | undefined)?.['vertrag_id']
+      if (!vertragId) {
+        window.alert('Kein verknüpfter Vertrag vorhanden.')
+        return
+      }
+      navigate(`/vertraege/${String(vertragId)}`)
+      return
+    }
+  }
+
   const handleSort = (field: string, dir: 'ASC' | 'DESC') => {
     setSortField(field)
     setSortDir(dir)
@@ -132,6 +160,7 @@ export function EinheitenPage() {
         onSort={handleSort}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onRowAction={handleRowAction}
         sortField={sortField}
         sortDir={sortDir}
         isLoading={listLoading}

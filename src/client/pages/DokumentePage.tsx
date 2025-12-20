@@ -9,6 +9,7 @@ import { Plus, Download, FileText } from 'lucide-react'
 import { DataTable, TableConfig } from '../components/data/DataTable'
 import { DynamicForm, FormConfig } from '../components/data/DynamicForm'
 import { useEntityConfig, useFormConfig, useTableConfig } from '../hooks/useConfig'
+import { useNavigate } from 'react-router-dom'
 import {
   useCreateEntity,
   useDeleteEntity,
@@ -86,6 +87,33 @@ export function DokumentePage() {
     }
   }
 
+  const navigate = useNavigate()
+
+  const handleRowAction = (item: Dokument, actionId: string) => {
+    const itemRecord = item as Record<string, unknown>
+
+    if (actionId === 'mieter') {
+      const mieterId =
+        itemRecord['mieter_id'] || (itemRecord['computed'] as Record<string, unknown> | undefined)?.['mieter_id']
+      if (!mieterId) {
+        window.alert('Kein verknüpfter Mieter vorhanden.')
+        return
+      }
+      navigate(`/mieter/${String(mieterId)}`)
+      return
+    }
+
+    if (actionId === 'objekt') {
+      const objektId = itemRecord['objekt_id'] || (itemRecord['computed'] as Record<string, unknown> | undefined)?.['objekt_id']
+      if (!objektId) {
+        window.alert('Kein verknüpftes Objekt vorhanden.')
+        return
+      }
+      navigate(`/objekte/${String(objektId)}`)
+      return
+    }
+  }
+
   if (entityLoading || tableLoading || formLoading || !tableConfig || !entityConfig) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -143,6 +171,7 @@ export function DokumentePage() {
         onPageChange={setPage}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onRowAction={handleRowAction}
         onSort={handleSort}
         sortField="hochgeladen_am"
         sortDir="DESC"

@@ -34,6 +34,7 @@ export default function App() {
         <Route path="/objekte" element={<ObjektePage />} />
         <Route path="/objekte/:id" element={<ObjektePage />} />
         <Route path="/einheiten" element={<EinheitenPage />} />
+        <Route path="/einheiten/:id" element={<EinheitenPage />} />
         <Route path="/mieter" element={<MieterPage />} />
         <Route path="/mieter/:id" element={<MieterDetailPage />} />
         <Route path="/vertraege" element={<VertraegePage />} />

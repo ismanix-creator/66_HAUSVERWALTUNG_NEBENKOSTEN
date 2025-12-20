@@ -149,6 +149,28 @@ export function NebenkostenPage() {
     navigate(`/nebenkosten/${nextTab}`, { replace: true })
   }
 
+  const handleRowAction = (item: Record<string, unknown>, actionId: string) => {
+    if (actionId === 'einheit') {
+      const einheitId = item['einheit_id'] || (item['computed'] as Record<string, unknown> | undefined)?.['einheit_id']
+      if (!einheitId) {
+        window.alert('Keine verknüpfte Einheit vorhanden.')
+        return
+      }
+      navigate(`/einheiten/${String(einheitId)}`)
+      return
+    }
+
+    if (actionId === 'objekt') {
+      const objektId = item['objekt_id'] || (item['computed'] as Record<string, unknown> | undefined)?.['objekt_id']
+      if (!objektId) {
+        window.alert('Kein verknüpftes Objekt vorhanden.')
+        return
+      }
+      navigate(`/objekte/${String(objektId)}`)
+      return
+    }
+  }
+
   const handleRechnungSubmit = async (data: Record<string, unknown>) => {
     setRechnungError('')
     try {
@@ -216,6 +238,7 @@ export function NebenkostenPage() {
               page={rechnungPage}
               pageSize={PAGE_SIZE}
               onPageChange={() => undefined}
+                onRowAction={handleRowAction}
               isLoading={rechnungList.isLoading}
             />
           )}
@@ -338,6 +361,7 @@ export function NebenkostenPage() {
                 page={abrechnungPage}
                 pageSize={PAGE_SIZE}
                 onPageChange={() => undefined}
+                onRowAction={handleRowAction}
                 isLoading={abrechnungList.isLoading}
               />
           )}

@@ -10,6 +10,7 @@ import { Plus } from 'lucide-react'
 import { DataTable, TableConfig } from '../components/data/DataTable'
 import { DynamicForm, FormConfig } from '../components/data/DynamicForm'
 import { useEntityConfig, useTableConfig, useFormConfig } from '../hooks/useConfig'
+import { useNavigate } from 'react-router-dom'
 import {
   useEntityList,
   useCreateEntity,
@@ -110,6 +111,32 @@ export function ZaehlerPage() {
     setFormError('')
   }
 
+  const navigate = useNavigate()
+
+  const handleRowAction = (item: Zaehler, actionId: string) => {
+    const itemRecord = item as Record<string, unknown>
+
+    if (actionId === 'einheit') {
+      const einheitId = itemRecord['einheit_id'] || (itemRecord['computed'] as Record<string, unknown> | undefined)?.['einheit_id']
+      if (!einheitId) {
+        window.alert('Keine verknüpfte Einheit vorhanden.')
+        return
+      }
+      navigate(`/einheiten/${String(einheitId)}`)
+      return
+    }
+
+    if (actionId === 'objekt') {
+      const objektId = itemRecord['objekt_id'] || (itemRecord['computed'] as Record<string, unknown> | undefined)?.['objekt_id']
+      if (!objektId) {
+        window.alert('Kein verknüpftes Objekt vorhanden.')
+        return
+      }
+      navigate(`/objekte/${String(objektId)}`)
+      return
+    }
+  }
+
   const handleReadingSubmit = async (data: Record<string, unknown>) => {
     setReadingError('')
     try {
@@ -163,6 +190,7 @@ export function ZaehlerPage() {
         onSort={handleSort}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onRowAction={handleRowAction}
         sortField={sortField}
         sortDir={sortDir}
         isLoading={listLoading}
