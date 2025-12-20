@@ -6,33 +6,29 @@ import { databaseService } from '../../src/server/services/database.service'
 import type { EntityConfig } from '../../src/shared/types/config'
 
 const createSampleConfig = (): EntityConfig => ({
-  entity: {
-    name: 'beispiel_entity',
-    table_name: 'beispiel_entity',
-    label: 'Beispiel',
-    label_plural: 'Beispiele',
-    icon: 'cube',
-    primary_key: 'id',
-    fields: {
-      id: { type: 'uuid', required: true },
-      name: { type: 'string', required: true, default: 'Demo' },
-      objekt: { type: 'reference', reference: 'objekt' },
-      status: { type: 'enum', options: ['aktiv', 'inaktiv'] },
-    },
+  name: 'beispiel_entity',
+  table_name: 'beispiel_entity',
+  label: 'Beispiel',
+  label_plural: 'Beispiele',
+  icon: 'cube',
+  primary_key: 'id',
+  fields: {
+    id: { type: 'uuid', required: true },
+    name: { type: 'string', required: true, default: 'Demo' },
+    objekt: { type: 'reference', reference: 'objekt' },
+    status: { type: 'enum', options: ['aktiv', 'inaktiv'] },
   },
 })
 
 const createNamedConfig = (name: string, tableName?: string): EntityConfig => ({
-  entity: {
-    name,
-    table_name: tableName,
-    label: name,
-    label_plural: `${name}s`,
-    icon: 'cube',
-    primary_key: 'id',
-    fields: {
-      id: { type: 'uuid', required: true },
-    },
+  name,
+  table_name: tableName || `${name}s`,
+  label: name,
+  label_plural: `${name}s`,
+  icon: 'cube',
+  primary_key: 'id',
+  fields: {
+    id: { type: 'uuid', required: true },
   },
 })
 
@@ -53,7 +49,7 @@ describe('SchemaService', () => {
   it('erzeugt Indizes für reference- und enum-Felder', () => {
     const service = new SchemaService()
     const config = createSampleConfig()
-    service.setTableName(config.entity.name, config.entity.table_name)
+    service.setTableName(config.name, config.table_name)
 
     const indexes = service.generateIndexSql(config)
     expect(indexes).toContain(

@@ -1157,3 +1157,20 @@
   "notes": "All dotted label/title keys converted. Removed backup config/config.toml.*.bak."
 }
 ```
+## 2025-12-20 22:02:11 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Archivieren und Entfernen von config_backup; Tests an die zentrale config anpassen",
+  "geändert": [
+    "config_backup/ -> /tmp/config_backup_20251220225644.tar.gz (archiviert)",
+    "config_backup/ (gelöscht)",
+    "tests/unit/config-entities.test.ts",
+    "tests/unit/schema.service.test.ts"
+  ],
+  "ergebnis": "OK",
+  "blocker": null,
+  "next_suggestion": "Release – Changelog prüfen & Commit erstellen",
+  "notes": "Archiv erstellt: /tmp/config_backup_20251220225644.tar.gz; config/config.toml ist jetzt Single Source of Truth; Unit-Tests: 21 passed."
+}
+```

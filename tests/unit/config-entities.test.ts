@@ -1,11 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { readdirSync } from 'node:fs'
-import { join } from 'node:path'
+import { configLoader } from '../../src/server/services/config-loader.service'
 
 describe('Konfigurations-Entities', () => {
-  it('liefert mindestens eine TOML-Definition', () => {
-    const entitiesDir = join(process.cwd(), 'config', 'entities')
-    const entries = readdirSync(entitiesDir).filter((file) => file.endsWith('.toml'))
-    expect(entries.length).toBeGreaterThan(0)
+  it('liefert mindestens eine Entity-Definition in config/config.toml', async () => {
+    const entities = await configLoader.getEntities()
+    expect(Object.keys(entities).length).toBeGreaterThan(0)
   })
 })
