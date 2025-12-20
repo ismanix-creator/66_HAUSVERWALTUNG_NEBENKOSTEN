@@ -1,0 +1,55 @@
+[table]
+entity = "mieter"
+row_click = "navigate"
+row_click_route = "/mieter/:id"
+
+[[table.columns]]
+field = "nachname"
+label = "Nachname"
+sortable = true
+width = "width.w150"
+
+[[table.columns]]
+field = "vorname"
+label = "Vorname"
+sortable = true
+width = "width.w150"
+
+[[table.columns]]
+field = "computed.aktuelle_einheit.adresse"
+label = "Adresse"
+sortable = false
+width = "width.w200"
+
+[[table.columns]]
+field = "computed.aktuelle_einheit.bezeichnung"
+label = "Einheit"
+sortable = false
+width = "width.w150"
+
+[[table.columns]]
+field = "computed.aktiver_vertrag.kalt_miete"
+label = "Kaltmiete"
+sortable = false
+width = "width.w120"
+format = "currency"
+
+[[table.row_actions]]
+icon = "Eye"
+label = "Details"
+handler = "navigate"
+defaults = { route = "/mieter/:id" }
+
+[[table.row_actions]]
+icon = "FileSignature"
+label = "Vertrag"
+visible_if = { field = "computed.aktiver_vertrag_id", is_set = true }
+
+[[table.row_actions]]
+icon = "Home"
+label = "Einheit"
+visible_if = { field = "computed.aktuelle_einheit.id", is_set = true }
+
+[table.actions]
+label = "Aktionen"
+width = "width.w200"

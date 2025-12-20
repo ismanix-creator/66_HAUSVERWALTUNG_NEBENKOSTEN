@@ -36,14 +36,21 @@ Basis: Navigation und Views aus `config/config.toml` (Navigation, Views, Forms, 
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Objekte & Mieter (List-Detail)
+## Mieter (List-Detail)
 ```
 ┌───────────────────────────────────────────────────────────────┐
-│ Liste links (filterbar)            │ Detail rechts             │
-│ [ + Neu ]                          │ Tabs: Stammdaten | Einheiten│
-│ ─ Objekt A ▶                       │       | Zähler | Dokumente │
-│ ─ Objekt B                         │ Header: Name + Adresse     │
-│ ─ Objekt C                         │ Detailfelder aus Table/Form│
+│ Liste (Tabelle)                     │ Detail (Modal/Overlay)     │
+│ [ + Neuer Mieter ]                  │ Tabs:                      │
+│ ─ Nachname, Vorname, Adresse        │   • Stammdaten (readonly)  │
+│   • Aktionen: Bearbeiten, Löschen   │     - Persönliche Daten    │
+│     - Navigation: Vertrag, Einheit  │     - Adressen             │
+│ ─ Sortierbar, paginiert             │     - [Bearbeiten] Button  │
+│                                     │   • Verträge (Tabelle)     │
+│                                     │   • Zahlungen (Tabelle)    │
+│                                     │   • Dokumente (Tabelle)    │
+│                                     │   • Kaution (Tabelle)      │
+│                                     │                             │
+│                                     │ Backdrop-Klick schließt    │
 └───────────────────────────────────────────────────────────────┘
 ```
 

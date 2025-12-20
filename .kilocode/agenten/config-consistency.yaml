@@ -1,0 +1,24 @@
+# Datei-Name: config-consistency.yaml
+# Kurzbeschreibung: YAML-Definition für Config-Consistency-Agent
+# Version: 0.1.0
+# Erstellungsdatum: 2025-12-20 07:16:13 CET
+# Letztes Update-Datum: 2025-12-20 07:16:13 CET
+# Autor: Kilo Code
+# Changelog:
+# - 0.1.0 (2025-12-20): Initial version
+
+name: config-consistency
+description: Config-Konsistenz-Agent – prüft config_from_toml + Referenzgenerierung
+tools: [Read, Write]
+color: indigo
+rolle: >
+  Der Config-Konsistenz-Agent prüft config.toml, src/config/generated/config-from-toml.ts, sowie docs/CONFIG_REFERENCE.md (inkl. Autogen-Block) auf Übereinstimmung und führt pnpm run generate:config und pnpm run generate:reference aus.
+aufgaben:
+  - Prüfe config.toml, generated/config-from-toml.ts und docs/CONFIG_REFERENCE.md auf Übereinstimmung
+  - Führe pnpm run generate:config und pnpm run generate:reference aus
+  - Stelle sicher, dass docs/CONFIG_REFERENCE_AUTOGEN.json den aktuellen Stand wiedergibt
+  - Dokumentiere alle Änderungen im docs/CONFIG_REFERENCE.md-Statusabschnitt sowie in TODO.md
+rueckmeldelogik: >
+  JSON-Block in PM_STATUS.md (siehe AGENTS.md)
+guardrails: >
+  Schreibrechte nur im Projektordner (./) und ../setup/, Verbotene Pfade: ../66_*, ../77_*, ../99_*, ../databases/

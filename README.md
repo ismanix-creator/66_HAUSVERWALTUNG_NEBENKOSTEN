@@ -26,6 +26,9 @@ Lokale, 100% konfigurationsgetriebene Miet- und Nebenkostenverwaltung mit React/
 - `data/` – SQLite-DB, Backups, Dokumente (lokal, nicht im Repo).
 
 ## Dokumentation & Referenzen
+Die Dokumentation ist nach [.kilocode/](.kilocode/) migriert. Siehe [.kilocode/README.md](.kilocode/README.md) für den zentralen Einstiegspunkt.
+
+Legacy-Referenzen:
 - `config/config.toml` – zentrale Konfiguration.
 - `BLUEPRINT_PROMPT_DE.md` – Blueprint-Vorgaben (Zielbild, Phasen, Akzeptanzkriterien).
 - `planning/BAUPLAN_MIETVERWALTUNG.md` – Detailbauplan & Akzeptanzkriterien.

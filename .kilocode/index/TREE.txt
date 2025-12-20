@@ -1,0 +1,191 @@
+.
+├── .eslintrc.cjs
+├── .gitignore
+├── .gitpod.yml
+├── .prettierrc
+├── AGENTS.md
+├── BLUEPRINT_PROMPT_DE.md
+├── CHANGELOG_ARCHIVE.md
+├── CHANGELOG.md
+├── CLAUDE.md
+├── CODEX.md
+├── config.toml
+├── german_banks_blz_bic.csv
+├── german_postcodes_cities.csv
+├── package-lock.json
+├── package.json
+├── PM_STATUS.md
+├── postcss.config.js
+├── README.md
+├── restart-project-server.sh
+├── tailwind.config.js
+├── todo.md
+├── tsconfig.json
+├── tsconfig.node.json
+├── tsconfig.server.json
+├── vite.config.ts
+├── vitest.config.ts
+├── wireframe.md
+├── .ai
+│   ├── architecture.md
+│   ├── conventions.md
+│   ├── glossary.md
+│   ├── rules.md
+│   └── RULES.md
+├── .claude
+│   ├── CLAUDE.md
+│   ├── planning.md
+│   ├── review.md
+│   ├── settings.json
+│   ├── settings.local.json
+│   ├── system.md
+│   ├── validation.md
+│   ├── hooks
+│   │   ├── 00-session-start.sh
+│   │   ├── 10-pre-tool-gate.sh
+│   │   ├── 20-guard-bash-and-track-tests.sh
+│   │   ├── 30-suggest-tests-from-changes.sh
+│   │   ├── 35-verify-system-time.sh
+│   │   ├── 40-auto-update-docs.sh
+│   │   ├── 50-validate-docs-consistency.sh
+│   │   ├── 90-session-end.sh
+│   └── state
+│       ├── session.env
+│       ├── session.log
+│       └── state.env
+├── .codex
+│   ├── CODEX.md
+│   ├── system.md
+│   └── workflows
+│       ├── implement.md
+│       └── refactor.md
+├── .github
+├── .kilocode
+│   ├── README.md
+│   ├── index
+│   │   ├── FILES.md
+│   │   ├── TREE.txt
+│   │   └── SWITCH_CHECKLIST.md
+│   ├── portal
+│   │   ├── 00_START_HERE.md
+│   │   ├── 10_SOURCE_OF_TRUTH.md
+│   │   ├── 20_WORKFLOWS.md
+│   │   ├── 30_DOCS_MAP.md
+│   │   ├── 40_STATUS.md
+│   │   └── 60_ARCH_CONFIG_UI.md
+│   └── rules
+│       ├── 00_INDEX.md
+│       ├── 10_WORKFLOW.md
+│       ├── 20_CONFIG_DRIVEN.md
+│       ├── 30_DOCS_CHANGELOG_VERSIONING.md
+│       ├── 40_ARCHITECTURE_CONVENTIONS.md
+│       ├── 50_VALIDATION_GATES.md
+│       └── 90_MIGRATION_LEGACY.md
+├── config
+│   ├── config.toml
+│   ├── catalogs
+│   │   ├── anrede.catalog.toml
+│   │   ├── bankleitzahlen.catalog.toml
+│   │   ├── dokumenttypen.catalog.toml
+│   │   ├── einheittypen.catalog.toml
+│   │   ├── heizungsarten.catalog.toml
+│   │   ├── kostenarten.catalog.toml
+│   │   ├── objekttypen.catalog.toml
+│   │   ├── plz_orte.catalog.toml
+│   │   ├── prioritaeten.catalog.toml
+│   │   ├── status.catalog.toml
+│   │   ├── umlageschluessel.catalog.toml
+│   │   ├── wiederholungen.catalog.toml
+│   │   ├── zaehlertypen.catalog.toml
+│   │   └── zahlungsarten.catalog.toml
+│   └── config_backup
+├── design
+├── docs
+│   └── Config_toml_als_Quelle.md
+├── home
+├── loaders
+│   └── resolve-js-extension.mjs
+├── planning
+│   ├── BAUPLAN_MIETVERWALTUNG.md
+│   └── MIETVERWALTUNG_PLANUNG.md
+├── public
+├── scripts
+│   ├── add-js-extensions.mjs
+│   ├── copy-config.js
+│   └── watch-server.js
+└── src
+    ├── client
+    │   ├── App.tsx
+    │   ├── CLAUDE.md
+    │   ├── index.html
+    │   ├── main.tsx
+    │   ├── vite-env.d.ts
+    │   ├── components
+    │   │   ├── common
+    │   │   ├── dashboard
+    │   │   └── data
+    │   │       ├── DataTable.tsx
+    │   │       └── DynamicForm.tsx
+    │   │   └── layout
+    │   │       ├── AppShell.tsx
+    │   │       ├── Sidebar.tsx
+    │   │       └── StatusBar.tsx
+    │   │   └── widgets
+    │   ├── hooks
+    │   │   ├── useConfig.ts
+    │   │   ├── useEntity.ts
+    │   │   └── useMobile.ts
+    │   ├── pages
+    │   │   ├── DashboardPage.tsx
+    │   │   ├── DokumentePage.tsx
+    │   │   ├── EinheitenPage.tsx
+    │   │   ├── FinanzenPage.tsx
+    │   │   ├── MieterDetailPage.tsx
+    │   │   ├── MieterPage.tsx
+    │   │   ├── NebenkostenPage.tsx
+    │   │   ├── ObjektePage.tsx
+    │   │   ├── VertraegePage.tsx
+    │   │   ├── ZaehlerPage.tsx
+    │   │   └── mobile
+    │   │       └── MobileDashboardPage.tsx
+    │   ├── services
+    │   │   └── api.service.ts
+    │   ├── store
+    │   ├── styles
+    │   │   └── global.css
+    │   └── types
+    ├── server
+    │   ├── CLAUDE.md
+    │   ├── index.ts
+    │   ├── middleware
+    │   │   ├── error.middleware.ts
+    │   │   ├── mobile.middleware.ts
+    │   │   └── rate-limit.middleware.ts
+    │   ├── routes
+    │   │   ├── api.routes.ts
+    │   │   ├── entity.routes.ts
+    │   │   └── mobile.routes.ts
+    │   └── services
+    │       ├── config-loader.service.ts
+    │       ├── config.service.ts
+    │       ├── dashboard.service.ts
+    │       ├── database.service.ts
+    │       ├── entity.service.ts
+    │       ├── mobile.service.ts
+    │       ├── pdf.service.ts
+    │       ├── schema.service.ts
+    │       ├── utils
+    │       │   ├── logger.ts
+    │       │   └── pagination.ts
+    │       └── types
+    │           └── pdfkit.d.ts
+    └── shared
+        ├── config
+        │   ├── index.ts
+        │   └── schemas.ts
+        └── types
+            ├── config.ts
+            ├── dashboard.ts
+            ├── entities.ts
+            ├── index.ts
+            └── mobile.ts

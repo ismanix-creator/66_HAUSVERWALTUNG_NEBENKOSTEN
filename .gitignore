@@ -41,3 +41,5 @@ AGENTS/
 # User-specific AI state (not shared)
 .claude/state/
 66_HAUSVERWALTUNG_NEBENKOSTEN.code-workspace
+
+#.kilocode/
