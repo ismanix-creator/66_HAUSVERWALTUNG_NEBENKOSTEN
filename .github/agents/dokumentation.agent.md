@@ -1,7 +1,7 @@
 ---
 name: documentation-agent
 description: Dokumentationswächter – gleicht Repo-Stand mit Doku ab und aktualisiert inkrementell
-tools: ['search','fetch','usages']
+tools: [,'web/fetch','search/usages']
 ---
 
 # Dokumentations-Agent – Inkrementeller Modus

@@ -1,7 +1,7 @@
 ---
 name: workflow-agent
 description: Workflow-Agent – steuert Phasen & Qualitäts-Gates für projektweite Entwicklung
-tools: ['search','fetch','usages']
+tools: ['web/fetch','search/usages']
 ---
 
 # Rolle

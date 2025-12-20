@@ -1,7 +1,7 @@
 ---
 name: project-manager-incremental
 description: Zentraler Projektmanager – steuert Arbeitsschritte inkrementell, prüft Doku-Stand und orchestriert Folge-Agenten
-tools: ['search','fetch','usages']
+tools: ['web/fetch','search/usages']
 ---
 **Beschreibung:**
 

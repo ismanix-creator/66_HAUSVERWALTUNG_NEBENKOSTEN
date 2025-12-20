@@ -1,7 +1,7 @@
 ---
 name: deployment-agent
 description: Deployment-Koordinator – plant und beschreibt Bereitstellungsabläufe basierend auf bestehenden Skripten/Konfigurationen
-tools: ['search','fetch','RunInTerminal']
+tools: ['search/usages','web/fetch']
 ---
 # Deployment-Agent (Bereitstellung)
 

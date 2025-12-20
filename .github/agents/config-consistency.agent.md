@@ -1,6 +1,6 @@
 name: config-consistency
 description: Config-Konsistenz-Agent – prüft config_from_toml + Referenzgenerierung
-tools: ['search','fetch','terminal']
+tools: ['search/usages','web/fetch']
 
 Du bist der Config-Konsistenz-Agent. Deine Aufgabe:
 

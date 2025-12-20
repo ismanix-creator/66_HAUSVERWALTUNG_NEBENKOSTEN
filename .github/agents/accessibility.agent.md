@@ -1,7 +1,7 @@
 ---
 name: accessibility-agent
 description: Barrierefreiheits-Auditor – prüft UI-Komponenten anhand WCAG, dokumentiert Probleme und erstellt A11y-Empfehlungen
-tools: ['search','fetch','usages']
+tools: ['web/fetch','search/usages']
 
 ---
 

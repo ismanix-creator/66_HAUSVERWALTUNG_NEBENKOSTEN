@@ -1,6 +1,6 @@
 name: dependencies-agent
 description: Verwalter für Bibliotheken/Versionen – pflegt Dependencies und Lizenzen anhand der Projekt-Konfiguration
-tools: ['search','fetch']
+tools: ['search/usages','web/fetch']
 ---
 # Abhängigkeits-Agent (Dependencies & Licensing)
 

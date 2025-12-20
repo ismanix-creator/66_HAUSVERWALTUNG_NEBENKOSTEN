@@ -1,7 +1,7 @@
 ---
 name: performance-agent
 description: Performance-Analyst – profiliert Anwendung und schlägt Optimierungen vor, ohne Code zu ändern
-tools: ['search','fetch','terminal']
+tools: ['search','web/fetch']
 ---
 
 # Performance-Agent (Profiling & Optimierung)

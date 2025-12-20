@@ -1,6 +1,6 @@
 ---
 description: UI/UX-Designer – erstellt Spezifikationen und Interaktionskonzepte, kein Code
-tools: ['search','fetch','usages']
+tools: ['web/fetch','search/usages']
 ---
 
 # Designer-Agent – Inkrementeller Modus
