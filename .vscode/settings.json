@@ -1,0 +1,45 @@
+{
+  "kilocode.quickLinks": [
+    {
+      "title": "Kilocode Portal — Start Here",
+      "path": ".vscode/portal/00_START_HERE.md"
+    },
+    {
+      "title": "Kilocode Portal — Source of Truth",
+      "path": ".vscode/portal/10_SOURCE_OF_TRUTH.md"
+    },
+    {
+      "title": "Kilocode Portal — Workflows",
+      "path": ".vscode/portal/20_WORKFLOWS.md"
+    },
+    {
+      "title": "Kilocode Portal — Docs Map",
+      "path": ".vscode/portal/30_DOCS_MAP.md"
+    },
+    {
+      "title": "Kilocode Portal — Status",
+      "path": ".vscode/portal/40_STATUS.md"
+    },
+    {
+      "title": "Kilocode Index — FILES",
+      "path": ".vscode/index/FILES.md"
+    },
+    {
+      "title": "Kilocode Index — TREE",
+      "path": ".vscode/index/TREE.txt"
+    },
+    {
+      "title": "Projekt — AGENTS",
+      "path": "AGENTS.md"
+    },
+    {
+      "title": "Projekt — PM_STATUS",
+      "path": "PM_STATUS.md"
+    },
+    {
+      "title": "Projekt — CHANGELOG",
+      "path": "CHANGELOG.md"
+    }
+    
+  ]
+}
