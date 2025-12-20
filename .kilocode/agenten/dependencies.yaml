@@ -16,7 +16,7 @@ rolle: >
 inputs:
   - Geänderte Dateien, insbesondere Manifest-Dateien wie package.json, requirements.txt, Cargo.toml usw.
   - Der letzte JSON-Statusblock aus PM_STATUS.md
-  - Lizenzdokumente (z. B. LICENSE, LICENSES/)
+  - Lizenzdokumente (z.B. LICENSE, LICENSES/)
 aufgaben:
   - Versionserhebung: Lies die aktuelle Versionsliste der verwendeten Abhängigkeiten
   - Kompatibilitätsbewertung: Bestimme anhand der Changelogs, ob ein Update möglich ist
