@@ -17,6 +17,10 @@ inputs:
   - Geänderte Sprach- oder Ressourcendateien (*.po, *.json, *.yml)
   - config.toml-Einträge zu Sprachen
   - Der letzte JSON-Statusblock aus PM_STATUS.md
+mcp_filesystem: true
+mcp_policy:
+  approval-policy: "never"
+  sandbox: "workspace-write"
 aufgaben:
   - Textquellen sammeln: Suche nach UI-Texten, die noch nicht lokalisierbar sind
   - Übersetzungsdateien prüfen: Stelle sicher, dass alle vorhandenen Sprachen vollständige Einträge haben

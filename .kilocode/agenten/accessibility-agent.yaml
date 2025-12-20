@@ -13,6 +13,10 @@ tools: [Read, Write]
 color: teal
 rolle: >
   Prüft UI auf WCAG/Accessibility, dokumentiert und empfiehlt Maßnahmen, kein UI-Code.
+mcp_filesystem: true
+mcp_policy:
+  approval-policy: "never"
+  sandbox: "workspace-write"
 inputs:
   - Geänderte UI-Dateien (*.html, *.vue, *.tsx, etc.)
   - config.toml (falls Accessibility-Hinweise)

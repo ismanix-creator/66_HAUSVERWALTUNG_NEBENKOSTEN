@@ -17,6 +17,10 @@ inputs:
   - Nur die zuletzt geänderten Dateien und der letzte JSON-Statusblock aus PM_STATUS.md
   - Relevante Legacy-Dateien (z. B. alte config-Files, Skripte) innerhalb des Projekt-Roots
   - Falls nötig, config.toml, README.md, BLUEPRINT_PROMPT_DE.md
+mcp_filesystem: true
+mcp_policy:
+  approval-policy: "never"
+  sandbox: "workspace-write"
 aufgaben:
   - Ist-Analyse: Identifiziere Legacy-Strukturen, die der aktuellen Blueprint-Logik widersprechen
   - Migrationsplan erstellen: Lege für jedes Legacy-Artefakt fest, welcher neue Mechanismus es ersetzen soll

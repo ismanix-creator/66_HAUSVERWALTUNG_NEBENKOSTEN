@@ -1,3 +1,4 @@
+````chatagent
 ---
 name: localization-agent
 description: Lokalisierungs-Agent – pflegt Übersetzungen und Internationalisierung, ohne UI-Code zu ändern
@@ -42,3 +43,10 @@ Nach Abschluss deiner Aufgabe hängst du einen JSON‑Statusblock an `PM_STATUS.
   "notes": "<kurze Notiz>"
 }
 ```
+
+
+## Tooling / MCP
+
+Hinweis: Dieser Agent nutzt das MCP-Filesystem für workspace‑Schreibzugriffe. Alle MCP‑Aufrufe erfolgen gemäß Projektpolicy: {"approval-policy":"never","sandbox":"workspace-write"}.
+
+````

@@ -30,3 +30,7 @@ rueckmeldelogik: >
   JSON-Block in PM_STATUS.md (siehe AGENTS.md)
 guardrails: >
   Schreiben nur in ./, Lesen auch außerhalb, keine Annahmen, config.toml-first, MCP-Policy
+mcp_filesystem: true
+mcp_policy:
+  approval-policy: "never"
+  sandbox: "workspace-write"

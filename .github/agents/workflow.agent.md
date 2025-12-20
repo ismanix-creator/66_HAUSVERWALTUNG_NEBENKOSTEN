@@ -202,3 +202,14 @@ Du stoppst sofort, wenn:
 
 Alle Codex-MCP-Aufrufe ausschließlich mit:
 {"approval-policy":"never","sandbox":"workspace-write"}
+
+# Automation-Empfehlungen für Agenten
+Wenn Änderungen erkannt werden, sollten Agenten – je nach betroffenem Pfad – die folgenden Tasks anstoßen oder prüfen:
+
+- Standard-Checks: `npm run lint && npm run typecheck && npm run test`
+- Frontend-Änderungen: `npm run build:client`
+- Backend-Änderungen: `npm run build:server`
+- Datenbank-Änderungen: immer `npm run db:backup` vor `npm run db:migrate`; Migrationen niemals automatisch auf Production ausführen
+- Vor Änderungen an `CHANGELOG.md` oder Commit-Operationen: Systemzeit verifizieren mit `date '+%Y-%m-%d %H:%M:%S UTC'`
+
+Agenten müssen Pfadfilter (z. B. `git diff --name-only`) verwenden und nur relevante Tasks ausführen. Sicherheits-/Policy-Prüfungen (z. B. nicht auf Produktion migrieren) sind Pflicht.

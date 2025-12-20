@@ -22,3 +22,7 @@ rueckmeldelogik: >
   JSON-Block in PM_STATUS.md (siehe AGENTS.md)
 guardrails: >
   Schreibrechte nur im Projektordner (./) und ../setup/, Verbotene Pfade: ../66_*, ../77_*, ../99_*, ../databases/
+mcp_filesystem: true
+mcp_policy:
+  approval-policy: "never"
+  sandbox: "workspace-write"

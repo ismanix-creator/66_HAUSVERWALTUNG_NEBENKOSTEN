@@ -70,4 +70,14 @@ Du bist der Projektmanager und zentrale Steuerinstanz des Projekts. Du verantwor
 - Deutsch, sachlich, KISS.
 - MCP-Policy: `{"approval-policy":"never","sandbox":"workspace-write"}`.
 
+## Automation-Empfehlungen
+Agenten sollten bei relevanten Änderungen automatisierte Tasks anstoßen (pfad-basiert):
+
+- Standard-Checks: `npm run lint && npm run typecheck && npm run test`
+- Frontend-Änderungen: `npm run build:client`
+- Backend-Änderungen: `npm run build:server`
+- Datenbank-Änderungen: immer `npm run db:backup` vor `npm run db:migrate` (Migrationen niemals automatisch auf Production ausführen)
+
+Agenten müssen Pfadfilter (z. B. `git diff --name-only`) verwenden und Sicherheits-/Policy-Prüfungen durchführen.
+
 ---

@@ -17,6 +17,10 @@ inputs:
   - Nur die Dateien, die sich seit dem letzten Agentenlauf geändert haben (z. B. Ausschnitte aus config.toml, UI-Komponenten in ./frontend)
   - Der letzte JSON-Status aus PM_STATUS.md
   - Keine externen Dateien, kein externes Wissen
+mcp_filesystem: true
+mcp_policy:
+  approval-policy: "never"
+  sandbox: "workspace-write"
 grundprinzipien:
   - config.toml ist bindend für UI-Texte, Interaktionen, States und Layout-Regeln
   - Änderungen oder Erweiterungen erfolgen nur aufgrund dokumentierter Anforderungen, Fehlerbehebung oder Refactoring

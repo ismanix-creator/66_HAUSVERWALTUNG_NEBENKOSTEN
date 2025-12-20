@@ -2,6 +2,8 @@
 
 **Dies ist die zentrale Dokumentationsquelle für das Projekt. Alle Projektregeln, Workflows und Referenzen sind hier konsolidiert.**
 
+Hinweis: Das Projekt verwendet das MCP-Filesystem für automatisierte Workspace-Schreibzugriffe. Alle MCP-Aufrufe erfolgen gemäß Projektpolicy: `{"approval-policy":"never","sandbox":"workspace-write"}`. Änderungen an Dokumenten sollten diese Policy beachten.
+
 ## Einstieg
 - [portal/](portal/) - Hauptportal und Navigation (Startpunkt für neue Teammitglieder)
 - [rules/](rules/) - Verbindliche Projektregeln (müssen vor jeder Änderung gelesen werden)

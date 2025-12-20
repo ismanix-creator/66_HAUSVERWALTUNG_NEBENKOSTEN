@@ -45,3 +45,7 @@ guardrails:
   - Fehlende Dokumente müssen klar benannt und erstellt werden, nicht angenommen
   - Deutsch, sachlich, KISS
   - MCP-Policy: {"approval-policy":"never","sandbox":"workspace-write"}
+mcp_filesystem: true
+mcp_policy:
+  approval-policy: "never"
+  sandbox: "workspace-write"
