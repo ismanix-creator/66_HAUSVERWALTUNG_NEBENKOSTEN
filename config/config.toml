@@ -3992,3 +3992,27 @@ title_field = "vertragsnummer"
 # [imports] SECTION REMOVED - All configurations are now consolidated in this file
 # Only catalogs remain as separate files in config/catalogs/
 # =============================================================================
+
+# =============================================================================
+# Compatibility root placeholders (added to satisfy MasterConfigSchema)
+# These root sections are intentionally minimal — concrete values remain
+# in the consolidated `entities`, `forms`, `tables`, `views` sections
+# and in the `config/catalogs/` directory for large lookup catalogs.
+# =============================================================================
+
+[labels]
+# Optional: label overrides / translations can be placed here.
+# Example: [labels.ui] greeting = "Willkommen"
+
+[catalogs]
+# Katalog-Referenz (Katalogdateien bleiben in config/catalogs/)
+path = "config/catalogs"
+
+[validation]
+# Optional global validation rules. Entity-specific validations remain
+# under [entities.<name>.validation]
+
+[features]
+# Feature-Flags (optional). Beispiel:
+# beta_dashboard = true
+

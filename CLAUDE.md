@@ -75,6 +75,12 @@ graph TB
 
 **Regel:** Änderungen an Business-Logik = TOML editieren, NICHT Code ändern.
 
+Hinweis: Die Master-Konfiguration ist vollständig in `config/config.toml` konsolidiert.
+Große Wertelisten/Kataloge verbleiben in `config/catalogs/`. Leere Root-Abschnitte
+(`labels`, `catalogs`, `validation`, `features`) wurden angelegt, damit das
+`MasterConfigSchema` vollständig abgebildet ist; konkrete Definitionen bleiben
+in den bestehenden `entities`, `forms`, `tables` und `views`-Blöcken.
+
 ## Lese-Gate & Steuerlogik
 
 - **Pflichtlektüre** vor Änderungen: `.claude/*`, `.codex/*`, `.ai/*`, `CLAUDE.md`, `CODEX.md`, `AGENTS.md`, `PM_STATUS.md` (letzter JSON-Block), `BLUEPRINT_PROMPT_DE.md`, `wireframe.md`, `todo.md`, `config/config.toml`, `CHANGELOG.md`.
