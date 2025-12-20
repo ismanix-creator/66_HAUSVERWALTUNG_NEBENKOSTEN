@@ -1,12 +1,13 @@
 import { Building2, Users, FileText, Wallet, FileArchive, FileCheck } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { useDashboardSummary } from '../hooks/useConfig'
+import { useDashboardSummary, useViewConfig } from '../hooks/useConfig'
 
 export function DashboardPage() {
   const navigate = useNavigate()
-  const { data: summary, isLoading } = useDashboardSummary()
+  const { data: viewConfig, isLoading: viewLoading } = useViewConfig('dashboard')
+  const { data: summary, isLoading: summaryLoading } = useDashboardSummary()
 
-  if (isLoading) {
+  if (viewLoading || summaryLoading) {
     return (
       <div className="flex h-64 items-center justify-center">
         <div className="text-slate-500">Lade Dashboard...</div>
@@ -14,7 +15,7 @@ export function DashboardPage() {
     )
   }
 
-  if (!summary) {
+  if (!viewConfig || !summary) {
     return (
       <div className="flex h-64 items-center justify-center">
         <div className="text-slate-500">Keine Dashboard-Daten verfügbar.</div>
@@ -22,91 +23,76 @@ export function DashboardPage() {
     )
   }
 
-  const stats: StatsCardItem[] = [
-    { title: 'Objekte', value: summary.objekte, icon: Building2, color: 'blue' },
-    { title: 'Mieter', value: summary.mieter, icon: Users, color: 'green' },
-    { title: 'Verträge', value: summary.vertraege, icon: FileText, color: 'purple' },
-    { title: 'Offene Rechnungen', value: summary.offeneRechnungen, icon: Wallet, color: 'orange' },
-    { title: 'Dokumente', value: summary.dokumente, icon: FileArchive, color: 'blue' },
-    { title: 'Erinnerungen', value: summary.offeneErinnerungen, icon: FileCheck, color: 'green' },
-  ]
-
-  const openExport = () => {
-    window.open('/api/export/steuerberater', '_blank')
-  }
+  const view = viewConfig.view
 
   return (
-    <div className="space-y-6 text-slate-100">
+    <div className={`space-y-6 text-slate-100 ${view.styling?.card_padding || 'p-6'}`}>
       <div>
-        <h1 className="text-2xl font-bold text-slate-100">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-slate-100">{view.title?.replace('labels.', '') || 'Dashboard'}</h1>
         <p className="text-slate-400">Übersicht Ihrer Mietverwaltung</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {stats.map(stat => (
+      {/* Stats Cards */}
+      <div className={`grid ${view.grid_cols?.sm ? `grid-cols-${view.grid_cols.sm}` : 'grid-cols-1'} gap-6 sm:grid-cols-${view.grid_cols?.md || 2} lg:grid-cols-${view.grid_cols?.lg || 3}`}>
+        {view.stats_cards?.map(stat => (
           <StatsCard
-            key={stat.title}
-            title={stat.title}
-            value={stat.value.toString()}
-            icon={stat.icon}
+            key={stat.id}
+            title={stat.title?.replace('dashboard.', '') || stat.id}
+            value={summary[stat.field as keyof typeof summary]?.toString() || '0'}
+            icon={getIcon(stat.icon)}
             color={stat.color}
           />
         ))}
       </div>
 
-      <section className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-lg border border-slate-800 bg-slate-900 p-6 shadow-lg shadow-black/30">
-          <h2 className="text-lg font-semibold text-slate-100 mb-2">Schnellzugriff</h2>
-          <p className="text-sm text-slate-400 mb-4">
-            Öffne Dokumente, Rechnungen oder Abrechnungen direkt aus dem Dashboard.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => navigate('/dokumente')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-800 border border-slate-700 rounded-lg hover:bg-slate-700"
-            >
-              Dokumente
-            </button>
-            <button
-              onClick={() => navigate('/nebenkosten/rechnungen')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-800 border border-slate-700 rounded-lg hover:bg-slate-700"
-            >
-              Rechnungen
-            </button>
-            <button
-              onClick={() => navigate('/nebenkosten/abrechnungen')}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 bg-slate-800 border border-slate-700 rounded-lg hover:bg-slate-700"
-            >
-              Abrechnungen
-            </button>
-            <button
-              onClick={openExport}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 bg-emerald-900/50 border border-emerald-800 rounded-lg hover:bg-emerald-800/70"
-            >
-              Steuerberater-Export
-            </button>
+      {/* Cards */}
+      <section className={`grid gap-4 ${view.cards?.some(c => c.grid_span?.col === 2) ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
+        {view.cards?.map(card => (
+          <div key={card.id} className={`${view.styling?.card_bg || 'bg-slate-900'} ${view.styling?.card_border || 'border border-slate-800'} rounded-lg ${view.styling?.card_shadow || 'shadow-lg shadow-black/30'} ${view.styling?.card_padding || 'p-6'}`}>
+            <h2 className="text-lg font-semibold text-slate-100 mb-2">{card.title?.replace('dashboard.', '') || card.id}</h2>
+            <p className="text-sm text-slate-400 mb-4">{card.subtitle?.replace('dashboard.', '') || card.description?.replace('dashboard.', '')}</p>
+            {card.type === 'action_buttons' && (
+              <div className="flex flex-wrap gap-2">
+                {card.actions?.map(action => (
+                  <button
+                    key={action.id}
+                    onClick={action.api_endpoint ? () => window.open(action.api_endpoint, '_blank') : () => navigate(action.route || '/')}
+                    className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 ${action.style === 'success' ? 'bg-emerald-900/50 border border-emerald-800 hover:bg-emerald-800/70' : 'bg-slate-800 border border-slate-700 hover:bg-slate-700'}`}
+                  >
+                    {action.label?.replace('dashboard.btn_', '')}
+                  </button>
+                ))}
+              </div>
+            )}
+            {card.type === 'status_summary' && (
+              <div className="space-y-2">
+                <p className="text-sm text-slate-400">
+                  {summary.offeneErinnerungen} Erinnerung(en) offen, {summary.offeneRechnungen} offene Rechnung(en).
+                </p>
+                <p className="text-sm text-slate-400">
+                  {summary.objekte} Objekte &middot; {summary.einheiten} Einheiten verwaltet.
+                </p>
+                <p className="text-sm text-slate-400">Letzte Dokumente: {summary.dokumente}</p>
+                <p className="text-sm text-slate-400">Alle Zahlen basieren auf der aktuellen Datenbank.</p>
+              </div>
+            )}
           </div>
-        </div>
-
-        <div className="rounded-lg border border-slate-800 bg-slate-900 p-6 shadow-lg shadow-black/30">
-          <h2 className="text-lg font-semibold text-slate-100 mb-2">Status</h2>
-          <p className="text-sm text-slate-400">
-            {summary.offeneErinnerungen} Erinnerung(en) offen, {summary.offeneRechnungen} offene
-            Rechnung(en).
-          </p>
-          <div className="mt-4 space-y-2">
-            <p className="text-sm text-slate-400">
-              {summary.objekte} Objekte &middot; {summary.einheiten} Einheiten verwaltet.
-            </p>
-            <p className="text-sm text-slate-400">Letzte Dokumente: {summary.dokumente}</p>
-            <p className="text-sm text-slate-400">
-              Alle Zahlen basieren auf der aktuellen Datenbank.
-            </p>
-          </div>
-        </div>
+        ))}
       </section>
     </div>
   )
+}
+
+function getIcon(iconName?: string) {
+  switch (iconName) {
+    case 'Building2': return Building2
+    case 'Users': return Users
+    case 'FileText': return FileText
+    case 'Wallet': return Wallet
+    case 'FileArchive': return FileArchive
+    case 'FileCheck': return FileCheck
+    default: return Building2
+  }
 }
 
 type StatsCardColor = 'blue' | 'green' | 'purple' | 'orange'

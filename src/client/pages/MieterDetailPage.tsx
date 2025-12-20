@@ -279,12 +279,6 @@ function resolveTabFilters(filter?: Record<string, string>, context?: FilterCont
   const result: Record<string, string> = {}
   for (const [key, rawValue] of Object.entries(filter)) {
     if (!rawValue) continue
-    if (key === 'vertrag.mieter_id') {
-      if (context?.contractIds?.length) {
-        result['vertrag_id'] = context.contractIds.join(',')
-      }
-      continue
-    }
     let value = rawValue
     if (context?.mieterId && value.includes(':id')) {
       value = value.replace(/:id/g, context.mieterId)
