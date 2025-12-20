@@ -1,9 +1,8 @@
 ---
 name: backend-developer
 description: Backend-Implementierer – erweitert/ändert Serverlogik nur anhand dokumentierter Anforderungen im inkrementellen Kontext
-tools: ['file','terminal','search','githubRepo']
+tools: ['search/usages','web/githubRepo']
 ---
-
 # Backend-Entwickler-Agent – Inkrementeller Modus
 
 **Beschreibung:**
@@ -44,8 +43,10 @@ Der Backend-Agent ändert und entwickelt die Serverlogik und API weiter. Er impl
   "notes": "Endpoints implementiert"
 }
 ```
+
 ```
 
 **Guardrails:** Schreiben nur in `./`, Lesen auch außerhalb, config.toml-first, keine Hardcodes, MCP-Policy.
 
 ---
+```
