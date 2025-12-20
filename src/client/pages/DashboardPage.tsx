@@ -44,7 +44,7 @@ export function DashboardPage() {
 
       {/* Stats Cards: immer 3 Spalten auf kleinen/größeren Ansichten, damit 6 Karten in 2 Reihen passen */}
       <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6`}>
-        {view.stats_cards?.map(stat => (
+        {view.stats_cards?.map((stat: any) => (
           <StatsCard
             key={stat.id}
             title={stat.title?.replace('dashboard.', '') || stat.id}
@@ -56,14 +56,14 @@ export function DashboardPage() {
       </div>
 
       {/* Cards */}
-      <section className={`grid gap-4 ${view.cards?.some(c => c.grid_span?.col === 2) ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
-        {view.cards?.map(card => (
+      <section className={`grid gap-4 ${view.cards?.some((c: any) => c.grid_span?.col === 2) ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
+        {view.cards?.map((card: any) => (
           <div key={card.id} className={`${view.styling?.card_bg || 'bg-slate-900'} ${view.styling?.card_border || 'border border-slate-800'} rounded-lg ${view.styling?.card_shadow || 'shadow-lg shadow-black/30'} ${view.styling?.card_padding || 'p-6'}`}>
             <h2 className="text-lg font-semibold text-slate-100 mb-2">{card.title?.replace('dashboard.', '') || card.id}</h2>
             <p className="text-sm text-slate-400 mb-4">{card.subtitle?.replace('dashboard.', '') || card.description?.replace('dashboard.', '')}</p>
             {card.type === 'action_buttons' && (
               <div className="flex flex-wrap gap-2">
-                {card.actions?.map(action => (
+                {card.actions?.map((action: any) => (
                   <button
                     key={action.id}
                     onClick={action.api_endpoint ? () => window.open(action.api_endpoint, '_blank') : () => navigate(action.route || '/')}
@@ -107,12 +107,7 @@ function getIcon(iconName?: string) {
 
 type StatsCardColor = 'blue' | 'green' | 'purple' | 'orange'
 
-interface StatsCardItem {
-  title: string
-  value: number
-  icon: React.ComponentType<{ className?: string }>
-  color: StatsCardColor
-}
+// Removed unused interface `StatsCardItem` to satisfy TypeScript (unused declaration)
 
 interface StatsCardProps {
   title: string

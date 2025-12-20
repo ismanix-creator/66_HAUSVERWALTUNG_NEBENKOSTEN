@@ -13,7 +13,7 @@ import type { TableConfig } from '../components/data/DataTable'
 import type { FormConfig } from '../components/data/DynamicForm'
 import { useEntityList, useCreateEntity, useUpdateEntity } from '../hooks/useEntity'
 import { useEntityConfig, useFormConfig, useTableConfig, useViewConfig } from '../hooks/useConfig'
-import type { Zahlung, Sollstellung, Kaution } from '@shared/types/entities'
+// removed unused type imports to avoid TS errors
 
 const PAGE_SIZE = 15
 
@@ -23,7 +23,7 @@ export function FinanzenPage() {
 
   const { data: viewConfig, isLoading: viewLoading } = useViewConfig('finanzen')
 
-  const tabs = viewConfig?.view?.tabs || []
+  const tabs = (viewConfig as any)?.view?.tabs || []
   const activeTabId = tab || tabs[0]?.id || 'zahlungen'
 
   const [pagination, setPagination] = useState<Record<string, number>>({})
@@ -32,7 +32,7 @@ export function FinanzenPage() {
   const [formError, setFormError] = useState('')
 
   useEffect(() => {
-    if (tab && tabs.some(t => t.id === tab)) {
+    if (tab && tabs.some((t: any) => t.id === tab)) {
       // activeTabId is set
     }
   }, [tab, tabs])
@@ -41,7 +41,7 @@ export function FinanzenPage() {
     navigate(`/finanzen/${nextTabId}`, { replace: true })
   }
 
-  const activeTab = tabs.find(t => t.id === activeTabId)
+  const activeTab = tabs.find((t: any) => t.id === activeTabId)
 
   const { data: currentTable, isLoading: tableLoading } = useTableConfig<TableConfig>(activeTab?.table?.replace('tables/', '') || '')
   const { data: currentForm } = useFormConfig<FormConfig>(activeTab?.id || '')
@@ -82,7 +82,7 @@ export function FinanzenPage() {
     setFormError('')
   }
 
-  const currentData = currentList.data?.data || []
+  const currentData = (currentList.data?.data || []) as Record<string, unknown>[]
   const currentMeta = currentList.data?.meta
   const isConfigLoading = viewLoading || tableLoading || !currentTable || !activeTab
 
@@ -102,7 +102,7 @@ export function FinanzenPage() {
       </div>
 
       <div className="flex space-x-2">
-        {tabs.map(tab => (
+        {tabs.map((tab: any) => (
           <button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
