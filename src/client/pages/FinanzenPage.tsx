@@ -28,14 +28,14 @@ export function FinanzenPage() {
     label?: string
     table?: string
     default_sort?: { field: string; direction: string }
-    actions?: { create?: boolean }
+    actions?: { create?: boolean | { label?: string } }
   }
   const tabs: FinanzenTab[] = useMemo(() => (viewConfig as { view?: { tabs?: FinanzenTab[] } })?.view?.tabs || [], [viewConfig])
   const activeTabId = tab || tabs[0]?.id || 'zahlungen'
 
   const [pagination, setPagination] = useState<Record<string, number>>({})
   const [showForm, setShowForm] = useState(false)
-  const [editingItem, setEditingItem] = useState<Record<string, unknown> | null>(null)
+  const [editingItem, setEditingItem] = useState<Record<string, unknown> & { id?: string } | null>(null)
   const [formError, setFormError] = useState('')
 
   useEffect(() => {
@@ -75,7 +75,11 @@ export function FinanzenPage() {
     setFormError('')
     try {
       if (editingItem) {
-        await updateMutation.mutateAsync({ id: editingItem.id, data })
+        if (typeof editingItem.id === 'string') {
+          await updateMutation.mutateAsync({ id: editingItem.id, data })
+        } else {
+          throw new Error('Ungültige ID zum Aktualisieren')
+        }
       } else {
         await createMutation.mutateAsync(data)
       }
@@ -139,7 +143,9 @@ export function FinanzenPage() {
                 className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary-600 rounded-lg hover:text-primary-700 transition-colors"
               >
                 <Plus className="h-4 w-4" />
-                {activeTab.actions.create.label?.replace('actions.', '') || 'Erstellen'}
+                {typeof activeTab.actions?.create === 'object'
+                  ? activeTab.actions.create.label?.replace('actions.', '') || 'Erstellen'
+                  : 'Erstellen'}
               </button>
             )}
           </div>

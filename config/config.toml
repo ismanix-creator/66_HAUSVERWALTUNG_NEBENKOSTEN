@@ -3987,6 +3987,65 @@ title_field = "vertragsnummer"
   filter = { vertrag_id = ":id" }
 
 # =============================================================================
+# STATSCARDS - Zentrale Definitionen für Dashboard Stats Cards
+# =============================================================================
+[statscards]
+# Zentrale Sammlungen von Stats Cards - können in Views referenziert werden
+[[statscards.cards]]
+id = "objekte"
+title = "Objekte"
+field = "objekte"
+icon = "Building2"
+color = "blue"
+sortable = true
+order = 10
+
+[[statscards.cards]]
+id = "mieter"
+title = "Mieter"
+field = "mieter"
+icon = "Users"
+color = "green"
+sortable = true
+order = 20
+
+[[statscards.cards]]
+id = "vertraege"
+title = "Vertraege"
+field = "vertraege"
+icon = "FileText"
+color = "purple"
+sortable = true
+order = 30
+
+[[statscards.cards]]
+id = "offene_rechnungen"
+title = "Offene Rechnungen"
+field = "offeneRechnungen"
+icon = "Wallet"
+color = "orange"
+sortable = true
+order = 40
+
+[[statscards.cards]]
+id = "dokumente"
+title = "Dokumente"
+field = "dokumente"
+icon = "FileArchive"
+color = "blue"
+sortable = true
+order = 50
+
+[[statscards.cards]]
+id = "erinnerungen"
+title = "Erinnerungen"
+field = "offeneErinnerungen"
+icon = "FileCheck"
+color = "green"
+sortable = true
+order = 60
+
+# =============================================================================
 # IMPORTS - Externe Konfigurationsdateien (Kataloge, Labels, Validierung, Design)
 # =============================================================================
 # [imports] SECTION REMOVED - All configurations are now consolidated in this file
