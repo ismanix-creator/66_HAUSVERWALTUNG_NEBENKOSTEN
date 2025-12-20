@@ -1,5 +1,10 @@
 ## 2025-12-17
 
+### [2025-12-21 00:32] - Chore - Pin TypeScript & Fix FinanzenPage
+- `package.json`: TypeScript auf `5.5.4` gepinnt, um Kompatibilität mit `@typescript-eslint` sicherzustellen.
+- `src/client/pages/FinanzenPage.tsx`: Typsicherungen und Guards ergänzt (`editingItem.id`-Guard, sicherer Umgang mit `actions.create`-Label).
+
+
 ### [2025-12-17 XX:XX] - Feature - IBAN-Autofill Bankname
 - Neuer Katalog `config/catalogs/bankleitzahlen.catalog.toml` (inkl. Import in `config/config.toml`) hält die BLZ→Bankname/BIC-Zuordnung für das Mieter-Banking; Erweiterungen passieren config-driven ohne Codeänderung.
 - `DynamicForm` formatiert IBAN-Eingaben automatisch mit DE-Prefix und 4er-Gruppierung (`DEkk xxxx xxxx ...`), validiert ohne Leerzeichen und füllt `bankname`/`bic`, sobald eine bekannte BLZ erkannt wird; manuelle Eingaben bleiben unangetastet.
