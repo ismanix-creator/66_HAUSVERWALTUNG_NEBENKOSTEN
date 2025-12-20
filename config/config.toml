@@ -534,7 +534,7 @@ mock_delay_ms = 0
 name = "dokument"
 table_name = "dokumente"
 label = "entity.dokument"
-label_plural = "labels.entity.dokumente"
+label_plural = "Dokumente"
 icon = "File"
 primary_key = "id"
 
@@ -634,14 +634,14 @@ vertrag = { type = "many_to_one", target = "vertrag", foreign_key = "vertrag_id"
 
 # Dokument Entity - Dokumentenverwaltung
 [entities.dokument.validation]
-mindestens_eine_zuordnung = { rule = "objekt_id is not null or mieter_id is not null or vertrag_id is not null", message = "labels.validation.dokument_zuordnung" }
+mindestens_eine_zuordnung = { rule = "objekt_id is not null or mieter_id is not null or vertrag_id is not null", message = "Mindestens eine Zuordnung erforderlich (Objekt oder Mieter oder Vertrag)" }
 
 # Einheit Entity - Mieteinheiten
 [entities.einheit]
 name = "einheit"
 table_name = "einheiten"
 label = "entity.einheit"
-label_plural = "labels.entity.einheiten"
+label_plural = "Einheiten"
 icon = "DoorOpen"
 primary_key = "id"
 
@@ -740,7 +740,7 @@ aktueller_mieter = { formula = "aktueller_vertrag.mieter" }
 name = "erinnerung"
 table_name = "erinnerungen"
 label = "entity.erinnerung"
-label_plural = "labels.entity.erinnerungen"
+label_plural = "Erinnerungen"
 icon = "Bell"
 primary_key = "id"
 
@@ -805,7 +805,7 @@ label = "common.erstellt_am"
 name = "kaution"
 table_name = "kautionen"
 label = "entity.kaution"
-label_plural = "labels.entity.kautionen"
+label_plural = "Kautionen"
 icon = "Shield"
 primary_key = "id"
 
@@ -900,7 +900,7 @@ vertrag = { type = "one_to_one", target = "vertrag", foreign_key = "vertrag_id" 
 name = "kostenart"
 table_name = "kostenarten"
 label = "entity.kostenart"
-label_plural = "labels.entity.kostenarten"
+label_plural = "Kostenarten"
 icon = "Tag"
 primary_key = "id"
 
@@ -961,7 +961,7 @@ rechnungen = { type = "one_to_many", target = "rechnung", foreign_key = "kostena
 name = "mieter"
 table_name = "mieter"
 label = "entity.mieter"
-label_plural = "labels.entity.mieter_plural"
+label_plural = "Mieter"
 icon = "User"
 primary_key = "id"
 
@@ -975,14 +975,14 @@ visible = false
 [entities.mieter.fields.anrede]
 type = "enum"
 options = ["herr", "frau", "firma", "divers"]
-label = "mieter.anrede"
+label = "Anrede"
 placeholder = "herr"
 
 # vorname (Text)
 [entities.mieter.fields.vorname]
 type = "string"
 max_length = 50
-label = "mieter.vorname"
+label = "Vorname"
 required_if = { field = "anrede", not_in = ["firma"] }
 placeholder = "Max"
 
@@ -991,7 +991,7 @@ placeholder = "Max"
 type = "string"
 required = true
 max_length = 50
-label = "mieter.nachname"
+label = "Nachname"
 description = "Bei Firma: Firmenname"
 placeholder = "Mustermann"
 
@@ -999,34 +999,34 @@ placeholder = "Mustermann"
 [entities.mieter.fields.firma_zusatz]
 type = "string"
 max_length = 100
-label = "mieter.firma_zusatz"
+label = "Firmenzusatz"
 visible_if = { field = "anrede", equals = "firma" }
 placeholder = "Muster GmbH"
 
 # geburtsdatum (Datum)
 [entities.mieter.fields.geburtsdatum]
 type = "date"
-label = "mieter.geburtsdatum"
+label = "Geburtsdatum"
 visible_if = { field = "anrede", not_in = ["firma"] }
 
 # telefon (Text)
 [entities.mieter.fields.telefon]
 type = "string"
 max_length = 30
-label = "mieter.telefon"
+label = "Telefon"
 placeholder = "+49 170 1234567"
 
 # email (E-Mail)
 [entities.mieter.fields.email]
 type = "email"
 max_length = 100
-label = "mieter.email"
+label = "E-Mail"
 placeholder = "max@example.com"
 
 # adresse_vorher (Mehrzeiliger Text)
 [entities.mieter.fields.adresse_vorher]
 type = "text"
-label = "mieter.adresse_vorher"
+label = "Vorherige Adresse"
 description = "Vorherige Anschrift"
 placeholder = "Musterstraße 1, 12345 Berlin"
 
@@ -1036,7 +1036,7 @@ type = "string"
 required = false
 max_length = 34
 pattern = "^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$"
-label = "mieter.iban"
+label = "IBAN"
 default = "DE"
 placeholder = "DE12 3456 7890 1234 5678 90"
 
@@ -1045,7 +1045,7 @@ placeholder = "DE12 3456 7890 1234 5678 90"
 type = "string"
 required = false
 max_length = 11
-label = "mieter.bic"
+label = "BIC"
 placeholder = "COBADEFFXXX"
 
 # bankname (Text - Optional)
@@ -1095,7 +1095,7 @@ aktuelle_einheit = { formula = "aktiver_vertrag.einheit" }
 name = "nebenkostenabrechnung"
 table_name = "nebenkostenabrechnungen"
 label = "entity.nebenkostenabrechnung"
-label_plural = "labels.entity.nebenkostenabrechnungen"
+label_plural = "Nebenkostenabrechnungen"
 icon = "FileSpreadsheet"
 primary_key = "id"
 
@@ -1165,7 +1165,7 @@ gesamtkosten = { formula = "sum(positionen.gesamtkosten)" }
 name = "objekt"
 table_name = "objekte"
 label = "entity.objekt"
-label_plural = "labels.entity.objekte"
+label_plural = "Objekte"
 icon = "Building2"
 primary_key = "id"
 
@@ -1257,7 +1257,7 @@ gesamt_flaeche = { formula = "sum(einheiten.flaeche)" }
 name = "rechnung"
 table_name = "rechnungen"
 label = "entity.rechnung"
-label_plural = "labels.entity.rechnungen"
+label_plural = "Rechnungen"
 icon = "Receipt"
 primary_key = "id"
 
@@ -1362,7 +1362,7 @@ jahr = { formula = "year(rechnungsdatum)" }
 name = "sollstellung"
 table_name = "sollstellungen"
 label = "entity.sollstellung"
-label_plural = "labels.entity.sollstellungen"
+label_plural = "Sollstellungen"
 icon = "ListChecks"
 primary_key = "id"
 
@@ -1419,7 +1419,7 @@ mieter = { formula = "vertrag.mieter" }
 name = "vertrag"
 table_name = "vertraege"
 label = "entity.vertrag"
-label_plural = "labels.entity.vertraege"
+label_plural = "Verträge"
 icon = "FileSignature"
 primary_key = "id"
 
@@ -1579,15 +1579,15 @@ naechste_mieterhoehung_moeglich = { formula = "add_months(letzte_mieterhoehung, 
 
 # Vertrag Entity - Mietverträge
 [entities.vertrag.validation]
-ende_nach_beginn = { rule = "ende is null or ende > beginn", message = "labels.validation.ende_nach_beginn" }
-kuendigung_logik = { rule = "kuendigung_zum is null or gekuendigt_von is not null", message = "labels.validation.kuendigung_von_fehlt" }
+ende_nach_beginn = { rule = "ende is null or ende > beginn", message = "Ende muss nach Beginn liegen" }
+kuendigung_logik = { rule = "kuendigung_zum is null or gekuendigt_von is not null", message = "Bei Kündigung fehlt die Angabe wer gekündigt hat" }
 
 # Zähler Entity - Zählerdefinitionen
 [entities.zaehler]
 name = "zaehler"
 table_name = "zaehler"
 label = "entity.zaehler"
-label_plural = "labels.entity.zaehler_plural"
+label_plural = "Zähler"
 icon = "Gauge"
 primary_key = "id"
 
@@ -1660,7 +1660,7 @@ bezeichnung_display = { formula = "concat(typ, ' - ', zaehlernummer, ist_hauptza
 name = "zaehlerstand"
 table_name = "zaehlerstaende"
 label = "entity.zaehlerstand"
-label_plural = "labels.entity.zaehlerstaende"
+label_plural = "Zählerstände"
 icon = "Activity"
 primary_key = "id"
 
@@ -1724,7 +1724,7 @@ verbrauch = { formula = "stand - previous(stand)" }
 name = "zahlung"
 table_name = "zahlungen"
 label = "entity.zahlung"
-label_plural = "labels.entity.zahlungen"
+label_plural = "Zahlungen"
 icon = "ArrowDownCircle"
 primary_key = "id"
 
@@ -1802,13 +1802,13 @@ einheit = { formula = "vertrag.einheit" }
 # Dokument Form
 [forms.dokument.form]
 entity = "dokument"
-title_create = "labels.form.dokument_hochladen"
-title_edit = "labels.form.dokument_bearbeiten"
+title_create = "Dokument hochladen"
+title_edit = "Dokument bearbeiten"
 
 # Dokument Form - Formular für Dokumente
 [[forms.dokument.form.sections]]
 id = "zuordnung"
-label = "labels.form.section.zuordnung"
+label = "Zuordnung"
 
 # Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
@@ -1837,7 +1837,7 @@ label = "labels.form.section.zuordnung"
 # Dokument Form - Formular für Dokumente
 [[forms.dokument.form.sections]]
 id = "detail"
-label = "labels.form.section.details"
+label = "Details"
 
 # Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
@@ -1868,7 +1868,7 @@ label = "labels.form.section.details"
 # Dokument Form - Formular für Dokumente
 [[forms.dokument.form.sections]]
 id = "datei"
-label = "labels.form.section.datei"
+label = "Datei"
 
 # Dokument Form - Formular für Dokumente
   [[forms.dokument.form.sections.fields]]
@@ -1910,13 +1910,13 @@ cancel_label = "actions.abbrechen"
 # Einheit Form
 [forms.einheit.form]
 entity = "einheit"
-title_create = "labels.actions.add"
-title_edit = "labels.actions.edit"
+title_create = "Einheit anlegen"
+title_edit = "Einheit bearbeiten"
 
 # Einheit Form - Formular für Einheiten
 [[forms.einheit.form.sections]]
 id = "basis"
-label = "labels.form.section.basic"
+label = "Basis"
 
 # Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
@@ -1936,7 +1936,7 @@ label = "labels.form.section.basic"
 # Einheit Form - Formular für Einheiten
 [[forms.einheit.form.sections]]
 id = "details"
-label = "labels.form.section.details"
+label = "Details"
 
 # Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
@@ -1957,7 +1957,7 @@ label = "labels.form.section.details"
 # Einheit Form - Formular für Einheiten
 [[forms.einheit.form.sections]]
 id = "ausstattung"
-label = "labels.form.section.settings"
+label = "Einstellungen"
 
 # Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
@@ -1972,7 +1972,7 @@ label = "labels.form.section.settings"
 # Einheit Form - Formular für Einheiten
 [[forms.einheit.form.sections]]
 id = "notizen"
-label = "labels.form.section.notes"
+label = "Notizen"
 
 # Einheit Form - Formular für Einheiten
   [[forms.einheit.form.sections.fields]]
@@ -1987,13 +1987,13 @@ cancel = "buttons.cancel"
 # Kaution Form
 [forms.kaution.form]
 entity = "kaution"
-title_create = "labels.form.kaution_anlegen"
-title_edit = "labels.form.kaution_bearbeiten"
+title_create = "Kaution anlegen"
+title_edit = "Kaution bearbeiten"
 
 # Kaution Form - Formular für Kautionen
 [[forms.kaution.form.sections]]
 id = "daten"
-label = "labels.form.section.allgemein"
+label = "Allgemein"
 
 # Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
@@ -2018,7 +2018,7 @@ label = "labels.form.section.allgemein"
 # Kaution Form - Formular für Kautionen
 [[forms.kaution.form.sections]]
 id = "details"
-label = "labels.form.section.kaution"
+label = "Kaution"
 
 # Kaution Form - Formular für Kautionen
   [[forms.kaution.form.sections.fields]]
@@ -2055,13 +2055,13 @@ label = "labels.form.section.kaution"
 # Mieter Form
 [forms.mieter.form]
 entity = "mieter"
-title_create = "labels.actions.add"
-title_edit = "labels.actions.edit"
+title_create = "Mieter anlegen"
+title_edit = "Mieter bearbeiten"
 
 # Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "basis"
-label = "labels.form.section.basic"
+label = "Basis"
 
 # Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
@@ -2086,7 +2086,7 @@ label = "labels.form.section.basic"
 # Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "kontakt"
-label = "labels.form.section.contact"
+label = "Kontakt"
 
 # Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
@@ -2111,7 +2111,7 @@ label = "labels.form.section.contact"
 # Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "adressen"
-label = "labels.form.section.addresses"
+label = "Adressen"
 
 # Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
@@ -2121,7 +2121,7 @@ label = "labels.form.section.addresses"
 # Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "banking"
-label = "labels.form.section.financial"
+label = "Finanzen"
 
 # Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
@@ -2141,7 +2141,7 @@ label = "labels.form.section.financial"
 # Mieter Form - Formular für Mieter
 [[forms.mieter.form.sections]]
 id = "notizen"
-label = "labels.form.section.notes"
+label = "Notizen"
 
 # Mieter Form - Formular für Mieter
   [[forms.mieter.form.sections.fields]]
@@ -2156,13 +2156,13 @@ cancel = { label = "buttons.cancel" }
 # Nebenkostenabrechnung Form
 [forms.nebenkostenabrechnung.form]
 entity = "nebenkostenabrechnung"
-title_create = "labels.form.nk_abrechnung_erstellen"
-title_edit = "labels.form.nk_abrechnung_bearbeiten"
+title_create = "Nebenkostenabrechnung erstellen"
+title_edit = "Nebenkostenabrechnung bearbeiten"
 
 # Nebenkosten-Abrechnung Form
 [[forms.nebenkostenabrechnung.form.sections]]
 id = "basis"
-label = "labels.form.section.nk_abrechnung"
+label = "Nebenkostenabrechnung"
 
 # Nebenkosten-Abrechnung Form
   [[forms.nebenkostenabrechnung.form.sections.fields]]
@@ -2192,7 +2192,7 @@ label = "labels.form.section.nk_abrechnung"
 # Nebenkosten-Abrechnung Form
 [[forms.nebenkostenabrechnung.form.sections]]
 id = "notiz"
-label = "labels.form.section.notizen"
+label = "Notizen"
 
 # Nebenkosten-Abrechnung Form
   [[forms.nebenkostenabrechnung.form.sections.fields]]
@@ -2203,13 +2203,13 @@ label = "labels.form.section.notizen"
 # Objekt Form
 [forms.objekt.form]
 entity = "objekt"
-title_create = "labels.form.objekt_anlegen"
-title_edit = "labels.form.objekt_bearbeiten"
+title_create = "Objekt anlegen"
+title_edit = "Objekt bearbeiten"
 
 # Objekt Form - Formular für Objekte
 [[forms.objekt.form.sections]]
 id = "basis"
-label = "labels.form.section.basis"
+label = "Basis"
 
 # Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
@@ -2229,7 +2229,7 @@ label = "labels.form.section.basis"
 # Objekt Form - Formular für Objekte
 [[forms.objekt.form.sections]]
 id = "adresse"
-label = "labels.form.section.adresse"
+label = "Adresse"
 
 # Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
@@ -2249,7 +2249,7 @@ label = "labels.form.section.adresse"
 # Objekt Form - Formular für Objekte
 [[forms.objekt.form.sections]]
 id = "details"
-label = "labels.form.section.details"
+label = "Details"
 
 # Objekt Form - Formular für Objekte
   [[forms.objekt.form.sections.fields]]
@@ -2269,13 +2269,13 @@ cancel = "buttons.cancel"
 # Rechnung Form
 [forms.rechnung.form]
 entity = "rechnung"
-title_create = "labels.form.rechnung_erfassen"
-title_edit = "labels.form.rechnung_bearbeiten"
+title_create = "Rechnung erfassen"
+title_edit = "Rechnung bearbeiten"
 
 # Rechnung Form - Formular für Rechnungen
 [[forms.rechnung.form.sections]]
 id = "metadata"
-label = "labels.form.section.rechnung"
+label = "Rechnung"
 
 # Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
@@ -2295,7 +2295,7 @@ label = "labels.form.section.rechnung"
 # Rechnung Form - Formular für Rechnungen
 [[forms.rechnung.form.sections]]
 id = "zeiträume"
-label = "labels.form.section.zeitraum"
+label = "Zeitraum"
 
 # Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
@@ -2325,7 +2325,7 @@ label = "labels.form.section.zeitraum"
 # Rechnung Form - Formular für Rechnungen
 [[forms.rechnung.form.sections]]
 id = "betrag"
-label = "labels.form.section.betrag"
+label = "Betrag"
 
 # Rechnung Form - Formular für Rechnungen
   [[forms.rechnung.form.sections.fields]]
@@ -2341,13 +2341,13 @@ label = "labels.form.section.betrag"
 # Sollstellung Form
 [forms.sollstellung.form]
 entity = "sollstellung"
-title_create = "labels.form.sollstellung_anlegen"
-title_edit = "labels.form.sollstellung_bearbeiten"
+title_create = "Sollstellung anlegen"
+title_edit = "Sollstellung bearbeiten"
 
 # Sollstellung Form - Formular für Sollstellungen
 [[forms.sollstellung.form.sections]]
 id = "zeitraum"
-label = "labels.form.section.sollstellung"
+label = "Sollstellung"
 
 # Sollstellung Form - Formular für Sollstellungen
   [[forms.sollstellung.form.sections.fields]]
@@ -2377,13 +2377,13 @@ label = "labels.form.section.sollstellung"
 # Vertrag Form
 [forms.vertrag.form]
 entity = "vertrag"
-title_create = "labels.form.vertrag_anlegen"
-title_edit = "labels.form.vertrag_bearbeiten"
+title_create = "Vertrag anlegen"
+title_edit = "Vertrag bearbeiten"
 
 # Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "zuordnung"
-label = "labels.form.section.zuordnung"
+label = "Zuordnung"
 
 # Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
@@ -2411,7 +2411,7 @@ label = "labels.form.section.zuordnung"
 # Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "laufzeit"
-label = "labels.form.section.laufzeit"
+label = "Laufzeit"
 
 # Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
@@ -2431,7 +2431,7 @@ label = "labels.form.section.laufzeit"
 # Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "miete"
-label = "labels.form.section.miete"
+label = "Miete"
 
 # Vertrag Form - Formular für Verträge
   [[forms.vertrag.form.sections.fields]]
@@ -2463,7 +2463,7 @@ label = "labels.form.section.miete"
 # Vertrag Form - Formular für Verträge
 [[forms.vertrag.form.sections]]
 id = "anpassung"
-label = "labels.form.section.mietanpassung"
+label = "Mietenanpassung"
 collapsible = true
 
 # Vertrag Form - Formular für Verträge
@@ -2508,13 +2508,13 @@ actions = [
 # Zaehler Form
 [forms.zaehler.form]
 entity = "zaehler"
-title_create = "labels.form.zaehler_anlegen"
-title_edit = "labels.form.zaehler_bearbeiten"
+title_create = "Zähler anlegen"
+title_edit = "Zähler bearbeiten"
 
 # Zähler Form - Formular für Zähler
 [[forms.zaehler.form.sections]]
 id = "zuordnung"
-label = "labels.form.section.zaehler_zuordnung"
+label = "Zähler-Zuordnung"
 
 # Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
@@ -2530,7 +2530,7 @@ label = "labels.form.section.zaehler_zuordnung"
 # Zähler Form - Formular für Zähler
 [[forms.zaehler.form.sections]]
 id = "details"
-label = "labels.form.section.zaehler_details"
+label = "Zählerdetails"
 
 # Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
@@ -2555,7 +2555,7 @@ label = "labels.form.section.zaehler_details"
 # Zähler Form - Formular für Zähler
 [[forms.zaehler.form.sections]]
 id = "zusatz"
-label = "labels.form.section.zaehler_zusatz"
+label = "Zähler Zusatz"
 
 # Zähler Form - Formular für Zähler
   [[forms.zaehler.form.sections.fields]]
@@ -2566,13 +2566,13 @@ label = "labels.form.section.zaehler_zusatz"
 # Zaehlerstand Form
 [forms.zaehlerstand.form]
 entity = "zaehlerstand"
-title_create = "labels.form.zaehlerstand_erfassen"
-title_edit = "labels.form.zaehlerstand_bearbeiten"
+title_create = "Zählerstand erfassen"
+title_edit = "Zählerstand bearbeiten"
 
 # Zählerstand Form - Formular für Zählerstände
 [[forms.zaehlerstand.form.sections]]
 id = "basis"
-label = "labels.form.section.zaehlerstand"
+label = "Zählerstand"
 
 # Zählerstand Form - Formular für Zählerstände
   [[forms.zaehlerstand.form.sections.fields]]
@@ -2609,13 +2609,13 @@ label = "labels.form.section.zaehlerstand"
 # Zahlung Form
 [forms.zahlung.form]
 entity = "zahlung"
-title_create = "labels.form.zahlung_erfassen"
-title_edit = "labels.form.zahlung_bearbeiten"
+title_create = "Zahlung erfassen"
+title_edit = "Zahlung bearbeiten"
 
 # Zahlung Form - Formular für Zahlungen
 [[forms.zahlung.form.sections]]
 id = "basis"
-label = "labels.form.section.zahlung"
+label = "Zahlung"
 
 # Zahlung Form - Formular für Zahlungen
   [[forms.zahlung.form.sections.fields]]
@@ -2996,7 +2996,7 @@ width = "width.actions"
 
 [tables.objekte.table.row_actions]
 edit = { icon = "Pencil", dialog = "forms/objekt.form" }
-delete = { icon = "Trash2", confirm = true, confirm_message = "labels.confirm.objekt_loeschen" }
+delete = { icon = "Trash2", confirm = true, confirm_message = "Objekt löschen?" }
 
 # Rechnungen Table
 [tables.rechnungen.table]
@@ -3341,7 +3341,7 @@ delete = { icon = "Trash2", confirm = true }
 # Views.Dashboard
 [views.dashboard]
 id = "dashboard"
-title = "labels.views.dashboard"
+title = "Dashboard"
 route = "/dashboard"
 layout = "grid"
 grid_cols = { sm = 1, md = 2, lg = 3 }
@@ -3488,7 +3488,7 @@ color_schemes = { blue = "bg-blue-900/40 text-blue-100 border-blue-800", green =
 # Views.Dokumente
 [views.dokumente]
 id = "dokumente"
-title = "labels.views.dokumente"
+title = "Dokumente"
 route = "/dokumente"
 layout = "single"
 
@@ -3528,44 +3528,44 @@ delete = { label = "actions.loeschen", confirm = true }
 # Views.Einstellungen
 [views.einstellungen]
 id = "einstellungen"
-title = "labels.views.einstellungen"
+title = "Einstellungen"
 route = "/einstellungen"
 layout = "settings"
 
 # View.Sections
   [[view.sections]]
   id = "eigentuemer"
-  label = "settings.eigentuemer"
+  label = "Eigentümer"
   icon = "User"
   form = "forms/eigentuemer.form"
-  description = "labels.settings.eigentuemer_desc"
+  description = "Eigentümerdaten verwalten"
 
 # View.Sections
   [[view.sections]]
   id = "kostenarten"
-  label = "settings.kostenarten"
+  label = "Kostenarten"
   icon = "Tag"
   type = "table_editable"
   table = "tables/kostenarten.table"
   form = "forms/kostenart.form"
-  description = "labels.settings.kostenarten_desc"
+  description = "Kostenarten verwalten"
 
 # View.Sections
   [[view.sections]]
   id = "umlageschluessel"
-  label = "settings.umlageschluessel"
+  label = "Umlageschlüssel"
   icon = "Percent"
   type = "info"
   content = "catalogs/umlageschluessel.catalog"
-  description = "labels.settings.umlageschluessel_desc"
+  description = "Umlageschlüssel konfigurieren"
 
 # View.Sections
   [[view.sections]]
   id = "backup"
-  label = "settings.backup"
+  label = "Backup"
   icon = "Database"
   type = "actions"
-  description = "labels.settings.backup_desc"
+  description = "Backups erstellen und wiederherstellen"
 
 # View.Sections.Actions
     [[view.sections.actions]]
@@ -3583,7 +3583,7 @@ layout = "settings"
 # Views.Finanzen
 [views.finanzen]
 id = "finanzen"
-title = "labels.views.finanzen"
+title = "Finanzen"
 route = "/finanzen"
 layout = "tabbed"
 
@@ -3656,7 +3656,7 @@ layout = "tabbed"
 # Views.Mieter
 [views.mieter]
 id = "mieter"
-title = "labels.views.mieter"
+title = "Mieter"
 route = "/mieter"
 layout = "list_detail"
 
@@ -3719,16 +3719,16 @@ title_field = "computed.display_name"
 # View.Detail.Tabs
   [[views.mieter.detail.tabs]]
   id = "kaution"
-  label = "tabs.kaution"
+  label = "Kaution"
   type = "form_readonly"
   form = "forms/kaution.form"
   data_path = "aktiver_vertrag.kaution"
-  empty_message = "labels.kaution.keine_kaution"
+  empty_message = "Keine Kaution vorhanden"
 
 # Views.Nebenkosten
 [views.nebenkosten]
 id = "nebenkosten"
-title = "labels.views.nebenkosten"
+title = "Nebenkosten"
 route = "/nebenkosten"
 layout = "tabbed"
 
@@ -3830,7 +3830,7 @@ layout = "tabbed"
 # Views.Objekte
 [views.objekte]
 id = "objekte"
-title = "labels.views.objekte"
+title = "Objekte"
 route = "/objekte"
 layout = "list_detail"
 
@@ -3910,7 +3910,7 @@ title_field = "bezeichnung"
 # Views.Vertraege
 [views.vertraege]
 id = "vertraege"
-title = "labels.views.vertraege"
+title = "Verträge"
 route = "/vertraege"
 layout = "list_detail"
 
