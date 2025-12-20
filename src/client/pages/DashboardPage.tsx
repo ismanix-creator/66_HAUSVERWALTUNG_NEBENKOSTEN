@@ -1,4 +1,4 @@
-import { Building2, Users, FileText, Wallet, FileArchive, FileCheck } from 'lucide-react'
+import { Building2, Users, FileText, Wallet, FileArchive, FileCheck, Plus } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useDashboardSummary, useViewConfig } from '../hooks/useConfig'
 
@@ -23,17 +23,27 @@ export function DashboardPage() {
     )
   }
 
-  const view = viewConfig.view
+  // Support: some endpoints return the view directly, others wrap it in { view: { ... } }
+  const view = (viewConfig as any).view ?? (viewConfig as any)
 
   return (
     <div className={`space-y-6 text-slate-100 ${view.styling?.card_padding || 'p-6'}`}>
-      <div>
-        <h1 className="text-2xl font-bold text-slate-100">{view.title?.replace('labels.', '') || 'Dashboard'}</h1>
-        <p className="text-slate-400">Übersicht Ihrer Mietverwaltung</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-400">{view.title?.replace('labels.', '') || 'Dashboard'}</h1>
+          <p className="text-gray-600">Übersicht Ihrer Mietverwaltung</p>
+        </div>
+        <button
+          onClick={() => window.location.reload()}
+          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary-600 rounded-lg hover:text-primary-700 transition-colors"
+        >
+          <Plus className="h-4 w-4" />
+          Aktualisieren
+        </button>
       </div>
 
-      {/* Stats Cards */}
-      <div className={`grid ${view.grid_cols?.sm ? `grid-cols-${view.grid_cols.sm}` : 'grid-cols-1'} gap-6 sm:grid-cols-${view.grid_cols?.md || 2} lg:grid-cols-${view.grid_cols?.lg || 3}`}>
+      {/* Stats Cards: immer 3 Spalten auf kleinen/größeren Ansichten, damit 6 Karten in 2 Reihen passen */}
+      <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6`}>
         {view.stats_cards?.map(stat => (
           <StatsCard
             key={stat.id}

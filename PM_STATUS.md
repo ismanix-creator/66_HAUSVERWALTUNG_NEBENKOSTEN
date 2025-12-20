@@ -947,3 +947,189 @@
   "notes": "🔧 Problem: ConfigLoaderService versuchte Catalogs aus config.toml zu laden (master.catalogs), aber Catalogs sind noch in separaten Dateien (config/catalogs/*.catalog.toml). ✅ Lösung: Neue Methode `loadCatalogsFromFiles()` implementiert, die alle *.catalog.toml Dateien aus config/catalogs/ einliest und als Key-Value Pairs speichert. ✅ loadAll() aufgepasst: Ruft jetzt `loadCatalogsFromFiles()` statt `master.catalogs` auf. ✅ Build + Restart durchgeführt. ✅ Test: /api/catalog/umlageschluessel antwortet jetzt korrekt mit 5 Items (flaeche, personen, einheiten, verbrauch, direkt). Alle Catalogs funktionieren. TypeScript ✅, ESLint ✅, keine Fehler."
 }
 ```
+
+## 2025-12-20 09:49:27 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Rules aus .kilocode/rules in .vscode/chat_rules übernommen",
+  "geändert": [
+    ".vscode/chat_rules/00_INDEX.md",
+    ".vscode/chat_rules/10_WORKFLOW.md",
+    ".vscode/chat_rules/20_CONFIG_DRIVEN.md",
+    ".vscode/chat_rules/30_DOCS_CHANGELOG_VERSIONING.md",
+    ".vscode/chat_rules/40_ARCHITECTURE_CONVENTIONS.md",
+    ".vscode/chat_rules/50_VALIDATION_GATES.md",
+    ".vscode/chat_rules/90_MIGRATION_LEGACY.md"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Editor: Lade .vscode/chat_rules/* in den Chat-Editor oder verlinken (wünschst du das?)",
+  "notes": "Regeln kopiert, Dateien in .vscode/chat_rules/ erstellt."
+}
+```
+
+
+## 2025-12-20 09:54:03 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Portal-Dokumentation aus .kilocode/portal für VSCode ablegen (.vscode/portal), Inhalt unverändert kopiert",
+  "geändert": [
+    ".vscode/portal/00_START_HERE.md",
+    ".vscode/portal/10_SOURCE_OF_TRUTH.md",
+    ".vscode/portal/20_WORKFLOWS.md",
+    ".vscode/portal/30_DOCS_MAP.md",
+    ".vscode/portal/40_STATUS.md"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Editor: Öffne .vscode/portal/* oder verlinke in den Workspace Settings (wünschst du das?)",
+  "notes": "Portal-Dateien unverändert kopiert; Struktur unter .vscode/portal/ erstellt."
+}
+```
+
+## 2025-12-20 14:31:11 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Index aus .kilocode/index in .vscode/index kopieren (FILES.md, TREE.txt, SWITCH_CHECKLIST.md)",
+  "geändert": [
+    ".vscode/index/FILES.md",
+    ".vscode/index/TREE.txt",
+    ".vscode/index/SWITCH_CHECKLIST.md"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Editor: Öffne .vscode/index/* oder verlinke in den Workspace Settings (wünschst du das?)",
+  "notes": "Index-Dateien unverändert kopiert; Struktur unter .vscode/index/ erstellt."
+}
+```
+
+## 2025-12-20 15:02:11 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Workspace-Settings (.vscode/settings.json) um Quick-Links zu .vscode/portal und .vscode/index erweitern",
+  "geändert": [
+    ".vscode/settings.json"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Editor: Nutze die neue `kilocode.quickLinks` View oder sag mir, wenn du die Links an anderer Stelle möchtest.",
+  "notes": "Quick-Links in .vscode/settings.json angelegt (kilocode.quickLinks)."
+}
+```
+
+## 2025-12-20 16:03:31 UTC – project-manager
+
+
+## 2025-12-20 16:04:01 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Remove SWITCH_CHECKLIST.md from .vscode and its quick-link",
+  "geändert": [
+    ".vscode/index/SWITCH_CHECKLIST.md (deleted)",
+    ".vscode/settings.json (updated)"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Editor: Falls gewünscht, öffne die verbleibenden quick-links oder passe sie an.",
+  "notes": "SWITCH_CHECKLIST removed from .vscode/index and .vscode/settings.json quick-links updated."
+}
+```
+
+## 2025-12-20 17:25:07 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Copy missing .kilocode files into .vscode and remove SWITCH_CHECKLIST.md (moved)",
+  "geändert": [
+    ".vscode/README.md (added)",
+    ".vscode/portal/60_ARCH_CONFIG_UI.md (added)",
+    ".vscode/agenten/*.yaml (added)",
+    ".vscode/index/SWITCH_CHECKLIST.md -> .vscode/index/SWITCH_CHECKLIST.md.deleted (moved)"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Editor: Öffne die neuen Agenten- und Portal-Dateien oder passe quick-links wenn gewünscht.",
+  "notes": "Agenten YAMLs and README copied; SWITCH_CHECKLIST moved to .deleted"
+}
+```
+
+## 2025-12-20 17:33:37 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Remove agenten copies from .vscode and update docs/settings",
+  "geändert": [
+    ".vscode/agenten -> .vscode/agenten.deleted (moved)",
+    ".vscode/README.md (updated)"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Optionally delete .vscode/agenten.deleted or keep as archive; update global custom_modes.yaml if needed.",
+  "notes": "Local agent YAMLs moved to .vscode/agenten.deleted; README updated to reference custom_modes.yaml."
+}
+```
+
+## 2025-12-20 17:36:11 UTC – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Permanently remove .vscode/agenten archive",
+  "geändert": [
+    ".vscode/agenten.deleted (removed)"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Alles sauber; Agenten werden global über custom_modes.yaml verwaltet.",
+  "notes": "Archived agenten folder permanently deleted."
+}
+```
+
+## 2025-12-20T17:50:00Z – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Dashboard prüfen und Fehler beheben",
+  "geändert": [
+    "src/client/pages/DashboardPage.tsx"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Tester – Dev-Server starten und Browser-Console prüfen; falls API 500, Backend-Logs prüfen",
+  "notes": "Dashboard-Komponente toleriert jetzt sowohl direkte View-Objekte als auch {view: ...} Wrapper; mögliche weitere Probleme: CORS, DB-Integrity, fehlende Tabellen."
+}
+```
+
+## 2025-12-20T17:56:00Z – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Dashboard-Layout anpassen: 3 Spalten für Stats-Cards",
+  "geändert": [
+    "src/client/pages/DashboardPage.tsx"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Tester – Dev-Server starten und prüfen, ob Stats-Cards auf 3 Spalten angezeigt werden (Desktop + Tablet).",
+  "notes": "Grid-Klassen auf `grid-cols-1 sm:grid-cols-3` gesetzt; bei sehr kleinen Viewports bleiben Karten einzeln untereinander."
+}
+```
+ 
+## 2025-12-20T17:58:00Z – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Dashboard-Header an MieterPage angleichen",
+  "geändert": [
+    "src/client/pages/DashboardPage.tsx"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "Tester – Dev-Server starten und prüfen: Header-Layout + Button erscheinen wie bei `/mieter`.",
+  "notes": "Header nutzt jetzt `flex items-center justify-between`, Titel/Description-Klassen und Refresh-Button entsprechen `MieterPage` styling."
+}
+```
