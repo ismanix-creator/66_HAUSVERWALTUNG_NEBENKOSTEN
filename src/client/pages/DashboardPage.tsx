@@ -1,6 +1,43 @@
 import { Building2, Users, FileText, Wallet, FileArchive, FileCheck, Plus } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+
 import { useDashboardSummary, useViewConfig } from '../hooks/useConfig'
+
+type DashboardAction = {
+  id: string
+  label: string
+  route?: string
+  api_endpoint?: string
+  style?: string
+}
+
+type DashboardCard = {
+  id: string
+  title?: string
+  subtitle?: string
+  description?: string
+  type?: string
+  actions?: DashboardAction[]
+  grid_span?: { col?: number }
+}
+
+type DashboardView = {
+  title?: string
+  styling?: {
+    card_padding?: string
+    card_bg?: string
+    card_border?: string
+    card_shadow?: string
+  }
+  stats_cards?: Array<{
+    id: string
+    title?: string
+    field: string
+    icon?: string
+    color?: string
+  }>
+  cards?: DashboardCard[]
+}
 
 export function DashboardPage() {
   const navigate = useNavigate()
@@ -23,8 +60,9 @@ export function DashboardPage() {
     )
   }
 
-  // Support: some endpoints return the view directly, others wrap it in { view: { ... } }
-  const view = (viewConfig as any).view ?? (viewConfig as any)
+  // Support: some endpoints return the view direkt, andere als { view: { ... } }
+  // viewConfig ist laut config.toml immer DashboardView oder { view: DashboardView }
+  const view: DashboardView = (viewConfig as { view?: DashboardView }).view ?? (viewConfig as DashboardView)
 
   return (
     <div className={`space-y-6 text-slate-100 ${view.styling?.card_padding || 'p-6'}`}>
@@ -44,7 +82,7 @@ export function DashboardPage() {
 
       {/* Stats Cards: immer 3 Spalten auf kleinen/größeren Ansichten, damit 6 Karten in 2 Reihen passen */}
       <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6`}>
-        {view.stats_cards?.map((stat: any) => (
+        {view.stats_cards?.map((stat) => (
           <StatsCard
             key={stat.id}
             title={stat.title?.replace('dashboard.', '') || stat.id}
@@ -56,14 +94,14 @@ export function DashboardPage() {
       </div>
 
       {/* Cards */}
-      <section className={`grid gap-4 ${view.cards?.some((c: any) => c.grid_span?.col === 2) ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
-        {view.cards?.map((card: any) => (
+      <section className={`grid gap-4 ${view.cards?.some((c) => c.grid_span?.col === 2) ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
+        {view.cards?.map((card) => (
           <div key={card.id} className={`${view.styling?.card_bg || 'bg-slate-900'} ${view.styling?.card_border || 'border border-slate-800'} rounded-lg ${view.styling?.card_shadow || 'shadow-lg shadow-black/30'} ${view.styling?.card_padding || 'p-6'}`}>
             <h2 className="text-lg font-semibold text-slate-100 mb-2">{card.title?.replace('dashboard.', '') || card.id}</h2>
             <p className="text-sm text-slate-400 mb-4">{card.subtitle?.replace('dashboard.', '') || card.description?.replace('dashboard.', '')}</p>
-            {card.type === 'action_buttons' && (
+            {card.type === 'action_buttons' && card.actions && (
               <div className="flex flex-wrap gap-2">
-                {card.actions?.map((action: any) => (
+                {card.actions.map((action) => (
                   <button
                     key={action.id}
                     onClick={action.api_endpoint ? () => window.open(action.api_endpoint, '_blank') : () => navigate(action.route || '/')}
@@ -109,25 +147,32 @@ type StatsCardColor = 'blue' | 'green' | 'purple' | 'orange'
 
 // Removed unused interface `StatsCardItem` to satisfy TypeScript (unused declaration)
 
+// accept a string | undefined for incoming color values (e.g. from config)
+// and map/validate it internally to a StatsCardColor with a safe fallback
 interface StatsCardProps {
   title: string
   value: string
   icon: React.ComponentType<{ className?: string }>
-  color: StatsCardColor
+  color?: string
 }
 
 function StatsCard({ title, value, icon: Icon, color }: StatsCardProps) {
-  const colorClasses = {
+  const colorClasses: Record<StatsCardColor, string> = {
     blue: 'bg-blue-900/40 text-blue-100 border border-blue-800',
     green: 'bg-emerald-900/40 text-emerald-100 border border-emerald-800',
     purple: 'bg-purple-900/40 text-purple-100 border border-purple-800',
     orange: 'bg-amber-900/40 text-amber-100 border border-amber-800',
   }
 
+  const safeColor: StatsCardColor =
+    color === 'green' || color === 'purple' || color === 'orange' || color === 'blue'
+      ? (color as StatsCardColor)
+      : 'blue'
+
   return (
     <div className="rounded-lg border border-slate-800 bg-slate-900 p-6 shadow-lg shadow-black/30">
       <div className="flex items-center">
-        <div className={`rounded-lg p-3 ${colorClasses[color]}`}>
+        <div className={`rounded-lg p-3 ${colorClasses[safeColor]}`}>
           <Icon className="h-6 w-6" />
         </div>
       </div>

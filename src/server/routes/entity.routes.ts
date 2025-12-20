@@ -29,7 +29,7 @@ async function getSupportedEntities(): Promise<string[]> {
 
 /**
  * Middleware: Prüft ob Entity unterstützt wird
- * Dynamisch aus config/entities/ Verzeichnis
+ * Dynamisch über zentrale Master-Config (`config/config.toml`) via `schemaService`/`configLoader`
  */
 async function validateEntity(req: Request, res: Response, next: NextFunction) {
   const { entity } = req.params

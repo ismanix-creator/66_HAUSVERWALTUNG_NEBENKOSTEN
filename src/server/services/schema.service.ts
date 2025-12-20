@@ -178,8 +178,8 @@ export class SchemaService {
   }
 
   /**
-   * Lädt alle Entity-Namen aus dem Config-Verzeichnis
-   * 100% dynamisch - keine hardcodierten Entity-Listen
+   * Holt alle Entity-Namen aus der zentralen Master-Config (`config/config.toml`) über den `configLoader`.
+   * Dieser Service ist 100% config-driven und benötigt keine separaten Entity-Dateien im Dateisystem.
    */
   async getEntityNames(): Promise<string[]> {
     const entities = await configLoader.getEntities()
@@ -187,8 +187,8 @@ export class SchemaService {
   }
 
   /**
-   * Initialisiert alle Entity-Tabellen
-   * Dynamisch aus config/entities/ Verzeichnis
+   * Initialisiert alle Entity-Tabellen basierend auf den Entity-Definitionen in `config/config.toml`.
+   * Die Entity-Namen werden via `configLoader.getEntities()` ermittelt.
    */
   async initializeAllTables(): Promise<void> {
     // Entity-Namen dynamisch aus Config-Verzeichnis laden

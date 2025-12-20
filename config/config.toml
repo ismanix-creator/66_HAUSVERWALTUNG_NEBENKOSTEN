@@ -4006,13 +4006,13 @@ title_field = "vertragsnummer"
 
 [catalogs]
 # Katalog-Referenz (Katalogdateien bleiben in config/catalogs/)
-path = "config/catalogs"
+# Kataloge werden als einzelne TOML-Dateien in `config/catalogs/` gehalten.
 
 [validation]
 # Optional global validation rules. Entity-specific validations remain
 # under [entities.<name>.validation]
 
 [features]
-# Feature-Flags (optional). Beispiel:
-# beta_dashboard = true
+# Feature-Flags (optional). Struktur erwartet ein Objekt `features`.
+features = {}
 

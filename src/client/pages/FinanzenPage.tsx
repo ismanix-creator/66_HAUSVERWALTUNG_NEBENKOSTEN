@@ -4,7 +4,7 @@
  * @lastModified 2026-01-15
  */
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Plus } from 'lucide-react'
 import { DataTable } from '../components/data/DataTable'
@@ -23,16 +23,23 @@ export function FinanzenPage() {
 
   const { data: viewConfig, isLoading: viewLoading } = useViewConfig('finanzen')
 
-  const tabs = (viewConfig as any)?.view?.tabs || []
+  type FinanzenTab = {
+    id: string
+    label?: string
+    table?: string
+    default_sort?: { field: string; direction: string }
+    actions?: { create?: boolean }
+  }
+  const tabs: FinanzenTab[] = useMemo(() => (viewConfig as { view?: { tabs?: FinanzenTab[] } })?.view?.tabs || [], [viewConfig])
   const activeTabId = tab || tabs[0]?.id || 'zahlungen'
 
   const [pagination, setPagination] = useState<Record<string, number>>({})
   const [showForm, setShowForm] = useState(false)
-  const [editingItem, setEditingItem] = useState<any>(null)
+  const [editingItem, setEditingItem] = useState<Record<string, unknown> | null>(null)
   const [formError, setFormError] = useState('')
 
   useEffect(() => {
-    if (tab && tabs.some((t: any) => t.id === tab)) {
+    if (tab && tabs.some((t) => t.id === tab)) {
       // activeTabId is set
     }
   }, [tab, tabs])
@@ -41,17 +48,20 @@ export function FinanzenPage() {
     navigate(`/finanzen/${nextTabId}`, { replace: true })
   }
 
-  const activeTab = tabs.find((t: any) => t.id === activeTabId)
+  const activeTab = tabs.find((t) => t.id === activeTabId)
 
   const { data: currentTable, isLoading: tableLoading } = useTableConfig<TableConfig>(activeTab?.table?.replace('tables/', '') || '')
   const { data: currentForm } = useFormConfig<FormConfig>(activeTab?.id || '')
   const { data: currentEntity } = useEntityConfig(activeTab?.id || '')
 
+  const defaultDir = activeTab?.default_sort?.direction
+  const orderDir = defaultDir === 'ASC' || defaultDir === 'DESC' ? defaultDir : 'DESC'
+
   const currentList = useEntityList(activeTab?.id || '', {
     limit: PAGE_SIZE,
     offset: ((pagination[activeTabId] || 1) - 1) * PAGE_SIZE,
     orderBy: activeTab?.default_sort?.field || 'datum',
-    orderDir: activeTab?.default_sort?.direction || 'DESC',
+    orderDir,
   })
 
   const createMutation = useCreateEntity(activeTab?.id || '')
@@ -102,17 +112,13 @@ export function FinanzenPage() {
       </div>
 
       <div className="flex space-x-2">
-        {tabs.map((tab: any) => (
+        {tabs.map((tab) => (
           <button
             key={tab.id}
+            className={`px-4 py-2 rounded-lg text-sm font-medium ${activeTabId === tab.id ? 'bg-primary-700 text-white' : 'bg-slate-200 text-slate-700'}`}
             onClick={() => handleTabChange(tab.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium ${
-              activeTabId === tab.id
-                ? 'bg-primary-600 text-white'
-                : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
-            }`}
           >
-            {tab.label?.replace('tabs.', '') || tab.id}
+            {tab.label?.replace('finanzen.', '') || tab.id}
           </button>
         ))}
       </div>
