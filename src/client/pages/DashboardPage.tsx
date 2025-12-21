@@ -82,10 +82,10 @@ export function DashboardPage() {
 
       {/* Stats Cards: immer 3 Spalten auf kleinen/größeren Ansichten, damit 6 Karten in 2 Reihen passen */}
       <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6`}>
-        {view.stats_cards?.map((stat) => (
+        {view.stats_cards?.map((stat, i) => (
           <StatsCard
-            key={stat.id}
-            title={stat.title?.replace('dashboard.', '') || stat.id}
+            key={stat.id || `${stat.field}-${i}`}
+            title={stat.title?.replace('dashboard.', '') || stat.id || stat.field}
             value={summary[stat.field as keyof typeof summary]?.toString() || '0'}
             icon={getIcon(stat.icon)}
             color={stat.color}
@@ -95,15 +95,15 @@ export function DashboardPage() {
 
       {/* Cards */}
       <section className={`grid gap-4 ${view.cards?.some((c) => c.grid_span?.col === 2) ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
-        {view.cards?.map((card) => (
-          <div key={card.id} className={`${view.styling?.card_bg || 'bg-slate-900'} ${view.styling?.card_border || 'border border-slate-800'} rounded-lg ${view.styling?.card_shadow || 'shadow-lg shadow-black/30'} ${view.styling?.card_padding || 'p-6'}`}>
+        {view.cards?.map((card, ci) => (
+          <div key={card.id || `card-${ci}`} className={`${view.styling?.card_bg || 'bg-slate-900'} ${view.styling?.card_border || 'border border-slate-800'} rounded-lg ${view.styling?.card_shadow || 'shadow-lg shadow-black/30'} ${view.styling?.card_padding || 'p-6'}`}>
             <h2 className="text-lg font-semibold text-slate-100 mb-2">{card.title?.replace('dashboard.', '') || card.id}</h2>
             <p className="text-sm text-slate-400 mb-4">{card.subtitle?.replace('dashboard.', '') || card.description?.replace('dashboard.', '')}</p>
             {card.type === 'action_buttons' && card.actions && (
               <div className="flex flex-wrap gap-2">
-                {card.actions.map((action) => (
+                {card.actions.map((action, ai) => (
                   <button
-                    key={action.id}
+                    key={action.id || action.label || `action-${ai}`}
                     onClick={action.api_endpoint ? () => window.open(action.api_endpoint, '_blank') : () => navigate(action.route || '/')}
                     className={`flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-100 ${action.style === 'success' ? 'bg-emerald-900/50 border border-emerald-800 hover:bg-emerald-800/70' : 'bg-slate-800 border border-slate-700 hover:bg-slate-700'}`}
                   >

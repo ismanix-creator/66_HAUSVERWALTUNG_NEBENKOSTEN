@@ -411,6 +411,35 @@
   "notes": "DataTable setzt Spaltenbreite jetzt in Header und Zellen, damit Inhalt und Überschrift exakt fluchten."
 }
 ```
+
+## 2025-12-21T12:00:00Z – project-manager
+```json
+{
+  "agent": "project-manager",
+  "ziel": "Parse JSON-Felder beim Lesen aus der DB (Fix für Mieter-Edit/Detail)",
+  "geändert": [
+    "src/server/services/entity.service.ts",
+    "PM_STATUS.md"
+  ],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "tester-agent – `npm test` oder manuelles UI-Check: Mieter-Edit Dialog und Detail-Expand prüfen",
+  "notes": "Beim Lesen werden Felder vom Typ `json` und `multiselect` jetzt automatisch geparst; sollte leere Edit-Formulare und falsch dargestellte Details beheben."
+}
+```
+
+## 2025-12-21T12:10:00Z – tester-agent
+```json
+{
+  "agent": "tester-agent",
+  "ziel": "Ausführen der Unit-Tests (Vitest)",
+  "geändert": [],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "frontend-developer – Dev-Server starten und UI (Mieter-Liste / Edit-Dialog) manuell prüfen",
+  "notes": "Alle Unit-Tests (7 Dateien, 21 Tests) erfolgreich durchgelaufen. Ausgabe: PASS"
+}
+```
 ## 2025-12-17T09:48:00Z – Frontend-Fix-Agent
 ```json
 {
@@ -1189,5 +1218,18 @@
   "blocker": null,
   "next_suggestion": "Release – Changelog prüfen & Commit erstellen",
   "notes": "Archiv erstellt: /tmp/config_backup_20251220225644.tar.gz; config/config.toml ist jetzt Single Source of Truth; Unit-Tests: 21 passed."
+}
+```
+
+## 2025-12-21T00:00:00Z – coverage-planner
+```json
+{
+  "agent": "coverage-planner",
+  "ziel": "Erstelle Coverage-Aktionsplan und list fehlende Tests auf",
+  "geändert": ["docs/coverage_action_plan_2025-12-21.md"],
+  "ergebnis": "OK",
+  "blocker": "",
+  "next_suggestion": "tester-agent – Implementiere Top-3 Tests (config-loader, config.service, dashboard.service)",
+  "notes": "Plan in docs/coverage_action_plan_2025-12-21.md erstellt. Priorität: server-side services."
 }
 ```

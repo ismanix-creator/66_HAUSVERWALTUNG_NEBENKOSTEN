@@ -70,7 +70,8 @@ class EntityService {
       }
     }
 
-    return databaseService.all<EntityRecord>(sql, params)
+    const rows = databaseService.all<EntityRecord>(sql, params)
+    return rows.map(r => this.parseRow(config, r))
   }
 
   /**
@@ -80,7 +81,75 @@ class EntityService {
     const tableName = schemaService.getTableName(entityName)
     const sql = `SELECT * FROM ${tableName} WHERE id = ?`
     const result = databaseService.get<EntityRecord>(sql, [id])
-    return result || null
+    if (!result) return null
+    return this.parseRow(await this.getConfig(entityName), result)
+  }
+
+  /**
+   * Parst JSON-ähnliche Felder basierend auf Entity-Config
+   */
+  private parseRow(config: EntityConfig, row: EntityRecord): EntityRecord {
+    const parsed: EntityRecord = { ...row }
+    for (const [fieldName, fieldConfig] of Object.entries(config.fields)) {
+      const raw = parsed[fieldName]
+      if (raw === undefined || raw === null) continue
+
+      // Falls Feld vom Typ json oder multiselect und als String gespeichert wurde,
+      // versuchen wir, es zu parsen. Silently fail und belasse den Originalwert.
+      if ((fieldConfig.type === 'json' || fieldConfig.type === 'multiselect') && typeof raw === 'string') {
+        const s = raw.trim()
+        if ((s.startsWith('{') && s.endsWith('}')) || (s.startsWith('[') && s.endsWith(']'))) {
+          try {
+            parsed[fieldName] = JSON.parse(s)
+          } catch (e) {
+            // leave as-is
+          }
+        }
+      }
+    }
+    // Compute basic computed fields (best-effort)
+    try {
+      const computedDefs = (config as any).computed as Record<string, any> | undefined
+      if (computedDefs && Object.keys(computedDefs).length > 0) {
+        const computed: Record<string, unknown> = {}
+        for (const [cname, cdef] of Object.entries(computedDefs)) {
+          const formula = cdef && (cdef as any).formula
+          if (!formula || typeof formula !== 'string') continue
+
+          // Support simple concat(...) formulas: concat(field1, ' ', field2)
+          const concatMatch = formula.match(/concat\((.*)\)/i)
+          if (concatMatch) {
+            const inner = concatMatch[1]
+            // split on commas not inside quotes (simple split is ok for our TOML patterns)
+            const parts = inner.split(',').map(p => p.trim())
+            const outParts: string[] = []
+            for (const part of parts) {
+              if (part.startsWith("'") && part.endsWith("'")) {
+                outParts.push(part.slice(1, -1))
+                continue
+              }
+              if (part.startsWith('"') && part.endsWith('"')) {
+                outParts.push(part.slice(1, -1))
+                continue
+              }
+              // treat as field name
+              const val = parsed[part]
+              if (val !== undefined && val !== null) outParts.push(String(val))
+            }
+            computed[cname] = outParts.join('')
+            continue
+          }
+
+          // Other formula types: best-effort placeholder (skip)
+        }
+        if (Object.keys(computed).length > 0) {
+          parsed['computed'] = { ...(parsed['computed'] as Record<string, unknown> || {}), ...computed }
+        }
+      }
+    } catch (e) {
+      // don't break on computed errors
+    }
+    return parsed
   }
 
   /**

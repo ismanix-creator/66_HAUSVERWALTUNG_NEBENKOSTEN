@@ -6,6 +6,7 @@ export default defineConfig({
     include: ['tests/**/*.{test,spec}.{ts,tsx}'],
     environment: 'node',
     clearMocks: true,
+    coverage: { provider: 'v8' }
   },
   resolve: {
     alias: {

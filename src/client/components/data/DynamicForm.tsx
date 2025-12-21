@@ -17,10 +17,8 @@ type BankCatalogItem = {
 }
 
 type BankCatalogConfig = {
-  catalog?: {
-    name?: string
-    items?: BankCatalogItem[]
-  }
+  name?: string
+  items?: BankCatalogItem[]
 }
 
 const normalizeIban = (iban?: string) =>
@@ -155,12 +153,16 @@ export function DynamicForm({
 
   useEffect(() => {
     if (!isMieterForm) return
-    if (!bankCatalog?.catalog?.items?.length) return
+    if (!bankCatalog?.items?.length) return
     const normalized = normalizeIbanInput(ibanValue)
     if (!normalized) return
     const bankCode = extractGermanBankCode(normalized)
     if (!bankCode) return
-    const match = bankCatalog.catalog.items.find(item => item.value === bankCode)
+    const matches = bankCatalog.items.filter(item => item.value === bankCode)
+    if (!matches.length) return
+
+    // If multiple entries for same BLZ exist, just take the first match (no PLZ-disambiguation)
+    const match = matches[0]
     if (!match?.label && !match?.bic) return
     setFormData(prev => {
       const currentBankname = typeof prev['bankname'] === 'string' ? (prev['bankname'] as string) : ''

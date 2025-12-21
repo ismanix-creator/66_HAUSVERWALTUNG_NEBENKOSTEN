@@ -220,7 +220,8 @@ export function DataTable<T extends Record<string, unknown>>({
   // Format cell value based on column config
   const formatValue = (item: T, column: TableColumn): string => {
     if (column.template) {
-      return column.template.replace(/\{(\w+)\}/g, (_, field) => {
+      // Support nested fields in templates, e.g. {computed.aktuelle_einheit.bezeichnung}
+      return column.template.replace(/\{([\w\.]+)\}/g, (_, field) => {
         const val = getValue(item, field, column.fallback_fields)
         return val !== undefined && val !== null ? String(val) : ''
       })
@@ -228,6 +229,19 @@ export function DataTable<T extends Record<string, unknown>>({
 
     const value = getValue(item, column.field, column.fallback_fields)
     if (value === undefined || value === null) return '-'
+
+    // If value is an object, try to present a readable representation.
+    if (typeof value === 'object') {
+      const obj = value as Record<string, unknown>
+      if (obj['bezeichnung']) return String(obj['bezeichnung'])
+      if (obj['display_name']) return String(obj['display_name'])
+      if (obj['name']) return String(obj['name'])
+      try {
+        return JSON.stringify(obj)
+      } catch (e) {
+        return String(value)
+      }
+    }
 
     if (column.format === 'currency') {
       return new Intl.NumberFormat('de-DE', {

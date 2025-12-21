@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:server": "NODE_OPTIONS=--experimental-loader=./loaders/resolve-js-extension.mjs node scripts/watch-server.js",
-    "dev:client": "vite",
+    "dev:server": "sh -c \"(lsof -ti:3002 >/dev/null 2>&1 && kill -9 $(lsof -ti:3002) || (fuser -k 3002/tcp >/dev/null 2>&1 || true)) && node --import \\\"data:text/javascript,import { register } from 'node:module'; import { pathToFileURL } from 'node:url'; register('./loaders/resolve-js-extension.mjs', pathToFileURL('./'));\\\" scripts/watch-server.js\"",
+    "dev:client": "sh -c \"(lsof -ti:5174 >/dev/null 2>&1 && kill -9 $(lsof -ti:5174) || (fuser -k 5174/tcp >/dev/null 2>&1 || true)) && vite\"",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
     "build:server": "tsc -p tsconfig.server.json && node scripts/add-js-extensions.mjs dist/server",
@@ -20,7 +20,7 @@
     "db:migrate": "tsx scripts/migrate.ts",
     "db:backup": "tsx scripts/backup.ts",
     "db:seed": "tsx scripts/seed-demo.ts",
-    "start:server": "npm run copy:config && HOST=127.0.0.1 PORT=3002 NODE_OPTIONS=--experimental-loader=./loaders/resolve-js-extension.mjs node dist/server/server/index.js",
+    "start:server": "sh -c \"(lsof -ti:3002 >/dev/null 2>&1 && kill -9 $(lsof -ti:3002) || (fuser -k 3002/tcp >/dev/null 2>&1 || true)) && npm run copy:config && HOST=127.0.0.1 PORT=3002 node --import \\\"data:text/javascript,import { register } from 'node:module'; import { pathToFileURL } from 'node:url'; register('./loaders/resolve-js-extension.mjs', pathToFileURL('./'));\\\" dist/server/server/index.js\"",
     "copy:config": "node scripts/copy-config.js"
   },
   "dependencies": {
@@ -50,6 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@vitejs/plugin-react": "^4.3.3",
+    "@vitest/coverage-v8": "^4.0.16",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.1.0",
     "eslint": "^8.57.1",
@@ -60,8 +61,8 @@
     "tailwindcss": "^3.4.14",
     "tsx": "^4.19.2",
     "typescript": "5.5.4",
-    "vite": "^5.4.10",
-    "vitest": "^2.1.4"
+    "vite": "^7.3.0",
+    "vitest": "^4.0.16"
   },
   "engines": {
     "node": ">=20.0.0"

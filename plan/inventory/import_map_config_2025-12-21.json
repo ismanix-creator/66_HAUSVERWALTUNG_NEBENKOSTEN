@@ -1,0 +1,31 @@
+{
+  "generated_at": "2025-12-21T00:00:00Z",
+  "note": "Import-Map für config-loader.service.ts und config.service.ts (exkl. Agent/Meta-Ordner)",
+  "targets": {
+    "src/server/services/config-loader.service.ts": {
+      "importedBy": {
+        "src/server/index.ts": ["configLoader"],
+        "src/server/routes/entity.routes.ts": ["configLoader"],
+        "src/server/middleware/rate-limit.middleware.ts": ["configLoader"],
+        "src/server/services/database.service.ts": ["configLoader"],
+        "src/server/services/schema.service.ts": ["configLoader"],
+        "tests/unit/database.service.test.ts": ["configLoader"],
+        "tests/unit/rate-limit.middleware.test.ts": ["configLoader"],
+        "tests/unit/config-loader.service.test.ts": ["configLoader"],
+        "tests/unit/schema.service.test.ts": ["configLoader"],
+        "tests/unit/config-entities.test.ts": ["configLoader"]
+      }
+    },
+    "src/server/services/config.service.ts": {
+      "importedBy": {
+        "src/server/routes/api.routes.ts": ["configService"],
+        "src/server/services/schema.service.ts": ["configService"],
+        "src/server/services/entity.service.ts": ["configService"],
+        "tests/unit/schema.service.test.ts": ["configService"]
+      },
+      "internalImports": {
+        "src/server/services/config.service.ts": ["configLoader"]
+      }
+    }
+  }
+}
