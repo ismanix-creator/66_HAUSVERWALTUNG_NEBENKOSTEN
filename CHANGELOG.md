@@ -1,3 +1,10 @@
+### [2025-12-21 00:00] - Feature - StatsCard Integration (inline)
+- `config/config.toml`: `views.dashboard.stats` konfigurierbar
+- Client: Dashboard rendert konfigurierbare Statskarten via inline-`StatsCard` in `DashboardPage.tsx`
+- Server: `StatsCardConfig` Typ ergänzt (src/server/services/config-types.statscard.ts)
+
+Füge diesen Block oben in `CHANGELOG.md` ein (Datum per `date` verifizieren).
+
 ## 2025-12-17
 
 ### [2025-12-21 00:32] - Chore - Pin TypeScript & Fix FinanzenPage

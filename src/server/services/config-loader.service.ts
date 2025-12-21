@@ -41,6 +41,9 @@ import {
   type DesignRoot,
 } from '../../shared/config/schemas'
 
+// StatsCard / Dashboard view types (inline statscard support)
+import { DashboardView } from './config-types.statscard'
+
 const CONFIG_DIR = path.resolve(process.cwd(), 'config')
 const MASTER_CONFIG_FILE = 'config.toml'
 const ALLOWED_META_ENVIRONMENTS = ['development', 'staging', 'production'] as const
@@ -106,7 +109,7 @@ interface LoadedConfig {
   master: MasterConfig
   catalogs: CatalogsRoot
   entities: Record<string, EntityConfig>
-  views: Record<string, unknown>
+  views: Record<string, DashboardView | unknown>
   forms: Record<string, unknown>
   tables: Record<string, unknown>
   widths: Record<string, string>

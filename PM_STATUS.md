@@ -346,6 +346,23 @@
   "notes": "DynamicForm rendert jetzt auch Felder vom Typ \"email\" als Eingabe, damit mieter.email im Dialog sichtbar ist."
 }
 ```
+
+## 2025-12-21 00:00 – Planer
+```json
+{
+  "agent": "Planer",
+  "ziel": "StatsCard in Dashboard integrieren (inline)",
+  "geändert": [
+    "src/server/services/config-types.statscard.ts",
+    "plan/migration_statscard_2025-12-21.md",
+    "CHANGELOG.md"
+  ],
+  "ergebnis": "OK",
+  "blocker": null,
+  "next_suggestion": "Config-Consistency – generate config + import types",
+  "notes": "Dashboard nutzt inline-StatsCard; keine separate Komponente erstellt"
+}
+```
 ## 2025-12-17T09:25:00Z – Frontend-UX-Agent
 ```json
 {
