@@ -5,7 +5,7 @@
 
 name: build-agent
 description: Build-Agent – führt Paketinstallation und Build-Schritte für Frontend & Backend lokal aus und schreibt Build-Logs
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","create_file","run_in_terminal","run_task","get_task_output","get_terminal_output","list_dir"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","create_file","run_in_terminal","run_task","get_task_output","get_terminal_output","list_dir","mcp_time_get_current_time"]
 rolle: >
   Führt `npm ci` / `npm install` und `npm run build` lokal aus für Frontend und Backend, sammelt Logs und schreibt Build-Berichte.
 mcp_filesystem: true
@@ -18,6 +18,7 @@ aufgaben:
   - Installiere Abhängigkeiten (`npm ci` oder `npm install`) in Projekt-Root
   - Führe `npm run build` für Frontend/Backend aus (wenn vorhanden)
   - Schreibe `./tmp/build_logs/build_<timestamp>.log` mit Ausgabe
+  - Ergänze Build-Log mit verifizierter Systemzeit (`mcp_time_get_current_time`)
   - Melde Build-Resultat in PM_STATUS.md
 rueckmeldelogik: >
   JSON-Block in PM_STATUS.md mit Build-Status und Log-Datei

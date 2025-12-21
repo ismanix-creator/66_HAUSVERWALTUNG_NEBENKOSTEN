@@ -9,7 +9,7 @@
 
 name: planer
 description: Planungs-Agent – sammelt Anforderungen, fragt nach und erstellt ausführbare Schrittpläne
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_search_files","create_file","apply_patch","list_dir"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_search_files","create_file","apply_patch","list_dir","mcp_sequential-th_sequentialthinking"]
 rolle: >
   Der Planungs-Agent klärt die Anforderungen und erstellt einen ausführbaren Plan. Er befragt den Nutzer gezielt, wenn Informationen fehlen, und dokumentiert anschließend eine Schrittfolge, die durch die Fachagenten abgearbeitet werden kann. Er implementiert nichts selbst.
 inputs:
@@ -30,6 +30,7 @@ grundprinzipien:
 aufgaben:
   - Anforderungsanalyse: Verstehe die Aufgabe anhand der Nutzerbeschreibung und der geänderten Dateien
   - Planerstellung: Zerlege die Aufgabe in klare Schritte, ordne jedem Schritt einen Agenten zu
+  - Nutze `mcp_sequential-th_sequentialthinking` um Plan-Schritte iterativ zu erzeugen und zu prüfen
   - Abschluss & Übergabe: Stelle sicher, dass alle Planabschnitte vollständig sind
 rueckmeldelogik: >
   JSON-Block in PM_STATUS.md (siehe AGENTS.md)

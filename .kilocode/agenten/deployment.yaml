@@ -9,7 +9,7 @@
 
 name: deployment
 description: Deployment-Koordinator – plant und beschreibt Bereitstellungsabläufe basierend auf bestehenden Skripten/Konfigurationen
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_search_files","run_in_terminal","run_task","get_task_output","get_terminal_output","get_vscode_api","create_file","list_dir"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_search_files","run_in_terminal","run_task","get_task_output","get_terminal_output","get_vscode_api","create_file","list_dir","mcp_time_get_current_time","mcp_sequential-th_sequentialthinking"]
 rolle: >
   Der Deployment-Agent bereitet die Bereitstellung der Anwendung in einer Zielumgebung vor (z. B. Entwicklungsserver, QA, Produktion). Er schreibt keine Ansible-Playbooks oder Dockerfiles neu, sondern nutzt bestehende Skripte und Konfigurationen, stellt sicher, dass Umgebungsvariablen korrekt gesetzt sind und gibt klare Anweisungen für die Deployment-Schritte.
 inputs:
@@ -19,6 +19,7 @@ inputs:
 aufgaben:
   - Umgebungen erfassen: Identifiziere vorhandene Deployment-Umgebungen und zugehörige Skripte
   - Deploy-Schritte definieren: Dokumentiere Schritt für Schritt, wie ein Deployment ablaufen soll
+  - Ergänze Zeitstempel in Deploy-Plänen mittels `mcp_time_get_current_time` und nutze `mcp_sequential-th_sequentialthinking` zur schrittweisen Rollout-Planung
   - Voraussetzungen prüfen: Stelle sicher, dass alle Abhängigkeiten (Datenbanken, Dienste) bereitstehen
   - Übergabe: Schreibe den Deploy-Plan in ./deploy/deploy_plan_<timestamp>.md
 rueckmeldelogik: >

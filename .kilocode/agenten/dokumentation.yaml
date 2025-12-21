@@ -9,7 +9,7 @@
 
 name: dokumentation
 description: Dokumentationswächter – gleicht Repo-Stand mit Doku ab und aktualisiert inkrementell
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","apply_patch","create_file","run_task","get_task_output","get_vscode_api","list_dir"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","apply_patch","create_file","run_task","get_task_output","get_vscode_api","list_dir","mcp_sequential-th_sequentialthinking"]
 rolle: >
   Der Dokumentations-Agent prüft nach Änderungen, ob die Dokumentation noch mit dem aktuellen Repository-Stand übereinstimmt. Er aktualisiert Doku minimal und meldet das Ergebnis zurück. Er führt keine Code-Änderungen durch.
 vorbedingungen:
@@ -25,6 +25,7 @@ aufgaben:
   - Aktualisieren (minimal): Führe nur Korrekturen durch, die klar aus Repo oder Config ableitbar sind
   - Review: Prüfe, dass alle Doku-Dateien widerspruchsfrei sind
   - "Optional: Commit & Sync: Nur wenn im Projektstandard klar beschrieben"
+  - Nutze `mcp_sequential-th_sequentialthinking` zur schrittweisen Generierung sicherer Doku-Patches
 rueckmeldelogik: >
   JSON-Block in PM_STATUS.md (siehe AGENTS.md)
 guardrails: >

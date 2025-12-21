@@ -1,0 +1,110 @@
+ # TOOLS_LIST.yaml - YAML-Variante der Tools-Übersicht (inkl. MCP extras)
+Datei_und_Dateisystem_Tools:
+  - read_file
+  - create_file
+  - create_directory
+  - mcp_filesystem_read_text_file
+  - mcp_filesystem_read_multiple_files
+  - mcp_filesystem_read_media_file
+  - mcp_filesystem_create_directory
+  - mcp_filesystem_write_file
+  - mcp_filesystem_edit_file
+  - mcp_filesystem_move_file
+  - mcp_filesystem_directory_tree
+  - mcp_filesystem_get_file_info
+  - mcp_filesystem_list_directory
+  - mcp_filesystem_list_directory_with_sizes
+  - mcp_filesystem_search_files
+
+Workspace_Editor_VSCode_Hilfen:
+  - get_vscode_api
+  - install_extension
+  - run_vscode_command
+  - create_new_workspace
+  - get_project_setup_info
+  - create_new_jupyter_notebook
+
+Suche_und_Lesen:
+  - file_search
+  - grep_search
+  - semantic_search
+  - fetch_webpage
+  - open_simple_browser
+  - copilot_getNotebookSummary
+  - get_search_view_results
+
+Git_GitKraken_Repository:
+  - github_repo
+  - mcp_gitkraken_repository_get_file_content
+  - mcp_gitkraken_git_add_or_commit
+  - mcp_gitkraken_git_blame
+  - mcp_gitkraken_git_branch
+  - mcp_gitkraken_git_checkout
+  - mcp_gitkraken_git_log_or_diff
+  - mcp_gitkraken_git_push
+  - mcp_gitkraken_git_stash
+  - mcp_gitkraken_git_status
+  - mcp_gitkraken_git_worktree
+  - mcp_gitkraken_gitkraken_workspace_list
+  - mcp_gitkraken_issues_add_comment
+  - mcp_gitkraken_issues_assigned_to_me
+  - mcp_gitkraken_issues_get_detail
+  - mcp_gitkraken_pull_request_assigned_to_me
+  - mcp_gitkraken_pull_request_create
+  - mcp_gitkraken_pull_request_create_review
+  - mcp_gitkraken_pull_request_get_comments
+  - mcp_gitkraken_pull_request_get_detail
+
+MCP_Container_Activators:
+  - activate_directory_and_file_creation_tools
+  - activate_file_and_directory_inspection_tools
+  - activate_file_reading_tools
+  - activate_container_management_tools
+  - activate_image_management_tools
+  - activate_container_inspection_and_logging_tools
+  - activate_listing_tools_for_containers_and_images
+  - mcp_copilot_conta_list_networks
+  - mcp_copilot_conta_prune
+
+MCP_Sequential_und_Time:
+  - mcp_sequential-th_sequentialthinking
+  - mcp_time_get_current_time
+  - mcp_time_convert_time
+
+Pylance_Python_Tools:
+  - configure_python_environment
+  - get_python_environment_details
+  - get_python_executable_details
+  - install_python_packages
+  - activate_python_code_validation_and_execution
+  - activate_import_analysis_and_dependency_management
+  - activate_python_environment_management
+  - mcp_pylance_mcp_s_pylanceDocuments
+  - mcp_pylance_mcp_s_pylanceInvokeRefactoring
+  - mcp_pylance_mcp_s_pylanceSyntaxErrors
+  - mcp_pylance_mcp_s_pylanceFileSyntaxErrors
+  - mcp_pylance_mcp_s_pylanceRunCodeSnippet
+
+Terminal_Tasks_Runner:
+  - run_in_terminal
+  - run_task
+  - create_and_run_task
+  - get_terminal_output
+  - get_task_output
+  - terminal_last_command
+  - terminal_selection
+
+Testing_and_Notebooks:
+  - runTests
+  - test_failure
+  - run_notebook_cell
+  - edit_notebook_file
+  - copilot_getNotebookSummary
+
+Sonstige_Hilfsfunktionen:
+  - list_dir
+  - list_code_usages
+  - get_changed_files
+  - get_errors
+  - apply_patch
+  - fetch_webpage
