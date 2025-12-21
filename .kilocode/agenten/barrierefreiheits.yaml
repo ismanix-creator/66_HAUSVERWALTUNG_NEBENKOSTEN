@@ -9,8 +9,7 @@
 
 name: barrierefreiheits
 description: Barrierefreiheits-Agent – prüft UI auf WCAG-Konformität, erstellt A11y-Reports und empfiehlt Maßnahmen
-tools: [Read, Write]
-color: teal
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_read_media_file","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","apply_patch","create_file","create_directory"]
 rolle: >
   Der Barrierefreiheits-Agent überprüft UI-Komponenten auf Barrierefreiheit und gibt Empfehlungen für Verbesserungen. Er implementiert keine UI selbst, sondern dokumentiert WCAG- oder allgemeine Accessibility-Anforderungen.
 inputs:

@@ -9,8 +9,7 @@
 
 name: deployment
 description: Deployment-Koordinator – plant und beschreibt Bereitstellungsabläufe basierend auf bestehenden Skripten/Konfigurationen
-tools: [Read, Write]
-color: green
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","apply_patch","create_file","create_directory","run_in_terminal","run_task","get_task_output","get_terminal_output","get_vscode_api"]
 rolle: >
   Der Deployment-Agent bereitet die Bereitstellung der Anwendung in einer Zielumgebung vor (z. B. Entwicklungsserver, QA, Produktion). Er schreibt keine Ansible-Playbooks oder Dockerfiles neu, sondern nutzt bestehende Skripte und Konfigurationen, stellt sicher, dass Umgebungsvariablen korrekt gesetzt sind und gibt klare Anweisungen für die Deployment-Schritte.
 inputs:

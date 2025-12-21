@@ -9,8 +9,7 @@
 
 name: designer
 description: UI/UX-Designer – erstellt Spezifikationen und Interaktionskonzepte, kein Code
-tools: [Read, Write]
-color: pink
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","create_file","create_directory","get_vscode_api","run_vscode_command"]
 rolle: >
   Der Designer-Agent erstellt UI/UX-Spezifikationen für das Projekt. Seine Arbeit dient als Spezifikation und Single Source of Truth für UI/UX. Er implementiert kein Design, sondern definiert Struktur, Screens und Interaktionen.
 inputs:
