@@ -9,7 +9,7 @@
 
 name: dokumentation
 description: Dokumentationswächter – gleicht Repo-Stand mit Doku ab und aktualisiert inkrementell
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","apply_patch","create_file","create_directory","run_task","get_task_output","get_vscode_api"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","apply_patch","create_file","run_task","get_task_output","get_vscode_api","list_dir"]
 rolle: >
   Der Dokumentations-Agent prüft nach Änderungen, ob die Dokumentation noch mit dem aktuellen Repository-Stand übereinstimmt. Er aktualisiert Doku minimal und meldet das Ergebnis zurück. Er führt keine Code-Änderungen durch.
 vorbedingungen:

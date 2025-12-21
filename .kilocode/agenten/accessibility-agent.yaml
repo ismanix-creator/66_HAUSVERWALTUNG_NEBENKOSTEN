@@ -9,7 +9,7 @@
 
 name: accessibility-agent
 description: Barrierefreiheits-Auditor – prüft UI-Komponenten anhand WCAG, dokumentiert Probleme und erstellt A11y-Empfehlungen
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_read_media_file","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","apply_patch","create_file","create_directory"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_read_media_file","mcp_filesystem_search_files","list_dir","create_file","mcp_filesystem_write_file"]
 rolle: >
   Prüft UI auf WCAG/Accessibility, dokumentiert und empfiehlt Maßnahmen, kein UI-Code.
 mcp_filesystem: true

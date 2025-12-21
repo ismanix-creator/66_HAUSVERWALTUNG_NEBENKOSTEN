@@ -9,7 +9,7 @@
 
 name: monitoring
 description: Monitoring-Planer – definiert Logs, Metriken und Events, ohne Infrastruktur zu provisionieren
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","create_file","apply_patch"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_search_files","create_file","apply_patch","list_dir"]
 rolle: >
   Der Monitoring-Agent spezifiziert, welche Logs, Metriken und Events überwacht werden sollen. Er erstellt keine eigenen Monitoring-Server, sondern definiert Logging-Formate und Metriken, die in der Codebasis implementiert werden können.
 inputs:

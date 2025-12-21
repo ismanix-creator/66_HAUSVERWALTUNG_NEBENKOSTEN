@@ -9,7 +9,7 @@
 
 name: migration
 description: Migrations- und Refactoring-Planer – bewertet Legacy-Code und erstellt Blueprint-konforme Migrationsschritte
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","apply_patch","create_file","create_directory","mcp_filesystem_move_file"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_search_files","apply_patch","create_file","create_directory","mcp_filesystem_move_file","list_dir"]
 rolle: >
   Der Migrations-Agent analysiert vorhandene Legacy-Projekte und hilft beim Überführen in die neue Blueprint-/config.toml-Struktur. Zusätzlich koordiniert er Refactorings, die im Rahmen einer technischen Migration nötig sind. Er implementiert nicht selbst, sondern erstellt Migrationspläne und Schritte, die dann vom Backend- oder Frontend-Agent umgesetzt werden.
 inputs:

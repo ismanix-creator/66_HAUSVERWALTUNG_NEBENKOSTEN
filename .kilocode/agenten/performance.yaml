@@ -9,7 +9,7 @@
 
 name: performance
 description: Performance-Analyst – profiliert Anwendung und schlägt Optimierungen vor, ohne Code zu ändern
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","create_file","apply_patch"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_write_file","mcp_filesystem_search_files","create_file","list_dir"]
 rolle: >
   Der Performance-Agent analysiert die Laufzeit- und Ladezeiten der Anwendung, identifiziert Engpässe und schlägt Optimierungsmöglichkeiten vor. Er implementiert keine Änderungen, sondern gibt Empfehlungen an Backend- oder Frontend-Agenten.
 inputs:

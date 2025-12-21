@@ -9,7 +9,7 @@
 
 name: tester
 description: QA/Tester – prüft Umsetzung gegen Akzeptanzkriterien und erstellt gezielte Tests
-tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","list_dir","create_file","apply_patch","run_in_terminal","run_task","runTests","get_task_output","get_terminal_output"]
+tools: ["read_file","file_search","grep_search","mcp_filesystem_read_text_file","mcp_filesystem_read_multiple_files","mcp_filesystem_write_file","mcp_filesystem_edit_file","mcp_filesystem_search_files","create_file","apply_patch","run_in_terminal","run_task","runTests","get_task_output","get_terminal_output","list_dir"]
 rolle: >
   Der Tester-Agent prüft die Umsetzung anhand der definierten Akzeptanzkriterien und erstellt einfache Tests. Er erfindet keine neuen Anforderungen und testet nur, was in Dokumentation und Implementierung belegbar ist.
 inputs:
