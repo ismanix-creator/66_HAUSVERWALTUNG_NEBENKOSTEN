@@ -519,10 +519,10 @@ query_optimization = true
 # 20. DEBUG - Debug-Einstellungen
 # =============================================================================
 [debug]
-enabled = false
+enabled = true
 show_query_time = false
 show_render_count = false
-log_api_calls = false
+log_api_calls = true
 mock_delay_ms = 0
 
 # =============================================================================

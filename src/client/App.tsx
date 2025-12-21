@@ -11,8 +11,59 @@ import { ZaehlerPage } from './pages/ZaehlerPage'
 import { NebenkostenPage } from './pages/NebenkostenPage'
 import { DokumentePage } from './pages/DokumentePage'
 import { MobileDashboardPage } from './pages/mobile/MobileDashboardPage'
+import { useMemo, type ComponentType } from 'react'
+import { useNavigationConfig } from './hooks/useConfig'
+
+type RouteConfig = {
+  component: ComponentType
+  detailRoutes?: Array<{ suffix: string; component: ComponentType }>
+}
+
+const ROUTE_REGISTRY: Record<string, RouteConfig> = {
+  dashboard: { component: DashboardPage },
+  objekte: { component: ObjektePage, detailRoutes: [{ suffix: '/:id', component: ObjektePage }] },
+  einheiten: { component: EinheitenPage, detailRoutes: [{ suffix: '/:id', component: EinheitenPage }] },
+  mieter: { component: MieterPage, detailRoutes: [{ suffix: '/:id', component: MieterDetailPage }] },
+  vertraege: { component: VertraegePage, detailRoutes: [{ suffix: '/:id', component: VertraegePage }] },
+  finanzen: { component: FinanzenPage, detailRoutes: [{ suffix: '/:tab', component: FinanzenPage }] },
+  nebenkosten: { component: NebenkostenPage, detailRoutes: [{ suffix: '/:tab', component: NebenkostenPage }, 
+                                                            { suffix: '/zaehler', component: ZaehlerPage }] },
+  dokumente: { component: DokumentePage },
+}
 
 export default function App() {
+  const { data: navigationConfig } = useNavigationConfig()
+  const navItems = useMemo(() => {
+    return [...(navigationConfig?.navigation?.items ?? [])].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  }, [navigationConfig?.navigation?.items])
+
+  const routeSets = useMemo(() => {
+    return navItems
+      .map(item => {
+        const registry = ROUTE_REGISTRY[item.id]
+
+        if (!item.route || !registry) return null
+
+        return {
+          base: {
+            path: item.route,
+            component: registry.component,
+          },
+          detailRoutes: (registry.detailRoutes ?? []).map(detail => ({
+            path: `${item.route}${detail.suffix}`,
+            component: detail.component,
+          })),
+        }
+      })
+      .filter(
+        (set): set is { base: { path: string; component: ComponentType }; detailRoutes: { path: string; component: ComponentType }[] } =>
+          Boolean(set)
+      )
+  }, [navItems])
+
+  const baseRoutes = routeSets.map(set => set.base)
+  const detailRoutes = routeSets.flatMap(set => set.detailRoutes)
+  const defaultRoute = baseRoutes[0]?.path ?? '/dashboard'
   const location = useLocation()
   const isMobileRoute = location.pathname.startsWith('/mobile')
 
@@ -29,23 +80,16 @@ export default function App() {
   return (
     <AppShell>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/objekte" element={<ObjektePage />} />
-        <Route path="/objekte/:id" element={<ObjektePage />} />
-        <Route path="/einheiten" element={<EinheitenPage />} />
-        <Route path="/einheiten/:id" element={<EinheitenPage />} />
-        <Route path="/mieter" element={<MieterPage />} />
-        <Route path="/mieter/:id" element={<MieterDetailPage />} />
-        <Route path="/vertraege" element={<VertraegePage />} />
-        <Route path="/vertraege/:id" element={<VertraegePage />} />
-        <Route path="/finanzen" element={<FinanzenPage />} />
-        <Route path="/finanzen/:tab" element={<FinanzenPage />} />
-        <Route path="/nebenkosten" element={<NebenkostenPage />} />
-        <Route path="/nebenkosten/:tab" element={<NebenkostenPage />} />
-        <Route path="/dokumente" element={<DokumentePage />} />
-        <Route path="/nebenkosten/zaehler" element={<ZaehlerPage />} />
-        {/* Weitere Routes werden config-gesteuert hinzugefügt */}
+        <Route path="/" element={<Navigate to={defaultRoute} replace />} />
+        {baseRoutes.map(route => {
+          const RouteComponent = route.component
+          return <Route key={`route-${route.path}`} path={route.path} element={<RouteComponent />} />
+        })}
+        {detailRoutes.map(route => {
+          const RouteComponent = route.component
+          return <Route key={`detail-${route.path}`} path={route.path} element={<RouteComponent />} />
+        })}
+        <Route path="*" element={<Navigate to={defaultRoute} replace />} />
       </Routes>
     </AppShell>
   )

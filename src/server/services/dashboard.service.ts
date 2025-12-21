@@ -2,6 +2,23 @@ import { databaseService } from './database.service'
 import { schemaService } from './schema.service'
 import type { DashboardSummary } from '@shared/types/dashboard'
 
+type SummaryMetric = {
+  key: keyof DashboardSummary
+  entity: string
+  whereClause?: string
+  params?: unknown[]
+}
+
+const summaryMetrics: SummaryMetric[] = [
+  { key: 'objekte', entity: 'objekt' },
+  { key: 'einheiten', entity: 'einheit' },
+  { key: 'mieter', entity: 'mieter' },
+  { key: 'vertraege', entity: 'vertrag' },
+  { key: 'offeneRechnungen', entity: 'rechnung', whereClause: 'bezahlt_am IS NULL' },
+  { key: 'dokumente', entity: 'dokument' },
+  { key: 'offeneErinnerungen', entity: 'erinnerung', whereClause: "status != 'erledigt'" },
+]
+
 class DashboardService {
   private async countTable(
     entityName: string,
@@ -18,26 +35,14 @@ class DashboardService {
   }
 
   async getSummary(): Promise<DashboardSummary> {
-    const [objekte, einheiten, mieter, vertraege, offeneRechnungen, dokumente, offeneErinnerungen] =
-      await Promise.all([
-        this.countTable('objekt'),
-        this.countTable('einheit'),
-        this.countTable('mieter'),
-        this.countTable('vertrag'),
-        this.countTable('rechnung', 'bezahlt_am IS NULL'),
-        this.countTable('dokument'),
-        this.countTable('erinnerung', "status != 'erledigt'"),
-      ])
+    const counts = await Promise.all(
+      summaryMetrics.map(metric => this.countTable(metric.entity, metric.whereClause, metric.params))
+    )
 
-    return {
-      objekte,
-      einheiten,
-      mieter,
-      vertraege,
-      offeneRechnungen,
-      dokumente,
-      offeneErinnerungen,
-    }
+    return summaryMetrics.reduce<DashboardSummary>((summary, metric, index) => {
+      summary[metric.key] = counts[index]
+      return summary
+    }, {} as DashboardSummary)
   }
 }
 

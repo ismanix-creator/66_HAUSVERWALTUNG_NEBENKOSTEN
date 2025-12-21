@@ -6,7 +6,7 @@
  */
 
 import { v4 as uuidv4 } from 'uuid'
-import { configService } from './config.service'
+import { configLoader } from './config-loader.service'
 import { databaseService } from './database.service'
 import { schemaService } from './schema.service'
 import type { EntityConfig, FieldConfig } from '../../shared/types/config'
@@ -272,7 +272,7 @@ class EntityService {
    * Holt Entity-Config
    */
   private async getConfig(entityName: string): Promise<EntityConfig> {
-    const config = (await configService.getEntityConfig(entityName)) as EntityConfig | null
+    const config = (await configLoader.getEntity(entityName)) as EntityConfig | null
     if (!config) {
       throw new Error(`Entity-Config nicht gefunden: ${entityName}`)
     }

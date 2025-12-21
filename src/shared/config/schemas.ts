@@ -163,6 +163,10 @@ export const RoutesSchema = z.object({
   dashboard: z.string().default('/dashboard'),
   login: z.string().default('/login'),
   not_found: z.string().default('/404'),
+  // Optional: base API path and version (for server routing)
+  base: z.string().optional(),
+  version: z.string().optional(),
+  mobile_readonly: z.boolean().optional(),
   patterns: RoutePatternsSchema.optional().default({}),
   custom: z.record(z.string(), z.string()).optional().default({}),
 })

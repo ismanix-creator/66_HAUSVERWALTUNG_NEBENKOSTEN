@@ -1,7 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { SchemaService } from '../../src/server/services/schema.service'
 import { configLoader } from '../../src/server/services/config-loader.service'
-import { configService } from '../../src/server/services/config.service'
 import { databaseService } from '../../src/server/services/database.service'
 import type { EntityConfig } from '../../src/shared/types/config'
 
@@ -66,11 +65,6 @@ describe('SchemaService', () => {
       objekt: createNamedConfig('objekt', 'objekte'),
       dokument: createNamedConfig('dokument'),
     })
-    vi.spyOn(configService, 'getEntityConfig').mockImplementation(async (entityName: string) =>
-      entityName === 'objekt'
-        ? createNamedConfig('objekt', 'objekte')
-        : createNamedConfig('dokument')
-    )
     vi.spyOn(databaseService, 'get').mockImplementation((_sql, params) => {
       const tableName = (params?.[0] as string) ?? ''
       return { name: tableName }
@@ -84,13 +78,6 @@ describe('SchemaService', () => {
     vi.spyOn(configLoader, 'getEntities').mockResolvedValue({
       objekt: createNamedConfig('objekt', 'objekte'),
       fehlend: createNamedConfig('fehlend', 'fehlende_tabelle'),
-    })
-    const configMap: Record<string, EntityConfig> = {
-      objekt: createNamedConfig('objekt', 'objekte'),
-      fehlend: createNamedConfig('fehlend', 'fehlende_tabelle'),
-    }
-    vi.spyOn(configService, 'getEntityConfig').mockImplementation(async (entityName: string) => {
-      return configMap[entityName]
     })
     vi.spyOn(databaseService, 'get').mockImplementation((_sql, params) => {
       const tableName = params?.[0] as string

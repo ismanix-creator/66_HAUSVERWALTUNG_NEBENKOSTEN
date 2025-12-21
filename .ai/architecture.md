@@ -9,7 +9,7 @@
 | State | Zustand + TanStack Query |
 | Backend | Node.js + Express + TypeScript |
 | Datenbank | SQLite (lokal, portabel) |
-| Config | TOML-Dateien |
+| Config | TOML-Datei | /config/config.toml |
 
 ## PC-First, Mobile Read-Only
 
@@ -29,17 +29,19 @@ Smartphone (Optional, via VPN)
 
 ```
 66_HAUSVERWALTUNG_NEBENKOSTEN/
-├── .ai/                    # Shared Truth (tool-agnostisch)
-├── .codex/                 # Codex-spezifisch (Implementierung)
-├── .claude/                # Claude-spezifisch (Analyse/Review)
-├── config/                 # TOML-Konfigurationen (Produktiv)
+├── .ai/                    # Shared Truth (tool-agnostisch) wird nach abschluss in docs/ verschoben
+├── .codex/                 # Codex-spezifisch (Implementierung) wird nach abschluss in docs/ verschoben
+├── .claude/                # Claude-spezifisch (Analyse/Review) wird nach abschluss in docs/ verschoben
+├── config/config.toml      # TOML-Konfigurationen alle CONFIG in einer config.toml (Produktiv) 
+│   └── catalogs/           # Kataloge (z.B. Abrechnungspositionen, Mietobjekte)
 ├── src/
-│   ├── server/            # Express Backend
-│   ├── client/            # React Frontend
-│   └── shared/            # Geteilte Typen/Utils
+│   ├── server/             # Express Backend
+│   ├── client/             # React Frontend
+│   └── shared/             # Geteilte Typen/Utils
 ├── data/                   # SQLite + Dokumente (nicht in Git)
-├── planning/              # Planungsdokumente
-└── scripts/               # DB-Init, Migration, Backup
+├── docs/                   # Dokumentation (nach projekt abschlluss sämtliche dokumentationen hier)
+├── planning/               # Planungsdokumente
+└── scripts/                # DB-Init, Migration, Backup
 ```
 
 ## Datenfluss

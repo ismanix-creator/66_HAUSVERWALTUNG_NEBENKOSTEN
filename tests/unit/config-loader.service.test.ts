@@ -116,4 +116,46 @@ describe('ConfigLoaderService', () => {
     const secondLoad = await configLoader.reload()
     expect(secondLoad.master.app.name).toBe('Beta-Test')
   })
+
+  test('liefert verschachtelte Sektionen via getSection', async () => {
+    const design = await configLoader.getSection('design')
+    expect(design).toHaveProperty('typography')
+
+    const missing = await configLoader.getSection('foo.bar.baz')
+    expect(missing).toEqual({})
+
+    const stringLeaf = await configLoader.getSection('ressourcen.unbekannt')
+    expect(stringLeaf).toEqual({})
+  })
+
+  test('kataloge stehen über getCatalog und getCatalogs zur Verfügung', async () => {
+    const catalogs = await configLoader.getCatalogs()
+    expect(Object.keys(catalogs).length).toBeGreaterThan(0)
+
+    const dokumenttypen = await configLoader.getCatalog('dokumenttypen')
+    expect(dokumenttypen).toBeDefined()
+    expect((dokumenttypen as Record<string, unknown>)?.['name']).toBe('dokumenttypen')
+
+    const missing = await configLoader.getCatalog('unbekannt')
+    expect(missing).toBeUndefined()
+  })
+
+  test('isFeatureEnabled reagiert auf Feature-Objekte', async () => {
+    const config = await configLoader.reload()
+    config.features = {
+      features: {
+        core: {
+          objekte: { enabled: true },
+        },
+        experimental: {
+          ai_analysis: { enabled: false },
+        },
+      },
+    }
+    ;(configLoader as unknown as { config: typeof config }).config = config
+
+    expect(await configLoader.isFeatureEnabled('core.objekte')).toBe(true)
+    expect(await configLoader.isFeatureEnabled('experimental.ai_analysis')).toBe(false)
+    expect(await configLoader.isFeatureEnabled('dont.exist')).toBe(false)
+  })
 })

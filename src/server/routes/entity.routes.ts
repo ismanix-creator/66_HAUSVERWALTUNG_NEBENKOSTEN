@@ -48,7 +48,7 @@ async function validateEntity(req: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * GET /api/:entity - Liste aller Einträge
+ * GET /api/:entity - Liste aller Einträge (kürzester Pfad, config-driven)
  *
  * Query-Parameter:
  * - limit: Anzahl der Ergebnisse (default: 100)
@@ -114,7 +114,7 @@ entityRoutes.get(
 )
 
 /**
- * GET /api/:entity/:id - Einzelner Eintrag
+ * GET /api/:entity/:id - Einzelner Eintrag (kürzester Pfad)
  */
 entityRoutes.get(
   '/:entity/:id',
@@ -142,7 +142,7 @@ entityRoutes.get(
 )
 
 /**
- * POST /api/:entity - Neuen Eintrag erstellen
+ * POST /api/:entity - Neuen Eintrag erstellen (kürzester Pfad)
  */
 entityRoutes.post(
   '/:entity',
@@ -170,7 +170,7 @@ entityRoutes.post(
 )
 
 /**
- * PUT /api/:entity/:id - Eintrag aktualisieren
+ * PUT /api/:entity/:id - Eintrag aktualisieren (kürzester Pfad)
  */
 entityRoutes.put(
   '/:entity/:id',
@@ -207,7 +207,7 @@ entityRoutes.put(
 )
 
 /**
- * DELETE /api/:entity/:id - Eintrag löschen
+ * DELETE /api/:entity/:id - Eintrag löschen (kürzester Pfad)
  */
 entityRoutes.delete(
   '/:entity/:id',

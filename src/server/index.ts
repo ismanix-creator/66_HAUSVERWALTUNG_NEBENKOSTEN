@@ -22,10 +22,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // API Routes
-app.use('/mobile', mobileReadOnlyMiddleware)
-app.use('/mobile', mobileRoutes)
-app.use('/api', rateLimitMiddleware)
-app.use('/api', apiRoutes)
+// Routen werden nach Laden der Master-Config in startServer() montiert
 
 // Health Check
 app.get('/health', (_req, res) => {
@@ -43,6 +40,18 @@ async function startServer() {
     const port = serverConfig?.port ?? 3002
     const host = serverConfig?.host ?? '0.0.0.0'
 
+    // Routen-Basis (config/config.toml -> [routes])
+    const routesConfig = masterConfig.routes || {}
+    const base = routesConfig.base || (serverConfig?.api?.base_path ?? '/api')
+    const version = routesConfig.version ? `/${routesConfig.version}` : ''
+    const apiBasePath = `${base}${version}`
+
+    // Mount mobile und api routes unter konfigurierbarer Basis
+    app.use(`${apiBasePath}/mobile`, mobileReadOnlyMiddleware)
+    app.use(`${apiBasePath}/mobile`, mobileRoutes)
+    app.use(apiBasePath, rateLimitMiddleware)
+    app.use(apiBasePath, apiRoutes)
+
     // Datenbank initialisieren
     await databaseService.initialize()
 
@@ -56,7 +65,7 @@ async function startServer() {
     // Server starten
     app.listen(port, host, () => {
       logger.info(`Server läuft auf http://${host}:${port}`)
-      logger.info(`API verfügbar unter http://${host}:${port}/api`)
+      logger.info(`API verfügbar unter http://${host}:${port}${apiBasePath}`)
     })
   } catch (error) {
     console.error('Fehler beim Starten des Servers:', error)

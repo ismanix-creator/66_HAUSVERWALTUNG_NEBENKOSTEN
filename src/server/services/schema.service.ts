@@ -5,13 +5,25 @@
  * @lastModified 2025-12-16
  */
 
-import { configService } from './config.service'
 import { configLoader } from './config-loader.service'
 import { databaseService } from './database.service'
 import { logger } from '../utils/logger'
 import type { EntityConfig, FieldConfig, FieldType } from '../../shared/types/config'
 
 export class SchemaService {
+  private entityCache: Record<string, EntityConfig> | null = null
+
+  private async loadEntities(): Promise<Record<string, EntityConfig>> {
+    if (!this.entityCache) {
+      this.entityCache = await configLoader.getEntities()
+    }
+    return this.entityCache
+  }
+
+  private async loadEntity(entityName: string): Promise<EntityConfig | undefined> {
+    return (await this.loadEntities())[entityName]
+  }
+
   /**
    * Mappt FieldType zu SQLite-Datentyp
    */
@@ -143,7 +155,7 @@ export class SchemaService {
     if (this.tableNameCache.has(entityName)) {
       return this.tableNameCache.get(entityName)!
     }
-    const config = (await configService.getEntityConfig(entityName)) as EntityConfig | null
+    const config = await this.loadEntity(entityName)
     if (config?.table_name) {
       this.tableNameCache.set(entityName, config.table_name)
       return config.table_name
@@ -182,7 +194,7 @@ export class SchemaService {
    * Dieser Service ist 100% config-driven und benötigt keine separaten Entity-Dateien im Dateisystem.
    */
   async getEntityNames(): Promise<string[]> {
-    const entities = await configLoader.getEntities()
+    const entities = await this.loadEntities()
     return Object.keys(entities)
   }
 
@@ -192,18 +204,12 @@ export class SchemaService {
    */
   async initializeAllTables(): Promise<void> {
     // Entity-Namen dynamisch aus Config-Verzeichnis laden
-    const entityNames = await this.getEntityNames()
+    const entities = await this.loadEntities()
 
-    logger.info(`Initialisiere Datenbank-Schema (${entityNames.length} Entities)...`)
+    logger.info(`Initialisiere Datenbank-Schema (${Object.keys(entities).length} Entities)...`)
 
-    for (const entityName of entityNames) {
+    for (const [entityName, config] of Object.entries(entities)) {
       try {
-        const config = (await configService.getEntityConfig(entityName)) as EntityConfig | null
-        if (!config) {
-          logger.warn(`  ⚠ Entity-Config nicht gefunden: ${entityName}`)
-          continue
-        }
-
         // Tabelle erstellen
         const createSql = this.generateCreateTableSql(config)
         databaseService.run(createSql)
@@ -227,10 +233,10 @@ export class SchemaService {
    * Prüft, ob alle Tabellen vorhanden sind und wirft andernfalls einen Fehler
    */
   async verifyTables(): Promise<void> {
-    const entityNames = await this.getEntityNames()
+    const entities = await this.loadEntities()
     const missingTables: string[] = []
 
-    for (const entityName of entityNames) {
+    for (const entityName of Object.keys(entities)) {
       const tableName = await this.getTableNameFromConfig(entityName)
       if (!this.tableExists(tableName)) {
         missingTables.push(tableName)
@@ -245,7 +251,7 @@ export class SchemaService {
       )
     }
 
-    logger.info(`[SchemaService] Schema geprüft (${entityNames.length} Entities vorhanden).`)
+    logger.info(`[SchemaService] Schema geprüft (${Object.keys(entities).length} Entities vorhanden).`)
   }
 
   /**
