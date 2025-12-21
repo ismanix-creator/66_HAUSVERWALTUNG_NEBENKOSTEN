@@ -1,4 +1,3 @@
-```yaml
 # Datei-Name: build-agent.yaml
 # Kurzbeschreibung: Agent zum Installieren/Builden von Frontend/Backend (npm ci / npm run build)
 # Version: 0.1.0
@@ -22,5 +21,3 @@ aufgaben:
   - Melde Build-Resultat in PM_STATUS.md
 rueckmeldelogik: >
   JSON-Block in PM_STATUS.md mit Build-Status und Log-Datei
-
-```
